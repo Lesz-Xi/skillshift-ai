@@ -1,0 +1,4215 @@
+{
+  "metadata": {
+    "generated_at": 1757156741.3427122,
+    "frame_count": 90,
+    "event_count": 163,
+    "duration": 89.0,
+    "minimap_layout": {
+      "width": 200,
+      "height": 200,
+      "top_lane": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.3,
+          0.2
+        ],
+        [
+          0.5,
+          0.3
+        ],
+        [
+          0.7,
+          0.4
+        ],
+        [
+          0.9,
+          0.5
+        ]
+      ],
+      "mid_lane": [
+        [
+          0.1,
+          0.5
+        ],
+        [
+          0.3,
+          0.4
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.7,
+          0.6
+        ],
+        [
+          0.9,
+          0.9
+        ]
+      ],
+      "bot_lane": [
+        [
+          0.1,
+          0.9
+        ],
+        [
+          0.3,
+          0.8
+        ],
+        [
+          0.5,
+          0.7
+        ],
+        [
+          0.7,
+          0.6
+        ],
+        [
+          0.9,
+          0.5
+        ]
+      ],
+      "jungle_camps": [
+        [
+          0.25,
+          0.25
+        ],
+        [
+          0.75,
+          0.75
+        ],
+        [
+          0.25,
+          0.75
+        ],
+        [
+          0.75,
+          0.25
+        ],
+        [
+          0.4,
+          0.4
+        ],
+        [
+          0.6,
+          0.6
+        ],
+        [
+          0.35,
+          0.65
+        ],
+        [
+          0.65,
+          0.35
+        ]
+      ]
+    }
+  },
+  "frames": [
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000000.png",
+      "timestamp": 0.0,
+      "frame_number": 0,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000001.png",
+      "timestamp": 1.0,
+      "frame_number": 1,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000002.png",
+      "timestamp": 2.0,
+      "frame_number": 2,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000003.png",
+      "timestamp": 3.0,
+      "frame_number": 3,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000004.png",
+      "timestamp": 4.0,
+      "frame_number": 4,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000005.png",
+      "timestamp": 5.0,
+      "frame_number": 5,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000006.png",
+      "timestamp": 6.0,
+      "frame_number": 6,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000007.png",
+      "timestamp": 7.0,
+      "frame_number": 7,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000008.png",
+      "timestamp": 8.0,
+      "frame_number": 8,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000009.png",
+      "timestamp": 9.0,
+      "frame_number": 9,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000010.png",
+      "timestamp": 10.0,
+      "frame_number": 10,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000011.png",
+      "timestamp": 11.0,
+      "frame_number": 11,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000012.png",
+      "timestamp": 12.0,
+      "frame_number": 12,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000013.png",
+      "timestamp": 13.0,
+      "frame_number": 13,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000014.png",
+      "timestamp": 14.0,
+      "frame_number": 14,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000015.png",
+      "timestamp": 15.0,
+      "frame_number": 15,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000016.png",
+      "timestamp": 16.0,
+      "frame_number": 16,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000017.png",
+      "timestamp": 17.0,
+      "frame_number": 17,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000018.png",
+      "timestamp": 18.0,
+      "frame_number": 18,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000019.png",
+      "timestamp": 19.0,
+      "frame_number": 19,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000020.png",
+      "timestamp": 20.0,
+      "frame_number": 20,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000021.png",
+      "timestamp": 21.0,
+      "frame_number": 21,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000022.png",
+      "timestamp": 22.0,
+      "frame_number": 22,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000023.png",
+      "timestamp": 23.0,
+      "frame_number": 23,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000024.png",
+      "timestamp": 24.0,
+      "frame_number": 24,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000025.png",
+      "timestamp": 25.0,
+      "frame_number": 25,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000026.png",
+      "timestamp": 26.0,
+      "frame_number": 26,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000027.png",
+      "timestamp": 27.0,
+      "frame_number": 27,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000028.png",
+      "timestamp": 28.0,
+      "frame_number": 28,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000029.png",
+      "timestamp": 29.0,
+      "frame_number": 29,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000030.png",
+      "timestamp": 30.0,
+      "frame_number": 30,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000031.png",
+      "timestamp": 31.0,
+      "frame_number": 31,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000032.png",
+      "timestamp": 32.0,
+      "frame_number": 32,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000033.png",
+      "timestamp": 33.0,
+      "frame_number": 33,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000034.png",
+      "timestamp": 34.0,
+      "frame_number": 34,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000035.png",
+      "timestamp": 35.0,
+      "frame_number": 35,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000036.png",
+      "timestamp": 36.0,
+      "frame_number": 36,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000037.png",
+      "timestamp": 37.0,
+      "frame_number": 37,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000038.png",
+      "timestamp": 38.0,
+      "frame_number": 38,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000039.png",
+      "timestamp": 39.0,
+      "frame_number": 39,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000040.png",
+      "timestamp": 40.0,
+      "frame_number": 40,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000041.png",
+      "timestamp": 41.0,
+      "frame_number": 41,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000042.png",
+      "timestamp": 42.0,
+      "frame_number": 42,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000043.png",
+      "timestamp": 43.0,
+      "frame_number": 43,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000044.png",
+      "timestamp": 44.0,
+      "frame_number": 44,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000045.png",
+      "timestamp": 45.0,
+      "frame_number": 45,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000046.png",
+      "timestamp": 46.0,
+      "frame_number": 46,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000047.png",
+      "timestamp": 47.0,
+      "frame_number": 47,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000048.png",
+      "timestamp": 48.0,
+      "frame_number": 48,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000049.png",
+      "timestamp": 49.0,
+      "frame_number": 49,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000050.png",
+      "timestamp": 50.0,
+      "frame_number": 50,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000051.png",
+      "timestamp": 51.0,
+      "frame_number": 51,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000052.png",
+      "timestamp": 52.0,
+      "frame_number": 52,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000053.png",
+      "timestamp": 53.0,
+      "frame_number": 53,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000054.png",
+      "timestamp": 54.0,
+      "frame_number": 54,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000055.png",
+      "timestamp": 55.0,
+      "frame_number": 55,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000056.png",
+      "timestamp": 56.0,
+      "frame_number": 56,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000057.png",
+      "timestamp": 57.0,
+      "frame_number": 57,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000058.png",
+      "timestamp": 58.0,
+      "frame_number": 58,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000059.png",
+      "timestamp": 59.0,
+      "frame_number": 59,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000060.png",
+      "timestamp": 60.0,
+      "frame_number": 60,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000061.png",
+      "timestamp": 61.0,
+      "frame_number": 61,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000062.png",
+      "timestamp": 62.0,
+      "frame_number": 62,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000063.png",
+      "timestamp": 63.0,
+      "frame_number": 63,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000064.png",
+      "timestamp": 64.0,
+      "frame_number": 64,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000065.png",
+      "timestamp": 65.0,
+      "frame_number": 65,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000066.png",
+      "timestamp": 66.0,
+      "frame_number": 66,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000067.png",
+      "timestamp": 67.0,
+      "frame_number": 67,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000068.png",
+      "timestamp": 68.0,
+      "frame_number": 68,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000069.png",
+      "timestamp": 69.0,
+      "frame_number": 69,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000070.png",
+      "timestamp": 70.0,
+      "frame_number": 70,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000071.png",
+      "timestamp": 71.0,
+      "frame_number": 71,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000072.png",
+      "timestamp": 72.0,
+      "frame_number": 72,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000073.png",
+      "timestamp": 73.0,
+      "frame_number": 73,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000074.png",
+      "timestamp": 74.0,
+      "frame_number": 74,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000075.png",
+      "timestamp": 75.0,
+      "frame_number": 75,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000076.png",
+      "timestamp": 76.0,
+      "frame_number": 76,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000077.png",
+      "timestamp": 77.0,
+      "frame_number": 77,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000078.png",
+      "timestamp": 78.0,
+      "frame_number": 78,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000079.png",
+      "timestamp": 79.0,
+      "frame_number": 79,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000080.png",
+      "timestamp": 80.0,
+      "frame_number": 80,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000081.png",
+      "timestamp": 81.0,
+      "frame_number": 81,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000082.png",
+      "timestamp": 82.0,
+      "frame_number": 82,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000083.png",
+      "timestamp": 83.0,
+      "frame_number": 83,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000084.png",
+      "timestamp": 84.0,
+      "frame_number": 84,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000085.png",
+      "timestamp": 85.0,
+      "frame_number": 85,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000086.png",
+      "timestamp": 86.0,
+      "frame_number": 86,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000087.png",
+      "timestamp": 87.0,
+      "frame_number": 87,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000088.png",
+      "timestamp": 88.0,
+      "frame_number": 88,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    },
+    {
+      "frame_path": "temp/test_training_dataset/sequence_002/frame_000089.png",
+      "timestamp": 89.0,
+      "frame_number": 89,
+      "metadata": {
+        "synthetic": true,
+        "player_count": 10,
+        "visible_players": 10
+      }
+    }
+  ],
+  "events": [
+    {
+      "timestamp": 0.0,
+      "frame_number": 0,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.17187727094548796,
+        "y": 0.8535422857930488
+      },
+      "to_position": {
+        "x": 0.15863767606452306,
+        "y": 0.8356247545604775
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "laning",
+      "distance": 0.0222783481901653,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 0.0,
+      "frame_number": 0,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.8547270516887886,
+        "y": 0.11032275038027228
+      },
+      "to_position": {
+        "x": 0.835734159312589,
+        "y": 0.10033047000081534
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.021461025790851226,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 1.0,
+      "frame_number": 1,
+      "player_ign": "ally_3",
+      "from_position": {
+        "x": 0.1173695304705062,
+        "y": 0.8312130465830851
+      },
+      "to_position": {
+        "x": 0.10034258000629127,
+        "y": 0.8207200068490056
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "laning",
+      "distance": 0.020000523117453737,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 1.0,
+      "frame_number": 1,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.8494220212558512,
+        "y": 0.2784080416453916
+      },
+      "to_position": {
+        "x": 0.8330685631998082,
+        "y": 0.2665281495750681
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.02021305088286514,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 2.0,
+      "frame_number": 2,
+      "player_ign": "ally_3",
+      "from_position": {
+        "x": 0.10034258000629127,
+        "y": 0.8207200068490056
+      },
+      "to_position": {
+        "x": 0.1175925901076211,
+        "y": 0.8055670323711974
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "laning",
+      "distance": 0.022960302350384824,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 3.0,
+      "frame_number": 3,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.21861466655361608,
+        "y": 0.8871483281967893
+      },
+      "to_position": {
+        "x": 0.15896377504054016,
+        "y": 0.8936113879748856
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.06,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 4.0,
+      "frame_number": 4,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.15896377504054016,
+        "y": 0.8936113879748856
+      },
+      "to_position": {
+        "x": 0.1,
+        "y": 0.9
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.05930886215936757,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 4.0,
+      "frame_number": 4,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.19668986560313517,
+        "y": 0.7694208528463202
+      },
+      "to_position": {
+        "x": 0.1846713490653266,
+        "y": 0.7529872942750346
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "laning",
+      "distance": 0.020359434841995306,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 4.0,
+      "frame_number": 4,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.16029913805468998,
+        "y": 0.8508629764546153
+      },
+      "to_position": {
+        "x": 0.11378669816989082,
+        "y": 0.8887653897809846
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.05999999999999998,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 5.0,
+      "frame_number": 5,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.1846713490653266,
+        "y": 0.7529872942750346
+      },
+      "to_position": {
+        "x": 0.1707895973547087,
+        "y": 0.7723393008752186
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "laning",
+      "distance": 0.023816028006550707,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 7.0,
+      "frame_number": 7,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.7800711286100124,
+        "y": 0.15348249945206438
+      },
+      "to_position": {
+        "x": 0.7940499855393826,
+        "y": 0.16926996873796313
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.021086787984541337,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 8.0,
+      "frame_number": 8,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.7940499855393826,
+        "y": 0.16926996873796313
+      },
+      "to_position": {
+        "x": 0.7796413419827585,
+        "y": 0.15430733959234236
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.020772320045946355,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 10.0,
+      "frame_number": 10,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.8324257154848755,
+        "y": 0.287807371655979
+      },
+      "to_position": {
+        "x": 0.7960679556271759,
+        "y": 0.2711306424164116
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.039999999999999966,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 11.0,
+      "frame_number": 11,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.09843373876919097,
+        "y": 0.9006204710846052
+      },
+      "to_position": {
+        "x": 0.14316952931260396,
+        "y": 0.8782886766100029
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999998,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 11.0,
+      "frame_number": 11,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.10552546372861166,
+        "y": 0.8633191872084618
+      },
+      "to_position": {
+        "x": 0.13699898415973355,
+        "y": 0.8386328040859435
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.040000000000000015,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 11.0,
+      "frame_number": 11,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.7960679556271759,
+        "y": 0.2711306424164116
+      },
+      "to_position": {
+        "x": 0.7597101957694762,
+        "y": 0.25445391317684424
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.04000000000000004,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 12.0,
+      "frame_number": 12,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.14316952931260396,
+        "y": 0.8782886766100029
+      },
+      "to_position": {
+        "x": 0.14040042348903464,
+        "y": 0.8283654149683806
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.050000000000000024,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 12.0,
+      "frame_number": 12,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.13699898415973355,
+        "y": 0.8386328040859435
+      },
+      "to_position": {
+        "x": 0.16847250459085544,
+        "y": 0.8139464209634253
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.040000000000000015,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 13.0,
+      "frame_number": 13,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.14040042348903464,
+        "y": 0.8283654149683806
+      },
+      "to_position": {
+        "x": 0.11583843649323974,
+        "y": 0.871916635328072
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.049999999999999954,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 13.0,
+      "frame_number": 13,
+      "player_ign": "ally_3",
+      "from_position": {
+        "x": 0.1395667212624671,
+        "y": 0.809006267753623
+      },
+      "to_position": {
+        "x": 0.18641487910283647,
+        "y": 0.7915348594828556
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000002,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 13.0,
+      "frame_number": 13,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.16847250459085544,
+        "y": 0.8139464209634253
+      },
+      "to_position": {
+        "x": 0.19994602502197734,
+        "y": 0.789260037840907
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.040000000000000015,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 14.0,
+      "frame_number": 14,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.11583843649323974,
+        "y": 0.871916635328072
+      },
+      "to_position": {
+        "x": 0.1290551880932474,
+        "y": 0.8236950895508606
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999998,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 14.0,
+      "frame_number": 14,
+      "player_ign": "ally_3",
+      "from_position": {
+        "x": 0.18641487910283647,
+        "y": 0.7915348594828556
+      },
+      "to_position": {
+        "x": 0.155258724944507,
+        "y": 0.8306410489937555
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000004,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 14.0,
+      "frame_number": 14,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.19994602502197734,
+        "y": 0.789260037840907
+      },
+      "to_position": {
+        "x": 0.23141954545309926,
+        "y": 0.7645736547183888
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.040000000000000036,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 14.0,
+      "frame_number": 14,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.7457544192486077,
+        "y": 0.26326183872845643
+      },
+      "to_position": {
+        "x": 0.7869594331736346,
+        "y": 0.2196482304457387
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "recall",
+      "distance": 0.06000000000000001,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 15.0,
+      "frame_number": 15,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.1290551880932474,
+        "y": 0.8236950895508606
+      },
+      "to_position": {
+        "x": 0.17648755668239757,
+        "y": 0.8078783133299298
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.050000000000000024,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 15.0,
+      "frame_number": 15,
+      "player_ign": "ally_3",
+      "from_position": {
+        "x": 0.155258724944507,
+        "y": 0.8306410489937555
+      },
+      "to_position": {
+        "x": 0.20504328797873655,
+        "y": 0.8352775653035318
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999999,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 15.0,
+      "frame_number": 15,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.7869594331736346,
+        "y": 0.2196482304457387
+      },
+      "to_position": {
+        "x": 0.8281644470986614,
+        "y": 0.17603462216302096
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "recall",
+      "distance": 0.06000000000000001,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 15.0,
+      "frame_number": 15,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.7492640326149925,
+        "y": 0.1249493419904651
+      },
+      "to_position": {
+        "x": 0.7171560246728634,
+        "y": 0.16327786695540697
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999997,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 16.0,
+      "frame_number": 16,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.22780338434671257,
+        "y": 0.7709795434974642
+      },
+      "to_position": {
+        "x": 0.25,
+        "y": 0.75
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.030542282033629346,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 16.0,
+      "frame_number": 16,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.8281644470986614,
+        "y": 0.17603462216302096
+      },
+      "to_position": {
+        "x": 0.8693694610236883,
+        "y": 0.1324210138803032
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "recall",
+      "distance": 0.06000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 16.0,
+      "frame_number": 16,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.7171560246728634,
+        "y": 0.16327786695540697
+      },
+      "to_position": {
+        "x": 0.7291999281305618,
+        "y": 0.21180563621695084
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.05,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 17.0,
+      "frame_number": 17,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.1810413657543165,
+        "y": 0.816181785483685
+      },
+      "to_position": {
+        "x": 0.13933549322681357,
+        "y": 0.8593166924236527
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.05999999999999997,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 17.0,
+      "frame_number": 17,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.7291999281305618,
+        "y": 0.21180563621695084
+      },
+      "to_position": {
+        "x": 0.6792188321070987,
+        "y": 0.21043084885399024
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999997,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 18.0,
+      "frame_number": 18,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.13933549322681357,
+        "y": 0.8593166924236527
+      },
+      "to_position": {
+        "x": 0.1,
+        "y": 0.9
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.05658986254399611,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 18.0,
+      "frame_number": 18,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.17068124074560728,
+        "y": 0.7438564713894001
+      },
+      "to_position": {
+        "x": 0.2105617964890469,
+        "y": 0.7469453665955222
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.039999999999999994,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 18.0,
+      "frame_number": 18,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6792188321070987,
+        "y": 0.21043084885399024
+      },
+      "to_position": {
+        "x": 0.6818822441801218,
+        "y": 0.2603598608222765
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.05,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 19.0,
+      "frame_number": 19,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.2105617964890469,
+        "y": 0.7469453665955222
+      },
+      "to_position": {
+        "x": 0.25,
+        "y": 0.75
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.03955632290048083,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 19.0,
+      "frame_number": 19,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6818822441801218,
+        "y": 0.2603598608222765
+      },
+      "to_position": {
+        "x": 0.6529996545372252,
+        "y": 0.3011740252204366
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999997,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 20.0,
+      "frame_number": 20,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6529996545372252,
+        "y": 0.3011740252204366
+      },
+      "to_position": {
+        "x": 0.6919486352468647,
+        "y": 0.3325264876704601
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000002,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 21.0,
+      "frame_number": 21,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6919486352468647,
+        "y": 0.3325264876704601
+      },
+      "to_position": {
+        "x": 0.6978729221887611,
+        "y": 0.38217427537776966
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000001,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 22.0,
+      "frame_number": 22,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.7803247895652293,
+        "y": 0.16398032714981514
+      },
+      "to_position": {
+        "x": 0.7955678497466685,
+        "y": 0.17841720505766642
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.020994626155785217,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 22.0,
+      "frame_number": 22,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.8553488977006697,
+        "y": 0.11392798589621166
+      },
+      "to_position": {
+        "x": 0.8389787135671631,
+        "y": 0.0997419042275371
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.02166166756450698,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 22.0,
+      "frame_number": 22,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6978729221887611,
+        "y": 0.38217427537776966
+      },
+      "to_position": {
+        "x": 0.6633927238893658,
+        "y": 0.41838361015810466
+      },
+      "from_region": "top_lane",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.05,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 23.0,
+      "frame_number": 23,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6633927238893658,
+        "y": 0.41838361015810466
+      },
+      "to_position": {
+        "x": 0.6732722164967656,
+        "y": 0.4673978491690322
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.05,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 24.0,
+      "frame_number": 24,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.8359200481380382,
+        "y": 0.09704756993685758
+      },
+      "to_position": {
+        "x": 0.8173848895347736,
+        "y": 0.08483293315059913
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.02219796063309402,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 24.0,
+      "frame_number": 24,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6732722164967656,
+        "y": 0.4673978491690322
+      },
+      "to_position": {
+        "x": 0.6373125709905562,
+        "y": 0.4326573267914433
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000005,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 25.0,
+      "frame_number": 25,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.22612955443908522,
+        "y": 0.7663212449947674
+      },
+      "to_position": {
+        "x": 0.21683007531244414,
+        "y": 0.7171936591801442
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.049999999999999975,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 25.0,
+      "frame_number": 25,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.805398639322904,
+        "y": 0.18083720460683755
+      },
+      "to_position": {
+        "x": 0.8185805261147475,
+        "y": 0.16575646011367542
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.020029752715922836,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 25.0,
+      "frame_number": 25,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6373125709905562,
+        "y": 0.4326573267914433
+      },
+      "to_position": {
+        "x": 0.6548525339118165,
+        "y": 0.4794798609039923
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 26.0,
+      "frame_number": 26,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.21683007531244414,
+        "y": 0.7171936591801442
+      },
+      "to_position": {
+        "x": 0.26542116280954026,
+        "y": 0.7054078110626115
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.049999999999999996,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 26.0,
+      "frame_number": 26,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6548525339118165,
+        "y": 0.4794798609039923
+      },
+      "to_position": {
+        "x": 0.7046782846685249,
+        "y": 0.48365053968931937
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000002,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 27.0,
+      "frame_number": 27,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.8217348087560545,
+        "y": 0.10818495803643967
+      },
+      "to_position": {
+        "x": 0.8084010716479691,
+        "y": 0.1264890540643509
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.022645716519168236,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 27.0,
+      "frame_number": 27,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.7046782846685249,
+        "y": 0.48365053968931937
+      },
+      "to_position": {
+        "x": 0.6652862552921406,
+        "y": 0.514444500487016
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999998,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 30.0,
+      "frame_number": 30,
+      "player_ign": "ally_1",
+      "from_position": {
+        "x": 0.2450030407885607,
+        "y": 0.8948220537639434
+      },
+      "to_position": {
+        "x": 0.22611815394436047,
+        "y": 0.9107466764036418
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "laning",
+      "distance": 0.024702885607455698,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 30.0,
+      "frame_number": 30,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.10259731729114735,
+        "y": 0.920177604005641
+      },
+      "to_position": {
+        "x": 0.12878595690447872,
+        "y": 0.8899426051598819
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.04000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 31.0,
+      "frame_number": 31,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.12878595690447872,
+        "y": 0.8899426051598819
+      },
+      "to_position": {
+        "x": 0.1549745965178101,
+        "y": 0.8597076063141228
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.04000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 32.0,
+      "frame_number": 32,
+      "player_ign": "ally_1",
+      "from_position": {
+        "x": 0.23503511350507877,
+        "y": 0.9169044386630032
+      },
+      "to_position": {
+        "x": 0.21546461777622772,
+        "y": 0.9091974980723779
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "laning",
+      "distance": 0.021033336310257694,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 32.0,
+      "frame_number": 32,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.1549745965178101,
+        "y": 0.8597076063141228
+      },
+      "to_position": {
+        "x": 0.10658093271017144,
+        "y": 0.8951766534295056
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.06,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 35.0,
+      "frame_number": 35,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.8464305542098568,
+        "y": 0.13179036675487577
+      },
+      "to_position": {
+        "x": 0.8602673562570124,
+        "y": 0.11343169227700918
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.022989084789883235,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 35.0,
+      "frame_number": 35,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.7897944916668908,
+        "y": 0.12652609081647448
+      },
+      "to_position": {
+        "x": 0.8092879722222248,
+        "y": 0.1346164653047298
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.021105685099550776,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 37.0,
+      "frame_number": 37,
+      "player_ign": "ally_1",
+      "from_position": {
+        "x": 0.193489323877855,
+        "y": 0.9138781429917782
+      },
+      "to_position": {
+        "x": 0.20953258917164436,
+        "y": 0.8975665410294748
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "laning",
+      "distance": 0.022879132847717955,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 37.0,
+      "frame_number": 37,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.24981523768055547,
+        "y": 0.771866966240523
+      },
+      "to_position": {
+        "x": 0.24026848669198247,
+        "y": 0.7541793088186616
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "laning",
+      "distance": 0.020099594013585156,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 38.0,
+      "frame_number": 38,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.8490109521352244,
+        "y": 0.11592508409801357
+      },
+      "to_position": {
+        "x": 0.8670591910903558,
+        "y": 0.10372389234952173
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.02178549998198316,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 40.0,
+      "frame_number": 40,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.8798477015462693,
+        "y": 0.09166583155411603
+      },
+      "to_position": {
+        "x": 0.8613287555048981,
+        "y": 0.08019022438085657
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.021786255356948902,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 41.0,
+      "frame_number": 41,
+      "player_ign": "ally_3",
+      "from_position": {
+        "x": 0.2385664843089747,
+        "y": 0.8435090860083446
+      },
+      "to_position": {
+        "x": 0.18300625436674967,
+        "y": 0.8661599325436748
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.060000000000000005,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 42.0,
+      "frame_number": 42,
+      "player_ign": "ally_3",
+      "from_position": {
+        "x": 0.18300625436674967,
+        "y": 0.8661599325436748
+      },
+      "to_position": {
+        "x": 0.12744602442452466,
+        "y": 0.8888107790790051
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.059999999999999984,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 42.0,
+      "frame_number": 42,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.806949511775494,
+        "y": 0.0906722897229255
+      },
+      "to_position": {
+        "x": 0.8180329979078114,
+        "y": 0.13942837995947677
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.05,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 42.0,
+      "frame_number": 42,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6646239099157676,
+        "y": 0.5049869535090584
+      },
+      "to_position": {
+        "x": 0.6421279295102785,
+        "y": 0.5380615792151167
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "jungle_clear",
+      "distance": 0.03999999999999995,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 43.0,
+      "frame_number": 43,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6421279295102785,
+        "y": 0.5380615792151167
+      },
+      "to_position": {
+        "x": 0.6196319491047895,
+        "y": 0.571136204921175
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "jungle_clear",
+      "distance": 0.040000000000000036,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 44.0,
+      "frame_number": 44,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.8697040607074279,
+        "y": 0.0898428904904317
+      },
+      "to_position": {
+        "x": 0.8770108049589607,
+        "y": 0.10945309731457972
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.020927224451493052,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 44.0,
+      "frame_number": 44,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6196319491047895,
+        "y": 0.571136204921175
+      },
+      "to_position": {
+        "x": 0.6,
+        "y": 0.6
+      },
+      "from_region": "river",
+      "to_region": "mid_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.034907479026785156,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 46.0,
+      "frame_number": 46,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.23224473640875878,
+        "y": 0.7515676897334596
+      },
+      "to_position": {
+        "x": 0.19233152554663444,
+        "y": 0.7963665245249538
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.05999999999999999,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 47.0,
+      "frame_number": 47,
+      "player_ign": "ally_3",
+      "from_position": {
+        "x": 0.12772837818852406,
+        "y": 0.8844565119068507
+      },
+      "to_position": {
+        "x": 0.17771825389093315,
+        "y": 0.8854626566567196
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.049999999999999996,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 47.0,
+      "frame_number": 47,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.19233152554663444,
+        "y": 0.7963665245249538
+      },
+      "to_position": {
+        "x": 0.1524183146845101,
+        "y": 0.8411653593164481
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.05999999999999999,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 48.0,
+      "frame_number": 48,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.11222457066364201,
+        "y": 0.9054903287675664
+      },
+      "to_position": {
+        "x": 0.1387519600048011,
+        "y": 0.8755520987807659
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.040000000000000036,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 48.0,
+      "frame_number": 48,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.1524183146845101,
+        "y": 0.8411653593164481
+      },
+      "to_position": {
+        "x": 0.11250510382238575,
+        "y": 0.8859641941079424
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.05999999999999998,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 49.0,
+      "frame_number": 49,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.1387519600048011,
+        "y": 0.8755520987807659
+      },
+      "to_position": {
+        "x": 0.1652793493459602,
+        "y": 0.8456138687939654
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.04000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 50.0,
+      "frame_number": 50,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.1652793493459602,
+        "y": 0.8456138687939654
+      },
+      "to_position": {
+        "x": 0.19180673868711928,
+        "y": 0.8156756388071649
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.04000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 50.0,
+      "frame_number": 50,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.8854243403303661,
+        "y": 0.13536050253769544
+      },
+      "to_position": {
+        "x": 0.9022781461147446,
+        "y": 0.12380656971032568
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.02043389667187639,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 51.0,
+      "frame_number": 51,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.19180673868711928,
+        "y": 0.8156756388071649
+      },
+      "to_position": {
+        "x": 0.1784150373444256,
+        "y": 0.7969552099812578
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "laning",
+      "distance": 0.023017213564585883,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 52.0,
+      "frame_number": 52,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.1784150373444256,
+        "y": 0.7969552099812578
+      },
+      "to_position": {
+        "x": 0.22465273165475355,
+        "y": 0.7779269251172806
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999999,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 52.0,
+      "frame_number": 52,
+      "player_ign": "enemy_5",
+      "from_position": {
+        "x": 0.6301473583609367,
+        "y": 0.6030740135883301
+      },
+      "to_position": {
+        "x": 0.6,
+        "y": 0.6
+      },
+      "from_region": "bot_jungle",
+      "to_region": "mid_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.030303675943422783,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 53.0,
+      "frame_number": 53,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.8393395134020497,
+        "y": 0.17280181447156812
+      },
+      "to_position": {
+        "x": 0.8067393194914522,
+        "y": 0.21071259601180328
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999996,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 53.0,
+      "frame_number": 53,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.9177447777781766,
+        "y": 0.11072804132747412
+      },
+      "to_position": {
+        "x": 0.8979073231023659,
+        "y": 0.12876381130795675
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.026810699483671162,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 54.0,
+      "frame_number": 54,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.8067393194914522,
+        "y": 0.21071259601180328
+      },
+      "to_position": {
+        "x": 0.7801812023646886,
+        "y": 0.25307609934522823
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.05,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 54.0,
+      "frame_number": 54,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.8979073231023659,
+        "y": 0.12876381130795675
+      },
+      "to_position": {
+        "x": 0.8926337134818296,
+        "y": 0.14816971809138793
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.02010970354125174,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 55.0,
+      "frame_number": 55,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.7801812023646886,
+        "y": 0.25307609934522823
+      },
+      "to_position": {
+        "x": 0.7314012572203303,
+        "y": 0.24209807804294442
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999996,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 56.0,
+      "frame_number": 56,
+      "player_ign": "ally_1",
+      "from_position": {
+        "x": 0.21330872136500106,
+        "y": 0.8834800467849853
+      },
+      "to_position": {
+        "x": 0.2239107538297874,
+        "y": 0.8449106689365468
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.04000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 56.0,
+      "frame_number": 56,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.7314012572203303,
+        "y": 0.24209807804294442
+      },
+      "to_position": {
+        "x": 0.7587603790181287,
+        "y": 0.2839487465495912
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999998,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 57.0,
+      "frame_number": 57,
+      "player_ign": "ally_1",
+      "from_position": {
+        "x": 0.2239107538297874,
+        "y": 0.8449106689365468
+      },
+      "to_position": {
+        "x": 0.23451278629457373,
+        "y": 0.8063412910881083
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.04000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 57.0,
+      "frame_number": 57,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.2907944915807505,
+        "y": 0.6674006050208994
+      },
+      "to_position": {
+        "x": 0.27485829915221244,
+        "y": 0.6200082240838689
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.050000000000000024,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 57.0,
+      "frame_number": 57,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.7587603790181287,
+        "y": 0.2839487465495912
+      },
+      "to_position": {
+        "x": 0.7496209746883309,
+        "y": 0.3331063633398351
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999999,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 58.0,
+      "frame_number": 58,
+      "player_ign": "ally_1",
+      "from_position": {
+        "x": 0.23451278629457373,
+        "y": 0.8063412910881083
+      },
+      "to_position": {
+        "x": 0.24511481875936006,
+        "y": 0.7677719132396698
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.04000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 58.0,
+      "frame_number": 58,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.248238048595392,
+        "y": 0.8284287477881079
+      },
+      "to_position": {
+        "x": 0.23312434372203591,
+        "y": 0.8430461860379944
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "laning",
+      "distance": 0.021026021401780986,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 58.0,
+      "frame_number": 58,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.27485829915221244,
+        "y": 0.6200082240838689
+      },
+      "to_position": {
+        "x": 0.32480301903155884,
+        "y": 0.6176577015518301
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000002,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 58.0,
+      "frame_number": 58,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.7496209746883309,
+        "y": 0.3331063633398351
+      },
+      "to_position": {
+        "x": 0.7624410110112712,
+        "y": 0.38143489185745594
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999997,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 59.0,
+      "frame_number": 59,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.32480301903155884,
+        "y": 0.6176577015518301
+      },
+      "to_position": {
+        "x": 0.2805036478942191,
+        "y": 0.5944722380706694
+      },
+      "from_region": "bot_lane",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000004,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 59.0,
+      "frame_number": 59,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.7624410110112712,
+        "y": 0.38143489185745594
+      },
+      "to_position": {
+        "x": 0.7145145211857862,
+        "y": 0.3956845084490588
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999998,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 60.0,
+      "frame_number": 60,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.2805036478942191,
+        "y": 0.5944722380706694
+      },
+      "to_position": {
+        "x": 0.28297182964316187,
+        "y": 0.5445331944389158
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000005,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 60.0,
+      "frame_number": 60,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.7145145211857862,
+        "y": 0.3956845084490588
+      },
+      "to_position": {
+        "x": 0.6695492278542331,
+        "y": 0.4175505185013611
+      },
+      "from_region": "top_lane",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999998,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 61.0,
+      "frame_number": 61,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.28297182964316187,
+        "y": 0.5445331944389158
+      },
+      "to_position": {
+        "x": 0.2854400113921046,
+        "y": 0.49459415080716224
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.049999999999999996,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 61.0,
+      "frame_number": 61,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.6695492278542331,
+        "y": 0.4175505185013611
+      },
+      "to_position": {
+        "x": 0.6258783368140597,
+        "y": 0.3932019399852074
+      },
+      "from_region": "river",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999999,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 61.0,
+      "frame_number": 61,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.8138827052117654,
+        "y": 0.18553814430967555
+      },
+      "to_position": {
+        "x": 0.8564520127903795,
+        "y": 0.1432551210937636
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "recall",
+      "distance": 0.06000000000000001,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 62.0,
+      "frame_number": 62,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.2854400113921046,
+        "y": 0.49459415080716224
+      },
+      "to_position": {
+        "x": 0.33418708193092295,
+        "y": 0.48347106158323383
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000002,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 62.0,
+      "frame_number": 62,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.6258783368140597,
+        "y": 0.3932019399852074
+      },
+      "to_position": {
+        "x": 0.649666058563764,
+        "y": 0.43718084736088747
+      },
+      "from_region": "top_lane",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.050000000000000024,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 62.0,
+      "frame_number": 62,
+      "player_ign": "enemy_3",
+      "from_position": {
+        "x": 0.8564520127903795,
+        "y": 0.1432551210937636
+      },
+      "to_position": {
+        "x": 0.8990213203689936,
+        "y": 0.10097209787785164
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "recall",
+      "distance": 0.06000000000000001,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 63.0,
+      "frame_number": 63,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.33418708193092295,
+        "y": 0.48347106158323383
+      },
+      "to_position": {
+        "x": 0.38416576099040733,
+        "y": 0.48493107509997135
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999999,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 63.0,
+      "frame_number": 63,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.649666058563764,
+        "y": 0.43718084736088747
+      },
+      "to_position": {
+        "x": 0.6249234844422779,
+        "y": 0.4806297256645073
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.050000000000000024,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 64.0,
+      "frame_number": 64,
+      "player_ign": "ally_1",
+      "from_position": {
+        "x": 0.2205309360321541,
+        "y": 0.7742962585198377
+      },
+      "to_position": {
+        "x": 0.25,
+        "y": 0.75
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.03819337520046876,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 64.0,
+      "frame_number": 64,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.38416576099040733,
+        "y": 0.48493107509997135
+      },
+      "to_position": {
+        "x": 0.43374796852319253,
+        "y": 0.4913812453439119
+      },
+      "from_region": "river",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.049999999999999975,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 64.0,
+      "frame_number": 64,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.6249234844422779,
+        "y": 0.4806297256645073
+      },
+      "to_position": {
+        "x": 0.5749574920662686,
+        "y": 0.4824735276822371
+      },
+      "from_region": "river",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000004,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 65.0,
+      "frame_number": 65,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.43374796852319253,
+        "y": 0.4913812453439119
+      },
+      "to_position": {
+        "x": 0.47135088339053943,
+        "y": 0.5243360749365386
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999999,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 65.0,
+      "frame_number": 65,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.5749574920662686,
+        "y": 0.4824735276822371
+      },
+      "to_position": {
+        "x": 0.5360145450372715,
+        "y": 0.45111357110228106
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.049999999999999975,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 66.0,
+      "frame_number": 66,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.47135088339053943,
+        "y": 0.5243360749365386
+      },
+      "to_position": {
+        "x": 0.4449550409742528,
+        "y": 0.5668008780461088
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000002,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 66.0,
+      "frame_number": 66,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.5360145450372715,
+        "y": 0.45111357110228106
+      },
+      "to_position": {
+        "x": 0.5011771747288376,
+        "y": 0.4869793992677235
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999997,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 66.0,
+      "frame_number": 66,
+      "player_ign": "enemy_4",
+      "from_position": {
+        "x": 0.7351310711732808,
+        "y": 0.14183819987569468
+      },
+      "to_position": {
+        "x": 0.7405786114799624,
+        "y": 0.18146551753166376
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.039999999999999994,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 67.0,
+      "frame_number": 67,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.14588293451079157,
+        "y": 0.8546996085518658
+      },
+      "to_position": {
+        "x": 0.16193318028578046,
+        "y": 0.8073457321470512
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000005,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 67.0,
+      "frame_number": 67,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.4449550409742528,
+        "y": 0.5668008780461088
+      },
+      "to_position": {
+        "x": 0.4868004618847028,
+        "y": 0.5394337307920145
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 67.0,
+      "frame_number": 67,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.5011771747288376,
+        "y": 0.4869793992677235
+      },
+      "to_position": {
+        "x": 0.5511505493965877,
+        "y": 0.48861090909505306
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.049999999999999996,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 67.0,
+      "frame_number": 67,
+      "player_ign": "enemy_4",
+      "from_position": {
+        "x": 0.7405786114799624,
+        "y": 0.18146551753166376
+      },
+      "to_position": {
+        "x": 0.7460261517866441,
+        "y": 0.22109283518763284
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.04000000000000001,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 68.0,
+      "frame_number": 68,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.16193318028578046,
+        "y": 0.8073457321470512
+      },
+      "to_position": {
+        "x": 0.21154379185067376,
+        "y": 0.8135736708234735
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.050000000000000024,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 68.0,
+      "frame_number": 68,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.4868004618847028,
+        "y": 0.5394337307920145
+      },
+      "to_position": {
+        "x": 0.5365743091816886,
+        "y": 0.5346835597154813
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999993,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 68.0,
+      "frame_number": 68,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.5511505493965877,
+        "y": 0.48861090909505306
+      },
+      "to_position": {
+        "x": 0.5132670987296803,
+        "y": 0.4559789590220342
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999997,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 68.0,
+      "frame_number": 68,
+      "player_ign": "enemy_4",
+      "from_position": {
+        "x": 0.7460261517866441,
+        "y": 0.22109283518763284
+      },
+      "to_position": {
+        "x": 0.696882031752728,
+        "y": 0.21188113251700533
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.05,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 69.0,
+      "frame_number": 69,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.21154379185067376,
+        "y": 0.8135736708234735
+      },
+      "to_position": {
+        "x": 0.258067543404433,
+        "y": 0.7952559050927932
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000002,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 69.0,
+      "frame_number": 69,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.5365743091816886,
+        "y": 0.5346835597154813
+      },
+      "to_position": {
+        "x": 0.4982283149002167,
+        "y": 0.566770702351829
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999998,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 69.0,
+      "frame_number": 69,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.5132670987296803,
+        "y": 0.4559789590220342
+      },
+      "to_position": {
+        "x": 0.5528592930918576,
+        "y": 0.48651513667392093
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000002,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 69.0,
+      "frame_number": 69,
+      "player_ign": "enemy_4",
+      "from_position": {
+        "x": 0.696882031752728,
+        "y": 0.21188113251700533
+      },
+      "to_position": {
+        "x": 0.6518535320403127,
+        "y": 0.2336166843537777
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.050000000000000024,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 70.0,
+      "frame_number": 70,
+      "player_ign": "ally_1",
+      "from_position": {
+        "x": 0.24702659162320198,
+        "y": 0.7198344239133441
+      },
+      "to_position": {
+        "x": 0.25,
+        "y": 0.75
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.030311765669703915,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 70.0,
+      "frame_number": 70,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.258067543404433,
+        "y": 0.7952559050927932
+      },
+      "to_position": {
+        "x": 0.2615810574007703,
+        "y": 0.7453795056698442
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.050000000000000024,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 70.0,
+      "frame_number": 70,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.4982283149002167,
+        "y": 0.566770702351829
+      },
+      "to_position": {
+        "x": 0.5475637526862512,
+        "y": 0.5748956379491317
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000002,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 70.0,
+      "frame_number": 70,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.5528592930918576,
+        "y": 0.48651513667392093
+      },
+      "to_position": {
+        "x": 0.6028216113600005,
+        "y": 0.48845594920294033
+      },
+      "from_region": "mid_lane",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000005,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 70.0,
+      "frame_number": 70,
+      "player_ign": "enemy_4",
+      "from_position": {
+        "x": 0.6518535320403127,
+        "y": 0.2336166843537777
+      },
+      "to_position": {
+        "x": 0.6066525277122266,
+        "y": 0.25499118335918924
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 71.0,
+      "frame_number": 71,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.2615810574007703,
+        "y": 0.7453795056698442
+      },
+      "to_position": {
+        "x": 0.29642412190176676,
+        "y": 0.7095192092937768
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999996,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 71.0,
+      "frame_number": 71,
+      "player_ign": "ally_5",
+      "from_position": {
+        "x": 0.5475637526862512,
+        "y": 0.5748956379491317
+      },
+      "to_position": {
+        "x": 0.5836421135942907,
+        "y": 0.592168503206212
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.04000000000000005,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 71.0,
+      "frame_number": 71,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.6028216113600005,
+        "y": 0.48845594920294033
+      },
+      "to_position": {
+        "x": 0.5809640913541231,
+        "y": 0.533425370137534
+      },
+      "from_region": "river",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.05,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 71.0,
+      "frame_number": 71,
+      "player_ign": "enemy_4",
+      "from_position": {
+        "x": 0.6066525277122266,
+        "y": 0.25499118335918924
+      },
+      "to_position": {
+        "x": 0.6337165622000759,
+        "y": 0.2970332817516399
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.05,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 72.0,
+      "frame_number": 72,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.29642412190176676,
+        "y": 0.7095192092937768
+      },
+      "to_position": {
+        "x": 0.2605299164023434,
+        "y": 0.7443273406938558
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999998,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 72.0,
+      "frame_number": 72,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.5809640913541231,
+        "y": 0.533425370137534
+      },
+      "to_position": {
+        "x": 0.5645791087994082,
+        "y": 0.48618627248864055
+      },
+      "from_region": "mid_lane",
+      "to_region": "mid_lane",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000002,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 72.0,
+      "frame_number": 72,
+      "player_ign": "enemy_4",
+      "from_position": {
+        "x": 0.6337165622000759,
+        "y": 0.2970332817516399
+      },
+      "to_position": {
+        "x": 0.6444028628997543,
+        "y": 0.3458779639325698
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.05,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 73.0,
+      "frame_number": 73,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.2605299164023434,
+        "y": 0.7443273406938558
+      },
+      "to_position": {
+        "x": 0.21745686980303536,
+        "y": 0.7860970983739506
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.06000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 73.0,
+      "frame_number": 73,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.5645791087994082,
+        "y": 0.48618627248864055
+      },
+      "to_position": {
+        "x": 0.6028559735752785,
+        "y": 0.5183558485338691
+      },
+      "from_region": "mid_lane",
+      "to_region": "river",
+      "movement_type": "roaming",
+      "distance": 0.05000000000000004,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 73.0,
+      "frame_number": 73,
+      "player_ign": "enemy_4",
+      "from_position": {
+        "x": 0.6444028628997543,
+        "y": 0.3458779639325698
+      },
+      "to_position": {
+        "x": 0.5967500564394632,
+        "y": 0.33073827977278514
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "roaming",
+      "distance": 0.04999999999999999,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 74.0,
+      "frame_number": 74,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.21745686980303536,
+        "y": 0.7860970983739506
+      },
+      "to_position": {
+        "x": 0.1743838232037273,
+        "y": 0.8278668560540454
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.06000000000000003,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 74.0,
+      "frame_number": 74,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.6028559735752785,
+        "y": 0.5183558485338691
+      },
+      "to_position": {
+        "x": 0.6191088546178471,
+        "y": 0.5301395825139975
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "laning",
+      "distance": 0.02007517194691791,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 75.0,
+      "frame_number": 75,
+      "player_ign": "ally_4",
+      "from_position": {
+        "x": 0.1743838232037273,
+        "y": 0.8278668560540454
+      },
+      "to_position": {
+        "x": 0.13131077660441925,
+        "y": 0.8696366137341401
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "recall",
+      "distance": 0.059999999999999956,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 75.0,
+      "frame_number": 75,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.6191088546178471,
+        "y": 0.5301395825139975
+      },
+      "to_position": {
+        "x": 0.6387992234953342,
+        "y": 0.5447280639206312
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "laning",
+      "distance": 0.024505803726529968,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 76.0,
+      "frame_number": 76,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.9030574811066312,
+        "y": 0.15321678575758138
+      },
+      "to_position": {
+        "x": 0.9,
+        "y": 0.1
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "recall",
+      "distance": 0.053304544619438614,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 77.0,
+      "frame_number": 77,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.6215759056709831,
+        "y": 0.5425329317732737
+      },
+      "to_position": {
+        "x": 0.6031730030425113,
+        "y": 0.5310933219518471
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "laning",
+      "distance": 0.021668675502196533,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 78.0,
+      "frame_number": 78,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.8919298557368336,
+        "y": 0.10115817728750998
+      },
+      "to_position": {
+        "x": 0.8643257311241881,
+        "y": 0.13010661946268648
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.03999999999999998,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 79.0,
+      "frame_number": 79,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.6174588735382817,
+        "y": 0.5435298600674261
+      },
+      "to_position": {
+        "x": 0.6005945384911733,
+        "y": 0.5322206167403045
+      },
+      "from_region": "river",
+      "to_region": "river",
+      "movement_type": "laning",
+      "distance": 0.020305289488534065,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 79.0,
+      "frame_number": 79,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.8643257311241881,
+        "y": 0.13010661946268648
+      },
+      "to_position": {
+        "x": 0.8367216065115426,
+        "y": 0.15905506163786298
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.03999999999999998,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 80.0,
+      "frame_number": 80,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.8367216065115426,
+        "y": 0.15905506163786298
+      },
+      "to_position": {
+        "x": 0.8091174818988971,
+        "y": 0.18800350381303946
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.039999999999999966,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 81.0,
+      "frame_number": 81,
+      "player_ign": "ally_2",
+      "from_position": {
+        "x": 0.23688717156495728,
+        "y": 0.8188788919405973
+      },
+      "to_position": {
+        "x": 0.2202011389583567,
+        "y": 0.8382643690101445
+      },
+      "from_region": "bot_lane",
+      "to_region": "bot_lane",
+      "movement_type": "laning",
+      "distance": 0.025577732607924373,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 81.0,
+      "frame_number": 81,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.8091174818988971,
+        "y": 0.18800350381303946
+      },
+      "to_position": {
+        "x": 0.827097581982737,
+        "y": 0.1734262906398909
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.02314690352769274,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 81.0,
+      "frame_number": 81,
+      "player_ign": "enemy_4",
+      "from_position": {
+        "x": 0.5942828648872882,
+        "y": 0.3034883791068016
+      },
+      "to_position": {
+        "x": 0.6249898384096013,
+        "y": 0.3291219855073837
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.04000000000000002,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 82.0,
+      "frame_number": 82,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.827097581982737,
+        "y": 0.1734262906398909
+      },
+      "to_position": {
+        "x": 0.8367380988955548,
+        "y": 0.15571395263995585
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.02016597341489546,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 82.0,
+      "frame_number": 82,
+      "player_ign": "enemy_4",
+      "from_position": {
+        "x": 0.6249898384096013,
+        "y": 0.3291219855073837
+      },
+      "to_position": {
+        "x": 0.65,
+        "y": 0.35
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "jungle_clear",
+      "distance": 0.03257912939186298,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 84.0,
+      "frame_number": 84,
+      "player_ign": "enemy_2",
+      "from_position": {
+        "x": 0.8369222722481646,
+        "y": 0.1406663142018218
+      },
+      "to_position": {
+        "x": 0.8544798706280464,
+        "y": 0.15165678769221244
+      },
+      "from_region": "top_lane",
+      "to_region": "top_lane",
+      "movement_type": "laning",
+      "distance": 0.020713757950024607,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 85.0,
+      "frame_number": 85,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.6049224035666123,
+        "y": 0.5106756465016288
+      },
+      "to_position": {
+        "x": 0.5928211300855472,
+        "y": 0.49341027968086926
+      },
+      "from_region": "river",
+      "to_region": "mid_lane",
+      "movement_type": "laning",
+      "distance": 0.02108396811131421,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 88.0,
+      "frame_number": 88,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.5884758205033734,
+        "y": 0.5193642664801041
+      },
+      "to_position": {
+        "x": 0.603455776820747,
+        "y": 0.5016927280264019
+      },
+      "from_region": "mid_lane",
+      "to_region": "river",
+      "movement_type": "laning",
+      "distance": 0.023166405905774408,
+      "duration": 1.0,
+      "confidence": 0.95
+    },
+    {
+      "timestamp": 89.0,
+      "frame_number": 89,
+      "player_ign": "enemy_1",
+      "from_position": {
+        "x": 0.603455776820747,
+        "y": 0.5016927280264019
+      },
+      "to_position": {
+        "x": 0.5888930743148851,
+        "y": 0.4867487550136483
+      },
+      "from_region": "river",
+      "to_region": "mid_lane",
+      "movement_type": "laning",
+      "distance": 0.020866112088267507,
+      "duration": 1.0,
+      "confidence": 0.95
+    }
+  ],
+  "players": [
+    {
+      "player_id": "ally_1",
+      "role": "tank",
+      "team": "ally",
+      "color": [
+        255,
+        100,
+        100
+      ]
+    },
+    {
+      "player_id": "ally_2",
+      "role": "marksman",
+      "team": "ally",
+      "color": [
+        255,
+        150,
+        100
+      ]
+    },
+    {
+      "player_id": "ally_3",
+      "role": "support",
+      "team": "ally",
+      "color": [
+        255,
+        200,
+        100
+      ]
+    },
+    {
+      "player_id": "ally_4",
+      "role": "mage",
+      "team": "ally",
+      "color": [
+        255,
+        255,
+        100
+      ]
+    },
+    {
+      "player_id": "ally_5",
+      "role": "assassin",
+      "team": "ally",
+      "color": [
+        200,
+        255,
+        100
+      ]
+    },
+    {
+      "player_id": "enemy_1",
+      "role": "tank",
+      "team": "enemy",
+      "color": [
+        100,
+        100,
+        255
+      ]
+    },
+    {
+      "player_id": "enemy_2",
+      "role": "marksman",
+      "team": "enemy",
+      "color": [
+        100,
+        150,
+        255
+      ]
+    },
+    {
+      "player_id": "enemy_3",
+      "role": "support",
+      "team": "enemy",
+      "color": [
+        100,
+        200,
+        255
+      ]
+    },
+    {
+      "player_id": "enemy_4",
+      "role": "mage",
+      "team": "enemy",
+      "color": [
+        100,
+        255,
+        255
+      ]
+    },
+    {
+      "player_id": "enemy_5",
+      "role": "fighter",
+      "team": "enemy",
+      "color": [
+        200,
+        100,
+        255
+      ]
+    }
+  ]
+}

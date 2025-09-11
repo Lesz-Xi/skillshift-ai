@@ -1,0 +1,14 @@
+{
+  "passed": 2,
+  "total": 6,
+  "success_rate": 0.3333333333333333,
+  "results": {
+    "Health Endpoint": true,
+    "CORS Middleware": false,
+    "Error Handling Structure": true,
+    "IGN Fuzzy Matching": false,
+    "KDA Regex Fallback": false,
+    "Table Detection Fallback": false
+  },
+  "timestamp": "2025-09-12 02:51:01"
+}

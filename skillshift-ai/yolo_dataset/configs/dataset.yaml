@@ -1,0 +1,6 @@
+train: /Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/images/train
+val: /Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/images/val
+test: /Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/images/test
+
+nc: 16
+names: ['damage_taken', 'gold', 'hero_ally', 'hero_damage', 'hero_enemy', 'kda_display', 'match_duration', 'medal_bronze', 'medal_gold', 'medal_silver', 'mvp_badge', 'mvp_loss_badge', 'outcome_banner', 'player_name', 'teamfight_participation', 'turret_damage']

@@ -1,0 +1,835 @@
+{
+  "detection_result": {
+    "trophy_type": "silver_medal",
+    "confidence": 0.48642500000000005,
+    "method": "hsv_color_analysis",
+    "processing_time": 0.03743720054626465
+  },
+  "color_analysis": {
+    "color_space": "HSV",
+    "detected_color": "silver",
+    "confidence": 1.0,
+    "pixel_count": 518,
+    "dominant_values": {
+      "hsv_confidence": 1.0
+    },
+    "color_histogram": null
+  },
+  "shape_analysis": {
+    "circularity": 0.5617452944182648,
+    "aspect_ratio": 1.0384615384615385,
+    "solidity": 0.8677824267782427,
+    "convexity": 0.8677824267782427,
+    "area": 518.5,
+    "perimeter": 107.69848418235779,
+    "shape_confidence": 0.675,
+    "contour_points": 39
+  },
+  "ensemble_votes": {
+    "silver_hsv_region_2": 0.48642500000000005
+  },
+  "method_confidences": {
+    "color_analysis": 1.0,
+    "shape_analysis": 0.675,
+    "position_boost": 0.9285416666666666,
+    "ensemble": 0.48642500000000005
+  },
+  "debug_info": {
+    "version": "v3_advanced",
+    "quality_hint": "average",
+    "search_regions": [],
+    "color_analysis_results": [
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "gold",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "gold",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 2,
+        "mask_pixels": 41,
+        "contours_found": 1
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 0,
+        "mask_pixels": 161,
+        "contours_found": 5
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 1,
+        "mask_pixels": 134,
+        "contours_found": 4
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 2,
+        "mask_pixels": 26,
+        "contours_found": 3
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 0,
+        "mask_pixels": 412,
+        "contours_found": 3
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 1,
+        "mask_pixels": 365,
+        "contours_found": 2
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 2,
+        "mask_pixels": 496,
+        "contours_found": 2
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 0,
+        "mask_pixels": 1,
+        "contours_found": 1
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 2,
+        "mask_pixels": 7,
+        "contours_found": 1
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 0,
+        "mask_pixels": 600,
+        "contours_found": 8
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 1,
+        "mask_pixels": 940,
+        "contours_found": 7
+      },
+      {
+        "method": "lab",
+        "medal_color": "silver",
+        "range_index": 2,
+        "mask_pixels": 653,
+        "contours_found": 5
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 0,
+        "mask_pixels": 2209,
+        "contours_found": 1
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 1,
+        "mask_pixels": 1750,
+        "contours_found": 2
+      },
+      {
+        "method": "hsv",
+        "medal_color": "silver",
+        "range_index": 2,
+        "mask_pixels": 2402,
+        "contours_found": 1
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "lab",
+        "medal_color": "bronze",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 0,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 1,
+        "mask_pixels": 0,
+        "contours_found": 0
+      },
+      {
+        "method": "hsv",
+        "medal_color": "bronze",
+        "range_index": 2,
+        "mask_pixels": 0,
+        "contours_found": 0
+      }
+    ],
+    "shape_analysis_results": [
+      {
+        "shape_type": "medal",
+        "medal_color": "silver",
+        "circularity": 0.5617452944182648,
+        "aspect_ratio": 1.0384615384615385,
+        "solidity": 0.8677824267782427,
+        "area": 518.5,
+        "shape_confidence": 0.675
+      },
+      {
+        "shape_type": "medal",
+        "medal_color": "silver",
+        "circularity": 0.1790203649824995,
+        "aspect_ratio": 0.9696969696969697,
+        "solidity": 0.7084191731904959,
+        "area": 2579.0,
+        "shape_confidence": 0.6300000000000001
+      }
+    ],
+    "ensemble_votes": {
+      "silver_hsv_region_2": 0.48642500000000005,
+      "silver_hsv_region_5": 0.44100000000000006
+    },
+    "method_confidences": {},
+    "processing_stages": [
+      "image_loaded",
+      "color_spaces_converted"
+    ],
+    "detection_order": [
+      "medal",
+      "mvp",
+      "text_mvp"
+    ],
+    "mvp_threshold_multiplier": 1.4
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "total_tests": 4,
+  "direct_reliability": 100.0,
+  "integrated_reliability": 0.0,
+  "consistency_rate": 0.0,
+  "success_level": "needs_work",
+  "detailed_results": [
+    {
+      "image": "edb4fa11-6_ranked_matches_good_performance_match06_win_kda.PNG",
+      "expected": "good_to_excellent",
+      "direct": {
+        "detection_success": true,
+        "trophy_type": "mvp_crown",
+        "confidence": 0.7638586706642659,
+        "method": "ensemble_voting",
+        "processing_time": 9.939836978912354,
+        "bounding_box": [
+          1356,
+          453,
+          70,
+          32
+        ]
+      },
+      "integrated": {
+        "detection_success": false,
+        "trophy_type": "none",
+        "confidence": 0.0,
+        "processing_time": 35.822269916534424,
+        "error": "No data returned from integrated pipeline"
+      },
+      "consistency": {
+        "consistent": false,
+        "both_detected": false,
+        "trophy_types_match": false,
+        "performance_gap": 0.7638586706642659,
+        "positioning_diff": null,
+        "direct_confidence": 0.7638586706642659,
+        "integrated_confidence": 0.0,
+        "reliability_improvement": false
+      }
+    },
+    {
+      "image": "ef18ecbc-2_ranked_matches_good_performance_match02_win_kda.PNG",
+      "expected": "good_to_excellent",
+      "direct": {
+        "detection_success": true,
+        "trophy_type": "silver_medal",
+        "confidence": 0.48527500000000007,
+        "method": "hsv_color_analysis",
+        "processing_time": 7.196337938308716,
+        "bounding_box": [
+          1398,
+          380,
+          27,
+          26
+        ]
+      },
+      "integrated": {
+        "detection_success": false,
+        "trophy_type": "none",
+        "confidence": 0.0,
+        "mvp_detected": false,
+        "medal_type": null,
+        "performance_label": "Unknown",
+        "contextual_rating": "Unknown",
+        "processing_time": 24.77965497970581,
+        "overall_confidence": 0.9425000000000001,
+        "warnings": []
+      },
+      "consistency": {
+        "consistent": false,
+        "both_detected": false,
+        "trophy_types_match": false,
+        "performance_gap": 0.48527500000000007,
+        "positioning_diff": null,
+        "direct_confidence": 0.48527500000000007,
+        "integrated_confidence": 0.0,
+        "reliability_improvement": false
+      }
+    },
+    {
+      "image": "ea01384d-1_ranked_matches_average_performance_match01_win_kda.PNG",
+      "expected": "average",
+      "direct": {
+        "detection_success": true,
+        "trophy_type": "silver_medal",
+        "confidence": 0.48642500000000005,
+        "method": "hsv_color_analysis",
+        "processing_time": 0.33525609970092773,
+        "bounding_box": [
+          1398,
+          380,
+          27,
+          26
+        ]
+      },
+      "integrated": {
+        "detection_success": false,
+        "trophy_type": "none",
+        "confidence": 0.0,
+        "mvp_detected": false,
+        "medal_type": null,
+        "performance_label": "Unknown",
+        "contextual_rating": "Unknown",
+        "processing_time": 23.908758878707886,
+        "overall_confidence": 0.8725,
+        "warnings": []
+      },
+      "consistency": {
+        "consistent": false,
+        "both_detected": false,
+        "trophy_types_match": false,
+        "performance_gap": 0.48642500000000005,
+        "positioning_diff": null,
+        "direct_confidence": 0.48642500000000005,
+        "integrated_confidence": 0.0,
+        "reliability_improvement": false
+      }
+    },
+    {
+      "image": "ranked_poor_kda_059.jpg",
+      "expected": "poor",
+      "direct": {
+        "detection_success": true,
+        "trophy_type": "silver_medal",
+        "confidence": 0.489375,
+        "method": "hsv_color_analysis",
+        "processing_time": 8.316580772399902,
+        "bounding_box": [
+          1398,
+          680,
+          27,
+          29
+        ]
+      },
+      "integrated": {
+        "detection_success": false,
+        "trophy_type": "none",
+        "confidence": 0.0,
+        "mvp_detected": false,
+        "medal_type": null,
+        "performance_label": "Unknown",
+        "contextual_rating": "Unknown",
+        "processing_time": 22.303713083267212,
+        "overall_confidence": 0.8725,
+        "warnings": []
+      },
+      "consistency": {
+        "consistent": false,
+        "both_detected": false,
+        "trophy_types_match": false,
+        "performance_gap": 0.489375,
+        "positioning_diff": null,
+        "direct_confidence": 0.489375,
+        "integrated_confidence": 0.0,
+        "reliability_improvement": false
+      }
+    }
+  ]
+}

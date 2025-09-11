@@ -1,0 +1,47 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  # Prometheus itself
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # API Gateway
+  - job_name: "api-gateway"
+    static_configs:
+      - targets: ["api-gateway:8000"]
+    metrics_path: "/metrics"
+    scrape_interval: 30s
+
+  # OCR Service
+  - job_name: "ocr-service"
+    static_configs:
+      - targets: ["ocr-service:8001"]
+    metrics_path: "/metrics"
+    scrape_interval: 30s
+
+  # Detection Service
+  - job_name: "detection-service"
+    static_configs:
+      - targets: ["detection-service:8002"]
+    metrics_path: "/metrics"
+    scrape_interval: 30s
+
+  # Analysis Service
+  - job_name: "analysis-service"
+    static_configs:
+      - targets: ["analysis-service:8003"]
+    metrics_path: "/metrics"
+    scrape_interval: 30s
+
+  # Redis
+  - job_name: "redis"
+    static_configs:
+      - targets: ["redis:6379"]
+    scrape_interval: 30s

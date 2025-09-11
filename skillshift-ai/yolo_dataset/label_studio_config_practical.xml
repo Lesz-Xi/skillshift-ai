@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<View>
+  <Image name="image" value="$image"/>
+  <View name="labels" value="$labels">
+    <Label name="hero_icon_ally_1" value="hero_icon_ally_1"/>
+    <Label name="hero_icon_ally_2" value="hero_icon_ally_2"/>
+    <Label name="hero_icon_ally_3" value="hero_icon_ally_3"/>
+    <Label name="hero_icon_enemy_1" value="hero_icon_enemy_1"/>
+    <Label name="hero_icon_enemy_2" value="hero_icon_enemy_2"/>
+    <Label name="hero_icon_enemy_3" value="hero_icon_enemy_3"/>
+  </View>
+</View>

@@ -1,0 +1,55 @@
+{
+  "success_rate": 60.0,
+  "high_confidence_rate": 0.0,
+  "excellent_rate": 40.0,
+  "target_achieved": false,
+  "success_level": "needs_work",
+  "detailed_results": [
+    {
+      "image": "edb4fa11-6_ranked_matches_good_performance_match06_win_kda.PNG",
+      "success": true,
+      "trophy_type": "mvp_crown",
+      "confidence": 0.9962875826300033,
+      "method": "ensemble_voting",
+      "processing_time": 41.484678983688354,
+      "detection_attempts": 11,
+      "consensus_ratio": 100.0
+    },
+    {
+      "image": "ef18ecbc-2_ranked_matches_good_performance_match02_win_kda.PNG",
+      "success": false,
+      "trophy_type": "none",
+      "confidence": 0.0,
+      "processing_time": 53.54247307777405,
+      "detection_attempts": 11
+    },
+    {
+      "image": "ea01384d-1_ranked_matches_average_performance_match01_win_kda.PNG",
+      "success": true,
+      "trophy_type": "mvp_crown",
+      "confidence": 0.804501707140151,
+      "method": "ensemble_voting",
+      "processing_time": 49.71844220161438,
+      "detection_attempts": 11,
+      "consensus_ratio": 100.0
+    },
+    {
+      "image": "ranked_poor_kda_059.jpg",
+      "success": false,
+      "trophy_type": "none",
+      "confidence": 0.0,
+      "processing_time": 51.90764880180359,
+      "detection_attempts": 11
+    },
+    {
+      "image": "fff98301-4_ranked_matches_average_performance_match04_win_kda.PNG",
+      "success": true,
+      "trophy_type": "mvp_crown",
+      "confidence": 0.9590916684162142,
+      "method": "ensemble_voting",
+      "processing_time": 41.320406913757324,
+      "detection_attempts": 11,
+      "consensus_ratio": 100.0
+    }
+  ]
+}

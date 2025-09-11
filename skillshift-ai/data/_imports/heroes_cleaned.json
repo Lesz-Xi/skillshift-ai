@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "name": "Layla",
+    "slug": "layla",
+    "role": "marksman",
+    "tier": "A"
+  },
+  {
+    "id": 2,
+    "name": "Miya",
+    "slug": "miya",
+    "role": "marksman",
+    "tier": "B"
+  },
+  {
+    "id": 3,
+    "name": "Alucard",
+    "slug": "alucard",
+    "role": "fighter",
+    "tier": "S"
+  },
+  {
+    "id": 4,
+    "name": "Alice",
+    "slug": "alice",
+    "role": "mage",
+    "tier": "A"
+  },
+  {
+    "id": 5,
+    "name": "Tigreal",
+    "slug": "tigreal",
+    "role": "tank",
+    "tier": "S"
+  },
+  {
+    "id": 6,
+    "name": "Saber",
+    "slug": "saber",
+    "role": "assassin",
+    "tier": "A"
+  },
+  {
+    "id": 7,
+    "name": "Angela",
+    "slug": "angela",
+    "role": "support",
+    "tier": "S"
+  },
+  {
+    "id": 8,
+    "name": "Fanny",
+    "slug": "fanny",
+    "role": "assassin",
+    "tier": "S"
+  },
+  {
+    "id": 9,
+    "name": "Gusion",
+    "slug": "gusion",
+    "role": "assassin",
+    "tier": "A"
+  },
+  {
+    "id": 10,
+    "name": "Lunox",
+    "slug": "lunox",
+    "role": "mage",
+    "tier": "S"
+  },
+  {
+    "id": 11,
+    "name": "Granger",
+    "slug": "granger",
+    "role": "marksman",
+    "tier": "S"
+  },
+  {
+    "id": 12,
+    "name": "Karrie",
+    "slug": "karrie",
+    "role": "marksman",
+    "tier": "A"
+  },
+  {
+    "id": 13,
+    "name": "Bruno",
+    "slug": "bruno",
+    "role": "marksman",
+    "tier": "B"
+  },
+  {
+    "id": 14,
+    "name": "Claude",
+    "slug": "claude",
+    "role": "marksman",
+    "tier": "A"
+  },
+  {
+    "id": 15,
+    "name": "Kimmy",
+    "slug": "kimmy",
+    "role": "marksman",
+    "tier": "B"
+  },
+  {
+    "id": 16,
+    "name": "Chou",
+    "slug": "chou",
+    "role": "fighter",
+    "tier": "S"
+  },
+  {
+    "id": 17,
+    "name": "Freya",
+    "slug": "freya",
+    "role": "fighter",
+    "tier": "A"
+  },
+  {
+    "id": 18,
+    "name": "Ruby",
+    "slug": "ruby",
+    "role": "fighter",
+    "tier": "A"
+  },
+  {
+    "id": 19,
+    "name": "Jawhead",
+    "slug": "jawhead",
+    "role": "fighter",
+    "tier": "B"
+  },
+  {
+    "id": 20,
+    "name": "Kagura",
+    "slug": "kagura",
+    "role": "mage",
+    "tier": "S"
+  },
+  {
+    "id": 21,
+    "name": "Eudora",
+    "slug": "eudora",
+    "role": "mage",
+    "tier": "B"
+  },
+  {
+    "id": 22,
+    "name": "Cyclops",
+    "slug": "cyclops",
+    "role": "mage",
+    "tier": "A"
+  },
+  {
+    "id": 23,
+    "name": "Harley",
+    "slug": "harley",
+    "role": "mage",
+    "tier": "A"
+  },
+  {
+    "id": 24,
+    "name": "Johnson",
+    "slug": "johnson",
+    "role": "tank",
+    "tier": "A"
+  },
+  {
+    "id": 25,
+    "name": "Akai",
+    "slug": "akai",
+    "role": "tank",
+    "tier": "B"
+  },
+  {
+    "id": 26,
+    "name": "Franco",
+    "slug": "franco",
+    "role": "tank",
+    "tier": "A"
+  },
+  {
+    "id": 27,
+    "name": "Lolita",
+    "slug": "lolita",
+    "role": "tank",
+    "tier": "B"
+  },
+  {
+    "id": 28,
+    "name": "Kaja",
+    "slug": "kaja",
+    "role": "support",
+    "tier": "A"
+  },
+  {
+    "id": 29,
+    "name": "Estes",
+    "slug": "estes",
+    "role": "support",
+    "tier": "A"
+  },
+  {
+    "id": 30,
+    "name": "Diggie",
+    "slug": "diggie",
+    "role": "support",
+    "tier": "B"
+  }
+]

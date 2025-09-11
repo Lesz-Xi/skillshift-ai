@@ -1,0 +1,67 @@
+{
+  "timestamp": "2025-09-07T12:52:02.570Z",
+  "summary": {
+    "overallScore": 60,
+    "status": "FAIR",
+    "readyForProduction": false,
+    "criticalIssues": [
+      "Lighthouse PWA audit failed"
+    ],
+    "passedTests": 2,
+    "totalTests": 4
+  },
+  "testResults": {
+    "lighthouse": {
+      "score": 0,
+      "passed": false,
+      "error": "lighthouse is not a function"
+    },
+    "manifest": {
+      "exists": true,
+      "valid": true,
+      "missingFields": [],
+      "iconCount": 8,
+      "hasShortcuts": true,
+      "details": {
+        "name": "MLBB Coach AI",
+        "shortName": "MLBB Coach",
+        "startUrl": "/",
+        "display": "standalone",
+        "themeColor": "#16213e"
+      }
+    },
+    "serviceWorker": {
+      "exists": true,
+      "size": 15100,
+      "hasCaching": true,
+      "hasOfflineSupport": true,
+      "hasBackgroundSync": true,
+      "hasPushHandling": true,
+      "features": {
+        "install": true,
+        "activate": true,
+        "fetch": true,
+        "message": true
+      }
+    },
+    "offline": {
+      "offlinePageExists": true,
+      "offlinePageSize": 7614,
+      "hasOfflineFeatures": true
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "category": "Performance",
+      "issue": "Lighthouse PWA score below 90",
+      "action": "Review Lighthouse recommendations and optimize"
+    }
+  ],
+  "nextSteps": [
+    "Fix critical issues identified in recommendations",
+    "Re-run PWA tests after fixes",
+    "Test on multiple devices and browsers",
+    "Optimize performance based on Lighthouse recommendations"
+  ]
+}

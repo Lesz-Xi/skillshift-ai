@@ -1,0 +1,81 @@
+<View>
+  <Image name="image" value="$image" zoom="true" zoomControl="true"/>
+  <View>
+    <Filter toName="label" minlength="0" name="filter"/>
+    <RectangleLabels name="label" toName="image">
+      
+      <!-- HIGH PRIORITY CLASSES (0-20) -->
+      <!-- Hero Icons - Ally Team -->
+      <Label value="hero_icon_ally_1" background="#4CAF50"/>
+      <Label value="hero_icon_ally_2" background="#66BB6A"/>
+      <Label value="hero_icon_ally_3" background="#81C784"/>
+      <Label value="hero_icon_ally_4" background="#A5D6A7"/>
+      <Label value="hero_icon_ally_5" background="#C8E6C9"/>
+      
+      <!-- Hero Icons - Enemy Team -->
+      <Label value="hero_icon_enemy_1" background="#F44336"/>
+      <Label value="hero_icon_enemy_2" background="#EF5350"/>
+      <Label value="hero_icon_enemy_3" background="#E57373"/>
+      <Label value="hero_icon_enemy_4" background="#EF9A9A"/>
+      <Label value="hero_icon_enemy_5" background="#FFCDD2"/>
+      
+      <!-- Performance Badges -->
+      <Label value="mvp_badge" background="#FFD700"/>
+      <Label value="mvp_loss_badge" background="#C0C0C0"/>
+      <Label value="medal_gold" background="#FFD700"/>
+      <Label value="medal_silver" background="#C0C0C0"/>
+      <Label value="medal_bronze" background="#CD7F32"/>
+      
+      <!-- Match Information -->
+      <Label value="match_type_classic" background="#2196F3"/>
+      <Label value="match_type_ranked" background="#FF9800"/>
+      <Label value="match_type_brawl" background="#9C27B0"/>
+      <Label value="match_type_custom" background="#607D8B"/>
+      <Label value="victory_text" background="#4CAF50"/>
+      <Label value="defeat_text" background="#F44336"/>
+      
+      <!-- MEDIUM PRIORITY CLASSES (21-33) -->
+      <!-- Player Statistics -->
+      <Label value="kda_display" background="#FF5722"/>
+      <Label value="player_name" background="#3F51B5"/>
+      <Label value="gold_amount" background="#FFC107"/>
+      <Label value="gpm_display" background="#FFEB3B"/>
+      <Label value="damage_dealt" background="#E91E63"/>
+      <Label value="damage_taken" background="#9E9E9E"/>
+      <Label value="healing_done" background="#4CAF50"/>
+      <Label value="participation_rate" background="#00BCD4"/>
+      <Label value="turret_damage" background="#795548"/>
+      <Label value="match_duration" background="#607D8B"/>
+      <Label value="player_level" background="#8BC34A"/>
+      
+      <!-- UI Elements -->
+      <Label value="team_indicator_ally" background="#8BC34A"/>
+      <Label value="team_indicator_enemy" background="#FF7043"/>
+      <Label value="scoreboard_container" background="#546E7A"/>
+      
+      <!-- LOW PRIORITY CLASSES (34-50) -->
+      <!-- Equipment -->
+      <Label value="item_icon_1" background="#673AB7"/>
+      <Label value="item_icon_2" background="#673AB7"/>
+      <Label value="item_icon_3" background="#673AB7"/>
+      <Label value="item_icon_4" background="#673AB7"/>
+      <Label value="item_icon_5" background="#673AB7"/>
+      <Label value="item_icon_6" background="#673AB7"/>
+      <Label value="battle_spell_1" background="#E91E63"/>
+      <Label value="battle_spell_2" background="#E91E63"/>
+      
+      <!-- Achievements & Roles -->
+      <Label value="savage_indicator" background="#D32F2F"/>
+      <Label value="maniac_indicator" background="#FF5722"/>
+      <Label value="legendary_indicator" background="#FF9800"/>
+      <Label value="role_indicator" background="#795548"/>
+      <Label value="position_rank" background="#607D8B"/>
+      
+      <!-- Quality Control -->
+      <Label value="ui_complete" background="#4CAF50"/>
+      <Label value="text_readable" background="#2196F3"/>
+      <Label value="icons_clear" background="#FF9800"/>
+      
+    </RectangleLabels>
+  </View>
+</View>

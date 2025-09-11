@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MLBB Coach AI - Offline</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          sans-serif;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .offline-container {
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+      }
+
+      .offline-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 24px;
+        background: #4a90e2;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+      }
+
+      .offline-title {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        color: #ffffff;
+      }
+
+      .offline-message {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #b0b3c1;
+        margin-bottom: 32px;
+      }
+
+      .offline-features {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 32px;
+        text-align: left;
+      }
+
+      .offline-features h3 {
+        font-size: 18px;
+        margin-bottom: 12px;
+        color: #4a90e2;
+      }
+
+      .feature-list {
+        list-style: none;
+      }
+
+      .feature-list li {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+      }
+
+      .feature-list li:last-child {
+        border-bottom: none;
+      }
+
+      .feature-list li::before {
+        content: "✓";
+        color: #4a90e2;
+        font-weight: bold;
+        margin-right: 12px;
+        width: 16px;
+      }
+
+      .retry-button {
+        background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+        color: white;
+        border: none;
+        padding: 12px 32px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-right: 12px;
+      }
+
+      .retry-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+      }
+
+      .home-button {
+        background: transparent;
+        color: #4a90e2;
+        border: 2px solid #4a90e2;
+        padding: 10px 32px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .home-button:hover {
+        background: #4a90e2;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .connection-status {
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .connection-status.offline {
+        background: rgba(231, 76, 60, 0.1);
+        border: 1px solid #e74c3c;
+        color: #e74c3c;
+      }
+
+      .connection-status.online {
+        background: rgba(46, 204, 113, 0.1);
+        border: 1px solid #2ecc71;
+        color: #2ecc71;
+      }
+
+      .tips {
+        margin-top: 24px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        font-size: 14px;
+        color: #8892b0;
+      }
+
+      .tips h4 {
+        color: #ffffff;
+        margin-bottom: 8px;
+      }
+
+      @media (max-width: 480px) {
+        .offline-title {
+          font-size: 24px;
+        }
+
+        .offline-message {
+          font-size: 14px;
+        }
+
+        .retry-button,
+        .home-button {
+          display: block;
+          width: 100%;
+          margin: 8px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="offline-container">
+      <div class="offline-icon">🏆</div>
+
+      <h1 class="offline-title">You're Offline</h1>
+      <p class="offline-message">
+        No internet connection detected. Don't worry - MLBB Coach AI has some
+        offline features to keep you improving!
+      </p>
+
+      <div class="offline-features">
+        <h3>Available Offline:</h3>
+        <ul class="feature-list">
+          <li>View cached match analyses</li>
+          <li>Browse achievement progress</li>
+          <li>Access learning materials</li>
+          <li>Review coaching tips</li>
+          <li>Check leaderboard rankings</li>
+        </ul>
+      </div>
+
+      <div>
+        <button class="retry-button" onclick="retryConnection()">
+          Try Again
+        </button>
+        <a href="/" class="home-button"> Go Home </a>
+      </div>
+
+      <div id="connectionStatus" class="connection-status offline">
+        📡 Connection Status: Offline
+      </div>
+
+      <div class="tips">
+        <h4>💡 Offline Tips:</h4>
+        <p>
+          Your progress will sync automatically when you're back online. Keep
+          practicing and improving your MLBB skills!
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Check connection status
+      function updateConnectionStatus() {
+        const statusElement = document.getElementById("connectionStatus");
+
+        if (navigator.onLine) {
+          statusElement.className = "connection-status online";
+          statusElement.innerHTML =
+            '🌐 Connection Status: Online - <a href="/" style="color: inherit;">Return to App</a>';
+        } else {
+          statusElement.className = "connection-status offline";
+          statusElement.innerHTML = "📡 Connection Status: Offline";
+        }
+      }
+
+      // Retry connection
+      function retryConnection() {
+        if (navigator.onLine) {
+          window.location.href = "/";
+        } else {
+          // Try to refresh the page
+          window.location.reload();
+        }
+      }
+
+      // Listen for connection changes
+      window.addEventListener("online", updateConnectionStatus);
+      window.addEventListener("offline", updateConnectionStatus);
+
+      // Auto-redirect when connection is restored
+      window.addEventListener("online", () => {
+        setTimeout(() => {
+          if (navigator.onLine) {
+            window.location.href = "/";
+          }
+        }, 1000);
+      });
+
+      // Check if we can reach the server
+      async function checkServerConnection() {
+        try {
+          const response = await fetch("/", {
+            method: "HEAD",
+            cache: "no-cache",
+          });
+
+          if (response.ok) {
+            window.location.href = "/";
+          }
+        } catch (error) {
+          // Server still unreachable
+          console.log("Server still unreachable:", error);
+        }
+      }
+
+      // Periodically check server connection
+      setInterval(checkServerConnection, 30000); // Check every 30 seconds
+
+      // Initialize
+      updateConnectionStatus();
+
+      // Service worker registration check
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.ready.then((registration) => {
+          console.log("Service Worker ready:", registration);
+        });
+      }
+
+      // Handle visibility change (when user returns to tab)
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden && navigator.onLine) {
+          checkServerConnection();
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+name: OCR Performance Budget CI (OCR-Mission-1.md)
+
+on:
+  push:
+    paths: 
+      - 'backend/ocr/**'
+      - 'backend/tests/performance/**'
+  pull_request:
+    paths:
+      - 'backend/ocr/**'
+      - 'backend/tests/performance/**'
+
+jobs:
+  performance-ratcheting-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Ratcheting performance budget schedule
+        budget: [2000, 1500, 1000, 500]
+      fail-fast: false
+      
+    name: "Performance Budget: ${{ matrix.budget }}ms"
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+        
+    - name: Install dependencies
+      run: |
+        cd skillshift-ai
+        pip install -r requirements.txt
+        
+    - name: Run Performance Tests (Budget: ${{ matrix.budget }}ms)
+      env:
+        OCR_BUDGET_MS: ${{ matrix.budget }}
+        ENFORCE_OCR_BUDGET: "1"
+        FAST_TEST_MODE: "1"
+        OCR_GPU: "0"  # Disable GPU in CI
+      run: |
+        cd skillshift-ai
+        echo "🚀 Testing with performance budget: ${{ matrix.budget }}ms"
+        pytest backend/tests/performance/test_ocr_performance.py -v -s
+        
+    - name: Budget Status
+      if: always()
+      run: |
+        echo "Performance budget ${{ matrix.budget }}ms test completed"
+        if [ "${{ job.status }}" == "success" ]; then
+          echo "✅ Budget ${{ matrix.budget }}ms: PASSED"
+        else
+          echo "❌ Budget ${{ matrix.budget }}ms: FAILED - optimization needed"
+        fi
+
+  budget-summary:
+    needs: performance-ratcheting-tests
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Performance Budget Summary
+      run: |
+        echo "## OCR Performance Budget Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "| Budget | Status |" >> $GITHUB_STEP_SUMMARY
+        echo "|--------|--------|" >> $GITHUB_STEP_SUMMARY
+        echo "| 2000ms | ${{ needs.performance-ratcheting-tests.result == 'success' && '✅ Target' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+        echo "| 1500ms | Next milestone |" >> $GITHUB_STEP_SUMMARY
+        echo "| 1000ms | Future target |" >> $GITHUB_STEP_SUMMARY
+        echo "| 500ms  | Ultimate goal |" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Ratcheting Schedule:** Start with 2000ms, progressively reduce to 500ms as optimizations improve." >> $GITHUB_STEP_SUMMARY

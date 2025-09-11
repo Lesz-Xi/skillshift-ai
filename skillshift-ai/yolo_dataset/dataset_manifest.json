@@ -1,0 +1,655 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "generated_by": "enhanced_prepare_for_annotation.py",
+    "total_images": 64,
+    "split_ratios": {
+      "train": 0.7,
+      "val": 0.15,
+      "test": 0.15
+    },
+    "naming_convention": "{match_type}_{performance}_{view}_{index:03d}.jpg"
+  },
+  "images": [
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/damage_view/10_ranked_matches_average_performance_match10_loss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "dmg",
+      "new_filename": "ranked_average_dmg_001.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/damage_view/1_ranked_matches_average_performance_match01_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "dmg",
+      "new_filename": "ranked_average_dmg_002.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/damage_view/2_ranked_matches_average_performance_match02_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "dmg",
+      "new_filename": "ranked_average_dmg_003.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/damage_view/3_ranked_matches_average_performance_match03_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "dmg",
+      "new_filename": "ranked_average_dmg_004.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/damage_view/4_ranked_matches_average_performance_match04_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "dmg",
+      "new_filename": "ranked_average_dmg_005.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/damage_view/5_ranked_matches_average_performance_match05_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "dmg",
+      "new_filename": "ranked_average_dmg_006.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/damage_view/6_ranked_matches_average_performance_match06_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "dmg",
+      "new_filename": "ranked_average_dmg_007.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/damage_view/7_ranked_matches_average_performance_match07_loss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "dmg",
+      "new_filename": "ranked_average_dmg_008.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/damage_view/8_ranked_matches_average_performance_match08_loss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "dmg",
+      "new_filename": "ranked_average_dmg_009.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/damage_view/9_ranked_matches_average_performance_match09_loss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "dmg",
+      "new_filename": "ranked_average_dmg_010.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/kda_view/10_ranked_matches_average_performance_match10_loss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "kda",
+      "new_filename": "ranked_average_kda_011.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/kda_view/1_ranked_matches_average_performance_match01_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "kda",
+      "new_filename": "ranked_average_kda_012.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/kda_view/2_ranked_matches_average_performance_match02_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "kda",
+      "new_filename": "ranked_average_kda_013.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/kda_view/3_ranked_matches_average_performance_match03_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "kda",
+      "new_filename": "ranked_average_kda_014.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/kda_view/4_ranked_matches_average_performance_match04_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "kda",
+      "new_filename": "ranked_average_kda_015.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/kda_view/5_ranked_matches_average_performance_match05_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "kda",
+      "new_filename": "ranked_average_kda_016.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/kda_view/6_ranked_matches_average_performance_match06_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "kda",
+      "new_filename": "ranked_average_kda_017.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/kda_view/7_ranked_matches_average_performance_match07_loss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "kda",
+      "new_filename": "ranked_average_kda_018.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/kda_view/8_ranked_matches_average_performance_match08_loss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "kda",
+      "new_filename": "ranked_average_kda_019.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/average_performance/kda_view/9_ranked_matches_average_performance_match09_loss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "average",
+      "view_type": "kda",
+      "new_filename": "ranked_average_kda_020.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/excellent_performance/damage_view/1_ranked_matches_excellent_performance_match01_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "excellent",
+      "view_type": "dmg",
+      "new_filename": "ranked_excellent_dmg_021.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/excellent_performance/damage_view/2_ranked_matches_excellent_performance_match02_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "excellent",
+      "view_type": "dmg",
+      "new_filename": "ranked_excellent_dmg_022.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/excellent_performance/damage_view/3_ranked_matches_excellent_performance_match03_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "excellent",
+      "view_type": "dmg",
+      "new_filename": "ranked_excellent_dmg_023.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/excellent_performance/damage_view/4_ranked_matches_excellent_performance_match04_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "excellent",
+      "view_type": "dmg",
+      "new_filename": "ranked_excellent_dmg_024.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/excellent_performance/kda_view/1_ranked_matches_excellent_performance_match01_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "excellent",
+      "view_type": "kda",
+      "new_filename": "ranked_excellent_kda_025.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/excellent_performance/kda_view/2_ranked_matches_excellent_performance_match02_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "excellent",
+      "view_type": "kda",
+      "new_filename": "ranked_excellent_kda_026.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/excellent_performance/kda_view/3_ranked_matches_excellent_performance_match03_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "excellent",
+      "view_type": "kda",
+      "new_filename": "ranked_excellent_kda_027.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/excellent_performance/kda_view/4_ranked_matches_excellent_performance_match04_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "excellent",
+      "view_type": "kda",
+      "new_filename": "ranked_excellent_kda_028.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/damage_view/1_ranked_matches_good_performance_match01_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "dmg",
+      "new_filename": "ranked_good_dmg_029.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/damage_view/2_ranked_matches_good_performance_match02_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "dmg",
+      "new_filename": "ranked_good_dmg_030.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/damage_view/3_ranked_matches_good_performance_match03_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "dmg",
+      "new_filename": "ranked_good_dmg_031.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/damage_view/4_ranked_matches_good_performance_match04_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "dmg",
+      "new_filename": "ranked_good_dmg_032.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/damage_view/5_ranked_matches_good_performance_match05_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "dmg",
+      "new_filename": "ranked_good_dmg_033.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/damage_view/6_ranked_matches_good_performance_match06_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "dmg",
+      "new_filename": "ranked_good_dmg_034.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/damage_view/7_ranked_matches_good_performance_match07_loss_daamge.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "dmg",
+      "new_filename": "ranked_good_dmg_035.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/damage_view/8_ranked_matches_good_performance_match08_loss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "dmg",
+      "new_filename": "ranked_good_dmg_036.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/kda_view/1_ranked_matches_good_performance_match01_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "kda",
+      "new_filename": "ranked_good_kda_037.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/kda_view/2_ranked_matches_good_performance_match02_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "kda",
+      "new_filename": "ranked_good_kda_038.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/kda_view/3_ranked_matches_good_performance_match03_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "kda",
+      "new_filename": "ranked_good_kda_039.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/kda_view/4_ranked_matches_good_performance_match04_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "kda",
+      "new_filename": "ranked_good_kda_040.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/kda_view/5_ranked_matches_good_performance_match05_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "kda",
+      "new_filename": "ranked_good_kda_041.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/kda_view/6_ranked_matches_good_performance_match06_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "kda",
+      "new_filename": "ranked_good_kda_042.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/kda_view/7_ranked_matches_good_perfor,amce_match07_loss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "kda",
+      "new_filename": "ranked_good_kda_043.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/good_performance/kda_view/8_ranked_matches_good_performance_match08_loss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "good",
+      "view_type": "kda",
+      "new_filename": "ranked_good_kda_044.jpg",
+      "split": "train",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/mvp_loss_performance/damage_view/1_ranked_matches_excellent_performance_match01_mvploss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "mvploss",
+      "view_type": "dmg",
+      "new_filename": "ranked_mvploss_dmg_045.jpg",
+      "split": "val",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/mvp_loss_performance/damage_view/2_ranked_matches_excellent_performance_match02_mvploss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "mvploss",
+      "view_type": "dmg",
+      "new_filename": "ranked_mvploss_dmg_046.jpg",
+      "split": "val",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/mvp_loss_performance/damage_view/3_ranked_matches_excellent_performance_match03_mvploss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "mvploss",
+      "view_type": "dmg",
+      "new_filename": "ranked_mvploss_dmg_047.jpg",
+      "split": "val",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/mvp_loss_performance/damage_view/4_ranked_matches_excellent_performance_match04_mvploss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "mvploss",
+      "view_type": "dmg",
+      "new_filename": "ranked_mvploss_dmg_048.jpg",
+      "split": "val",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/mvp_loss_performance/kda_view/1_ranked_matches_excellent_performance_match01_mvploss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "mvploss",
+      "view_type": "kda",
+      "new_filename": "ranked_mvploss_kda_049.jpg",
+      "split": "val",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/mvp_loss_performance/kda_view/2_ranked_matches_excellent_performance_match02_mvploss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "mvploss",
+      "view_type": "kda",
+      "new_filename": "ranked_mvploss_kda_050.jpg",
+      "split": "val",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/mvp_loss_performance/kda_view/3_ranked_matches_excellent_performance_match03_mvploss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "mvploss",
+      "view_type": "kda",
+      "new_filename": "ranked_mvploss_kda_051.jpg",
+      "split": "val",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/mvp_loss_performance/kda_view/4_ranked_matches_excellent_performance_match04_mvploss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "mvploss",
+      "view_type": "kda",
+      "new_filename": "ranked_mvploss_kda_052.jpg",
+      "split": "val",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/poor_performance/damage_view/1_ranked_matches_poor_performance_match01_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "poor",
+      "view_type": "dmg",
+      "new_filename": "ranked_poor_dmg_053.jpg",
+      "split": "val",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/poor_performance/damage_view/2_ranked_matches_poor_performance_match02_win_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "poor",
+      "view_type": "dmg",
+      "new_filename": "ranked_poor_dmg_054.jpg",
+      "split": "test",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/poor_performance/damage_view/3_ranked_matches_poor_performance_match03_loss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "poor",
+      "view_type": "dmg",
+      "new_filename": "ranked_poor_dmg_055.jpg",
+      "split": "test",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/poor_performance/damage_view/4_ranked_matches_poor_performance_match04_loss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "poor",
+      "view_type": "dmg",
+      "new_filename": "ranked_poor_dmg_056.jpg",
+      "split": "test",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/poor_performance/damage_view/5_ranked_matches_poor_performance_match05_loss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "poor",
+      "view_type": "dmg",
+      "new_filename": "ranked_poor_dmg_057.jpg",
+      "split": "test",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/poor_performance/damage_view/6_ranked_matches_poor_performance_match06_loss_damage.PNG",
+      "match_type": "ranked",
+      "performance_level": "poor",
+      "view_type": "dmg",
+      "new_filename": "ranked_poor_dmg_058.jpg",
+      "split": "test",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/poor_performance/kda_view/1_ranked_matches_poor_performance_match01_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "poor",
+      "view_type": "kda",
+      "new_filename": "ranked_poor_kda_059.jpg",
+      "split": "test",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/poor_performance/kda_view/2_ranked_matches_poor_performance_match02_win_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "poor",
+      "view_type": "kda",
+      "new_filename": "ranked_poor_kda_060.jpg",
+      "split": "test",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/poor_performance/kda_view/3_ranked_matches_poor_performance_match03_loss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "poor",
+      "view_type": "kda",
+      "new_filename": "ranked_poor_kda_061.jpg",
+      "split": "test",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/poor_performance/kda_view/4_ranked_matches_poor_performance_match04_loss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "poor",
+      "view_type": "kda",
+      "new_filename": "ranked_poor_kda_062.jpg",
+      "split": "test",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/poor_performance/kda_view/5_ranked_matches_poor_performance_match05_loss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "poor",
+      "view_type": "kda",
+      "new_filename": "ranked_poor_kda_063.jpg",
+      "split": "test",
+      "annotation_exists": false,
+      "collision_resolved": false
+    },
+    {
+      "original_path": "/Users/lesz/Documents/Project-AI/skillshift-ai/yolo_dataset/collection/1_RANKED_MATCHES/poor_performance/kda_view/6_ranked_matches_poor_performance_match06_loss_kda.PNG",
+      "match_type": "ranked",
+      "performance_level": "poor",
+      "view_type": "kda",
+      "new_filename": "ranked_poor_kda_064.jpg",
+      "split": "test",
+      "annotation_exists": false,
+      "collision_resolved": false
+    }
+  ]
+}

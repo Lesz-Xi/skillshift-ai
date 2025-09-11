@@ -1,0 +1,173 @@
+{
+  "CallerReference": "mlbb-coach-ai-cdn-2025",
+  "Comment": "MLBB Coach AI - Global CDN for static assets and image optimization",
+  "DefaultRootObject": "index.html",
+  "Origins": {
+    "Quantity": 3,
+    "Items": [
+      {
+        "Id": "mlbb-api-origin",
+        "DomainName": "api.mlbb-coach-ai.com",
+        "CustomOriginConfig": {
+          "HTTPPort": 80,
+          "HTTPSPort": 443,
+          "OriginProtocolPolicy": "https-only",
+          "OriginSslProtocols": {
+            "Quantity": 3,
+            "Items": ["TLSv1.2", "TLSv1.1", "TLSv1"]
+          }
+        }
+      },
+      {
+        "Id": "mlbb-assets-origin",
+        "DomainName": "assets.mlbb-coach-ai.com",
+        "S3OriginConfig": {
+          "OriginAccessIdentity": "origin-access-identity/cloudfront/E1234567890123"
+        }
+      },
+      {
+        "Id": "mlbb-images-origin",
+        "DomainName": "images.mlbb-coach-ai.com",
+        "S3OriginConfig": {
+          "OriginAccessIdentity": "origin-access-identity/cloudfront/E1234567890123"
+        }
+      }
+    ]
+  },
+  "DefaultCacheBehavior": {
+    "TargetOriginId": "mlbb-api-origin",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "MinTTL": 0,
+    "DefaultTTL": 86400,
+    "MaxTTL": 31536000,
+    "ForwardedValues": {
+      "QueryString": true,
+      "Cookies": {
+        "Forward": "whitelist",
+        "WhitelistedNames": {
+          "Quantity": 2,
+          "Items": ["session_id", "user_preferences"]
+        }
+      },
+      "Headers": {
+        "Quantity": 4,
+        "Items": [
+          "Authorization",
+          "Content-Type",
+          "User-Agent",
+          "Accept-Language"
+        ]
+      }
+    },
+    "TrustedSigners": {
+      "Enabled": false,
+      "Quantity": 0
+    },
+    "Compress": true,
+    "SmoothStreaming": false
+  },
+  "CacheBehaviors": {
+    "Quantity": 4,
+    "Items": [
+      {
+        "PathPattern": "/api/static/*",
+        "TargetOriginId": "mlbb-assets-origin",
+        "ViewerProtocolPolicy": "redirect-to-https",
+        "MinTTL": 0,
+        "DefaultTTL": 2592000,
+        "MaxTTL": 31536000,
+        "ForwardedValues": {
+          "QueryString": false,
+          "Cookies": { "Forward": "none" }
+        },
+        "Compress": true
+      },
+      {
+        "PathPattern": "/api/images/*",
+        "TargetOriginId": "mlbb-images-origin",
+        "ViewerProtocolPolicy": "redirect-to-https",
+        "MinTTL": 0,
+        "DefaultTTL": 604800,
+        "MaxTTL": 31536000,
+        "ForwardedValues": {
+          "QueryString": true,
+          "Cookies": { "Forward": "none" }
+        },
+        "Compress": true
+      },
+      {
+        "PathPattern": "/api/heroes/images/*",
+        "TargetOriginId": "mlbb-images-origin",
+        "ViewerProtocolPolicy": "redirect-to-https",
+        "MinTTL": 86400,
+        "DefaultTTL": 2592000,
+        "MaxTTL": 31536000,
+        "ForwardedValues": {
+          "QueryString": true,
+          "Cookies": { "Forward": "none" }
+        },
+        "Compress": true
+      },
+      {
+        "PathPattern": "/api/analyze/*",
+        "TargetOriginId": "mlbb-api-origin",
+        "ViewerProtocolPolicy": "redirect-to-https",
+        "MinTTL": 0,
+        "DefaultTTL": 0,
+        "MaxTTL": 0,
+        "ForwardedValues": {
+          "QueryString": true,
+          "Cookies": { "Forward": "all" },
+          "Headers": { "Quantity": 1, "Items": ["*"] }
+        },
+        "Compress": false
+      }
+    ]
+  },
+  "CustomErrorResponses": {
+    "Quantity": 3,
+    "Items": [
+      {
+        "ErrorCode": 404,
+        "ResponsePagePath": "/404.html",
+        "ResponseCode": "404",
+        "ErrorCachingMinTTL": 300
+      },
+      {
+        "ErrorCode": 500,
+        "ResponsePagePath": "/500.html",
+        "ResponseCode": "500",
+        "ErrorCachingMinTTL": 0
+      },
+      {
+        "ErrorCode": 503,
+        "ResponsePagePath": "/maintenance.html",
+        "ResponseCode": "503",
+        "ErrorCachingMinTTL": 0
+      }
+    ]
+  },
+  "Logging": {
+    "Enabled": true,
+    "IncludeCookies": false,
+    "Bucket": "mlbb-coach-ai-logs.s3.amazonaws.com",
+    "Prefix": "cloudfront-logs/"
+  },
+  "Enabled": true,
+  "PriceClass": "PriceClass_All",
+  "ViewerCertificate": {
+    "CloudFrontDefaultCertificate": false,
+    "ACMCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012",
+    "SSLSupportMethod": "sni-only",
+    "MinimumProtocolVersion": "TLSv1.2_2021"
+  },
+  "WebACLId": "",
+  "HttpVersion": "http2",
+  "IsIPV6Enabled": true,
+  "Restrictions": {
+    "GeoRestriction": {
+      "RestrictionType": "none",
+      "Quantity": 0
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "categories": [
+    {
+      "id": 0,
+      "name": "damage_taken"
+    },
+    {
+      "id": 1,
+      "name": "gold"
+    },
+    {
+      "id": 2,
+      "name": "hero_ally"
+    },
+    {
+      "id": 3,
+      "name": "hero_damage"
+    },
+    {
+      "id": 4,
+      "name": "hero_enemy"
+    },
+    {
+      "id": 5,
+      "name": "kda_display"
+    },
+    {
+      "id": 6,
+      "name": "match_duration"
+    },
+    {
+      "id": 7,
+      "name": "medal_bronze"
+    },
+    {
+      "id": 8,
+      "name": "medal_gold"
+    },
+    {
+      "id": 9,
+      "name": "medal_silver"
+    },
+    {
+      "id": 10,
+      "name": "mvp_badge"
+    },
+    {
+      "id": 11,
+      "name": "mvp_loss_badge"
+    },
+    {
+      "id": 12,
+      "name": "outcome_banner"
+    },
+    {
+      "id": 13,
+      "name": "player_name"
+    },
+    {
+      "id": 14,
+      "name": "teamfight_participation"
+    },
+    {
+      "id": 15,
+      "name": "turret_damage"
+    }
+  ],
+  "info": {
+    "year": 2025,
+    "version": "1.0",
+    "contributor": "Label Studio"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "version": "1.7.9",
+  "hero_adjustments": {
+    "lunox": {
+      "type": "nerf",
+      "description": "Skill 2 cooldown increased"
+    },
+    "tigreal": {
+      "type": "buff",
+      "description": "Ultimate range increased"
+    }
+  }
+}

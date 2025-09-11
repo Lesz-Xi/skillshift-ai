@@ -1,0 +1,27 @@
+{
+  "sequences": [
+    {
+      "sequence_id": 1,
+      "directory": "temp/test_training_dataset/sequence_001",
+      "frame_count": 90,
+      "event_count": 239,
+      "duration": 90
+    },
+    {
+      "sequence_id": 2,
+      "directory": "temp/test_training_dataset/sequence_002",
+      "frame_count": 90,
+      "event_count": 163,
+      "duration": 90
+    },
+    {
+      "sequence_id": 3,
+      "directory": "temp/test_training_dataset/sequence_003",
+      "frame_count": 90,
+      "event_count": 138,
+      "duration": 90
+    }
+  ],
+  "total_frames": 270,
+  "total_events": 540
+}

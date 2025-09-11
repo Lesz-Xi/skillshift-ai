@@ -1,0 +1,201 @@
+version: "3.8"
+
+services:
+  # Redis Cache Service
+  redis:
+    image: redis:7-alpine
+    container_name: mlbb-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - mlbb-network
+
+  # OCR Service
+  ocr-service:
+    build:
+      context: ../../../
+      dockerfile: infrastructure/microservices/docker/ocr-service/Dockerfile
+    container_name: mlbb-ocr-service
+    ports:
+      - "8001:8001"
+    environment:
+      - SERVICE_NAME=ocr-service
+      - SERVICE_PORT=8001
+      - REDIS_URL=redis://redis:6379
+      - PYTHONPATH=/app
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - mlbb-network
+    volumes:
+      - ../../../temp:/app/temp
+
+  # Detection Service
+  detection-service:
+    build:
+      context: ../../../
+      dockerfile: infrastructure/microservices/docker/detection-service/Dockerfile
+    container_name: mlbb-detection-service
+    ports:
+      - "8002:8002"
+    environment:
+      - SERVICE_NAME=detection-service
+      - SERVICE_PORT=8002
+      - REDIS_URL=redis://redis:6379
+      - PYTHONPATH=/app
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - mlbb-network
+    volumes:
+      - ../../../temp:/app/temp
+      - ../../../models:/app/models
+
+  # Analysis Service
+  analysis-service:
+    build:
+      context: ../../../
+      dockerfile: infrastructure/microservices/docker/analysis-service/Dockerfile
+    container_name: mlbb-analysis-service
+    ports:
+      - "8003:8003"
+    environment:
+      - SERVICE_NAME=analysis-service
+      - SERVICE_PORT=8003
+      - REDIS_URL=redis://redis:6379
+      - PYTHONPATH=/app
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - mlbb-network
+    volumes:
+      - ../../../temp:/app/temp
+
+  # API Gateway (Main FastAPI App)
+  api-gateway:
+    build:
+      context: ../../../
+      dockerfile: infrastructure/microservices/docker/api-gateway/Dockerfile
+    container_name: mlbb-api-gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - SERVICE_NAME=api-gateway
+      - SERVICE_PORT=8000
+      - REDIS_URL=redis://redis:6379
+      - PYTHONPATH=/app
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      # Microservices URLs
+      - OCR_SERVICE_URL=http://ocr-service:8001
+      - DETECTION_SERVICE_URL=http://detection-service:8002
+      - ANALYSIS_SERVICE_URL=http://analysis-service:8003
+    depends_on:
+      redis:
+        condition: service_healthy
+      ocr-service:
+        condition: service_healthy
+      detection-service:
+        condition: service_healthy
+      analysis-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - mlbb-network
+    volumes:
+      - ../../../temp:/app/temp
+      - ../../../logs:/app/logs
+
+  # Frontend Service (Next.js)
+  frontend:
+    build:
+      context: ../../../dashboard-ui-new
+      dockerfile: ../infrastructure/microservices/docker/frontend/Dockerfile
+    container_name: mlbb-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      api-gateway:
+        condition: service_healthy
+    networks:
+      - mlbb-network
+
+  # Monitoring and Metrics
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: mlbb-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--web.enable-lifecycle"
+    networks:
+      - mlbb-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: mlbb-grafana
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - prometheus
+    networks:
+      - mlbb-network
+
+networks:
+  mlbb-network:
+    driver: bridge
+
+volumes:
+  redis_data:
+  prometheus_data:
+  grafana_data:

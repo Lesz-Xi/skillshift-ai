@@ -1,0 +1,13 @@
+{
+  "version": "1.7.8",
+  "hero_adjustments": {
+    "fanny": {
+      "type": "nerf",
+      "description": "Cable speed reduced by 5%"
+    },
+    "granger": {
+      "type": "buff",
+      "description": "Basic attack damage increased"
+    }
+  }
+}

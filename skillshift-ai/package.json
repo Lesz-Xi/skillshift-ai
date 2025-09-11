@@ -1,0 +1,96 @@
+{
+  "name": "mlbb-coach-ai-pwa",
+  "version": "1.0.0",
+  "description": "Advanced AI-powered coaching system for Mobile Legends: Bang Bang - Progressive Web App",
+  "main": "main.py",
+  "scripts": {
+    "dev": "python -m uvicorn web.app:app --reload --host 0.0.0.0 --port 8000",
+    "start": "python -m uvicorn web.app:app --host 0.0.0.0 --port 8000",
+    "test": "python -m pytest tests/",
+    "test-pwa": "node test-pwa.js",
+    "test-pwa-quick": "node test-pwa.js http://localhost:8000",
+    "lighthouse": "lighthouse http://localhost:8000 --only-categories=pwa --view",
+    "lighthouse-ci": "lhci autorun",
+    "build": "echo 'Python FastAPI build - no build step required'",
+    "serve": "python -m uvicorn web.app:app --host 0.0.0.0 --port 8000",
+    "pwa-audit": "lighthouse http://localhost:8000 --only-categories=pwa --output json --output-path ./lighthouse-pwa-report.json",
+    "generate-icons": "pwa-asset-generator public/images/logo.png public/images/icons --manifest public/manifest.json --index public/index.html",
+    "validate-pwa": "node -e \"require('./test-pwa.js'); new (require('./test-pwa.js'))().runFullPWATest();\""
+  },
+  "keywords": [
+    "mlbb",
+    "mobile-legends",
+    "ai-coaching",
+    "pwa",
+    "progressive-web-app",
+    "gaming",
+    "analytics",
+    "machine-learning"
+  ],
+  "author": "MLBB Coach AI Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/mlbb-coach-ai"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/mlbb-coach-ai/issues"
+  },
+  "homepage": "https://mlbbcoach.ai",
+  "engines": {
+    "node": ">=16.0.0",
+    "python": ">=3.8"
+  },
+  "devDependencies": {
+    "lighthouse": "^11.4.0",
+    "chrome-launcher": "^1.1.0",
+    "@lhci/cli": "^0.12.0",
+    "pwa-asset-generator": "^6.3.1"
+  },
+  "pwa": {
+    "name": "MLBB Coach AI",
+    "shortName": "MLBB Coach",
+    "description": "Advanced AI-powered coaching system for Mobile Legends: Bang Bang",
+    "themeColor": "#16213e",
+    "backgroundColor": "#1a1a2e",
+    "startUrl": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary"
+  },
+  "lighthouse-ci": {
+    "ci": {
+      "collect": {
+        "url": [
+          "http://localhost:8000"
+        ],
+        "numberOfRuns": 3
+      },
+      "assert": {
+        "assertions": {
+          "categories:pwa": [
+            "error",
+            {
+              "minScore": 0.9
+            }
+          ],
+          "categories:performance": [
+            "warn",
+            {
+              "minScore": 0.8
+            }
+          ],
+          "categories:accessibility": [
+            "error",
+            {
+              "minScore": 0.9
+            }
+          ]
+        }
+      },
+      "upload": {
+        "target": "filesystem",
+        "outputDir": "./lighthouse-reports"
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "total_tests": 6,
+  "successful_detections": 0,
+  "success_rate": 0.0,
+  "success_level": "needs_work",
+  "detailed_results": [
+    {
+      "image": "edb4fa11-6_ranked_matches_good_performance_match06_win_kda.PNG",
+      "success": false,
+      "trophy_type": null,
+      "trophy_confidence": 0.0,
+      "performance_label": "Unknown",
+      "processing_time": 53.210155963897705,
+      "overall_confidence": 0.39,
+      "warnings_count": 2
+    },
+    {
+      "image": "ef18ecbc-2_ranked_matches_good_performance_match02_win_kda.PNG",
+      "success": false,
+      "trophy_type": "none",
+      "trophy_confidence": 0.0,
+      "performance_label": "Unknown",
+      "processing_time": 37.592156171798706,
+      "overall_confidence": 0.0,
+      "warnings_count": 0
+    },
+    {
+      "image": "ea01384d-1_ranked_matches_average_performance_match01_win_kda.PNG",
+      "success": false,
+      "trophy_type": null,
+      "trophy_confidence": 0.0,
+      "performance_label": "Unknown",
+      "processing_time": 54.54610300064087,
+      "overall_confidence": 0.39,
+      "warnings_count": 2
+    },
+    {
+      "image": "ranked_poor_kda_059.jpg",
+      "success": false,
+      "trophy_type": "none",
+      "trophy_confidence": 0.0,
+      "performance_label": "Unknown",
+      "processing_time": 33.31226325035095,
+      "overall_confidence": 0.0,
+      "warnings_count": 0
+    },
+    {
+      "image": "fff98301-4_ranked_matches_average_performance_match04_win_kda.PNG",
+      "success": false,
+      "trophy_type": null,
+      "trophy_confidence": 0.0,
+      "performance_label": "Unknown",
+      "processing_time": 57.81464695930481,
+      "overall_confidence": 0.39,
+      "warnings_count": 2
+    },
+    {
+      "image": "fc2a5f56-3_ranked_matches_average_performance_match03_win_damage.PNG",
+      "success": false,
+      "trophy_type": "none",
+      "trophy_confidence": 0.0,
+      "performance_label": "Unknown",
+      "processing_time": 38.17720103263855,
+      "overall_confidence": 0.0,
+      "warnings_count": 0
+    }
+  ],
+  "target_achieved": false
+}

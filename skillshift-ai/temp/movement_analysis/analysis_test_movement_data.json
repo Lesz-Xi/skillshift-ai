@@ -1,0 +1,423 @@
+{
+  "timestamp": 1757156741.2608051,
+  "total_events": 105,
+  "analysis_duration": 59.0,
+  "player_metrics": {
+    "enemy_2": {
+      "player_id": "enemy_2",
+      "total_distance": 0.12661411494720287,
+      "average_speed": 0.0042204704982400955,
+      "time_in_lanes": {
+        "top": 30.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "jungle": 0.0,
+        "river": 0.0,
+        "base": 0.0
+      },
+      "rotation_count": 0,
+      "rotation_efficiency": 0.0,
+      "map_coverage": 0.0075,
+      "team_coordination_score": 0.0,
+      "positioning_score": 1.0,
+      "farming_efficiency": 0.4
+    },
+    "ally_4": {
+      "player_id": "ally_4",
+      "total_distance": 0.4946015523906329,
+      "average_speed": 0.010093909232461897,
+      "time_in_lanes": {
+        "top": 0.0,
+        "mid": 2.0,
+        "bot": 35.0,
+        "jungle": 0.0,
+        "river": 0.0,
+        "base": 12.0
+      },
+      "rotation_count": 3,
+      "rotation_efficiency": 0.0,
+      "map_coverage": 0.0275,
+      "team_coordination_score": 0.0,
+      "positioning_score": 0.9285714285714286,
+      "farming_efficiency": 0.4
+    },
+    "enemy_3": {
+      "player_id": "enemy_3",
+      "total_distance": 0.5843409220020231,
+      "average_speed": 0.011025300415132512,
+      "time_in_lanes": {
+        "top": 51.0,
+        "mid": 2.0,
+        "bot": 0.0,
+        "jungle": 0.0,
+        "river": 0.0,
+        "base": 0.0
+      },
+      "rotation_count": 1,
+      "rotation_efficiency": 1.0,
+      "map_coverage": 0.0225,
+      "team_coordination_score": 0.0,
+      "positioning_score": 1.0,
+      "farming_efficiency": 0.4
+    },
+    "ally_3": {
+      "player_id": "ally_3",
+      "total_distance": 0.4299621833429269,
+      "average_speed": 0.007962262654498646,
+      "time_in_lanes": {
+        "top": 0.0,
+        "mid": 0.0,
+        "bot": 6.0,
+        "jungle": 0.0,
+        "river": 0.0,
+        "base": 48.0
+      },
+      "rotation_count": 3,
+      "rotation_efficiency": 0.0,
+      "map_coverage": 0.02,
+      "team_coordination_score": 0.0,
+      "positioning_score": 0.23076923076923078,
+      "farming_efficiency": 0.4
+    },
+    "enemy_4": {
+      "player_id": "enemy_4",
+      "total_distance": 0.1701648588128294,
+      "average_speed": 0.003403297176256588,
+      "time_in_lanes": {
+        "top": 50.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "jungle": 0.0,
+        "river": 0.0,
+        "base": 0.0
+      },
+      "rotation_count": 0,
+      "rotation_efficiency": 0.0,
+      "map_coverage": 0.01,
+      "team_coordination_score": 0.0,
+      "positioning_score": 1.0,
+      "farming_efficiency": 0.4
+    },
+    "ally_1": {
+      "player_id": "ally_1",
+      "total_distance": 0.2363974693465157,
+      "average_speed": 0.006389120793149073,
+      "time_in_lanes": {
+        "top": 0.0,
+        "mid": 0.0,
+        "bot": 37.0,
+        "jungle": 0.0,
+        "river": 0.0,
+        "base": 0.0
+      },
+      "rotation_count": 0,
+      "rotation_efficiency": 0.0,
+      "map_coverage": 0.01,
+      "team_coordination_score": 0.0,
+      "positioning_score": 1.0,
+      "farming_efficiency": 0.4
+    },
+    "ally_2": {
+      "player_id": "ally_2",
+      "total_distance": 0.2739859757343761,
+      "average_speed": 0.007210157256167793,
+      "time_in_lanes": {
+        "top": 0.0,
+        "mid": 0.0,
+        "bot": 38.0,
+        "jungle": 0.0,
+        "river": 0.0,
+        "base": 0.0
+      },
+      "rotation_count": 0,
+      "rotation_efficiency": 0.0,
+      "map_coverage": 0.0125,
+      "team_coordination_score": 0.0,
+      "positioning_score": 1.0,
+      "farming_efficiency": 0.4
+    },
+    "enemy_5": {
+      "player_id": "enemy_5",
+      "total_distance": 0.9574559433523191,
+      "average_speed": 0.020371403050049343,
+      "time_in_lanes": {
+        "top": 4.0,
+        "mid": 15.0,
+        "bot": 17.0,
+        "jungle": 0.0,
+        "river": 0.0,
+        "base": 11.0
+      },
+      "rotation_count": 4,
+      "rotation_efficiency": 0.6,
+      "map_coverage": 0.0375,
+      "team_coordination_score": 0.0,
+      "positioning_score": 0.8260869565217391,
+      "farming_efficiency": 0.4
+    },
+    "ally_5": {
+      "player_id": "ally_5",
+      "total_distance": 0.13557920166928847,
+      "average_speed": 0.003766088935258013,
+      "time_in_lanes": {
+        "top": 0.0,
+        "mid": 0.0,
+        "bot": 36.0,
+        "jungle": 0.0,
+        "river": 0.0,
+        "base": 0.0
+      },
+      "rotation_count": 0,
+      "rotation_efficiency": 0.0,
+      "map_coverage": 0.0075,
+      "team_coordination_score": 0.0,
+      "positioning_score": 1.0,
+      "farming_efficiency": 0.4
+    },
+    "enemy_1": {
+      "player_id": "enemy_1",
+      "total_distance": 0.2599999999999999,
+      "average_speed": 0.008666666666666663,
+      "time_in_lanes": {
+        "top": 30.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "jungle": 0.0,
+        "river": 0.0,
+        "base": 0.0
+      },
+      "rotation_count": 0,
+      "rotation_efficiency": 0.0,
+      "map_coverage": 0.0125,
+      "team_coordination_score": 0.0,
+      "positioning_score": 1.0,
+      "farming_efficiency": 0.4
+    }
+  },
+  "team_analysis": {
+    "ally_team": {
+      "team_id": "ally",
+      "coordination_score": 0.7333333333333334,
+      "map_control_percentage": 0.06,
+      "rotation_synchronization": 0.14285714285714285,
+      "objective_control": 0.0,
+      "positioning_quality": 0.8377358490566038
+    },
+    "enemy_team": {
+      "team_id": "enemy",
+      "coordination_score": 0.8,
+      "map_control_percentage": 0.1,
+      "rotation_synchronization": 0.03571428571428571,
+      "objective_control": 0.0,
+      "positioning_quality": 0.9230769230769231
+    }
+  },
+  "tactical_insights": [
+    {
+      "insight_type": "poor_positioning",
+      "severity": "high",
+      "description": "Player ally_3 has poor positioning (score: 0.23)",
+      "recommendation": "Focus on safer positioning, avoid overextending, stay closer to team",
+      "timestamp": 1757156741.260793,
+      "player_id": "ally_3",
+      "confidence": 0.8,
+      "impact_score": 0.7
+    },
+    {
+      "insight_type": "wasted_time",
+      "severity": "medium",
+      "description": "Player enemy_2 has inefficient rotations (efficiency: 0.00)",
+      "recommendation": "Plan rotations better, take more direct paths, improve timing",
+      "timestamp": 1757156741.2607849,
+      "player_id": "enemy_2",
+      "confidence": 0.7,
+      "impact_score": 0.5
+    },
+    {
+      "insight_type": "wasted_time",
+      "severity": "medium",
+      "description": "Player ally_4 has inefficient rotations (efficiency: 0.00)",
+      "recommendation": "Plan rotations better, take more direct paths, improve timing",
+      "timestamp": 1757156741.260789,
+      "player_id": "ally_4",
+      "confidence": 0.7,
+      "impact_score": 0.5
+    },
+    {
+      "insight_type": "wasted_time",
+      "severity": "medium",
+      "description": "Player ally_3 has inefficient rotations (efficiency: 0.00)",
+      "recommendation": "Plan rotations better, take more direct paths, improve timing",
+      "timestamp": 1757156741.260793,
+      "player_id": "ally_3",
+      "confidence": 0.7,
+      "impact_score": 0.5
+    },
+    {
+      "insight_type": "wasted_time",
+      "severity": "medium",
+      "description": "Player enemy_4 has inefficient rotations (efficiency: 0.00)",
+      "recommendation": "Plan rotations better, take more direct paths, improve timing",
+      "timestamp": 1757156741.2607949,
+      "player_id": "enemy_4",
+      "confidence": 0.7,
+      "impact_score": 0.5
+    },
+    {
+      "insight_type": "wasted_time",
+      "severity": "medium",
+      "description": "Player ally_1 has inefficient rotations (efficiency: 0.00)",
+      "recommendation": "Plan rotations better, take more direct paths, improve timing",
+      "timestamp": 1757156741.2607958,
+      "player_id": "ally_1",
+      "confidence": 0.7,
+      "impact_score": 0.5
+    },
+    {
+      "insight_type": "wasted_time",
+      "severity": "medium",
+      "description": "Player ally_2 has inefficient rotations (efficiency: 0.00)",
+      "recommendation": "Plan rotations better, take more direct paths, improve timing",
+      "timestamp": 1757156741.260797,
+      "player_id": "ally_2",
+      "confidence": 0.7,
+      "impact_score": 0.5
+    },
+    {
+      "insight_type": "wasted_time",
+      "severity": "medium",
+      "description": "Player ally_5 has inefficient rotations (efficiency: 0.00)",
+      "recommendation": "Plan rotations better, take more direct paths, improve timing",
+      "timestamp": 1757156741.2608,
+      "player_id": "ally_5",
+      "confidence": 0.7,
+      "impact_score": 0.5
+    },
+    {
+      "insight_type": "wasted_time",
+      "severity": "medium",
+      "description": "Player enemy_1 has inefficient rotations (efficiency: 0.00)",
+      "recommendation": "Plan rotations better, take more direct paths, improve timing",
+      "timestamp": 1757156741.260801,
+      "player_id": "enemy_1",
+      "confidence": 0.7,
+      "impact_score": 0.5
+    },
+    {
+      "insight_type": "missed_opportunity",
+      "severity": "medium",
+      "description": "Player enemy_2 has limited map presence (coverage: 0.01)",
+      "recommendation": "Explore more areas of the map, help other lanes, control key areas",
+      "timestamp": 1757156741.260788,
+      "player_id": "enemy_2",
+      "confidence": 0.6,
+      "impact_score": 0.4
+    },
+    {
+      "insight_type": "missed_opportunity",
+      "severity": "medium",
+      "description": "Player ally_4 has limited map presence (coverage: 0.03)",
+      "recommendation": "Explore more areas of the map, help other lanes, control key areas",
+      "timestamp": 1757156741.26079,
+      "player_id": "ally_4",
+      "confidence": 0.6,
+      "impact_score": 0.4
+    },
+    {
+      "insight_type": "missed_opportunity",
+      "severity": "medium",
+      "description": "Player enemy_3 has limited map presence (coverage: 0.02)",
+      "recommendation": "Explore more areas of the map, help other lanes, control key areas",
+      "timestamp": 1757156741.260791,
+      "player_id": "enemy_3",
+      "confidence": 0.6,
+      "impact_score": 0.4
+    },
+    {
+      "insight_type": "missed_opportunity",
+      "severity": "medium",
+      "description": "Player ally_3 has limited map presence (coverage: 0.02)",
+      "recommendation": "Explore more areas of the map, help other lanes, control key areas",
+      "timestamp": 1757156741.2607942,
+      "player_id": "ally_3",
+      "confidence": 0.6,
+      "impact_score": 0.4
+    },
+    {
+      "insight_type": "missed_opportunity",
+      "severity": "medium",
+      "description": "Player enemy_4 has limited map presence (coverage: 0.01)",
+      "recommendation": "Explore more areas of the map, help other lanes, control key areas",
+      "timestamp": 1757156741.2607949,
+      "player_id": "enemy_4",
+      "confidence": 0.6,
+      "impact_score": 0.4
+    },
+    {
+      "insight_type": "missed_opportunity",
+      "severity": "medium",
+      "description": "Player ally_1 has limited map presence (coverage: 0.01)",
+      "recommendation": "Explore more areas of the map, help other lanes, control key areas",
+      "timestamp": 1757156741.260797,
+      "player_id": "ally_1",
+      "confidence": 0.6,
+      "impact_score": 0.4
+    },
+    {
+      "insight_type": "missed_opportunity",
+      "severity": "medium",
+      "description": "Player ally_2 has limited map presence (coverage: 0.01)",
+      "recommendation": "Explore more areas of the map, help other lanes, control key areas",
+      "timestamp": 1757156741.260798,
+      "player_id": "ally_2",
+      "confidence": 0.6,
+      "impact_score": 0.4
+    },
+    {
+      "insight_type": "missed_opportunity",
+      "severity": "medium",
+      "description": "Player enemy_5 has limited map presence (coverage: 0.04)",
+      "recommendation": "Explore more areas of the map, help other lanes, control key areas",
+      "timestamp": 1757156741.260799,
+      "player_id": "enemy_5",
+      "confidence": 0.6,
+      "impact_score": 0.4
+    },
+    {
+      "insight_type": "missed_opportunity",
+      "severity": "medium",
+      "description": "Player ally_5 has limited map presence (coverage: 0.01)",
+      "recommendation": "Explore more areas of the map, help other lanes, control key areas",
+      "timestamp": 1757156741.2608,
+      "player_id": "ally_5",
+      "confidence": 0.6,
+      "impact_score": 0.4
+    },
+    {
+      "insight_type": "missed_opportunity",
+      "severity": "medium",
+      "description": "Player enemy_1 has limited map presence (coverage: 0.01)",
+      "recommendation": "Explore more areas of the map, help other lanes, control key areas",
+      "timestamp": 1757156741.260802,
+      "player_id": "enemy_1",
+      "confidence": 0.6,
+      "impact_score": 0.4
+    },
+    {
+      "insight_type": "good_rotation",
+      "severity": "low",
+      "description": "Player enemy_3 shows excellent movement patterns",
+      "recommendation": "Keep up the good positioning and efficient rotations",
+      "timestamp": 1757156741.260792,
+      "player_id": "enemy_3",
+      "confidence": 0.9,
+      "impact_score": 0.3
+    }
+  ],
+  "summary_scores": {
+    "overall_movement_quality": 0.4861809205287466,
+    "team_coordination": 0.7666666666666667,
+    "map_control": 0.08,
+    "tactical_awareness": 0.44020319303338173
+  }
+}
