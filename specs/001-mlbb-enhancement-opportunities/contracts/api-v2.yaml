@@ -1,0 +1,1036 @@
+openapi: 3.0.3
+info:
+  title: MLBB Coach AI - Enhanced API v2
+  description: Enhanced API for MLBB Coach AI with expanded hero coverage, analytics, real-time coaching, and localization
+  version: 2.0.0
+  contact:
+    name: MLBB Coach AI Team
+    email: support@mlbbcoach.ai
+
+servers:
+  - url: https://api.mlbbcoach.ai/v2
+    description: Production server
+  - url: https://staging-api.mlbbcoach.ai/v2  
+    description: Staging server
+  - url: http://localhost:8000/v2
+    description: Development server
+
+security:
+  - bearerAuth: []
+  - apiKey: []
+
+paths:
+  # Enhanced Screenshot Analysis
+  /analysis/screenshot:
+    post:
+      summary: Analyze screenshot with enhanced hero support
+      description: Upload and analyze MLBB screenshot with expanded hero coverage and coaching
+      tags: [Analysis]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: Screenshot image file
+                session_id:
+                  type: string
+                  format: uuid
+                  description: Session ID for data fusion
+                hero_override:
+                  type: string
+                  description: Override detected hero (for accuracy)
+                language:
+                  type: string
+                  default: en
+                  description: Language for coaching feedback
+                ign_hint:
+                  type: string
+                  description: Player IGN hint for improved detection
+                debug_mode:
+                  type: boolean
+                  default: false
+                  description: Enable detailed OCR debugging output
+              required: [image]
+      responses:
+        '200':
+          description: Analysis completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalysisResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  # OCR Debug Endpoints
+  /ocr/debug:
+    post:
+      summary: Debug OCR extraction for screenshots
+      description: Detailed OCR debugging for KDA and Damage view screenshots
+      tags: [OCR Debug]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                kda_image:
+                  type: string
+                  format: binary
+                  description: KDA view screenshot
+                damage_image:
+                  type: string
+                  format: binary
+                  description: Damage view screenshot (optional)
+                target_ign:
+                  type: string
+                  description: Expected player IGN for validation
+                expected_hero:
+                  type: string
+                  description: Expected hero for validation
+                expected_kda:
+                  type: string
+                  pattern: "^\\d+/\\d+/\\d+$"
+                  description: Expected KDA in format "9/2/12"
+              required: [kda_image, target_ign]
+      responses:
+        '200':
+          description: OCR debug analysis completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OCRDebugResult'
+
+  /ocr/fusion:
+    post:
+      summary: Fuse data from multiple screenshot views
+      description: Combine data from KDA and Damage view screenshots
+      tags: [OCR Debug]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                kda_result:
+                  $ref: '#/components/schemas/OCRExtractionResult'
+                damage_result:
+                  $ref: '#/components/schemas/OCRExtractionResult'
+                target_ign:
+                  type: string
+                  description: Player IGN for consistency validation
+              required: [kda_result, damage_result, target_ign]
+      responses:
+        '200':
+          description: Data fusion completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrossViewFusionResult'
+
+  # Historical Analytics
+  /analytics/performance:
+    get:
+      summary: Get historical performance analytics
+      description: Retrieve user performance trends and statistics
+      tags: [Analytics]
+      parameters:
+        - name: hero_id
+          in: query
+          schema:
+            type: string
+          description: Filter by specific hero
+        - name: period
+          in: query
+          schema:
+            type: string
+            enum: [day, week, month, quarter, year]
+            default: month
+        - name: start_date
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: comparison_tier
+          in: query
+          schema:
+            type: string
+          description: Compare against specific rank tier
+      responses:
+        '200':
+          description: Performance data retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerformanceAnalytics'
+
+  /analytics/trends:
+    get:
+      summary: Get performance trends and insights
+      description: Retrieve performance trends with improvement recommendations
+      tags: [Analytics]
+      parameters:
+        - name: metric
+          in: query
+          schema:
+            type: string
+            enum: [kda, gpm, damage, participation, improvement]
+            default: kda
+        - name: hero_id
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Trend data retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrendAnalysis'
+
+  # Hero Management
+  /heroes:
+    get:
+      summary: List all supported heroes
+      description: Get list of heroes with coaching support
+      tags: [Heroes]
+      parameters:
+        - name: role
+          in: query
+          schema:
+            type: string
+            enum: [tank, fighter, assassin, mage, marksman, support]
+        - name: meta_tier
+          in: query
+          schema:
+            type: string
+            enum: [S, A, B, C]
+        - name: language
+          in: query
+          schema:
+            type: string
+            default: en
+      responses:
+        '200':
+          description: Heroes list retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  heroes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Hero'
+                  total:
+                    type: integer
+
+  /heroes/{hero_id}/rules:
+    get:
+      summary: Get hero-specific coaching rules
+      description: Retrieve coaching rules and analysis for specific hero
+      tags: [Heroes]
+      parameters:
+        - name: hero_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: language
+          in: query
+          schema:
+            type: string
+            default: en
+      responses:
+        '200':
+          description: Hero rules retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeroRules'
+
+  # Localization
+  /localization/translate:
+    post:
+      summary: Translate content dynamically
+      description: Translate game content and coaching messages
+      tags: [Localization]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  description: Content to translate
+                from_language:
+                  type: string
+                  default: en
+                to_language:
+                  type: string
+                namespace:
+                  type: string
+                  enum: [ui, heroes, skills, coaching]
+                context:
+                  type: string
+                  description: Additional context for translation
+              required: [content, to_language]
+      responses:
+        '200':
+          description: Translation completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  translated_content:
+                    type: string
+                  confidence:
+                    type: number
+                    format: float
+
+  # Team Analysis
+  /team/analyze:
+    post:
+      summary: Analyze team composition
+      description: Analyze team synergy and provide strategic recommendations
+      tags: [Team]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                heroes:
+                  type: array
+                  items:
+                    type: string
+                  minItems: 5
+                  maxItems: 5
+                  description: Array of 5 hero IDs
+                enemy_heroes:
+                  type: array
+                  items:
+                    type: string
+                  maxItems: 5
+                  description: Optional enemy team composition
+                meta_version:
+                  type: string
+                  description: Game version for meta analysis
+              required: [heroes]
+      responses:
+        '200':
+          description: Team analysis completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamAnalysis'
+
+  # User Preferences
+  /user/preferences:
+    get:
+      summary: Get user preferences
+      description: Retrieve user coaching and display preferences
+      tags: [User]
+      responses:
+        '200':
+          description: Preferences retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPreferences'
+    
+    put:
+      summary: Update user preferences
+      description: Update user coaching and display preferences
+      tags: [User]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPreferences'
+      responses:
+        '200':
+          description: Preferences updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPreferences'
+
+# WebSocket Endpoints (documented separately)
+# /ws/realtime-coaching - Real-time coaching session
+# /ws/team-session - Multi-player team analysis
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+  schemas:
+    AnalysisResult:
+      type: object
+      properties:
+        session_id:
+          type: string
+          format: uuid
+        analysis_id:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          format: date-time
+        hero:
+          $ref: '#/components/schemas/DetectedHero'
+        performance:
+          $ref: '#/components/schemas/PerformanceMetrics'
+        coaching:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoachingFeedback'
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+        ocr_extraction:
+          $ref: '#/components/schemas/OCRExtractionResult'
+        debug_info:
+          type: object
+          description: Debug information when debug_mode=true
+
+    DetectedHero:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+        confidence:
+          type: number
+          format: float
+        override_used:
+          type: boolean
+
+    PerformanceMetrics:
+      type: object
+      properties:
+        kda:
+          type: object
+          properties:
+            kills:
+              type: integer
+            deaths:
+              type: integer
+            assists:
+              type: integer
+            ratio:
+              type: number
+              format: float
+        economy:
+          type: object
+          properties:
+            gold:
+              type: integer
+            gpm:
+              type: number
+              format: float
+        damage:
+          type: object
+          properties:
+            hero_damage:
+              type: integer
+            turret_damage:
+              type: integer
+            damage_taken:
+              type: integer
+        participation:
+          type: object
+          properties:
+            teamfight_participation:
+              type: number
+              format: float
+
+    CoachingFeedback:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [tip, warning, suggestion, encouragement]
+        severity:
+          type: string
+          enum: [info, warning, critical]
+        title:
+          type: string
+        message:
+          type: string
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 5
+        category:
+          type: string
+          enum: [mechanics, strategy, positioning, itemization]
+        improvement_suggestion:
+          type: string
+
+    Hero:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+        meta_tier:
+          type: string
+        difficulty:
+          type: integer
+        has_specific_rules:
+          type: boolean
+        synergies:
+          type: array
+          items:
+            type: string
+        counters:
+          type: array
+          items:
+            type: string
+
+    HeroRules:
+      type: object
+      properties:
+        hero_id:
+          type: string
+        hero_name:
+          type: string
+        role:
+          type: string
+        skills:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/HeroSkill'
+        performance_thresholds:
+          type: object
+          additionalProperties:
+            type: number
+        analysis_rules:
+          type: array
+          items:
+            type: object
+        version:
+          type: string
+
+    HeroSkill:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        cooldown:
+          type: number
+        mana_cost:
+          type: integer
+        analysis_points:
+          type: array
+          items:
+            type: string
+
+    PerformanceAnalytics:
+      type: object
+      properties:
+        period:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        hero_id:
+          type: string
+        games_played:
+          type: integer
+        win_rate:
+          type: number
+          format: float
+        average_metrics:
+          $ref: '#/components/schemas/PerformanceMetrics'
+        trends:
+          type: object
+          properties:
+            kda_trend:
+              type: number
+              format: float
+            gpm_trend:
+              type: number
+              format: float
+            improvement_rate:
+              type: number
+              format: float
+        comparisons:
+          type: object
+          properties:
+            rank_percentile:
+              type: number
+              format: float
+            tier_average:
+              $ref: '#/components/schemas/PerformanceMetrics'
+
+    TrendAnalysis:
+      type: object
+      properties:
+        metric:
+          type: string
+        hero_id:
+          type: string
+        trend_direction:
+          type: string
+          enum: [improving, declining, stable]
+        trend_strength:
+          type: number
+          format: float
+        data_points:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              value:
+                type: number
+                format: float
+        insights:
+          type: array
+          items:
+            type: string
+        recommendations:
+          type: array
+          items:
+            type: string
+
+    TeamAnalysis:
+      type: object
+      properties:
+        composition_id:
+          type: string
+        heroes:
+          type: array
+          items:
+            type: string
+        analysis:
+          type: object
+          properties:
+            synergy_score:
+              type: number
+              format: float
+            balance_score:
+              type: number
+              format: float
+            meta_score:
+              type: number
+              format: float
+        role_distribution:
+          type: object
+          additionalProperties:
+            type: integer
+        synergy_pairs:
+          type: array
+          items:
+            type: object
+            properties:
+              hero_a:
+                type: string
+              hero_b:
+                type: string
+              synergy_score:
+                type: number
+                format: float
+        recommendations:
+          type: object
+          properties:
+            strengths:
+              type: array
+              items:
+                type: string
+            weaknesses:
+              type: array
+              items:
+                type: string
+            strategy:
+              type: array
+              items:
+                type: string
+
+    UserPreferences:
+      type: object
+      properties:
+        user_id:
+          type: string
+        language:
+          type: string
+          default: en
+        coaching_frequency:
+          type: string
+          enum: [minimal, normal, detailed]
+          default: normal
+        focus_areas:
+          type: array
+          items:
+            type: string
+            enum: [mechanics, strategy, positioning, itemization]
+        realtime_enabled:
+          type: boolean
+          default: false
+        notification_types:
+          type: array
+          items:
+            type: string
+        comparison_tier:
+          type: string
+        privacy_level:
+          type: string
+          enum: [minimal, standard, full]
+          default: standard
+        mobile_settings:
+          type: object
+          properties:
+            image_quality:
+              type: string
+              enum: [low, medium, high, auto]
+              default: auto
+            offline_mode:
+              type: boolean
+              default: true
+
+    # OCR-specific schemas
+    OCRExtractionResult:
+      type: object
+      properties:
+        session_id:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        ign:
+          type: string
+          nullable: true
+        player_located:
+          type: boolean
+        detection_method:
+          type: string
+          enum: [none, exact_match, fuzzy_match, visual_anchor, mvp_fallback]
+        hero:
+          type: string
+          nullable: true
+        role:
+          type: string
+          nullable: true
+        kda:
+          type: object
+          nullable: true
+          properties:
+            k:
+              type: integer
+            d:
+              type: integer
+            a:
+              type: integer
+        gpm:
+          type: number
+          format: float
+          nullable: true
+        gold:
+          type: integer
+          nullable: true
+        mvp_score:
+          type: number
+          format: float
+          nullable: true
+        match_duration_min:
+          type: number
+          format: float
+          nullable: true
+        damage:
+          type: object
+          nullable: true
+          properties:
+            hero_pct:
+              type: number
+              format: float
+            taken_pct:
+              type: number
+              format: float
+            turret:
+              type: number
+              format: float
+        teamfight_pct:
+          type: number
+          format: float
+          nullable: true
+        view_confidences:
+          type: object
+          properties:
+            kda_view:
+              type: number
+              format: float
+            damage_view:
+              type: number
+              format: float
+        overall_confidence:
+          type: number
+          format: float
+        data_completeness:
+          type: number
+          format: float
+        warnings:
+          type: array
+          items:
+            type: string
+        missing_fields:
+          type: array
+          items:
+            type: string
+        ocr_text_kda:
+          type: string
+          nullable: true
+        ocr_text_damage:
+          type: string
+          nullable: true
+
+    OCRDebugResult:
+      type: object
+      properties:
+        extraction_result:
+          $ref: '#/components/schemas/OCRExtractionResult'
+        player_detection:
+          type: object
+          properties:
+            found:
+              type: boolean
+            row_index:
+              type: integer
+              nullable: true
+            detection_method:
+              type: string
+            confidence:
+              type: number
+              format: float
+            ign_match:
+              type: string
+              nullable: true
+            similarity_score:
+              type: number
+              format: float
+              nullable: true
+            visual_anchors:
+              type: array
+              items:
+                type: string
+            candidate_rows:
+              type: array
+              items:
+                type: object
+            fallback_reason:
+              type: string
+              nullable: true
+        region_detection:
+          type: object
+          properties:
+            kda_region:
+              type: array
+              items:
+                type: integer
+              minItems: 4
+              maxItems: 4
+              nullable: true
+            damage_region:
+              type: array
+              items:
+                type: integer
+              minItems: 4
+              maxItems: 4
+              nullable: true
+            anchors_found:
+              type: array
+              items:
+                type: string
+            anchor_confidence:
+              type: number
+              format: float
+            template_matches:
+              type: object
+              additionalProperties:
+                type: number
+        processing_metrics:
+          type: object
+          properties:
+            processing_time_ms:
+              type: number
+              format: float
+            stage_timings:
+              type: object
+              additionalProperties:
+                type: number
+            ocr_confidence:
+              type: number
+              format: float
+            text_clarity:
+              type: number
+              format: float
+            template_match_quality:
+              type: number
+              format: float
+            correction_count:
+              type: integer
+            fallback_count:
+              type: integer
+            warning_count:
+              type: integer
+        validation_results:
+          type: object
+          properties:
+            expected_vs_actual:
+              type: object
+              properties:
+                ign_match:
+                  type: boolean
+                hero_match:
+                  type: boolean
+                kda_match:
+                  type: boolean
+            accuracy_metrics:
+              type: object
+              properties:
+                field_accuracy:
+                  type: number
+                  format: float
+                confidence_accuracy:
+                  type: number
+                  format: float
+
+    CrossViewFusionResult:
+      type: object
+      properties:
+        primary_view:
+          type: string
+          enum: [kda, damage]
+        secondary_view:
+          type: string
+          enum: [kda, damage]
+        fusion_confidence:
+          type: number
+          format: float
+        consistency_score:
+          type: number
+          format: float
+        conflicts:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              kda_value:
+                type: string
+              damage_value:
+                type: string
+              resolution:
+                type: string
+        resolutions:
+          type: array
+          items:
+            type: string
+        merged_result:
+          $ref: '#/components/schemas/OCRExtractionResult'
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        code:
+          type: integer
+        details:
+          type: object
+        timestamp:
+          type: string
+          format: date-time
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+tags:
+  - name: Analysis
+    description: Screenshot analysis and coaching
+  - name: OCR Debug
+    description: OCR debugging and troubleshooting tools
+  - name: Analytics
+    description: Performance analytics and trends
+  - name: Heroes
+    description: Hero information and rules
+  - name: Localization
+    description: Multi-language support
+  - name: Team
+    description: Team composition analysis
+  - name: User
+    description: User preferences and configuration

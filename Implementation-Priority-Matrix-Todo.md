@@ -298,3 +298,11 @@ Overview
   | 6-12 | Operational Excellence + UX       | 90%                 |
 
   Overall Production Readiness: Target 85% success rate by Week 12
+## Progress Update — 2025-09-09
+
+- [x] Implement hero identification optimization using text region filtering (near-IGN top-3)
+- [x] Create structured regex patterns for KDA extraction (IGN-anchored + spatial fallback)
+- [x] Fix damage and GPM parsing from stats page screenshots (5–6 digit damage; GPM computed when available)
+- [x] Implement role classification based on extracted hero data (DB + heuristic fallback)
+
+Reference: see `PROGRESS_LOG.md` for file-level details and test outputs.

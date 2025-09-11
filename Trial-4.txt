@@ -1,0 +1,141 @@
+ ✓ Compiled /api/analyze in 318ms (1639 modules)
+INFO:core.session_manager:Created new session 3c4330f0-588a-417b-9f70-b11bfc2ed968 for player Diary of dolls
+INFO:core.enhanced_data_collector:Created new session 3c4330f0-588a-417b-9f70-b11bfc2ed968
+INFO:root:🔄 Initializing EasyOCR reader (one-time setup)...
+INFO:root:✅ OCR reader initialized in 1.690s
+Quick health check failed, trying isolated endpoint...
+Isolated endpoint failed, trying basic endpoint...
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 6836ms
+/Users/lesz/Documents/Project-AI/skillshift-ai/venv/lib/python3.13/site-packages/torch/utils/data/dataloader.py:683: UserWarning: 'pin_memory' argument is set as true but not supported on MPS now, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+INFO:core.screenshot_analyzer:OCR text preview: 30 victory 29 duration 21:12 hero turret damage teamfight hero turret damage teamfight damage damage taken participation damage damage taken participation e .mx[youtuber ] kylie. 13482 520 140289 2513...
+INFO:core.screenshot_analyzer:Screenshot type: stats_page, confidence: 0.850, keywords: ['turret damage', 'damage taken', 'equipment']
+INFO:core.enhanced_data_collector:Screenshot analysis: type=stats_page, confidence=0.850, keywords=['turret damage', 'damage taken', 'equipment']
+INFO:core.enhanced_data_collector:Starting PARALLEL enhanced analysis for stats_page screenshot
+INFO:core.enhanced_data_collector:🔄 Phase 1: Sequential preprocessing...
+🔍 DEBUG: Original image shape: (1170, 2532, 3)
+🔍 DEBUG: Original image path: /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmpim_qybhf.png
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.311 (weight: 0.25)
+  Contrast:   0.372 (weight: 0.20)
+  Brightness: 0.630 (weight: 0.20)
+  Noise:      0.842 (weight: 0.20)
+  FINAL:      0.597
+🔍 DEBUG: Image quality score: 0.597
+🔍 DEBUG: Processing type: moderate
+INFO:core.enhanced_data_collector:Image quality score: 0.597
+🔍 DEBUG: Applying MODERATE preprocessing (grayscale + denoising)
+INFO:core.enhanced_data_collector:Medium quality image detected - using moderate preprocessing
+Quick health check failed, trying isolated endpoint...
+INFO:core.enhanced_data_collector:Moderate preprocessed image saved to: temp/enhanced_preprocessed_image.png
+🔍 DEBUG: Original image shape: (1170, 2532, 3)
+🔍 DEBUG: Original image path: /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmpim_qybhf.png
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.311 (weight: 0.25)
+  Contrast:   0.372 (weight: 0.20)
+  Brightness: 0.630 (weight: 0.20)
+  Noise:      0.842 (weight: 0.20)
+  FINAL:      0.597
+🔍 DEBUG: Image quality score: 0.597
+🔍 DEBUG: Processing type: moderate
+INFO:core.enhanced_data_collector:Image quality score: 0.597
+🔍 DEBUG: Applying MODERATE preprocessing (grayscale + denoising)
+INFO:core.enhanced_data_collector:Medium quality image detected - using moderate preprocessing
+Isolated endpoint failed, trying basic endpoint...
+INFO:core.enhanced_data_collector:Moderate preprocessed image saved to: temp/enhanced_preprocessed_image.png
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 6534ms
+Quick health check failed, trying isolated endpoint...
+Isolated endpoint failed, trying basic endpoint...
+INFO:core.enhanced_data_collector:🚀 Phase 2: Launching parallel analysis tasks...
+ERROR:core.enhanced_data_collector:Enhanced analysis failed: cannot access local variable 'validated_ign' where it is not associated with a value
+INFO:core.session_manager:Added stats_page analysis to session 3c4330f0-588a-417b-9f70-b11bfc2ed968. Total screenshots: 1
+INFO:     127.0.0.1:53989 - "POST /api/analyze?ign=Diary%20of%20dolls HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54028 - "GET /health HTTP/1.1" 200 OK
+Invalid backend response structure: {
+  success: false,
+  confidence_score: 0,
+  hero: 'unknown',
+  kda: '0/0/0',
+  gpm: 0,
+  role: 'unknown',
+  coaching_feedback: [],
+  warnings: [
+    "Analysis failed: cannot access local variable 'validated_ign' where it is not associated with a value"
+  ],
+  processing_time: 0,
+  quality_score: 0,
+  hero_confidence: 0,
+  data_completeness: 0,
+  success_factors: [],
+  error_message: null,
+  analysis_stage: 'enhanced_fast',
+  diagnostics: { analysis_mode: 'enhanced_fast', confidence_category: 'low' }
+}
+ POST /api/analyze 502 in 28606ms
+INFO:core.session_manager:Created new session e6a9d315-350c-4780-8096-f136ef621f60 for player Diary of dolls
+INFO:core.enhanced_data_collector:Created new session e6a9d315-350c-4780-8096-f136ef621f60
+ GET /api/health 200 in 6067ms
+INFO:core.screenshot_analyzer:OCR text preview: 30 victory 29 duration 21.12 x 0 8 8 x & e .mx[youtuber ] 0 10 10 10623 11186 3 9 17 kylie. 15 317 616 45 blck sei kigami_ 7 6 11 15941 15089 15 2 4 makii mvp 15 8.5 40.6 15 tp 7   6 4 14761 11811 1  ...
+INFO:core.screenshot_analyzer:Screenshot type: scoreboard, confidence: 0.800, keywords: ['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Screenshot analysis: type=scoreboard, confidence=0.800, keywords=['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Starting PARALLEL enhanced analysis for scoreboard screenshot
+INFO:core.enhanced_data_collector:🔄 Phase 1: Sequential preprocessing...
+🔍 DEBUG: Original image shape: (1170, 2532, 3)
+🔍 DEBUG: Original image path: /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmpbceufk6x.png
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+🔍 DEBUG: Image quality score: 0.629
+🔍 DEBUG: Processing type: moderate
+INFO:core.enhanced_data_collector:Image quality score: 0.629
+🔍 DEBUG: Applying MODERATE preprocessing (grayscale + denoising)
+INFO:core.enhanced_data_collector:Medium quality image detected - using moderate preprocessing
+INFO:core.enhanced_data_collector:Moderate preprocessed image saved to: temp/enhanced_preprocessed_image.png
+🔍 DEBUG: Original image shape: (1170, 2532, 3)
+🔍 DEBUG: Original image path: /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmpbceufk6x.png
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+🔍 DEBUG: Image quality score: 0.629
+🔍 DEBUG: Processing type: moderate
+INFO:core.enhanced_data_collector:Image quality score: 0.629
+🔍 DEBUG: Applying MODERATE preprocessing (grayscale + denoising)
+INFO:core.enhanced_data_collector:Medium quality image detected - using moderate preprocessing
+INFO:core.enhanced_data_collector:Moderate preprocessed image saved to: temp/enhanced_preprocessed_image.png
+INFO:core.enhanced_data_collector:🚀 Phase 2: Launching parallel analysis tasks...
+ERROR:core.enhanced_data_collector:Enhanced analysis failed: cannot access local variable 'validated_ign' where it is not associated with a value
+INFO:core.session_manager:Added scoreboard analysis to session e6a9d315-350c-4780-8096-f136ef621f60. Total screenshots: 1
+INFO:     127.0.0.1:53990 - "POST /api/analyze?ign=Diary%20of%20dolls HTTP/1.1" 200 OK
+Invalid backend response structure: {
+  success: false,
+  confidence_score: 0,
+  hero: 'unknown',
+  kda: '0/0/0',
+  gpm: 0,
+  role: 'unknown',
+  coaching_feedback: [],
+  warnings: [
+    "Analysis failed: cannot access local variable 'validated_ign' where it is not associated with a value"
+  ],
+  processing_time: 0,
+  quality_score: 0,
+  hero_confidence: 0,
+  data_completeness: 0,
+  success_factors: [],
+  error_message: null,
+  analysis_stage: 'enhanced_fast',
+  diagnostics: { analysis_mode: 'enhanced_fast', confidence_category: 'low' }
+}
+ POST /api/analyze 502 in 48691ms

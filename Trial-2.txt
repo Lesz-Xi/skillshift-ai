@@ -1,0 +1,317 @@
+NFO:core.ultimate_parsing_system:🚀 Ultimate analysis started: /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmpel2udkzq.png
+INFO:core.ultimate_parsing_system:Target: 95-100% confidence | Context: scoreboard
+INFO:core.ultimate_parsing_system:🔍 Stage 1: Advanced Quality Validation
+INFO:core.advanced_quality_validator:Quality assessment: 0.745, acceptable: False
+WARNING:core.ultimate_parsing_system:⚠️ Quality below threshold: 0.7% < 85.0%
+INFO:core.ultimate_parsing_system:🎯 Stage 2: YOLO Visual Intelligence Enhancement
+INFO:core.services.yolo_detection_service:🚫 YOLO fallback not triggered (OCR confidence: 0.80)
+INFO:core.ultimate_parsing_system:📊 Stage 3: Basic Data Extraction
+INFO:core.session_manager:Created new session f43f45fa-b4a6-4c42-a2a2-1375b10ba770 for player Diary of dolls
+INFO:core.enhanced_data_collector:Created new session f43f45fa-b4a6-4c42-a2a2-1375b10ba770
+Analysis endpoint timed out, this should not happen with instant endpoint
+Analysis API error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ POST /api/analyze 500 in 120066ms
+INFO:core.screenshot_analyzer:OCR text preview: 30 victory 29 duration 21.12 x 0 8 8 x & e .mx[youtuber ] 0 10 10 10623 11186 3 9 17 kylie. 15 317 616 45 blck sei kigami_ 7 6 11 15941 15089 15 2 4 makii mvp 15 8.5 40.6 15 tp 7   6 4 14761 11811 1  ...
+INFO:core.screenshot_analyzer:Screenshot type: scoreboard, confidence: 0.800, keywords: ['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Screenshot analysis: type=scoreboard, confidence=0.800, keywords=['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Starting PARALLEL enhanced analysis for scoreboard screenshot
+INFO:core.enhanced_data_collector:🚀 Phase 1: Launching parallel preprocessing tasks...
+INFO:core.enhanced_data_collector:⏳ Phase 2: Waiting for preprocessing and OCR...
+🔍 DEBUG: Original image shape: (1170, 2532, 3)
+🔍 DEBUG: Original image path: /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmpel2udkzq.png
+🔍 DEBUG: Original image shape: (1170, 2532, 3)
+🔍 DEBUG: Original image path: /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmpel2udkzq.png
+🔍 DEBUG: Quality metrics breakdown:
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+🔍 DEBUG: Image quality score: 0.629
+🔍 DEBUG: Image quality score: 0.629
+🔍 DEBUG: Processing type: moderate
+INFO:core.enhanced_data_collector:Image quality score: 0.629
+🔍 DEBUG: Processing type: moderate
+INFO:core.enhanced_data_collector:Image quality score: 0.629
+🔍 DEBUG: Applying MODERATE preprocessing (grayscale + denoising)
+INFO:core.enhanced_data_collector:Medium quality image detected - using moderate preprocessing
+🔍 DEBUG: Applying MODERATE preprocessing (grayscale + denoising)
+INFO:core.enhanced_data_collector:Medium quality image detected - using moderate preprocessing
+Quick health check failed, trying basic endpoint...
+INFO:core.enhanced_data_collector:Moderate preprocessed image saved to: temp/enhanced_preprocessed_image.png
+INFO:core.enhanced_data_collector:Moderate preprocessed image saved to: temp/enhanced_preprocessed_image.png
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13038ms
+INFO:core.enhanced_data_collector:🔄 Phase 3: Launching dependent analysis tasks...
+INFO:core.enhanced_data_collector:📊 Phase 4: Collecting results...
+INFO:core.enhanced_data_collector:Trophy detection: Player row at y=764.5, x=653.0
+INFO:core.enhanced_data_collector:Using enhanced stats page parsing
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.enhanced_data_collector:🔄 Primary trophy detection failed, trying fallback positioning
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '30 VICTORY 29 Duration 21.12 X 0 8 8 X & E .Mx[YOUTUBER ] 0 10 10 10623 11186 3 9 17 Kylie. 15 317 616 45 BLCK sei kigami_ 7 6 11 15941 15089 15 2 4 Makii MVP 15 8.5 40.6 15 TP 7   6 4 14761 11811 1  5 9 der. 15 616 517 15 HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav MP 15 10.5 712 Kento Kento Kento 7 5 5 16434 13545 3 6 18 Elysian Gracehaven 15 619 8.1 15 BattlelD 858921223897853062 Data Quit HiRyx'
+WARNING:core.hero_identifier:Could not identify hero from text: 'VICTORY'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Duration 21.12'
+WARNING:core.hero_identifier:Could not identify hero from text: 'X 0'
+WARNING:core.hero_identifier:Could not identify hero from text: 'X &'
+WARNING:core.hero_identifier:Could not identify hero from text: 'E .Mx[YOUTUBER ]'
+WARNING:core.hero_identifier:Could not identify hero from text: '10 10'
+WARNING:core.hero_identifier:Could not identify hero from text: '10623'
+WARNING:core.hero_identifier:Could not identify hero from text: '11186'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kylie.'
+WARNING:core.hero_identifier:Could not identify hero from text: '317'
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BLCK sei kigami_'
+WARNING:core.hero_identifier:Could not identify hero from text: '15941'
+WARNING:core.hero_identifier:Could not identify hero from text: '15089'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Makii'
+WARNING:core.hero_identifier:Could not identify hero from text: 'MVP'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '40.6'
+WARNING:core.hero_identifier:Could not identify hero from text: '7   6 4'
+WARNING:core.hero_identifier:Could not identify hero from text: '14761'
+WARNING:core.hero_identifier:Could not identify hero from text: '11811'
+WARNING:core.hero_identifier:Could not identify hero from text: '1  5'
+WARNING:core.hero_identifier:Could not identify hero from text: 'der.'
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: '517'
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls'
+WARNING:core.hero_identifier:Could not identify hero from text: '12374'
+WARNING:core.hero_identifier:Could not identify hero from text: '15435'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '10.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '712'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kento Kento Kento 7'
+WARNING:core.hero_identifier:Could not identify hero from text: '16434'
+WARNING:core.hero_identifier:Could not identify hero from text: '13545'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Elysian Gracehaven'
+WARNING:core.hero_identifier:Could not identify hero from text: '619'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.1'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BattlelD'
+WARNING:core.hero_identifier:Could not identify hero from text: '858921223897853062'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Data'
+INFO:core.hero_identifier:Hero identified by fuzzy match: paquito (confidence: 0.800)
+WARNING:core.hero_identifier:Could not identify hero from text: 'HiRyx'
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.enhanced_data_collector:Trophy detection result: none (confidence: 0.0%)
+WARNING:core.enhanced_data_collector:Low trophy detection confidence: 0.0%
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVD Diary of dolls 9 2 12 12374'
+WARNING:core.hero_identifier:Could not identify hero from text: '15 317 BLCK sei kigami. 7 6 11 15941 15 8.5 TP HiRyx 7   6 4 14761 15 616 HVD Diary of dolls 9 2 12 12374 MP 15 10.5 Kento Kento Kento 7 5   5 16434'
+WARNING:core.hero_identifier:Could not identify hero from text: '317'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BLCK sei kigami.'
+WARNING:core.hero_identifier:Could not identify hero from text: '15941'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.5'
+WARNING:core.hero_identifier:Could not identify hero from text: 'TP HiRyx'
+WARNING:core.hero_identifier:Could not identify hero from text: '7   6 4'
+WARNING:core.hero_identifier:Could not identify hero from text: '14761'
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVD Diary of dolls'
+WARNING:core.hero_identifier:Could not identify hero from text: '12374'
+WARNING:core.hero_identifier:Could not identify hero from text: '10.5'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kento Kento Kento 7'
+WARNING:core.hero_identifier:Could not identify hero from text: '5   5'
+WARNING:core.hero_identifier:Could not identify hero from text: '16434'
+WARNING:core.hero_identifier:Could not identify hero from text: '616 15 15089 15 2 4 Makii MVP 40.6 15 11811 1  5 9 der. 517 15 15435 7 8 10 Mhaaaaaaaaaaav 712 13545 3  6 18 Elysian Gracehaven'
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: '15089'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Makii'
+WARNING:core.hero_identifier:Could not identify hero from text: 'MVP'
+WARNING:core.hero_identifier:Could not identify hero from text: '40.6'
+WARNING:core.hero_identifier:Could not identify hero from text: '11811'
+WARNING:core.hero_identifier:Could not identify hero from text: '1  5'
+WARNING:core.hero_identifier:Could not identify hero from text: 'der.'
+WARNING:core.hero_identifier:Could not identify hero from text: '517'
+WARNING:core.hero_identifier:Could not identify hero from text: '15435'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '712'
+WARNING:core.hero_identifier:Could not identify hero from text: '13545'
+WARNING:core.hero_identifier:Could not identify hero from text: '3  6 18'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Elysian Gracehaven'
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Duration 21.12 X & 8 8 %6 # .Mx[YOUTUBER ] 0 10 10 10623 11186 3 9 17 Kylie: 15 317 616 415 BLCK sei kigami: 7 6 11 15941 15089 15 2 4 Makii MVP 15 8.5 40.6 15 TP HiRyx 7 6   4 14761 11811 1  5 9 der. 15 616 517 15 HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav MP 15 10.5 712 Kento Kento Kento 7 5 5 16434 13545 3 6 18 Elysian Gracehaven 15 619 8.1 15 Datcm 050m040neoo oda'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Duration 21.12'
+WARNING:core.hero_identifier:Could not identify hero from text: 'X &'
+WARNING:core.hero_identifier:Could not identify hero from text: '8 %6'
+WARNING:core.hero_identifier:Could not identify hero from text: '# .Mx[YOUTUBER ]'
+WARNING:core.hero_identifier:Could not identify hero from text: '10 10'
+WARNING:core.hero_identifier:Could not identify hero from text: '10623'
+WARNING:core.hero_identifier:Could not identify hero from text: '11186'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kylie:'
+WARNING:core.hero_identifier:Could not identify hero from text: '317'
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: '415'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BLCK sei kigami:'
+WARNING:core.hero_identifier:Could not identify hero from text: '15941'
+WARNING:core.hero_identifier:Could not identify hero from text: '15089 15'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Makii'
+WARNING:core.hero_identifier:Could not identify hero from text: 'MVP'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '40.6'
+WARNING:core.hero_identifier:Could not identify hero from text: 'TP HiRyx'
+WARNING:core.hero_identifier:Could not identify hero from text: '6   4'
+WARNING:core.hero_identifier:Could not identify hero from text: '14761'
+WARNING:core.hero_identifier:Could not identify hero from text: '11811'
+WARNING:core.hero_identifier:Could not identify hero from text: '1  5'
+WARNING:core.hero_identifier:Could not identify hero from text: 'der.'
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: '517'
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls'
+WARNING:core.hero_identifier:Could not identify hero from text: '12374'
+WARNING:core.hero_identifier:Could not identify hero from text: '15435'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '10.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '712'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kento Kento Kento 7'
+WARNING:core.hero_identifier:Could not identify hero from text: '16434'
+WARNING:core.hero_identifier:Could not identify hero from text: '13545'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Elysian Gracehaven'
+WARNING:core.hero_identifier:Could not identify hero from text: '619'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.1'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Datcm'
+WARNING:core.hero_identifier:Could not identify hero from text: '050m040neoo oda'
+WARNING:core.hero_identifier:Could not identify hero from text: '30 29 Duralton 21812 oMx[YOUTUBERA] 0 10 10   10623 11186 3 9 17 Kylie: O60 15 BLCK sei kigami: 7 6 11 15941 15089 15 2 4 Makii U A0.o) TP Hiryx 7   6 4 14761 11811 1   5 9 der: 5 060  3 23 42 12374 15435 7/ 8 10 Mhaaaaaaaaaaav We Kento Kento Kento 7 5 5 16434 13545 3 6 18 Elysian Gracehaven Batell '
+WARNING:core.hero_identifier:Could not identify hero from text: 'Duralton 21812'
+WARNING:core.hero_identifier:Could not identify hero from text: 'oMx[YOUTUBERA]'
+WARNING:core.hero_identifier:Could not identify hero from text: '10 10   10623'
+WARNING:core.hero_identifier:Could not identify hero from text: '11186'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kylie:'
+WARNING:core.hero_identifier:Could not identify hero from text: 'O60'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BLCK sei kigami:'
+WARNING:core.hero_identifier:Could not identify hero from text: '15941'
+WARNING:core.hero_identifier:Could not identify hero from text: '15089'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Makii'
+WARNING:core.hero_identifier:Could not identify hero from text: 'A0.o)'
+WARNING:core.hero_identifier:Could not identify hero from text: 'TP Hiryx'
+WARNING:core.hero_identifier:Could not identify hero from text: '7   6'
+WARNING:core.hero_identifier:Could not identify hero from text: '14761'
+WARNING:core.hero_identifier:Could not identify hero from text: '11811'
+WARNING:core.hero_identifier:Could not identify hero from text: '1   5'
+WARNING:core.hero_identifier:Could not identify hero from text: 'der:'
+WARNING:core.hero_identifier:Could not identify hero from text: '060'
+WARNING:core.hero_identifier:Could not identify hero from text: '42 12374'
+WARNING:core.hero_identifier:Could not identify hero from text: '15435'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kento Kento Kento 7'
+WARNING:core.hero_identifier:Could not identify hero from text: '16434'
+WARNING:core.hero_identifier:Could not identify hero from text: '13545'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Elysian Gracehaven'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Batell'
+WARNING:core.enhanced_data_collector:Parallel analysis tasks timed out
+INFO:core.enhanced_data_collector:🔗 Phase 5: Combining results...
+INFO:core.enhanced_data_collector:Final data after defaults: {'hero': 'unknown', 'kills': 0, 'deaths': 1, 'assists': 0, 'gold': 0, 'hero_damage': 0}
+INFO:core.enhanced_data_collector:✅ Parallel analysis complete in 39.970s
+INFO:core.enhanced_data_collector:📈 Parallel stats: {'max_workers': 8, 'active_tasks': 12, 'completed_tasks': 0, 'failed_tasks': 0, 'success_rate': 0.0}
+INFO:core.session_manager:Added scoreboard analysis to session f43f45fa-b4a6-4c42-a2a2-1375b10ba770. Total screenshots: 1
+INFO:core.ultimate_parsing_system:🎯 Stage 4: Premium Hero Detection
+WARNING:core.hero_identifier:Could not identify hero from text: '30 29 Duration 21:12 8 %& 0 # ,M (YOUTUBER 10 10 10  10623 11186 3  9 17 Kylie. 15 7 # @e: 65 5 BLCK sei kigami. 7 6 11 15941 15089 15 2 4 Makii 0 2 4 2 0 6' ^ TP Hiryx 7   6 4 14761 11811 1 5 9 der. 5 T 15 [MDDiery ol dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav 0 x: 2 Kento Kento Kento 7 5 5 16434 13545 3 6 18 Elysian Gracehaven 7 € 2 BattlelD 858921223897853082 Uc'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Duration 21:12'
+WARNING:core.hero_identifier:Could not identify hero from text: '8 %&'
+WARNING:core.hero_identifier:Could not identify hero from text: '0 # ,M'
+WARNING:core.hero_identifier:Could not identify hero from text: '(YOUTUBER'
+WARNING:core.hero_identifier:Could not identify hero from text: '10 10  10623'
+WARNING:core.hero_identifier:Could not identify hero from text: '11186'
+WARNING:core.hero_identifier:Could not identify hero from text: '3  9 17'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kylie.'
+WARNING:core.hero_identifier:Could not identify hero from text: '7 # @e: 65'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BLCK sei kigami.'
+WARNING:core.hero_identifier:Could not identify hero from text: '15941'
+WARNING:core.hero_identifier:Could not identify hero from text: '15089'
+WARNING:core.hero_identifier:Could not identify hero from text: '2 4'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Makii 0'
+WARNING:core.hero_identifier:Could not identify hero from text: '2 4 2'
+WARNING:core.hero_identifier:Could not identify hero from text: '0 6' ^'
+WARNING:core.hero_identifier:Could not identify hero from text: 'TP Hiryx'
+WARNING:core.hero_identifier:Could not identify hero from text: '7   6 4'
+WARNING:core.hero_identifier:Could not identify hero from text: '14761'
+WARNING:core.hero_identifier:Could not identify hero from text: '11811'
+WARNING:core.hero_identifier:Could not identify hero from text: '1 5 9'
+WARNING:core.hero_identifier:Could not identify hero from text: 'der.'
+WARNING:core.hero_identifier:Could not identify hero from text: '[MDDiery ol dolls'
+WARNING:core.hero_identifier:Could not identify hero from text: '12 12374'
+WARNING:core.hero_identifier:Could not identify hero from text: '15435'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: 'x: 2'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kento Kento Kento 7'
+WARNING:core.hero_identifier:Could not identify hero from text: '16434'
+WARNING:core.hero_identifier:Could not identify hero from text: '13545'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Elysian Gracehaven'
+WARNING:core.hero_identifier:Could not identify hero from text: '7 €'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BattlelD'
+WARNING:core.hero_identifier:Could not identify hero from text: '858921223897853082'
+Quick health check failed, trying basic endpoint...
+WARNING:core.hero_identifier:Could not identify hero from text: '30 VICTORY 29 Duration 21.12 X 0 8 8 % & E .Mx[YOUTUBER <] 0 10 10 10623 11186 3 9 17 Kylie. 15 377 616 415 BLCK sei kigami. 7 6 11 15941 15089 15 2 4 Makii MVP 15 8.5 10.6 15 TP HiRyx 7   6 4 14761 11811 1 5 9 der. 15 616 517 15 HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav NP 15 10.5 712 Kento Kento Kento 7 5 5 16434 13545 3 6 18 Elysian Gracehaven 15 619 8.1 5 BattlelD 858921223897853062 Data Quit'
+WARNING:core.hero_identifier:Could not identify hero from text: 'VICTORY'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Duration 21.12'
+WARNING:core.hero_identifier:Could not identify hero from text: 'X 0'
+WARNING:core.hero_identifier:Could not identify hero from text: '8 % &'
+WARNING:core.hero_identifier:Could not identify hero from text: 'E .Mx[YOUTUBER <]'
+WARNING:core.hero_identifier:Could not identify hero from text: '10 10'
+WARNING:core.hero_identifier:Could not identify hero from text: '10623'
+WARNING:core.hero_identifier:Could not identify hero from text: '11186'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kylie.'
+WARNING:core.hero_identifier:Could not identify hero from text: '377'
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: '415'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BLCK sei kigami.'
+WARNING:core.hero_identifier:Could not identify hero from text: '15941'
+WARNING:core.hero_identifier:Could not identify hero from text: '15089 15'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Makii'
+WARNING:core.hero_identifier:Could not identify hero from text: 'MVP'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '10.6'
+WARNING:core.hero_identifier:Could not identify hero from text: 'TP HiRyx'
+WARNING:core.hero_identifier:Could not identify hero from text: '7   6 4'
+WARNING:core.hero_identifier:Could not identify hero from text: '14761'
+WARNING:core.hero_identifier:Could not identify hero from text: '11811'
+WARNING:core.hero_identifier:Could not identify hero from text: 'der.'
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: '517'
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls'
+WARNING:core.hero_identifier:Could not identify hero from text: '12374'
+WARNING:core.hero_identifier:Could not identify hero from text: '15435'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '10.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '712'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kento Kento Kento 7'
+WARNING:core.hero_identifier:Could not identify hero from text: '16434'
+WARNING:core.hero_identifier:Could not identify hero from text: '13545'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Elysian Gracehaven'
+WARNING:core.hero_identifier:Could not identify hero from text: '619'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.1'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BattlelD'
+WARNING:core.hero_identifier:Could not identify hero from text: '858921223897853062'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Data'
+INFO:core.hero_identifier:Hero identified by fuzzy match: paquito (confidence: 0.800)
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13093ms
+Quick health check failed, trying basic endpoint...
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13027ms
+Quick health check failed, trying basic endpoint...
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13043ms
+Quick health check failed, trying basic endpoint...
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13025ms
+INFO:core.ultimate_parsing_system:🧠 Stage 5: Intelligent Data Completion
+INFO:core.intelligent_data_completer:Data completion: 60.7% complete, 94.0% confidence
+INFO:core.ultimate_parsing_system:⭐ Stage 6: Elite Confidence Scoring
+WARNING:core.ultimate_parsing_system:⚠️ Elite confidence scorer division by zero: float division by zero
+INFO:core.ultimate_parsing_system:🔧 Using fallback confidence calculation based on data completeness
+INFO:core.ultimate_parsing_system:🔧 Fallback confidence: 40.3% (data_quality: 20.0%, completeness: 60.7%)
+INFO:core.ultimate_parsing_system:🔧 Stage 7: Adaptive Optimization
+INFO:core.ultimate_parsing_system:🎨 Stage 8: Final Assembly and Validation
+INFO:core.ultimate_parsing_system:📊 Performance logged: {'timestamp': 1757346078.830809, 'overall_confidence': 42.333333333333336, 'category': 'unreliable', 'processing_time': 102.13492894172668, 'component_scores': {'data_completeness': 0.2, 'system_reliability': 0.8}, 'completeness_score': 60.66666666666667, 'quality_score': 0.745254585075294, 'hero_confidence': 0.6430769230769232, 'success_factors_count': 0}
+INFO:core.ultimate_parsing_system:✅ Ultimate analysis complete: 42.3% confidence
+INFO:core.ultimate_parsing_system:📈 Category: UNRELIABLE

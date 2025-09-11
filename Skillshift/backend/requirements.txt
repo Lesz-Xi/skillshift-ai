@@ -1,0 +1,18 @@
+# OCR and Computer Vision dependencies
+EasyOCR>=1.7.0
+opencv-python>=4.8.1.78
+Pillow>=10.0.1
+numpy>=1.25.2
+
+# Text processing and fuzzy matching
+fuzzywuzzy>=0.18.0
+python-Levenshtein>=0.21.0
+
+# Testing dependencies
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.1
+
+# Existing dependencies (if not already present)
+# fastapi>=0.104.1
+# pydantic>=2.5.0

@@ -1,0 +1,10 @@
+Image 1: (IMG_1767.PNG)
+Player squad name: HVD
+Player ign: Diary of dolls
+KDA: 9/2/12
+
+Image 2: (IMG_1768.PNG)
+Hero Damage: 107100 (31%)
+Turret Damage: 2854 (9%)
+Damage Taken: 54444 (11%)
+Teamfight Participation: 70%

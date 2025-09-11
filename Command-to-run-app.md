@@ -1,262 +1,161 @@
-# MLBB Coach AI - Application Setup & Commands
+# MLBB Coach AI - Unified Setup & Runbook
 
-## Install requirements
-cd skillshift-ai; ./venv/bin/activate; 
+This consolidates virtualenv usage and clarifies health checks and API schema contracts.
 
+## One-Command Startup (Recommended)
 
-## Checl if the installation is completed
-cd skillshift-ai && pip list | grep numpy
+NEW: python -m uvicorn web.app:app --host 0.0.0.0 --port 8000 --reload
 
-## Quick Start Commands
+BEST: FASTAPI_USE_GUNICORN=1 FASTAPI_WORKERS=2 FASTAPI_TIMEOUT=180 FRONTEND_PORT=3000 bash -c 'cd skillshift-ai && ./start_services.sh'
+
+Manual:
+Backend (multi-worker): cd skillshift-ai && source venv/bin/activate && gunicorn web.app:app -w 2 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 --timeout 180 --graceful-timeout 30 --keep-alive 5
+Frontend: cd skillshift-ai/dashboard-ui-new && PORT=3000 npm run dev
 
 ```bash
-# Backend (FastAPI)
-source venv/bin/activate 
-python3 -m uvicorn web.app:app --reload --port 8000
-
-# Frontend (React + Vite)
-npm run dev
+cd skillshift-ai && ./start_services.sh
 ```
 
-## Prerequisites
+Starts FastAPI on port 8000 and Next.js on port 3000 with health checks.
+
+## Environment Setup (Backend + Frontend)
 
 ```bash
-# Python environment
-python3 -m venv venv
-source venv/bin/activate  # On macOS/Linux
-pip install -r requirements.txt
-
-# Node.js dependencies
-npm install
-```
-
-## Environment Setup
-
-```bash
-# Create virtual environment
+# 1) Backend setup
 cd skillshift-ai
 python3 -m venv venv
 source venv/bin/activate
-
-# Install Python dependencies
 pip install -r requirements.txt
 
-# Install Node.js dependencies (if using frontend)
+# 2) Backend environment variables
+cp .env.example .env  # edit values as needed
+
+# 3) Frontend setup
+cd dashboard-ui-new
 npm install
+cp .env.example .env.local  # edit SKILLSHIFT_AI_URL as needed
 ```
+
+Notes:
+
+- Use only this virtualenv: `skillshift-ai/venv` (avoid extra venvs in repo root).
+- FastAPI expects backend `.env` in `skillshift-ai/.env`. Next.js expects `.env.local` in `dashboard-ui-new/`.
 
 ## Development Workflow
 
 ```bash
-# 1. Activate Python environment
-source venv/bin/activate
-
-# 2. Start backend with auto-reload
+# Terminal A – Backend
+cd skillshift-ai && source venv/bin/activate
 python3 -m uvicorn web.app:app --reload --port 8000
 
-# 3. Start frontend (in new terminal)
-npm run dev
-
-# 4. Test API endpoint
-curl -X POST http://localhost:8000/analyze \
-  -H "Content-Type: application/json" \
-  -d '{"player_name": "TestPlayer", "hero": "Chou", "kda": "5/2/8"}'
+# Terminal B – Frontend
+cd skillshift-ai/dashboard-ui-new
+# Force a stable port (defaults to 3000)
+PORT=3000 npm run dev
 ```
+
+## Health Checks (Tightened)
+
+```bash
+# Prefer isolated health (never blocks)
+curl -s http://localhost:8000/api/health-isolated | python3 -m json.tool
+
+# Standard health (lightweight)
+curl -s http://localhost:8000/api/health | python3 -m json.tool
+
+# Basic fallback
+curl -s http://localhost:8000/health | python3 -m json.tool
+
+# Frontend health proxy
+curl -s http://localhost:3000/api/health | python3 -m json.tool
+```
+
+Expected backend response (api/health):
+
+```json
+{
+  "status": "healthy",
+  "hero_database_size": 0,
+  "available_roles": [],
+  "version": "2.0.0",
+  "timestamp": 1737000000.0
+}
+```
+
+Expected isolated health (api/health-isolated):
+
+```json
+{
+  "status": "healthy",
+  "timestamp": "2025-01-15T20:30:00Z",
+  "version": "2.0.0",
+  "uptime": "running",
+  "response_time_ms": 1
+}
+```
+
+## Minimal Analysis Contract (Backend → Frontend)
+
+The dashboard proxy expects a superset of these fields from backend analysis endpoints:
+
+- Core: `statistical_feedback` (array), `mental_feedback` (string)
+- Parsed data: `parsed_data.hero`, `parsed_data.kda`, `parsed_data.damage`, `parsed_data.gpm`, `parsed_data.match_duration`, `parsed_data.rank`
+- Confidence: one of `confidence_scores.overall_confidence`, `overall_confidence`, or `diagnostics.confidence_score` (normalized in proxy)
+- Diagnostics (optional): `parsing_warnings`, `ultimate_analysis.processing_time`, `ultimate_analysis.improvement_roadmap`
 
 ## Port Management & Troubleshooting
 
-### Kill Processes on Ports
-
 ```bash
-# Kill process on port 8000 (Backend)
-lsof -ti:8000 | xargs kill -9
+# Free ports
+lsof -ti:8000 | xargs kill -9 2>/dev/null || true
+lsof -ti:3000 | xargs kill -9 2>/dev/null || true
+lsof -ti:5173 | xargs kill -9 2>/dev/null || true
 
-# Kill process on port 5173 (Frontend - Vite default)
-lsof -ti:5173 | xargs kill -9
-
-# Kill process on port 3000 (Alternative frontend port)
-lsof -ti:3000 | xargs kill -9
-
-# Find what's running on a port
-lsof -i :8000
-```
-
-### Common Issues & Solutions
-
-#### Backend Issues
-
-```bash
-# Check if FastAPI is accessible
+# Backend docs
 curl http://localhost:8000/docs
 
-# Check Python path and imports
-python3 -c "import sys; print(sys.path)"
-python3 -c "from web.app import app; print('Import successful')"
-
-# Run with verbose logging
+# Verbose backend
 python3 -m uvicorn web.app:app --reload --port 8000 --log-level debug
+
+# Frontend recovery
+cd skillshift-ai/dashboard-ui-new && rm -rf node_modules package-lock.json && npm install
 ```
 
-#### Frontend Issues
+## Production Commands
 
 ```bash
-# Clear npm cache
-npm cache clean --force
+# Gunicorn + Uvicorn workers (recommended when health timeouts occur during heavy analysis)
+cd skillshift-ai && source venv/bin/activate
+gunicorn web.app:app -w 2 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
 
-# Reinstall dependencies
-rm -rf node_modules package-lock.json
-npm install
-
-# Check Vite config
-npm run build --verbose
+# Build frontend
+cd skillshift-ai/dashboard-ui-new && npm run build && npm run start
 ```
 
-#### OCR & Dependencies
+## Keep Health Responsive During Heavy Analysis
+
+If `/api/health` or `/api/health-isolated` time out while an analysis is running, the backend may be running a single worker with a CPU-bound request. Use multiple workers and raise the worker timeout beyond your worst-case analysis time:
 
 ```bash
-# Verify EasyOCR installation
-python3 -c "import easyocr; print('EasyOCR OK')"
+# Option 1: One-command script with gunicorn
+cd skillshift-ai
+FASTAPI_USE_GUNICORN=1 FASTAPI_WORKERS=2 FASTAPI_TIMEOUT=180 FRONTEND_PORT=3000 ./start_services.sh
 
-# Test image processing
-python3 -c "from PIL import Image; print('PIL OK')"
-
-# Check OpenCV
-python3 -c "import cv2; print('OpenCV OK')"
+# Option 2: Manually run gunicorn in one terminal and Next.js in another
+gunicorn web.app:app -w 2 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 --timeout 180 --graceful-timeout 30 --keep-alive 5
+# In another terminal
+cd dashboard-ui-new && PORT=3000 npm run dev
 ```
 
-## Testing Commands
+## Diagnostics Prompt
 
-### API Testing
+1. Specific issue, 2) Context, 3) Logs (FastAPI/Next.js), 4) Environment (Python/Node/OS/Browser).
 
-```bash
-# Test analysis endpoint
-curl -X POST http://localhost:8000/analyze \
-  -H "Content-Type: application/json" \
-  -d '{
-    "player_name": "Lesz XVII",
-    "hero": "Chou",
-    "kda": "5/2/8",
-    "damage": 67551,
-    "gpm": 450,
-    "match_duration": 12.5
-  }'
+Checklist:
 
-# Test health endpoint
-curl http://localhost:8000/health
-
-# Test with file upload
-curl -X POST http://localhost:8000/upload \
-  -F "file=@screenshot.png" \
-  -F "player_name=TestPlayer"
-```
-
-### Unit Testing
-
-```bash
-# Run all tests
-python3 -m pytest tests/ -v
-
-# Run specific test
-python3 -m pytest tests/test_data_collector.py -v
-
-# Run with coverage
-python3 -m pytest tests/ --cov=core --cov-report=html
-```
-
-## Performance Monitoring
-
-```bash
-# Monitor backend performance
-python3 test_performance_analyzer.py
-
-# Monitor API response times
-time curl -X POST http://localhost:8000/analyze -H "Content-Type: application/json" -d '{"player_name":"Test","hero":"Chou"}'
-
-# Check memory usage
-python3 -c "
-import psutil
-import os
-process = psutil.Process(os.getpid())
-print(f'Memory: {process.memory_info().rss / 1024 / 1024:.1f} MB')
-"
-```
-
-## Production Deployment
-
-```bash
-# Production server (Gunicorn)
-gunicorn web.app:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
-
-# Build frontend for production
-npm run build
-
-# Serve static files
-python3 -m http.server 3000 --directory dist
-```
-
-## Debugging Commands
-
-```bash
-# Debug screenshot analysis
-python3 debug_user_screenshots.py
-
-# Debug hero detection
-python3 debug_hero_detection.py
-
-# Debug counter pick system
-python3 debug_counter_pick_assistant.py
-
-# Generate validation report
-python3 test_comprehensive_validation.py
-```
-
-## 🚀 AUTOMATED STARTUP & RECOVERY
-
-### One-Command Startup
-
-```bash
-# Start both backend and frontend with health checking
-cd skillshift-ai && ./start_services.sh
-```
-
-### Backend Connection Issue Recovery
-
-```bash
-# Diagnose backend connection problems
-cd skillshift-ai && ./diagnose_backend.sh
-
-# Quick fix for "Backend Connection Issue" alerts:
-killall -9 python3 node  # Kill all processes
-cd skillshift-ai && ./start_services.sh  # Restart with health checks
-```
-
-### Frontend "Analyze Buttons Not Working" Fix
-
-The frontend disables analyze buttons when it can't reach the backend health endpoint.
-Fixed in latest version:
-
-- Added `/api/health` endpoint (frontend expects this)
-- Fallback to `/health` endpoint
-- Auto-reconnection logic
-- Manual "Reconnect Backend" button in UI
-
-## BEST ENGINEERING PROMPT
-
-I'm having this problem right now. Please do a full comprehensive step-by-step analysis of my codebase and identify the root cause:
-
-1. **Describe the specific issue** (error messages, unexpected behavior)
-2. **Provide context** (what you were trying to do, recent changes)
-3. **Include relevant logs** (FastAPI logs, browser console, Python traceback)
-4. **Specify environment** (Python version, OS, browser)
-
-### Quick Diagnostic Checklist
-
-- [ ] Virtual environment activated?
-- [ ] All dependencies installed?
-- [ ] Ports available (8000, 5173)?
-- [ ] Required files present in `data/` directory?
-- [ ] OCR libraries working?
-- [ ] API endpoints responding?
-- [ ] Frontend build successful?
-- [ ] **NEW**: Backend health endpoint responding? (`curl http://localhost:8000/api/health`)
-- [ ] **NEW**: Frontend showing "Backend Connection Issue"? (Use reconnect button)
+- [ ] Virtual environment activated (`skillshift-ai/venv`)
+- [ ] `.env` and `.env.local` configured
+- [ ] Health endpoints responding (`/api/health-isolated` preferred)
+- [ ] Ports free (8000, 3000, 5173)
+- [ ] Dependencies installed (Python + npm)
+- [ ] Frontend proxy configured to backend URL

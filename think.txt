@@ -1,0 +1,9 @@
+▌<think> I've analyzed the screenshot image [image 2532x1170 PNG] [image 2532x1170 PNG] on our Frontend. Unfortunately, I don't get the desired result, here's the json data
+▌that it output on Network preview Preview_Output/Preview_json.txt. This is the analysis Results image [image 1394x1360 PNG], and this is the coaching feedback image [image
+▌1298x1276 PNG]. There are couple of things you need to understand here based from the Analysis results: Performance Metrics: where it detect the wrong: KDA, GPM (N/A), Wrong
+▌Hero, and Role. I provide the actual info of the screenshot image on a text file Trial-Image/Image_Info.txt. Here's the terminal output: OCR_Output.txt.
+▌Plan 1: I want you to do a comprehensive step-by-step analysis our Project codebase before engaging into our current problem.
+▌Plan 2: Reflect your information that you've gathered from the our codebase towards our current problem and implement new features/fixes.
+▌Plan 3: Explain why you think those new features/fixes might helps to fix our current problem.
+▌Plan 4: Create a Back-up plan atleast 5-10 Todo list that you think might help, improve, and fix our problem in case if our First plan won't fix the issue.
+▌</think>

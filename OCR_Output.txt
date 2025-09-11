@@ -1,0 +1,182 @@
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [56351] using StatReload
+INFO:root:✅ Enhanced OCR processor available
+INFO:core.hero_database:Loaded 129 heroes from /Users/lesz/Documents/Project-AI/skillshift-ai/data/mlbb-heroes-corrected.json
+INFO:core.yolo_fallback:🔄 YOLOFallbackManager initialized
+INFO:core.yolo_fallback:📊 OCR threshold: 0.7, YOLO threshold: 0.5
+INFO:core.services.yolo_detection_service:✅ YOLOv8 model loaded from models/mlbb_yolo_best.pt
+INFO:core.services.yolo_detection_service:🔧 Device: cpu
+INFO:core.services.yolo_detection_service:📊 Confidence threshold: 0.5
+INFO:root:🚀 Enhanced MLBB parallel processing initialized with 2 workers (performance mode)
+WARNING:root:⚠️ Resource limits: max 60s timeout, 2 workers
+INFO:core.enhanced_data_collector:🎯 YOLO detection service initialized
+INFO:core.hero_database:Loaded 129 heroes from /Users/lesz/Documents/Project-AI/skillshift-ai/data/mlbb-heroes-corrected.json
+INFO:root:🚀 Enhanced MLBB parallel processing initialized with 2 workers (performance mode)
+WARNING:root:⚠️ Resource limits: max 60s timeout, 2 workers
+INFO:core.enhanced_data_collector:🎯 YOLO detection service initialized
+INFO:core.hero_database:Loaded 129 heroes from /Users/lesz/Documents/Project-AI/skillshift-ai/data/mlbb-heroes-corrected.json
+Loaded 30 heroes from meta data
+INFO:root:🚀 Enhanced MLBB parallel processing initialized with 2 workers (performance mode)
+WARNING:root:⚠️ Resource limits: max 60s timeout, 2 workers
+INFO:core.enhanced_data_collector:🎯 YOLO detection service initialized
+INFO:core.hero_database:Loaded 129 heroes from /Users/lesz/Documents/Project-AI/skillshift-ai/data/mlbb-heroes-corrected.json
+WARNING:root:Some imports not available: No module named 'joblib'
+INFO:core.ai_coach_v2:🧠 MLBB Behavioral Learning Engine initialized
+INFO:core.ai_coach_v2:📚 MLBB Knowledge Base initialized
+INFO:core.ai_coach_v2:   - Heroes: 5
+INFO:core.ai_coach_v2:   - Items: 4
+INFO:core.ai_coach_v2:   - Coaching templates: 4
+INFO:core.ai_coach_v2:🎓 Advanced MLBB Coaching Intelligence initialized
+INFO:core.ai_coach_v2:   - GPT-4 available: False
+INFO:core.ai_coach_v2:   - Behavioral learning: True
+INFO:core.ai_coach_v2:   - Personalization: True
+INFO:core.ai_coach_v2:   - Focus: Mobile Legends: Bang Bang specialization
+WARNING:root:Core imports not available: cannot import name 'AdvancedAICoachingIntelligence' from 'core.ai_coach_v2' (/Users/lesz/Documents/Project-AI/skillshift-ai/core/ai_coach_v2.py)
+✅ Unified error handlers registered
+🌐 Connecting to Redis Cloud: flexible-humpback-53551.upstash.io:6379
+ERROR:root:Redis connection failed: Error 8 connecting to flexible-humpback-53551.upstash.io:6379. nodename nor servname provided, or not known.
+❌ Redis connection failed: Error 8 connecting to flexible-humpback-53551.upstash.io:6379. nodename nor servname provided, or not known.
+💡 Tip: Make sure to set REDIS_URL and REDIS_TOKEN for Upstash Redis
+✅ Real-time analysis API enabled
+INFO:backend.ocr.hero_resolver:Advanced Hero Resolver initialized with 0 heroes
+✅ OCR v2 API enabled
+INFO:     Started server process [56353]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:52987 - "GET /api/health-isolated HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52988 - "GET /api/health-isolated HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52995 - "GET /api/health-isolated HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52998 - "GET /api/health-isolated HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53003 - "GET /api/health-isolated HTTP/1.1" 200 OK
+WARNING:core.enhanced_data_collector:Session f1753769-54d2-45fe-8fba-181ef6503581 not found; creating session with provided id
+INFO:core.session_manager:Created session with provided id f1753769-54d2-45fe-8fba-181ef6503581 for player Diary of dolls
+INFO:root:🔄 Initializing EasyOCR reader (one-time setup)...
+INFO:root:✅ OCR reader initialized in 1.578s
+/Users/lesz/Documents/Project-AI/.venv_codex/lib/python3.13/site-packages/torch/utils/data/dataloader.py:683: UserWarning: 'pin_memory' argument is set as true but not supported on MPS now, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+INFO:core.screenshot_analyzer:OCR text preview: 30 victory 29 duration 21.12 x 0 8 8 x & e .mx[youtuber ] 0 10 10 10623 11186 3 9 17 kylie. 15 317 616 45 blck sei kigami_ 7 6 11 15941 15089 15 2 4 makii mvp 15 8.5 40.6 15 tp 7   6 4 14761 11811 1  ...
+INFO:core.screenshot_analyzer:Screenshot type: scoreboard, confidence: 0.800, keywords: ['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Screenshot analysis: type=scoreboard, confidence=0.800, keywords=['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Starting PARALLEL enhanced analysis for scoreboard screenshot
+INFO:core.enhanced_data_collector:🔄 Phase 1: Sequential preprocessing...
+INFO:core.enhanced_data_collector:🔍 Processing MLBB screenshot: (1170, 2532, 3)
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+INFO:core.enhanced_data_collector:📊 Image quality score: 0.629
+INFO:core.enhanced_data_collector:🔹 Applying moderate MLBB preprocessing
+INFO:core.enhanced_data_collector:✅ Processed 5 regions with quality 0.629
+INFO:core.enhanced_data_collector:🔍 Processing MLBB screenshot: (1170, 2532, 3)
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+INFO:core.enhanced_data_collector:📊 Image quality score: 0.629
+INFO:core.enhanced_data_collector:🔹 Applying moderate MLBB preprocessing
+INFO:core.enhanced_data_collector:✅ Processed 5 regions with quality 0.629
+ERROR:core.enhanced_data_collector:Parallel OCR failed: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+INFO:core.enhanced_data_collector:🚀 Phase 2: Launching parallel analysis tasks...
+INFO:core.enhanced_data_collector:Using enhanced scoreboard parsing with anchor-based layout detection
+INFO:core.enhanced_data_collector:Attempting anchor-based parsing
+WARNING:core.enhanced_data_collector:No UI anchors detected, skipping anchor-based parsing
+INFO:core.enhanced_data_collector:Anchor-based parsing insufficient, trying enhanced row parsing
+INFO:core.enhanced_data_collector:🔄 Exact IGN not found, trying common variations
+INFO:core.enhanced_data_collector:📊 Phase 3: Collecting results...
+WARNING:core.enhanced_data_collector:IGN not found - trying fallback trophy detection strategies
+INFO:core.yolo_fallback:🎯 YOLOv8 fallback triggered: low_ocr_confidence
+INFO:core.services.yolo_detection_service:🎯 YOLO fallback triggered: low_ocr_confidence
+
+image 1/1 /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmpkym843wr.png: 320x640 2 golds, 1 hero_enemy, 1 medal_silver, 1 outcome_banner, 1 player_name, 59.6ms
+Speed: 1.8ms preprocess, 59.6ms inference, 10.6ms postprocess per image at shape (1, 3, 320, 640)
+INFO:core.services.yolo_detection_service:🎯 YOLO detection completed: 1 objects in 0.446s
+/Users/lesz/Documents/Project-AI/.venv_codex/lib/python3.13/site-packages/torch/utils/data/dataloader.py:683: UserWarning: 'pin_memory' argument is set as true but not supported on MPS now, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+INFO:core.enhanced_data_collector:Enhanced row parsing insufficient, trying fallback strategy
+INFO:core.enhanced_data_collector:Applying fallback parsing strategy
+WARNING:core.enhanced_data_collector:All parsing strategies failed
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.trophy_medal_detector_v3:🏆 MVP crown detected with confidence 99.6% (threshold: 77.0%)
+INFO:core.trophy_medal_detector_v3:Enhanced debug visualization saved: temp/debug_v3/mvp_crown_v3_1757617352_detection.png
+INFO:core.enhanced_data_collector:🎯 Fallback trophy at Y=468.0: mvp_crown (conf: 99.6%)
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.enhanced_data_collector:📊 Fallback analysis: 11 attempts, best confidence: 0.996
+INFO:core.enhanced_data_collector:🚀 Enhanced confidence boost: 0.996 → 1.000 (consensus: 1/1, ratio: 100.0%)
+INFO:core.enhanced_data_collector:✅ Fallback trophy detection successful: mvp_crown
+INFO:core.enhanced_data_collector:Parsed data sparse for scoreboard; trying stats_page parser fallback
+INFO:core.enhanced_data_collector:Using enhanced stats page parsing
+INFO:core.enhanced_data_collector:🔗 Phase 5: Combining results...
+INFO:core.enhanced_data_collector:Final data after safe defaults: {'kills': None, 'deaths': None, 'assists': None, 'gold': None, 'hero_damage': None, 'teamfight_participation': None}
+INFO:core.enhanced_data_collector:✅ Parallel analysis complete in 37.142s
+INFO:core.enhanced_data_collector:📈 Parallel stats: {'max_workers': 2, 'active_tasks': 3, 'completed_tasks': 0, 'failed_tasks': 0, 'success_rate': 0.0}
+INFO:core.session_manager:Added scoreboard analysis to session f1753769-54d2-45fe-8fba-181ef6503581. Total screenshots: 1
+INFO:     127.0.0.1:53005 - "POST /api/analyze?ign=Diary+of+dolls&session_id=f1753769-54d2-45fe-8fba-181ef6503581&hero_override=Kagura HTTP/1.1" 200 OK
+INFO:core.enhanced_data_collector:Reusing existing session f1753769-54d2-45fe-8fba-181ef6503581 with 1 screenshots
+INFO:core.screenshot_analyzer:OCR text preview: 30 victory 29 duration 21:12 hero turret damage teamfight hero turret damage teamfight damage damage taken participation damage damage taken participation e .mx[youtuber ] kylie. 13482 520 140289 2513...
+INFO:core.screenshot_analyzer:Screenshot type: stats_page, confidence: 0.850, keywords: ['turret damage', 'damage taken', 'equipment']
+INFO:core.enhanced_data_collector:Screenshot analysis: type=stats_page, confidence=0.850, keywords=['turret damage', 'damage taken', 'equipment']
+INFO:core.enhanced_data_collector:Starting PARALLEL enhanced analysis for stats_page screenshot
+INFO:core.enhanced_data_collector:🔄 Phase 1: Sequential preprocessing...
+INFO:core.enhanced_data_collector:🔍 Processing MLBB screenshot: (1170, 2532, 3)
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.311 (weight: 0.25)
+  Contrast:   0.372 (weight: 0.20)
+  Brightness: 0.630 (weight: 0.20)
+  Noise:      0.842 (weight: 0.20)
+  FINAL:      0.597
+INFO:core.enhanced_data_collector:📊 Image quality score: 0.597
+INFO:core.enhanced_data_collector:🔹 Applying moderate MLBB preprocessing
+INFO:core.enhanced_data_collector:✅ Processed 5 regions with quality 0.597
+INFO:core.enhanced_data_collector:🔍 Processing MLBB screenshot: (1170, 2532, 3)
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.311 (weight: 0.25)
+  Contrast:   0.372 (weight: 0.20)
+  Brightness: 0.630 (weight: 0.20)
+  Noise:      0.842 (weight: 0.20)
+  FINAL:      0.597
+INFO:core.enhanced_data_collector:📊 Image quality score: 0.597
+INFO:core.enhanced_data_collector:🔹 Applying moderate MLBB preprocessing
+INFO:core.enhanced_data_collector:✅ Processed 5 regions with quality 0.597
+ERROR:core.enhanced_data_collector:Parallel OCR failed: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+INFO:core.enhanced_data_collector:🚀 Phase 2: Launching parallel analysis tasks...
+INFO:core.enhanced_data_collector:🔄 Exact IGN not found, trying common variations
+WARNING:core.enhanced_data_collector:IGN not found - trying fallback trophy detection strategies
+INFO:core.enhanced_data_collector:Using enhanced stats page parsing
+INFO:core.enhanced_data_collector:📊 Phase 3: Collecting results...
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.enhanced_data_collector:Parallel analysis tasks timed out
+INFO:core.enhanced_data_collector:🔗 Phase 5: Combining results...
+INFO:core.enhanced_data_collector:Final data after safe defaults: {'kills': None, 'deaths': None, 'assists': None, 'gold': None, 'hero_damage': None, 'teamfight_participation': None}
+INFO:core.enhanced_data_collector:✅ Parallel analysis complete in 48.396s
+INFO:core.enhanced_data_collector:📈 Parallel stats: {'max_workers': 2, 'active_tasks': 6, 'completed_tasks': 0, 'failed_tasks': 0, 'success_rate': 0.0}
+INFO:core.session_manager:Added stats_page analysis to session f1753769-54d2-45fe-8fba-181ef6503581. Total screenshots: 2
+INFO:     127.0.0.1:53012 - "POST /api/analyze?ign=Diary+of+dolls&session_id=f1753769-54d2-45fe-8fba-181ef6503581&hero_override=Kagura HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53028 - "GET /api/health-isolated HTTP/1.1" 200 OK
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.enhanced_data_collector:📊 Fallback analysis: 11 attempts, best confidence: 0.000
+WARNING:core.enhanced_data_collector:All fallback trophy detection strategies failed

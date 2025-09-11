@@ -1,0 +1,130 @@
+INFO:core.ultimate_parsing_system:🚀 Ultimate analysis started: /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmp77nhaymc.png
+INFO:core.ultimate_parsing_system:Target: 95-100% confidence | Context: scoreboard
+INFO:core.ultimate_parsing_system:🔍 Stage 1: Advanced Quality Validation
+INFO:core.advanced_quality_validator:Quality assessment: 0.742, acceptable: False
+WARNING:core.ultimate_parsing_system:⚠️ Quality below threshold: 0.7% < 85.0%
+INFO:core.ultimate_parsing_system:🎯 Stage 2: YOLO Visual Intelligence Enhancement
+INFO:core.services.yolo_detection_service:🚫 YOLO fallback not triggered (OCR confidence: 0.80)
+INFO:core.ultimate_parsing_system:📊 Stage 3: Basic Data Extraction
+INFO:core.session_manager:Created new session 48c2a82b-defc-4e72-a587-476451204f75 for player Diary of dolls
+INFO:core.enhanced_data_collector:Created new session 48c2a82b-defc-4e72-a587-476451204f75
+INFO:root:🔄 Initializing EasyOCR reader (one-time setup)...
+INFO:root:✅ OCR reader initialized in 1.605s
+Quick health check failed, trying basic endpoint...
+ERROR:core.screenshot_analyzer:Error analyzing screenshot type: module 'PIL.Image' has no attribute 'ANTIALIAS'
+INFO:core.enhanced_data_collector:Screenshot analysis: type=unknown, confidence=0.000, keywords=[]
+INFO:core.enhanced_data_collector:Starting PARALLEL enhanced analysis for unknown screenshot
+INFO:core.enhanced_data_collector:🚀 Phase 1: Launching parallel preprocessing tasks...
+INFO:core.enhanced_data_collector:⏳ Phase 2: Waiting for preprocessing and OCR...
+🔍 DEBUG: Original image shape: (1170, 2532, 3)
+🔍 DEBUG: Original image shape: (1170, 2532, 3)
+🔍 DEBUG: Original image path: /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmp77nhaymc.png
+🔍 DEBUG: Original image path: /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmp77nhaymc.png
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.311 (weight: 0.25)
+  Contrast:   0.372 (weight: 0.20)
+  Brightness: 0.630 (weight: 0.20)
+  Noise:      0.842 (weight: 0.20)
+  FINAL:      0.597
+🔍 DEBUG: Image quality score: 0.597
+🔍 DEBUG: Processing type: moderate
+INFO:core.enhanced_data_collector:Image quality score: 0.597
+🔍 DEBUG: Applying MODERATE preprocessing (grayscale + denoising)
+INFO:core.enhanced_data_collector:Medium quality image detected - using moderate preprocessing
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.311 (weight: 0.25)
+  Contrast:   0.372 (weight: 0.20)
+  Brightness: 0.630 (weight: 0.20)
+  Noise:      0.842 (weight: 0.20)
+  FINAL:      0.597
+🔍 DEBUG: Image quality score: 0.597
+🔍 DEBUG: Processing type: moderate
+INFO:core.enhanced_data_collector:Image quality score: 0.597
+🔍 DEBUG: Applying MODERATE preprocessing (grayscale + denoising)
+INFO:core.enhanced_data_collector:Medium quality image detected - using moderate preprocessing
+INFO:core.enhanced_data_collector:Moderate preprocessed image saved to: temp/enhanced_preprocessed_image.png
+INFO:core.enhanced_data_collector:Moderate preprocessed image saved to: temp/enhanced_preprocessed_image.png
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13318ms
+Quick health check failed, trying basic endpoint...
+ERROR:core.enhanced_data_collector:Parallel OCR failed: module 'PIL.Image' has no attribute 'ANTIALIAS'
+INFO:core.enhanced_data_collector:🔄 Phase 3: Launching dependent analysis tasks...
+INFO:core.enhanced_data_collector:📊 Phase 4: Collecting results...
+INFO:core.enhanced_data_collector:🔄 Exact IGN not found, trying common variations
+INFO:core.enhanced_data_collector:Using enhanced stats page parsing
+WARNING:core.enhanced_data_collector:IGN not found - trying fallback trophy detection strategies
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13051ms
+Quick health check failed, trying basic endpoint...
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13056ms
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+Quick health check failed, trying basic endpoint...
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13023ms
+WARNING:core.enhanced_data_collector:Parallel analysis tasks timed out
+INFO:core.enhanced_data_collector:🔗 Phase 5: Combining results...
+INFO:core.enhanced_data_collector:Final data after defaults: {'hero': 'unknown', 'kills': 0, 'deaths': 1, 'assists': 0, 'gold': 0, 'hero_damage': 0}
+INFO:core.enhanced_data_collector:✅ Parallel analysis complete in 36.764s
+INFO:core.enhanced_data_collector:📈 Parallel stats: {'max_workers': 8, 'active_tasks': 6, 'completed_tasks': 0, 'failed_tasks': 0, 'success_rate': 0.0}
+INFO:core.session_manager:Added unknown analysis to session 48c2a82b-defc-4e72-a587-476451204f75. Total screenshots: 1
+INFO:core.ultimate_parsing_system:🎯 Stage 4: Premium Hero Detection
+Quick health check failed, trying basic endpoint...
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13039ms
+Quick health check failed, trying basic endpoint...
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13156ms
+ERROR:core.premium_hero_detector:Enhanced text analysis failed: module 'PIL.Image' has no attribute 'ANTIALIAS'
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+Quick health check failed, trying basic endpoint...
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13058ms
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+Quick health check failed, trying basic endpoint...
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13188ms
+ERROR:core.premium_hero_detector:Bounding box cropping failed: module 'PIL.Image' has no attribute 'ANTIALIAS'
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+Quick health check failed, trying basic endpoint...
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13097ms
+ERROR:core.premium_hero_detector:OCR normalization failed: module 'PIL.Image' has no attribute 'ANTIALIAS'
+Quick health check failed, trying basic endpoint...
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.enhanced_data_collector:📊 Fallback analysis: 11 attempts, best confidence: 0.000
+WARNING:core.enhanced_data_collector:All fallback trophy detection strategies failed
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13052ms
+ERROR:core.premium_hero_detector:Advanced fuzzy matching failed: module 'PIL.Image' has no attribute 'ANTIALIAS'
+Analysis endpoint timed out, this should not happen with instant endpoint
+Analysis API error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ POST /api/analyze 500 in 120466ms
+Analysis endpoint timed out, this should not happen with instant endpoint
+Analysis API error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ POST /api/analyze 500 in 120481ms
+Quick health check failed, trying basic endpoint...
+ERROR:core.premium_hero_detector:Token matching failed: module 'PIL.Image' has no attribute 'ANTIALIAS'
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 13031ms
+ERROR:core.premium_hero_detector:Character similarity failed: module 'PIL.Image' has no attribute 'ANTIALIAS'
+INFO:core.ultimate_parsing_system:🧠 Stage 5: Intelligent Data Completion
+INFO:core.intelligent_data_completer:Data completion: 60.7% complete, 94.0% confidence
+INFO:core.ultimate_parsing_system:⭐ Stage 6: Elite Confidence Scoring
+WARNING:core.ultimate_parsing_system:⚠️ Elite confidence scorer division by zero: float division by zero
+INFO:core.ultimate_parsing_system:🔧 Using fallback confidence calculation based on data completeness
+INFO:core.ultimate_parsing_system:🔧 Fallback confidence: 40.3% (data_quality: 20.0%, completeness: 60.7%)
+INFO:core.ultimate_parsing_system:🔧 Stage 7: Adaptive Optimization
+INFO:core.ultimate_parsing_system:🎨 Stage 8: Final Assembly and Validation
+INFO:core.ultimate_parsing_system:📊 Performance logged: {'timestamp': 1757344938.994349, 'overall_confidence': 42.333333333333336, 'category': 'unreliable', 'processing_time': 130.55982303619385, 'component_scores': {'data_completeness': 0.2, 'system_reliability': 0.8}, 'completeness_score': 60.66666666666667, 'quality_score': 0.7415840545869335, 'hero_confidence': 0.0, 'success_factors_count': 0}
+INFO:core.ultimate_parsing_system:✅ Ultimate analysis complete: 42.3% confidence
+INFO:core.ultimate_parsing_system:📈 Category: UNRELIABLE
+INFO:core.ultimate_parsing_system:⏱️ Processing time: 130.56s

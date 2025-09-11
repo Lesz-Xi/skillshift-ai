@@ -1,0 +1,60 @@
+lesz@Xi dashboard-ui-new % npm run dev
+
+> my-v0-project@0.1.0 dev
+> next dev
+
+ ⚠ Port 3000 is in use, trying 3001 instead.
+   ▲ Next.js 15.2.4
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.254.100:3001
+
+ ✓ Starting...
+ ✓ Ready in 1233ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1041ms (719 modules)
+ GET / 200 in 1249ms
+ ✓ Compiled in 69ms (344 modules)
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 1230ms (2997 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /dashboard 200 in 1241ms
+ GET / 200 in 47ms
+ GET /dashboard 200 in 88ms
+ ✓ Compiled /_not-found in 282ms (3001 modules)
+ GET /avatars/frost_mage.png 404 in 378ms
+ GET /avatars/cyber_ninja.png 404 in 377ms
+ GET /avatars/lightning_bolt.png 404 in 379ms
+ GET /avatars/shadow_striker.png 404 in 382ms
+ ✓ Compiled /api/health in 267ms (3055 modules)
+ GET /api/health 200 in 331ms
+ GET /api/health 200 in 332ms
+ GET /api/health 200 in 15ms
+ GET /api/health 200 in 17ms
+ ✓ Compiled /api/analyze in 300ms (3117 modules)
+Quick health check failed, trying isolated endpoint...
+Isolated endpoint failed, trying basic endpoint...
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 6560ms
+Quick health check failed, trying isolated endpoint...
+Isolated endpoint failed, trying basic endpoint...
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 6556ms
+ POST /api/analyze 200 in 30099ms
+ POST /api/analyze 200 in 30097ms
+Quick health check failed, trying isolated endpoint...
+Isolated endpoint failed, trying basic endpoint...
+Health check error: [AbortError: The operation was aborted.] { type: 'aborted' }
+ GET /api/health 503 in 6541ms
+Analysis endpoint timed out, this should not happen with instant endpoint
+Analysis API error: [FetchError: request to http://localhost:8000/api/analyze?ign=Diary%20off%20dolls failed, reason: socket hang up] {
+  type: 'system',
+  errno: 'ECONNRESET',
+  code: 'ECONNRESET',
+  erroredSysCall: undefined
+}
+Analysis endpoint timed out, this should not happen with instant endpoint
+Analysis API error: [FetchError: request to http://localhost:8000/api/analyze?ign=Diary%20off%20dolls failed, reason: socket hang up] {
+  type: 'system',
+  errno: 'ECONNRESET',
+  code: 'ECONNRESET',
+  erroredSysCall: undefined

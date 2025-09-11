@@ -1,0 +1,15 @@
+Root cause
+
+Single-process, single-worker dev server blocks while doing CPU-heavy work. Even the “isolated” health endpoint needs a free worker to respond.
+
+Root cause found and fixed. You had two separate issues causing the “Bad Gateway” and analysis failure.
+
+What happened
+
+Backend schema mismatch → 502 from Next.js
+Your Next.js proxy requires backend analysis responses to include either parsed_data or match_data.
+The FastAPI /api/analyze endpoint was returning an “enhanced_fast” shape without match_data, so the proxy rejected it and returned 502.
+Evidence: Trial-4 shows “Invalid backend response structure” and prints a payload that lacks match_data.
+Runtime exception in analysis → degraded payload
+In parallel analysis, validated_ign was used before assignment, throwing: “cannot access local variable 'validated_ign' where it is not associated with a value”.
+That error path produced a minimal error response (also lacking match_data), which further triggered the proxy’s 502.

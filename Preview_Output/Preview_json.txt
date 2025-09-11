@@ -1,0 +1,118 @@
+{
+    "success": true,
+    "message": "Analysis completed successfully",
+    "analysis": {
+        "statistical_feedback": [
+            {
+                "message": "🎯 Welcome to your coaching journey! This analysis reveals your baseline gameplay DNA.",
+                "severity": "info",
+                "category": "experience_intro"
+            },
+            {
+                "message": "Low assists (0). As Mathilda, you should be in every team fight providing support.",
+                "severity": "info",
+                "category": "coaching"
+            },
+            {
+                "message": "Excellent survivability (1 deaths). You're mastering Mathilda's mobility and positioning!",
+                "severity": "info",
+                "category": "coaching"
+            },
+            {
+                "message": "Low damage output (0). Mathilda can deal significant damage - work on your positioning and combos.",
+                "severity": "info",
+                "category": "coaching"
+            },
+            {
+                "message": "Low damage taken (0). You might be playing too passively - get closer to support your team.",
+                "severity": "info",
+                "category": "coaching"
+            },
+            {
+                "message": "Low KDA (0.0). Focus on staying alive to provide continuous support.",
+                "severity": "info",
+                "category": "coaching"
+            },
+            {
+                "message": "Low teamfight participation (0%). Mathilda should be in most team engagements.",
+                "severity": "info",
+                "category": "coaching"
+            },
+            {
+                "message": "Low GPM (0). Consider roaming more efficiently and securing assists.",
+                "severity": "info",
+                "category": "coaching"
+            },
+            {
+                "message": "Mathilda Tips: Use your S1 to scout and escape, combo S2+S1 for engage/disengage, and time your ultimate perfectly to turn team fights around!",
+                "severity": "info",
+                "category": "coaching"
+            },
+            {
+                "message": "Focus on roaming more! Mathilda excels at rotating between lanes and helping teammates. Use your mobility to be everywhere your team needs support.",
+                "severity": "info",
+                "category": "coaching"
+            }
+        ],
+        "mental_feedback": "🧠 First Revelation: \n\n🎯 This is just the beginning. Your gameplay patterns show adaptive potential - your style is emerging. Ready to go deeper?",
+        "performance": {
+            "hero": "mathilda",
+            "kda": "0/1/0",
+            "damage": "N/A",
+            "gpm": "N/A",
+            "match_duration": 10,
+            "rank": "Unknown",
+            "role": "tank"
+        },
+        "quality": {
+            "overall_confidence": 42.333333333333336,
+            "confidence_category": "low",
+            "component_scores": {},
+            "warnings": [
+                "Some parallel tasks timed out",
+                "Low data completeness: 28.0%"
+            ],
+            "data_validation_passed": true
+        },
+        "insights": {
+            "processing_time": 0,
+            "success_factors": [],
+            "improvement_roadmap": [],
+            "data_completeness": 0.27999999999999997,
+            "experience_progression": {
+                "stage": "first_upload",
+                "insights_unlocked": 10,
+                "personality_hint": "adaptive potential - your style is emerging",
+                "mastery_indicators": []
+            }
+        }
+    },
+    "experience": {
+        "stage": "first_upload",
+        "stage_config": {
+            "anticipationMessage": "🧠 Decoding your first gameplay DNA...",
+            "revelationPrefix": "🎯 Your gameplay soul revealed:",
+            "focusAreas": [
+                "mvp_detection",
+                "basic_performance",
+                "potential_discovery"
+            ]
+        },
+        "progression_detected": false,
+        "unlocked_features": [],
+        "next_invitation": {
+            "title": "🧠 Want to understand your tactical mind?",
+            "subtitle": "Upload another match to reveal how your gameplay adapts under different conditions.",
+            "cta": "Continue Discovery"
+        }
+    },
+    "metadata": {
+        "ign": "Diary of dolls",
+        "analysisType": "general",
+        "filename": "IMG_1768.PNG",
+        "fileSize": 2158565,
+        "timestamp": "2025-09-09T16:40:38.925Z",
+        "backend_url": "http://localhost:8000",
+        "experienceStage": "first_upload"
+    }
+}

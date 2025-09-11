@@ -1,0 +1,503 @@
+INFO:root:✅ OCR reader initialized in 1.538s
+/Users/lesz/Documents/Project-AI/skillshift-ai/venv/lib/python3.13/site-packages/torch/utils/data/dataloader.py:683: UserWarning: 'pin_memory' argument is set as true but not supported on MPS now, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+INFO:core.screenshot_analyzer:OCR text preview: 30 victory 29 duration 21.12 x 0 8 8 x & e .mx[youtuber ] 0 10 10 10623 11186 3 9 17 kylie. 15 317 616 45 blck sei kigami_ 7 6 11 15941 15089 15 2 4 makii mvp 15 8.5 40.6 15 tp 7   6 4 14761 11811 1  ...
+INFO:core.screenshot_analyzer:Screenshot type: scoreboard, confidence: 0.800, keywords: ['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Screenshot analysis: type=scoreboard, confidence=0.800, keywords=['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Starting PARALLEL enhanced analysis for scoreboard screenshot
+INFO:core.enhanced_data_collector:🔄 Phase 1: Sequential preprocessing...
+INFO:core.enhanced_data_collector:🔍 Processing MLBB screenshot: (1170, 2532, 3)
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+INFO:core.enhanced_data_collector:📊 Image quality score: 0.629
+INFO:core.enhanced_data_collector:🔹 Applying moderate MLBB preprocessing
+INFO:core.enhanced_data_collector:✅ Processed 5 regions with quality 0.629
+INFO:core.enhanced_data_collector:🔍 Processing MLBB screenshot: (1170, 2532, 3)
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+INFO:core.enhanced_data_collector:📊 Image quality score: 0.629
+INFO:core.enhanced_data_collector:🔹 Applying moderate MLBB preprocessing
+INFO:core.enhanced_data_collector:✅ Processed 5 regions with quality 0.629
+ERROR:core.enhanced_data_collector:Parallel OCR failed: Invalid input type. Supporting format = string(file path or url), bytes, numpy array
+INFO:core.enhanced_data_collector:🚀 Phase 2: Launching parallel analysis tasks...
+INFO:core.enhanced_data_collector:Using enhanced scoreboard parsing with anchor-based layout detection
+INFO:core.enhanced_data_collector:Attempting anchor-based parsing
+WARNING:core.enhanced_data_collector:No UI anchors detected, skipping anchor-based parsing
+INFO:core.enhanced_data_collector:Anchor-based parsing insufficient, trying enhanced row parsing
+INFO:core.enhanced_data_collector:Enhanced row parsing insufficient, trying fallback strategy
+INFO:core.enhanced_data_collector:Applying fallback parsing strategy
+WARNING:core.enhanced_data_collector:All parsing strategies failed
+INFO:core.enhanced_data_collector:🔄 Exact IGN not found, trying common variations
+WARNING:core.enhanced_data_collector:IGN not found - trying fallback trophy detection strategies
+INFO:core.enhanced_data_collector:📊 Phase 3: Collecting results...
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.trophy_medal_detector_v3:🏆 MVP crown detected with confidence 99.6% (threshold: 77.0%)
+INFO:core.trophy_medal_detector_v3:Enhanced debug visualization saved: temp/debug_v3/mvp_crown_v3_1757389130_detection.png
+INFO:core.enhanced_data_collector:🎯 Fallback trophy at Y=468.0: mvp_crown (conf: 99.6%)
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '30 VICTORY 29 Duration 21.12 X 0 8 8 X & E .Mx[YOUTUBER ] 0 10 10 10623 11186 3 9 17 Kylie. 15 317 616 45 BLCK sei kigami_ 7 6 11 15941 15089 15 2 4 Makii MVP 15 8.5 40.6 15 TP 7   6 4 14761 11811 1  5 9 der. 15 616 517 15 HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav MP 15 10.5 712 Kento Kento Kento 7 5 5 16434 13545 3 6 18 Elysian Gracehaven 15 619 8.1 15 BattlelD 858921223897853062 Data Quit HiRyx'
+WARNING:core.hero_identifier:Could not identify hero from text: 'VICTORY'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Duration 21.12'
+WARNING:core.hero_identifier:Could not identify hero from text: 'X 0'
+WARNING:core.hero_identifier:Could not identify hero from text: 'X &'
+WARNING:core.hero_identifier:Could not identify hero from text: 'E .Mx[YOUTUBER ]'
+WARNING:core.hero_identifier:Could not identify hero from text: '10 10'
+WARNING:core.hero_identifier:Could not identify hero from text: '10623'
+WARNING:core.hero_identifier:Could not identify hero from text: '11186'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kylie.'
+INFO:core.hero_identifier:Hero identified by fuzzy match: edith (confidence: 0.860)
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BLCK sei kigami_'
+WARNING:core.hero_identifier:Could not identify hero from text: '15941'
+WARNING:core.hero_identifier:Could not identify hero from text: '15089'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Makii'
+WARNING:core.hero_identifier:Could not identify hero from text: 'MVP'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '40.6'
+WARNING:core.hero_identifier:Could not identify hero from text: '7   6 4'
+WARNING:core.hero_identifier:Could not identify hero from text: '14761'
+WARNING:core.hero_identifier:Could not identify hero from text: '11811'
+WARNING:core.hero_identifier:Could not identify hero from text: '1  5'
+WARNING:core.hero_identifier:Could not identify hero from text: 'der.'
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: '517'
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls'
+WARNING:core.hero_identifier:Could not identify hero from text: '12374'
+WARNING:core.hero_identifier:Could not identify hero from text: '15435'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '10.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '712'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kento Kento Kento 7'
+WARNING:core.hero_identifier:Could not identify hero from text: '16434'
+WARNING:core.hero_identifier:Could not identify hero from text: '13545'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Elysian Gracehaven'
+WARNING:core.hero_identifier:Could not identify hero from text: '619'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.1'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BattlelD'
+WARNING:core.hero_identifier:Could not identify hero from text: '858921223897853062'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Data'
+INFO:core.hero_identifier:Hero identified by fuzzy match: paquito (confidence: 0.800)
+WARNING:core.hero_identifier:Could not identify hero from text: 'HiRyx'
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.enhanced_data_collector:📊 Fallback analysis: 11 attempts, best confidence: 0.996
+INFO:core.enhanced_data_collector:🚀 Enhanced confidence boost: 0.996 → 1.000 (consensus: 1/1, ratio: 100.0%)
+INFO:core.enhanced_data_collector:✅ Fallback trophy detection successful: mvp_crown
+INFO:core.enhanced_data_collector:Parsed data sparse for scoreboard; trying stats_page parser fallback
+INFO:core.enhanced_data_collector:Using enhanced stats page parsing
+INFO:core.enhanced_data_collector:🔗 Phase 5: Combining results...
+INFO:core.enhanced_data_collector:Final data after defaults: {'hero': 'edith', 'kills': 0, 'deaths': 1, 'assists': 0, 'gold': 0, 'hero_damage': 0}
+INFO:core.enhanced_data_collector:✅ Parallel analysis complete in 44.522s
+INFO:core.enhanced_data_collector:📈 Parallel stats: {'max_workers': 6, 'active_tasks': 4, 'completed_tasks': 0, 'failed_tasks': 0, 'success_rate': 0.0}
+INFO:core.session_manager:Added scoreboard analysis to session c23b5dff-f25f-46bd-b793-66878c440d6c. Total screenshots: 1
+INFO:core.ultimate_parsing_system:🚀 Ultimate analysis started: /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmp5lb7po96.png
+INFO:core.ultimate_parsing_system:Target: 95-100% confidence | Context: scoreboard
+INFO:core.ultimate_parsing_system:🔍 Stage 1: Advanced Quality Validation
+INFO:core.advanced_quality_validator:Quality assessment: 0.745, acceptable: False
+WARNING:core.ultimate_parsing_system:⚠️ Quality below threshold: 0.7% < 85.0%
+INFO:core.ultimate_parsing_system:🎯 Stage 2: YOLO Visual Intelligence Enhancement
+INFO:core.services.yolo_detection_service:🚫 YOLO fallback not triggered (OCR confidence: 0.80)
+INFO:core.ultimate_parsing_system:📊 Stage 3: Basic Data Extraction
+INFO:core.session_manager:Created new session 22e76dc4-7324-4c38-8cac-ef0bde1444b6 for player Diary of dolls
+INFO:core.enhanced_data_collector:Created new session 22e76dc4-7324-4c38-8cac-ef0bde1444b6
+INFO:core.screenshot_analyzer:OCR text preview: 30 victory 29 duration 21.12 x 0 8 8 x & e .mx[youtuber ] 0 10 10 10623 11186 3 9 17 kylie. 15 317 616 45 blck sei kigami_ 7 6 11 15941 15089 15 2 4 makii mvp 15 8.5 40.6 15 tp 7   6 4 14761 11811 1  ...
+INFO:core.screenshot_analyzer:Screenshot type: scoreboard, confidence: 0.800, keywords: ['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Screenshot analysis: type=scoreboard, confidence=0.800, keywords=['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Starting PARALLEL enhanced analysis for scoreboard screenshot
+INFO:core.enhanced_data_collector:🔄 Phase 1: Sequential preprocessing...
+INFO:core.enhanced_data_collector:🔍 Processing MLBB screenshot: (1170, 2532, 3)
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+INFO:core.enhanced_data_collector:📊 Image quality score: 0.629
+INFO:core.enhanced_data_collector:🔹 Applying moderate MLBB preprocessing
+INFO:core.enhanced_data_collector:✅ Processed 5 regions with quality 0.629
+INFO:core.enhanced_data_collector:🔍 Processing MLBB screenshot: (1170, 2532, 3)
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+INFO:core.enhanced_data_collector:📊 Image quality score: 0.629
+INFO:core.enhanced_data_collector:🔹 Applying moderate MLBB preprocessing
+INFO:core.enhanced_data_collector:✅ Processed 5 regions with quality 0.629
+ERROR:core.enhanced_data_collector:Parallel OCR failed: Invalid input type. Supporting format = string(file path or url), bytes, numpy array
+INFO:core.enhanced_data_collector:🚀 Phase 2: Launching parallel analysis tasks...
+INFO:core.enhanced_data_collector:🔄 Exact IGN not found, trying common variations
+WARNING:core.enhanced_data_collector:IGN not found - trying fallback trophy detection strategies
+INFO:core.enhanced_data_collector:Using enhanced scoreboard parsing with anchor-based layout detection
+INFO:core.enhanced_data_collector:Attempting anchor-based parsing
+WARNING:core.enhanced_data_collector:No UI anchors detected, skipping anchor-based parsing
+INFO:core.enhanced_data_collector:Anchor-based parsing insufficient, trying enhanced row parsing
+INFO:core.enhanced_data_collector:Enhanced row parsing insufficient, trying fallback strategy
+INFO:core.enhanced_data_collector:Applying fallback parsing strategy
+WARNING:core.enhanced_data_collector:All parsing strategies failed
+INFO:core.enhanced_data_collector:📊 Phase 3: Collecting results...
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.trophy_medal_detector_v3:🏆 MVP crown detected with confidence 99.6% (threshold: 77.0%)
+INFO:core.trophy_medal_detector_v3:Enhanced debug visualization saved: temp/debug_v3/mvp_crown_v3_1757389181_detection.png
+INFO:core.enhanced_data_collector:🎯 Fallback trophy at Y=468.0: mvp_crown (conf: 99.6%)
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '30 VICTORY 29 Duration 21.12 X 0 8 8 X & E .Mx[YOUTUBER ] 0 10 10 10623 11186 3 9 17 Kylie. 15 317 616 45 BLCK sei kigami_ 7 6 11 15941 15089 15 2 4 Makii MVP 15 8.5 40.6 15 TP 7   6 4 14761 11811 1  5 9 der. 15 616 517 15 HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav MP 15 10.5 712 Kento Kento Kento 7 5 5 16434 13545 3 6 18 Elysian Gracehaven 15 619 8.1 15 BattlelD 858921223897853062 Data Quit HiRyx'
+WARNING:core.hero_identifier:Could not identify hero from text: 'VICTORY'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Duration 21.12'
+WARNING:core.hero_identifier:Could not identify hero from text: 'X 0'
+WARNING:core.hero_identifier:Could not identify hero from text: 'X &'
+WARNING:core.hero_identifier:Could not identify hero from text: 'E .Mx[YOUTUBER ]'
+WARNING:core.hero_identifier:Could not identify hero from text: '10 10'
+WARNING:core.hero_identifier:Could not identify hero from text: '10623'
+WARNING:core.hero_identifier:Could not identify hero from text: '11186'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kylie.'
+INFO:core.hero_identifier:Hero identified by fuzzy match: edith (confidence: 0.860)
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BLCK sei kigami_'
+WARNING:core.hero_identifier:Could not identify hero from text: '15941'
+WARNING:core.hero_identifier:Could not identify hero from text: '15089'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Makii'
+WARNING:core.hero_identifier:Could not identify hero from text: 'MVP'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '40.6'
+WARNING:core.hero_identifier:Could not identify hero from text: '7   6 4'
+WARNING:core.hero_identifier:Could not identify hero from text: '14761'
+WARNING:core.hero_identifier:Could not identify hero from text: '11811'
+WARNING:core.hero_identifier:Could not identify hero from text: '1  5'
+WARNING:core.hero_identifier:Could not identify hero from text: 'der.'
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: '517'
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls'
+WARNING:core.hero_identifier:Could not identify hero from text: '12374'
+WARNING:core.hero_identifier:Could not identify hero from text: '15435'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '10.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '712'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kento Kento Kento 7'
+WARNING:core.hero_identifier:Could not identify hero from text: '16434'
+WARNING:core.hero_identifier:Could not identify hero from text: '13545'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Elysian Gracehaven'
+WARNING:core.hero_identifier:Could not identify hero from text: '619'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.1'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BattlelD'
+WARNING:core.hero_identifier:Could not identify hero from text: '858921223897853062'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Data'
+INFO:core.hero_identifier:Hero identified by fuzzy match: paquito (confidence: 0.800)
+WARNING:core.hero_identifier:Could not identify hero from text: 'HiRyx'
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.enhanced_data_collector:📊 Fallback analysis: 11 attempts, best confidence: 0.996
+INFO:core.enhanced_data_collector:🚀 Enhanced confidence boost: 0.996 → 1.000 (consensus: 1/1, ratio: 100.0%)
+INFO:core.enhanced_data_collector:✅ Fallback trophy detection successful: mvp_crown
+INFO:core.enhanced_data_collector:Parsed data sparse for scoreboard; trying stats_page parser fallback
+INFO:core.enhanced_data_collector:Using enhanced stats page parsing
+INFO:core.enhanced_data_collector:🔗 Phase 5: Combining results...
+INFO:core.enhanced_data_collector:Final data after defaults: {'hero': 'edith', 'kills': 0, 'deaths': 1, 'assists': 0, 'gold': 0, 'hero_damage': 0}
+INFO:core.enhanced_data_collector:✅ Parallel analysis complete in 43.069s
+INFO:core.enhanced_data_collector:📈 Parallel stats: {'max_workers': 6, 'active_tasks': 4, 'completed_tasks': 0, 'failed_tasks': 0, 'success_rate': 0.0}
+INFO:core.session_manager:Added scoreboard analysis to session 22e76dc4-7324-4c38-8cac-ef0bde1444b6. Total screenshots: 1
+INFO:core.ultimate_parsing_system:🎯 Stage 4: Premium Hero Detection
+        [2025-09-09 11:40:43 +0800] [43392] [CRITICAL] WORKER TIMEOUT (pid:43395)
+[2025-09-09 11:40:44 +0800] [43392] [ERROR] Worker (pid:43395) was sent SIGABRT!
+[2025-09-09 11:40:44 +0800] [47163] [INFO] Booting worker with pid: 47163
+Transient error, retrying direct analysis once... request to http://localhost:8000/api/analyze?ign=Diary%20of%20dolls failed, reason: socket hang up
+INFO:core.session_manager:Created new session 69c6524c-d14f-4381-bd66-8f6e96740571 for player Diary of dolls
+INFO:core.enhanced_data_collector:Created new session 69c6524c-d14f-4381-bd66-8f6e96740571
+INFO:root:🔄 Initializing EasyOCR reader (one-time setup)...
+INFO:root:✅ OCR reader initialized in 1.496s
+INFO:root:✅ Enhanced OCR processor available
+/Users/lesz/Documents/Project-AI/skillshift-ai/venv/lib/python3.13/site-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+INFO:core.hero_database:Loaded 129 heroes from data/mlbb-heroes-corrected.json
+INFO:core.yolo_fallback:🔄 YOLOFallbackManager initialized
+INFO:core.yolo_fallback:📊 OCR threshold: 0.7, YOLO threshold: 0.5
+INFO:core.services.yolo_detection_service:✅ YOLOv8 model loaded from models/mlbb_yolo_best.pt
+INFO:core.services.yolo_detection_service:🔧 Device: cpu
+INFO:core.services.yolo_detection_service:📊 Confidence threshold: 0.5
+INFO:root:🚀 Enhanced MLBB parallel processing initialized with 6 workers
+INFO:core.enhanced_data_collector:🎯 YOLO detection service initialized
+INFO:core.hero_database:Loaded 129 heroes from data/mlbb-heroes-corrected.json
+INFO:root:🚀 Enhanced MLBB parallel processing initialized with 6 workers
+INFO:core.enhanced_data_collector:🎯 YOLO detection service initialized
+INFO:core.hero_database:Loaded 129 heroes from data/mlbb-heroes-corrected.json
+Loaded 30 heroes from meta data
+INFO:root:🚀 Enhanced MLBB parallel processing initialized with 6 workers
+INFO:core.enhanced_data_collector:🎯 YOLO detection service initialized
+INFO:core.hero_database:Loaded 129 heroes from data/mlbb-heroes-corrected.json
+WARNING:root:Some imports not available: No module named 'sklearn'
+WARNING:core.ai_coach_v2:⚠️ GPT-4 not available (API key or library missing)
+INFO:core.ai_coach_v2:📚 MLBB Knowledge Base initialized
+INFO:core.ai_coach_v2:   - Heroes: 5
+INFO:core.ai_coach_v2:   - Items: 4
+INFO:core.ai_coach_v2:   - Coaching templates: 4
+INFO:core.ai_coach_v2:🧠 MLBB Behavioral Learning Engine initialized
+INFO:core.ai_coach_v2:📚 MLBB Knowledge Base initialized
+INFO:core.ai_coach_v2:   - Heroes: 5
+INFO:core.ai_coach_v2:   - Items: 4
+INFO:core.ai_coach_v2:   - Coaching templates: 4
+INFO:core.ai_coach_v2:🎓 Advanced MLBB Coaching Intelligence initialized
+INFO:core.ai_coach_v2:   - GPT-4 available: False
+INFO:core.ai_coach_v2:   - Behavioral learning: True
+INFO:core.ai_coach_v2:   - Personalization: True
+INFO:core.ai_coach_v2:   - Focus: Mobile Legends: Bang Bang specialization
+WARNING:root:Core imports not available: cannot import name 'AdvancedAICoachingIntelligence' from 'core.ai_coach_v2' (/Users/lesz/Documents/Project-AI/skillshift-ai/core/ai_coach_v2.py)
+🌐 Connecting to Redis Cloud: flexible-humpback-53551.upstash.io:6379
+ERROR:root:Redis connection failed: Error 8 connecting to flexible-humpback-53551.upstash.io:6379. nodename nor servname provided, or not known.
+❌ Redis connection failed: Error 8 connecting to flexible-humpback-53551.upstash.io:6379. nodename nor servname provided, or not known.
+💡 Tip: Make sure to set REDIS_URL and REDIS_TOKEN for Upstash Redis
+✅ Real-time analysis API enabled
+[2025-09-09 11:40:48 +0800] [47163] [INFO] Started server process [47163]
+[2025-09-09 11:40:48 +0800] [47163] [INFO] Waiting for application startup.
+[2025-09-09 11:40:48 +0800] [47163] [INFO] Application startup complete.
+/Users/lesz/Documents/Project-AI/skillshift-ai/venv/lib/python3.13/site-packages/torch/utils/data/dataloader.py:683: UserWarning: 'pin_memory' argument is set as true but not supported on MPS now, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+INFO:core.screenshot_analyzer:OCR text preview: 30 victory 29 duration 21.12 x 0 8 8 x & e .mx[youtuber ] 0 10 10 10623 11186 3 9 17 kylie. 15 317 616 45 blck sei kigami_ 7 6 11 15941 15089 15 2 4 makii mvp 15 8.5 40.6 15 tp 7   6 4 14761 11811 1  ...
+INFO:core.screenshot_analyzer:Screenshot type: scoreboard, confidence: 0.800, keywords: ['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Screenshot analysis: type=scoreboard, confidence=0.800, keywords=['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Starting PARALLEL enhanced analysis for scoreboard screenshot
+INFO:core.enhanced_data_collector:🔄 Phase 1: Sequential preprocessing...
+INFO:core.enhanced_data_collector:🔍 Processing MLBB screenshot: (1170, 2532, 3)
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+INFO:core.enhanced_data_collector:📊 Image quality score: 0.629
+INFO:core.enhanced_data_collector:🔹 Applying moderate MLBB preprocessing
+INFO:core.enhanced_data_collector:✅ Processed 5 regions with quality 0.629
+INFO:core.enhanced_data_collector:🔍 Processing MLBB screenshot: (1170, 2532, 3)
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+INFO:core.enhanced_data_collector:📊 Image quality score: 0.629
+INFO:core.enhanced_data_collector:🔹 Applying moderate MLBB preprocessing
+INFO:core.enhanced_data_collector:✅ Processed 5 regions with quality 0.629
+ERROR:core.enhanced_data_collector:Parallel OCR failed: Invalid input type. Supporting format = string(file path or url), bytes, numpy array
+INFO:core.enhanced_data_collector:🚀 Phase 2: Launching parallel analysis tasks...
+INFO:core.enhanced_data_collector:🔄 Exact IGN not found, trying common variations
+WARNING:core.enhanced_data_collector:IGN not found - trying fallback trophy detection strategies
+INFO:core.enhanced_data_collector:Using enhanced scoreboard parsing with anchor-based layout detection
+INFO:core.enhanced_data_collector:Attempting anchor-based parsing
+WARNING:core.enhanced_data_collector:No UI anchors detected, skipping anchor-based parsing
+INFO:core.enhanced_data_collector:Anchor-based parsing insufficient, trying enhanced row parsing
+INFO:core.enhanced_data_collector:Enhanced row parsing insufficient, trying fallback strategy
+INFO:core.enhanced_data_collector:Applying fallback parsing strategy
+WARNING:core.enhanced_data_collector:All parsing strategies failed
+INFO:core.enhanced_data_collector:📊 Phase 3: Collecting results...
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.trophy_medal_detector_v3:🏆 MVP crown detected with confidence 99.6% (threshold: 77.0%)
+INFO:core.trophy_medal_detector_v3:Enhanced debug visualization saved: temp/debug_v3/mvp_crown_v3_1757389267_detection.png
+INFO:core.enhanced_data_collector:🎯 Fallback trophy at Y=468.0: mvp_crown (conf: 99.6%)
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '30 VICTORY 29 Duration 21.12 X 0 8 8 X & E .Mx[YOUTUBER ] 0 10 10 10623 11186 3 9 17 Kylie. 15 317 616 45 BLCK sei kigami_ 7 6 11 15941 15089 15 2 4 Makii MVP 15 8.5 40.6 15 TP 7   6 4 14761 11811 1  5 9 der. 15 616 517 15 HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav MP 15 10.5 712 Kento Kento Kento 7 5 5 16434 13545 3 6 18 Elysian Gracehaven 15 619 8.1 15 BattlelD 858921223897853062 Data Quit HiRyx'
+WARNING:core.hero_identifier:Could not identify hero from text: 'VICTORY'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Duration 21.12'
+WARNING:core.hero_identifier:Could not identify hero from text: 'X 0'
+WARNING:core.hero_identifier:Could not identify hero from text: 'X &'
+WARNING:core.hero_identifier:Could not identify hero from text: 'E .Mx[YOUTUBER ]'
+WARNING:core.hero_identifier:Could not identify hero from text: '10 10'
+WARNING:core.hero_identifier:Could not identify hero from text: '10623'
+WARNING:core.hero_identifier:Could not identify hero from text: '11186'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kylie.'
+INFO:core.hero_identifier:Hero identified by fuzzy match: edith (confidence: 0.860)
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BLCK sei kigami_'
+WARNING:core.hero_identifier:Could not identify hero from text: '15941'
+WARNING:core.hero_identifier:Could not identify hero from text: '15089'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Makii'
+WARNING:core.hero_identifier:Could not identify hero from text: 'MVP'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '40.6'
+WARNING:core.hero_identifier:Could not identify hero from text: '7   6 4'
+WARNING:core.hero_identifier:Could not identify hero from text: '14761'
+WARNING:core.hero_identifier:Could not identify hero from text: '11811'
+WARNING:core.hero_identifier:Could not identify hero from text: '1  5'
+WARNING:core.hero_identifier:Could not identify hero from text: 'der.'
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: '517'
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls'
+WARNING:core.hero_identifier:Could not identify hero from text: '12374'
+WARNING:core.hero_identifier:Could not identify hero from text: '15435'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '10.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '712'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kento Kento Kento 7'
+WARNING:core.hero_identifier:Could not identify hero from text: '16434'
+WARNING:core.hero_identifier:Could not identify hero from text: '13545'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Elysian Gracehaven'
+WARNING:core.hero_identifier:Could not identify hero from text: '619'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.1'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BattlelD'
+WARNING:core.hero_identifier:Could not identify hero from text: '858921223897853062'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Data'
+INFO:core.hero_identifier:Hero identified by fuzzy match: paquito (confidence: 0.800)
+WARNING:core.hero_identifier:Could not identify hero from text: 'HiRyx'
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.enhanced_data_collector:📊 Fallback analysis: 11 attempts, best confidence: 0.996
+INFO:core.enhanced_data_collector:🚀 Enhanced confidence boost: 0.996 → 1.000 (consensus: 1/1, ratio: 100.0%)
+INFO:core.enhanced_data_collector:✅ Fallback trophy detection successful: mvp_crown
+INFO:core.enhanced_data_collector:Parsed data sparse for scoreboard; trying stats_page parser fallback
+INFO:core.enhanced_data_collector:Using enhanced stats page parsing
+INFO:core.enhanced_data_collector:🔗 Phase 5: Combining results...
+INFO:core.enhanced_data_collector:Final data after defaults: {'hero': 'edith', 'kills': 0, 'deaths': 1, 'assists': 0, 'gold': 0, 'hero_damage': 0}
+INFO:core.enhanced_data_collector:✅ Parallel analysis complete in 41.699s
+INFO:core.enhanced_data_collector:📈 Parallel stats: {'max_workers': 6, 'active_tasks': 4, 'completed_tasks': 0, 'failed_tasks': 0, 'success_rate': 0.0}
+INFO:core.session_manager:Added scoreboard analysis to session 69c6524c-d14f-4381-bd66-8f6e96740571. Total screenshots: 1
+INFO:core.ultimate_parsing_system:🚀 Ultimate analysis started: /var/folders/fg/41nnqq515td4lj4c4b26m6580000gn/T/tmp1w0dh9_g.png
+INFO:core.ultimate_parsing_system:Target: 95-100% confidence | Context: scoreboard
+INFO:core.ultimate_parsing_system:🔍 Stage 1: Advanced Quality Validation
+INFO:core.advanced_quality_validator:Quality assessment: 0.745, acceptable: False
+WARNING:core.ultimate_parsing_system:⚠️ Quality below threshold: 0.7% < 85.0%
+INFO:core.ultimate_parsing_system:🎯 Stage 2: YOLO Visual Intelligence Enhancement
+INFO:core.services.yolo_detection_service:🚫 YOLO fallback not triggered (OCR confidence: 0.80)
+INFO:core.ultimate_parsing_system:📊 Stage 3: Basic Data Extraction
+INFO:core.session_manager:Created new session ef58829c-808e-4c49-a18d-95cdd456f700 for player Diary of dolls
+INFO:core.enhanced_data_collector:Created new session ef58829c-808e-4c49-a18d-95cdd456f700
+INFO:core.screenshot_analyzer:OCR text preview: 30 victory 29 duration 21.12 x 0 8 8 x & e .mx[youtuber ] 0 10 10 10623 11186 3 9 17 kylie. 15 317 616 45 blck sei kigami_ 7 6 11 15941 15089 15 2 4 makii mvp 15 8.5 40.6 15 tp 7   6 4 14761 11811 1  ...
+INFO:core.screenshot_analyzer:Screenshot type: scoreboard, confidence: 0.800, keywords: ['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Screenshot analysis: type=scoreboard, confidence=0.800, keywords=['victory', 'duration', 'mvp']
+INFO:core.enhanced_data_collector:Starting PARALLEL enhanced analysis for scoreboard screenshot
+INFO:core.enhanced_data_collector:🔄 Phase 1: Sequential preprocessing...
+INFO:core.enhanced_data_collector:🔍 Processing MLBB screenshot: (1170, 2532, 3)
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+INFO:core.enhanced_data_collector:📊 Image quality score: 0.629
+INFO:core.enhanced_data_collector:🔹 Applying moderate MLBB preprocessing
+INFO:core.enhanced_data_collector:✅ Processed 5 regions with quality 0.629
+INFO:core.enhanced_data_collector:🔍 Processing MLBB screenshot: (1170, 2532, 3)
+🔍 DEBUG: Quality metrics breakdown:
+  Resolution: 1.000 (weight: 0.15)
+  Sharpness:  0.414 (weight: 0.25)
+  Contrast:   0.409 (weight: 0.20)
+  Brightness: 0.645 (weight: 0.20)
+  Noise:      0.824 (weight: 0.20)
+  FINAL:      0.629
+INFO:core.enhanced_data_collector:📊 Image quality score: 0.629
+INFO:core.enhanced_data_collector:🔹 Applying moderate MLBB preprocessing
+INFO:core.enhanced_data_collector:✅ Processed 5 regions with quality 0.629
+ERROR:core.enhanced_data_collector:Parallel OCR failed: Invalid input type. Supporting format = string(file path or url), bytes, numpy array
+INFO:core.enhanced_data_collector:🚀 Phase 2: Launching parallel analysis tasks...
+INFO:core.enhanced_data_collector:Using enhanced scoreboard parsing with anchor-based layout detection
+INFO:core.enhanced_data_collector:Attempting anchor-based parsing
+WARNING:core.enhanced_data_collector:No UI anchors detected, skipping anchor-based parsing
+INFO:core.enhanced_data_collector:🔄 Exact IGN not found, trying common variations
+INFO:core.enhanced_data_collector:Anchor-based parsing insufficient, trying enhanced row parsing
+WARNING:core.enhanced_data_collector:IGN not found - trying fallback trophy detection strategies
+INFO:core.enhanced_data_collector:📊 Phase 3: Collecting results...
+INFO:core.enhanced_data_collector:Enhanced row parsing insufficient, trying fallback strategy
+INFO:core.enhanced_data_collector:Applying fallback parsing strategy
+WARNING:core.enhanced_data_collector:All parsing strategies failed
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+INFO:core.trophy_medal_detector_v3:🏆 MVP crown detected with confidence 99.6% (threshold: 77.0%)
+INFO:core.trophy_medal_detector_v3:Enhanced debug visualization saved: temp/debug_v3/mvp_crown_v3_1757389319_detection.png
+INFO:core.enhanced_data_collector:🎯 Fallback trophy at Y=468.0: mvp_crown (conf: 99.6%)
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '30 VICTORY 29 Duration 21.12 X 0 8 8 X & E .Mx[YOUTUBER ] 0 10 10 10623 11186 3 9 17 Kylie. 15 317 616 45 BLCK sei kigami_ 7 6 11 15941 15089 15 2 4 Makii MVP 15 8.5 40.6 15 TP 7   6 4 14761 11811 1  5 9 der. 15 616 517 15 HVP Diary of dolls 9 2 12 12374 15435 7 8 10 Mhaaaaaaaaaaav MP 15 10.5 712 Kento Kento Kento 7 5 5 16434 13545 3 6 18 Elysian Gracehaven 15 619 8.1 15 BattlelD 858921223897853062 Data Quit HiRyx'
+WARNING:core.hero_identifier:Could not identify hero from text: 'VICTORY'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Duration 21.12'
+WARNING:core.hero_identifier:Could not identify hero from text: 'X 0'
+WARNING:core.hero_identifier:Could not identify hero from text: 'X &'
+WARNING:core.hero_identifier:Could not identify hero from text: 'E .Mx[YOUTUBER ]'
+WARNING:core.hero_identifier:Could not identify hero from text: '10 10'
+WARNING:core.hero_identifier:Could not identify hero from text: '10623'
+WARNING:core.hero_identifier:Could not identify hero from text: '11186'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kylie.'
+INFO:core.hero_identifier:Hero identified by fuzzy match: edith (confidence: 0.860)
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BLCK sei kigami_'
+WARNING:core.hero_identifier:Could not identify hero from text: '15941'
+WARNING:core.hero_identifier:Could not identify hero from text: '15089'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Makii'
+WARNING:core.hero_identifier:Could not identify hero from text: 'MVP'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '40.6'
+WARNING:core.hero_identifier:Could not identify hero from text: '7   6 4'
+WARNING:core.hero_identifier:Could not identify hero from text: '14761'
+WARNING:core.hero_identifier:Could not identify hero from text: '11811'
+WARNING:core.hero_identifier:Could not identify hero from text: '1  5'
+WARNING:core.hero_identifier:Could not identify hero from text: 'der.'
+WARNING:core.hero_identifier:Could not identify hero from text: '616'
+WARNING:core.hero_identifier:Could not identify hero from text: '517'
+WARNING:core.hero_identifier:Could not identify hero from text: 'HVP Diary of dolls'
+WARNING:core.hero_identifier:Could not identify hero from text: '12374'
+WARNING:core.hero_identifier:Could not identify hero from text: '15435'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Mhaaaaaaaaaaav'
+WARNING:core.hero_identifier:Could not identify hero from text: '10.5'
+WARNING:core.hero_identifier:Could not identify hero from text: '712'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Kento Kento Kento 7'
+WARNING:core.hero_identifier:Could not identify hero from text: '16434'
+WARNING:core.hero_identifier:Could not identify hero from text: '13545'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Elysian Gracehaven'
+WARNING:core.hero_identifier:Could not identify hero from text: '619'
+WARNING:core.hero_identifier:Could not identify hero from text: '8.1'
+WARNING:core.hero_identifier:Could not identify hero from text: 'BattlelD'
+WARNING:core.hero_identifier:Could not identify hero from text: '858921223897853062'
+WARNING:core.hero_identifier:Could not identify hero from text: 'Data'
+INFO:core.hero_identifier:Hero identified by fuzzy match: paquito (confidence: 0.800)
+WARNING:core.hero_identifier:Could not identify hero from text: 'HiRyx'
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+WARNING:core.trophy_medal_detector_v3:No trophy detected with any v3 strategy
+[2025-09-09 11:42:13 +0800] [43392] [CRITICAL] WORKER TIMEOUT (pid:43394)
+[2025-09-09 11:42:13 +0800] [43392] [ERROR] Worker (pid:43394) was sent SIGABRT!
+Retry failed, will attempt async fallback... request to http://localhost:8000/api/analyze?ign=Diary%20of%20dolls failed, reason: socket hang up
+Falling back to async job pipeline due to: request to http://localhost:8000/api/analyze?ign=Diary%20of%20dolls failed, reason: socket hang up
+[2025-09-09 11:42:13 +0800] [49043] [INFO] Booting worker with pid: 49043
+Analysis API error: Error: Async job creation failed: {"detail":"Redis/RQ not available - use /api/analyze for synchronous processing"}
+    at runAsyncFallback (app/api/analyze/route.js:374:10)
+    at async POST (app/api/analyze/route.js:190:28)
+  372 |   if (!createRes.ok) {
+  373 |     const t = await createRes.text();
+> 374 |     throw new Error(`Async job creation failed: ${t}`);
+      |          ^
+  375 |   }
+  376 |   const createJson = await createRes.json();
+  377 |   const jobId = createJson.job_id;
+ POST /api/analyze 500 in 229618ms

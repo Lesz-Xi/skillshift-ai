@@ -1,0 +1,123 @@
+1
+107
+37.4 KB
+65.5 KB
+0
+
+analysis: Object
+
+insights: Object
+
+data_completeness: 0
+
+experience_progression: Object
+
+insights_unlocked: 1
+
+mastery_indicators: Array (0)
+No Properties
+
+personality_hint: "adaptive potential - your style is emerging"
+
+stage: "first_upload"
+
+improvement_roadmap: Array (0)
+No Properties
+
+processing_time: 0
+
+success_factors: Array (0)
+No Properties
+
+mental_feedback: "🧠 First Revelation: ↵↵🎯 This is just the beginning. Your gameplay patterns show adaptive potential - your style is emerging. Ready to g…"
+
+performance: Object
+
+damage: "N/A"
+
+gpm: "N/A"
+
+hero: "Unknown"
+
+kda: "0/0/0"
+
+match_duration: "N/A"
+
+rank: "Unknown"
+
+role: "unknown"
+
+quality: Object
+
+component_scores: Object
+No Properties
+
+confidence_category: "low"
+
+data_validation_passed: false
+
+overall_confidence: 0
+
+warnings: Array (0)
+No Properties
+
+statistical_feedback: Array (1)
+0
+Object
+
+category: "experience_intro"
+
+message: "🎯 Welcome to your coaching journey! This analysis reveals your baseline gameplay DNA."
+
+severity: "info"
+
+experience: Object
+
+next_invitation: Object
+
+cta: "Continue Discovery"
+
+subtitle: "Upload another match to reveal how your gameplay adapts under different conditions."
+
+title: "🧠 Want to understand your tactical mind?"
+
+progression_detected: false
+
+stage: "first_upload"
+
+stage_config: Object
+
+anticipationMessage: "🧠 Decoding your first gameplay DNA..."
+
+focusAreas: Array (3)
+0
+"mvp_detection"
+1
+"basic_performance"
+2
+"potential_discovery"
+
+revelationPrefix: "🎯 Your gameplay soul revealed:"
+
+unlocked_features: Array (0)
+No Properties
+
+message: "Analysis completed successfully"
+
+metadata: Object
+
+analysisType: "general"
+
+backend_url: "http://localhost:8000"
+
+experienceStage: "first_upload"
+
+fileSize: 2158565
+
+filename: "IMG_1768.PNG"
+
+ign: "Diary of dolls"
+
+timestamp: "2025-09-09T04:59:01.301Z"
+
+success: true
