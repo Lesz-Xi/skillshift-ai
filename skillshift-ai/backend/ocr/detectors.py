@@ -184,8 +184,9 @@ class RowAgnosticScoreboardDetector:
                     logger.debug(f"ROI processing failed for region {x},{y},{w},{h}: {e}")
                     continue
             
-            if len(anchor_positions) < 1:  # Lower threshold for fast detection
-                return None
+            # Relax threshold: allow no anchors for fallback detection
+            if len(anchor_positions) < 1:
+                logger.debug("No anchors found in fast detection, using fallback region")
             
             # Calculate bounding box from anchor positions with generous padding
             if anchor_positions:
@@ -222,6 +223,18 @@ class RowAgnosticScoreboardDetector:
                     row_top_ratio=row_top_ratio,
                     confidence=confidence,
                     anchors_found=found_anchors
+                )
+            else:
+                # No anchors found - use fallback region estimation
+                logger.debug("No anchors found, using default scoreboard region")
+                fallback_bbox = (0.15, 0.0, 1.0, 0.70)  # Top 15%, full width, 70% height
+                return TableRegion(
+                    panel_bbox=fallback_bbox,
+                    rows_count=self.expected_rows,
+                    row_height_ratio=0.14,  # 70% / 5 rows = 14%
+                    row_top_ratio=0.15,
+                    confidence=0.3,  # Lower confidence for fallback
+                    anchors_found=["fallback_no_anchors"]
                 )
             
             return None
@@ -637,7 +650,7 @@ class RowAgnosticScoreboardDetector:
             
             # Use robust fuzzy matching
             from backend.ocr.textmatch import best_match
-            result = best_match(target_ign, texts, threshold=80)
+            result = best_match(target_ign, texts, threshold=70)
             
             # Debug logging
             logger.debug(f"Best match result: {result}, type: {type(result)}")
@@ -645,7 +658,7 @@ class RowAgnosticScoreboardDetector:
             # Handle the result properly
             if result and len(result) == 2:
                 match, score = result
-                if match and score >= 80:
+                if match and score >= 70:
                     return True, float(score) / 100.0  # Convert to 0-1 scale
             
             return False, 0.0

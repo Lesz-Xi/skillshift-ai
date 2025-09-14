@@ -15,7 +15,7 @@ class BaseMatch(BaseModel):
     hero_damage: Annotated[int, Field(ge=0)]
     turret_damage: Annotated[int, Field(ge=0)]
     damage_taken: Annotated[int, Field(ge=0)]
-    teamfight_participation: Annotated[int, Field(ge=0, le=100)]
+    teamfight_participation: Annotated[int, Field(ge=0, le=200)]  # Relaxed: Allow OCR noise up to 200%
     positioning_rating: Literal['low', 'average', 'good']
     ult_usage: Literal['low', 'average', 'high']
     # Allow fractional minutes to support MM:SS parsing

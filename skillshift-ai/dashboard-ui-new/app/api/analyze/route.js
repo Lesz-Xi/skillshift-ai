@@ -147,6 +147,8 @@ export async function POST(request) {
       qp.set("ign", ign);
       if (sessionId) qp.set("session_id", sessionId);
       if (heroInput) qp.set("hero_override", heroInput);
+      // CRITICAL FIX: Add extract_options to enable damage statistics extraction
+      qp.set("extract_options", JSON.stringify({ with_damage: true }));
       const url = `${SKILLSHIFT_AI_BASE_URL}${endpoint}?${qp.toString()}`;
       const agent = url.startsWith("https")
         ? new https.Agent({ keepAlive: true })
@@ -186,6 +188,8 @@ export async function POST(request) {
           qp2.set("ign", ign);
           if (sessionId) qp2.set("session_id", sessionId);
           if (heroInput) qp2.set("hero_override", heroInput);
+          // CRITICAL FIX: Add extract_options to enable damage statistics extraction
+          qp2.set("extract_options", JSON.stringify({ with_damage: true }));
           const url2 = `${SKILLSHIFT_AI_BASE_URL}${endpoint}?${qp2.toString()}`;
           const agent2 = url2.startsWith("https")
             ? new https.Agent({ keepAlive: true })
@@ -216,6 +220,7 @@ export async function POST(request) {
           file,
           ign,
           pollTimeoutMs: ANALYZE_TIMEOUT_MS, // respect server timeout budget
+          extractOptions: { with_damage: true }, // FIXED: Add extract_options for damage stats
         });
         analysisResult = asyncResult;
       }
@@ -319,10 +324,11 @@ export async function POST(request) {
       perfSrc.match_duration || analysisResult.match_duration || "N/A";
     const rank = perfSrc.rank || analysisResult.rank || "Unknown";
 
-    // Transform the response to match dashboard expectations
+    // CRITICAL FIX: Include raw backend response with damage_stats for frontend compatibility
     const dashboardResponse = {
       success: true,
       message: "Analysis completed successfully",
+      __raw: analysisResult, // Include raw backend response for damage_stats access
       analysis: {
         // Core analysis results
         statistical_feedback: enhancedInsights.statistical_feedback,
@@ -435,13 +441,13 @@ function normalizeFeedback(analysisResult) {
   });
 }
 
-async function runAsyncFallback({ fileBuffer, file, ign, pollTimeoutMs }) {
+async function runAsyncFallback({ fileBuffer, file, ign, pollTimeoutMs, extractOptions }) {
   // Build a fresh FormData for job creation
   const fd = new FormData();
   fd.append("file", fileBuffer, { filename: file.name, contentType: file.type });
 
-  // Create the job on backend
-  const createUrl = `${SKILLSHIFT_AI_BASE_URL}/api/jobs?ign=${encodeURIComponent(ign)}`;
+  // Create the job on backend with extract_options
+  const createUrl = `${SKILLSHIFT_AI_BASE_URL}/api/jobs?ign=${encodeURIComponent(ign)}${extractOptions ? `&extract_options=${encodeURIComponent(JSON.stringify(extractOptions))}` : ''}`;
   const createRes = await fetch(createUrl, {
     method: "POST",
     body: fd,

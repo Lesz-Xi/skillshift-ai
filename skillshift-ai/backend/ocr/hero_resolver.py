@@ -24,7 +24,7 @@ project_root = current_dir.parents[1]
 sys.path.insert(0, str(project_root))
 
 try:
-    from src.config.data_paths import get_heroes_json_path
+    from src.config.data_paths import get_mlbb_heroes_corrected_path
     CONFIG_AVAILABLE = True
 except ImportError:
     CONFIG_AVAILABLE = False
@@ -76,16 +76,16 @@ class AdvancedHeroResolver:
         """Find the hero database file."""
         # Use configuration system first
         if CONFIG_AVAILABLE:
-            config_path = get_heroes_json_path()
+            config_path = get_mlbb_heroes_corrected_path()
             if os.path.exists(config_path):
                 return config_path
         
         # Fallback to multiple paths if config not available
         fallback_paths = [
-            "data/heroes_cleaned.json",
-            "../data/heroes_cleaned.json",
-            "../../data/heroes_cleaned.json",
-            "/Users/lesz/Documents/Project-AI/skillshift-ai/data/heroes_cleaned.json"
+            "data/mlbb-heroes-corrected.json",
+            "../data/mlbb-heroes-corrected.json", 
+            "../../data/mlbb-heroes-corrected.json",
+            "/Users/lesz/Documents/Project-AI/skillshift-ai/data/mlbb-heroes-corrected.json"
         ]
         
         for path in fallback_paths:

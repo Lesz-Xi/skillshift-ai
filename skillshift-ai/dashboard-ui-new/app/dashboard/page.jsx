@@ -37,14 +37,14 @@ export default function TacticalDashboard() {
   const [activeSection, setActiveSection] = useState("overview");
 
   const navigationItems = [
-    { id: "overview", icon: BarChart3, label: "Overview" },
+    { id: "overview", icon: BarChart3, label: "Profile" },
     { id: "heroes", icon: Trophy, label: "Heroes" },
-    { id: "coaching", icon: Target, label: "Coaching" },
+    { id: "coaching", icon: Target, label: "Coaching Sessions" },
     { id: "mindset", icon: Heart, label: "Mindset" },
     { id: "history", icon: History, label: "Analysis History" },
     { id: "screenshot-analysis", icon: Camera, label: "Screenshot Analysis" },
     { id: "video-analysis", icon: Video, label: "Video Analysis" },
-    { id: "admin", icon: Settings, label: "System Status" },
+    { id: "admin", icon: Settings, label: "Settings" },
   ];
 
   const renderActiveSection = () => {

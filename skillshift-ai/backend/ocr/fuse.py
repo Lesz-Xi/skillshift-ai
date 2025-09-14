@@ -148,16 +148,26 @@ class CrossViewFusion:
             fusion_method = self._determine_fusion_method(kda_result, damage_result)
             
             # Create fused result
+            # Calculate KDA ratio safely
+            kills = kda_data['kills']
+            deaths = kda_data['deaths']
+            assists = kda_data['assists']
+            kda_ratio = (kills + assists) / max(deaths, 1) if deaths > 0 else kills + assists
+            
             return FusedResult(
                 player_ign=player_ign,
                 hero=hero,
-                kills=kda_data['kills'],
-                deaths=kda_data['deaths'],
-                assists=kda_data['assists'],
+                kills=kills,
+                deaths=deaths,
+                assists=assists,
+                kda_ratio=kda_ratio,
                 mvp_score=kda_data['mvp_score'],
                 hero_damage=damage_data['hero_damage'],
                 tower_damage=damage_data['tower_damage'],
                 damage_taken=damage_data['damage_taken'],
+                hero_damage_pct=damage_data.get('hero_damage_pct', 0.0),
+                turret_damage_pct=damage_data.get('turret_damage_pct', 0.0),
+                taken_damage_pct=damage_data.get('taken_damage_pct', 0.0),
                 teamfight_participation=damage_data['teamfight_participation'],
                 gold_per_minute=damage_data['gold_per_minute'],
                 overall_confidence=overall_confidence,

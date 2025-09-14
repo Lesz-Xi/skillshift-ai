@@ -135,9 +135,10 @@ export default function ScreenshotAnalysisPage() {
 
     try {
       // Generate a session id to merge multi-screenshot data on the backend
-      const sessionId = (typeof crypto !== "undefined" && crypto.randomUUID)
-        ? crypto.randomUUID()
-        : Math.random().toString(36).slice(2);
+      const sessionId =
+        typeof crypto !== "undefined" && crypto.randomUUID
+          ? crypto.randomUUID()
+          : Math.random().toString(36).slice(2);
       // Process each uploaded file SEQUENTIALLY to avoid CPU contention
       const results = [];
       for (const fileData of uploadedFiles) {
@@ -168,26 +169,28 @@ export default function ScreenshotAnalysisPage() {
         const result = await response.json();
 
         // Normalize various backend/proxy result shapes into the UI schema
+        // FIXED: Handle null values properly instead of coercing to "N/A"
         const normalizeResult = (r) => {
           const hero =
             r.hero ||
             r?.analysis?.performance?.hero ||
             r?.match_data?.hero ||
-            "N/A";
+            null;
 
+          // Handle KDA object properly - preserve null values when data is missing
           const kda =
             r.kda ||
             r?.analysis?.performance?.kda ||
             r?.match_data?.kda ||
-            "N/A";
+            null;
 
           const gpm =
             r.gpm ||
             r?.analysis?.performance?.gpm ||
             r?.match_data?.gpm ||
-            "N/A";
+            null;
 
-          const role = r.role || r?.analysis?.performance?.role || "N/A";
+          const role = r.role || r?.analysis?.performance?.role || null;
 
           let confidence = 0;
           if (typeof r?.confidence_score === "number") {
@@ -225,11 +228,17 @@ export default function ScreenshotAnalysisPage() {
         };
 
         const normalized = normalizeResult(result);
-        results.push({ fileId: fileData.id, fileName: fileData.name, result: normalized });
+        results.push({
+          fileId: fileData.id,
+          fileName: fileData.name,
+          result: normalized,
+        });
 
         // Mark as analyzed
         setUploadedFiles((prev) =>
-          prev.map((f) => (f.id === fileData.id ? { ...f, status: "analyzed" } : f))
+          prev.map((f) =>
+            f.id === fileData.id ? { ...f, status: "analyzed" } : f
+          )
         );
         setProcessingFiles((prev) => {
           const next = new Set(prev);
@@ -518,7 +527,10 @@ export default function ScreenshotAnalysisPage() {
                 </div>
               </div>
               <div className="text-center">
-                <Label htmlFor="heroOverride" className="text-sm font-medium text-foreground">
+                <Label
+                  htmlFor="heroOverride"
+                  className="text-sm font-medium text-foreground"
+                >
                   Optional Hero Override
                 </Label>
                 <Input
@@ -529,7 +541,10 @@ export default function ScreenshotAnalysisPage() {
                   className="mt-1 text-center"
                 />
                 <div className="flex items-center justify-center gap-2 mt-2">
-                  <Badge variant="outline" className="bg-muted text-muted-foreground text-xs">
+                  <Badge
+                    variant="outline"
+                    className="bg-muted text-muted-foreground text-xs"
+                  >
                     Use to lock hero when OCR misreads
                   </Badge>
                 </div>
@@ -785,31 +800,213 @@ export default function ScreenshotAnalysisPage() {
                               <div className="flex justify-between">
                                 <span>KDA:</span>
                                 <span className="font-medium">
-                                  {analysisResults[selectedResultFile].kda ||
-                                    "N/A"}
+                                  {(() => {
+                                    // Use new structured performance data with fallback
+                                    const perfData =
+                                      analysisResults[selectedResultFile]
+                                        .analysis?.performance?.kda ||
+                                      analysisResults[selectedResultFile].kda;
+
+                                    if (perfData) {
+                                      if (typeof perfData === "object") {
+                                        return `${perfData.kills || 0}/${
+                                          perfData.deaths || 0
+                                        }/${perfData.assists || 0}`;
+                                      } else {
+                                        return perfData;
+                                      }
+                                    }
+                                    return (
+                                      <span className="text-muted-foreground">
+                                        Not available
+                                      </span>
+                                    );
+                                  })()}
                                 </span>
                               </div>
                               <div className="flex justify-between">
                                 <span>GPM:</span>
                                 <span className="font-medium">
-                                  {analysisResults[selectedResultFile].gpm ||
-                                    "N/A"}
+                                  {(() => {
+                                    // Use new structured performance data with fallback
+                                    const gpm =
+                                      analysisResults[selectedResultFile]
+                                        .analysis?.performance?.gpm ||
+                                      analysisResults[selectedResultFile].gpm;
+
+                                    return gpm !== null ? (
+                                      gpm
+                                    ) : (
+                                      <span className="text-muted-foreground">
+                                        Not available
+                                      </span>
+                                    );
+                                  })()}
                                 </span>
                               </div>
                               <div className="flex justify-between">
                                 <span>Hero:</span>
                                 <span className="font-medium">
-                                  {analysisResults[selectedResultFile].hero ||
-                                    "N/A"}
+                                  {(() => {
+                                    // Use new structured performance data with fallback
+                                    const hero =
+                                      analysisResults[selectedResultFile]
+                                        .analysis?.performance?.hero ||
+                                      analysisResults[selectedResultFile].hero;
+
+                                    return hero ? (
+                                      hero
+                                    ) : (
+                                      <span className="text-muted-foreground">
+                                        Not available
+                                      </span>
+                                    );
+                                  })()}
                                 </span>
                               </div>
                               <div className="flex justify-between">
                                 <span>Role:</span>
                                 <span className="font-medium">
-                                  {analysisResults[selectedResultFile].role ||
-                                    "N/A"}
+                                  {(() => {
+                                    // Use new structured performance data with fallback
+                                    const role =
+                                      analysisResults[selectedResultFile]
+                                        .analysis?.performance?.role ||
+                                      analysisResults[selectedResultFile].role;
+
+                                    return role ? (
+                                      role
+                                    ) : (
+                                      <span className="text-muted-foreground">
+                                        Not available
+                                      </span>
+                                    );
+                                  })()}
                                 </span>
                               </div>
+                            </CardContent>
+                          </Card>
+
+                          {/* Damage Statistics - NEW */}
+                          <Card>
+                            <CardHeader>
+                              <CardTitle className="text-lg">
+                                Damage Statistics
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-2">
+                              {(() => {
+                                // ROBUST DAMAGE STATISTICS FALLBACK (OCR-Task-5.md fix)
+                                const raw =
+                                  analysisResults[selectedResultFile]?.__raw ??
+                                  {};
+                                const match = raw.match_data ?? {};
+                                const robustDamageStats = analysisResults[
+                                  selectedResultFile
+                                ]?.analysis?.damage_statistics ??
+                                  raw.damage_stats ?? {
+                                    hero_damage:
+                                      raw.hero_damage ??
+                                      match.hero_damage ??
+                                      null,
+                                    tower_damage:
+                                      raw.tower_damage ??
+                                      raw.turret_damage ??
+                                      match.tower_damage ??
+                                      match.turret_damage ??
+                                      null,
+                                    damage_taken:
+                                      raw.damage_taken ??
+                                      match.damage_taken ??
+                                      null,
+                                    teamfight_participation:
+                                      raw.teamfight_participation ??
+                                      raw.teamfight_participation_pct ??
+                                      match.teamfight_participation ??
+                                      null,
+                                  };
+
+                                // Check if any damage data exists
+                                const hasAnyDamageData = Object.values(
+                                  robustDamageStats
+                                ).some((val) => val !== null);
+
+                                if (hasAnyDamageData) {
+                                  return (
+                                    <>
+                                      <div className="flex justify-between">
+                                        <span>Hero Damage:</span>
+                                        <span className="font-medium">
+                                          {robustDamageStats.hero_damage !==
+                                          null ? (
+                                            `${(
+                                              robustDamageStats.hero_damage /
+                                              1000
+                                            ).toFixed(1)}k`
+                                          ) : (
+                                            <span className="text-muted-foreground">
+                                              Not available
+                                            </span>
+                                          )}
+                                        </span>
+                                      </div>
+                                      <div className="flex justify-between">
+                                        <span>Damage Taken:</span>
+                                        <span className="font-medium">
+                                          {robustDamageStats.damage_taken !==
+                                          null ? (
+                                            `${(
+                                              robustDamageStats.damage_taken /
+                                              1000
+                                            ).toFixed(1)}k`
+                                          ) : (
+                                            <span className="text-muted-foreground">
+                                              Not available
+                                            </span>
+                                          )}
+                                        </span>
+                                      </div>
+                                      <div className="flex justify-between">
+                                        <span>Turret Damage:</span>
+                                        <span className="font-medium">
+                                          {robustDamageStats.tower_damage !==
+                                          null ? (
+                                            `${(
+                                              robustDamageStats.tower_damage /
+                                              1000
+                                            ).toFixed(1)}k`
+                                          ) : (
+                                            <span className="text-muted-foreground">
+                                              Not available
+                                            </span>
+                                          )}
+                                        </span>
+                                      </div>
+                                      <div className="flex justify-between">
+                                        <span>Teamfight Participation:</span>
+                                        <span className="font-medium">
+                                          {robustDamageStats.teamfight_participation !==
+                                          null ? (
+                                            `${robustDamageStats.teamfight_participation}%`
+                                          ) : (
+                                            <span className="text-muted-foreground">
+                                              Not available
+                                            </span>
+                                          )}
+                                        </span>
+                                      </div>
+                                    </>
+                                  );
+                                } else {
+                                  return (
+                                    <p className="text-muted-foreground text-sm">
+                                      Damage statistics not available. Upload
+                                      both scoreboard and damage view
+                                      screenshots for complete analysis.
+                                    </p>
+                                  );
+                                }
+                              })()}
                             </CardContent>
                           </Card>
 
@@ -823,9 +1020,9 @@ export default function ScreenshotAnalysisPage() {
                             <CardContent>
                               <div className="space-y-2">
                                 {(
-                                  (analysisResults[selectedResultFile]
-                                    .coaching_feedback || []).length > 0
-                                ) ? (
+                                  analysisResults[selectedResultFile]
+                                    .coaching_feedback || []
+                                ).length > 0 ? (
                                   analysisResults[
                                     selectedResultFile
                                   ].coaching_feedback.map((feedback, index) => (

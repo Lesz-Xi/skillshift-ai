@@ -562,7 +562,7 @@ class RobustIGNMatcher:
     """Advanced IGN matching with multiple fallback strategies."""
     
     def __init__(self):
-        self.min_similarity = 0.6  # Minimum similarity threshold
+        self.min_similarity = 0.45  # Relaxed: Lower threshold for OCR variations
         
     def find_ign_in_ocr(self, target_ign: str, ocr_results: List) -> Dict[str, Any]:
         """Find IGN using multiple robust strategies."""
@@ -698,7 +698,7 @@ class RobustIGNMatcher:
                 
             # Calculate confidence based on token overlap
             overlap_ratio = len(common_tokens) / len(target_tokens)
-            if overlap_ratio >= 0.5:  # At least half the tokens match
+            if overlap_ratio >= 0.3:  # Relaxed: At least 30% token overlap for OCR variations
                 confidence = overlap_ratio * 0.7  # Penalty for token-based match
                 
                 if confidence > best_match["confidence"]:
@@ -1894,10 +1894,13 @@ class EnhancedDataCollector(DataCollector):
             # Select an actual image array from preprocessing result
             preprocessed = None
             if isinstance(prep_result, dict):
-                preprocessed = (
-                    prep_result.get("full_image")
-                    or prep_result.get("processed_image")
-                )
+                # Fix: Avoid numpy array boolean evaluation by checking explicitly
+                full_image = prep_result.get("full_image")
+                processed_image = prep_result.get("processed_image")
+                if full_image is not None:
+                    preprocessed = full_image
+                elif processed_image is not None:
+                    preprocessed = processed_image
             else:
                 preprocessed = prep_result
             # HARDEN: Ensure EasyOCR-friendly numpy image
@@ -2113,10 +2116,10 @@ class EnhancedDataCollector(DataCollector):
             if validation_result['is_valid']:
                 validated_ign = validation_result['cleaned_ign']
                 
-                # Add appropriate warnings based on confidence
-                if confidence < 0.7:
+                # Add appropriate warnings based on confidence (relaxed thresholds)
+                if confidence < 0.5:
                     warnings.append(f"Low IGN match confidence: {confidence:.1%}")
-                elif confidence < 0.9:
+                elif confidence < 0.8:
                     warnings.append(f"IGN matched with {strategy} (confidence: {confidence:.1%})")
                 
                 logger.info(f"IGN validated and cleaned: '{validated_ign}'")
@@ -2126,12 +2129,22 @@ class EnhancedDataCollector(DataCollector):
                 warnings.append(f"Found '{matched_text}' but failed MLBB IGN validation")
                 return matched_text
         
-        # Fallback: Try original validation approach
+        # Fallback: Try original validation approach with fuzzy matching
+        from difflib import SequenceMatcher
+        best_fallback = {"ign": None, "similarity": 0.0}
+        
         for bbox, text, conf in ocr_results:
             validation_result = self.ign_validator.validate_mlbb_ign(text)
-            if validation_result['is_valid'] and ign.lower() in validation_result['cleaned_ign'].lower():
-                warnings.append(f"IGN found via fallback validation: {validation_result['cleaned_ign']}")
-                return validation_result['cleaned_ign']
+            if validation_result['is_valid']:
+                cleaned_ign = validation_result['cleaned_ign']
+                # Use fuzzy matching instead of exact substring
+                similarity = SequenceMatcher(None, ign.lower(), cleaned_ign.lower()).ratio()
+                if similarity >= 0.4 and similarity > best_fallback["similarity"]:  # Relaxed threshold
+                    best_fallback = {"ign": cleaned_ign, "similarity": similarity}
+        
+        if best_fallback["ign"]:
+            warnings.append(f"IGN found via fallback fuzzy validation: {best_fallback['ign']} (similarity: {best_fallback['similarity']:.1%})")
+            return best_fallback["ign"]
         
         # AUTO-INFER: Extract potential IGNs from OCR and choose best that can be located
         try:

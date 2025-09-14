@@ -4,14 +4,7 @@ import { useState } from "react";
 import { CapabilityCard } from "../components/ui/CapabilityCard";
 import SkillShiftGlobeSection from "../components/SkillShiftGlobeSection";
 import PrinciplesSection from "../components/PrinciplesSection";
-import { 
-  Camera, 
-  Video, 
-  Target, 
-  Brain, 
-  Bot, 
-  BarChart3 
-} from "lucide-react";
+import { Camera, Video, Target, Brain, Bot, BarChart3 } from "lucide-react";
 
 const SkillShiftLanding = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -120,10 +113,7 @@ const SkillShiftLanding = () => {
       {/* Header */}
       <header className="flex justify-between items-center px-8 py-6 border-b border-border">
         <div className="flex items-center space-x-8">
-          <div className="h2 font-display flex items-center">
-            <span className="mr-2">⚡</span>
-            SkillShift
-          </div>
+          <div className="h2 font-display flex items-center">SkillShift</div>
           <nav className="flex space-x-8 text-sm tracking-wider">
             <a
               href="#home"
@@ -137,59 +127,59 @@ const SkillShiftLanding = () => {
               SKILLSHIFT
             </a>
             <a
-              href="#api"
+              href="#price"
               className={`hover:text-foreground/80 transition-colors ${
-                activeSection === "api"
+                activeSection === "price"
                   ? "text-foreground border-b-2 border-primary"
                   : "text-muted-foreground"
               }`}
-              onClick={() => setActiveSection("api")}
+              onClick={() => setActiveSection("price")}
             >
-              API
+              PRICE
             </a>
             <a
-              href="#company"
+              href="#features"
               className={`hover:text-foreground/80 transition-colors ${
-                activeSection === "company"
+                activeSection === "features"
                   ? "text-foreground border-b-2 border-primary"
                   : "text-muted-foreground"
               }`}
-              onClick={() => setActiveSection("company")}
+              onClick={() => setActiveSection("features")}
             >
-              COMPANY
+              FEATURES
             </a>
             <a
-              href="#products"
+              href="#coaching"
               className={`hover:text-foreground/80 transition-colors ${
-                activeSection === "products"
+                activeSection === "coaching"
                   ? "text-foreground border-b-2 border-primary"
                   : "text-muted-foreground"
               }`}
-              onClick={() => setActiveSection("products")}
+              onClick={() => setActiveSection("coaching")}
             >
-              PRODUCTS
+              COACHING
             </a>
             <a
-              href="#careers"
+              href="#about"
               className={`hover:text-foreground/80 transition-colors ${
-                activeSection === "careers"
+                activeSection === "about"
                   ? "text-foreground border-b-2 border-primary"
                   : "text-muted-foreground"
               }`}
-              onClick={() => setActiveSection("careers")}
+              onClick={() => setActiveSection("about")}
             >
-              CAREERS
+              ABOUT
             </a>
             <a
-              href="#news"
+              href="#updates"
               className={`hover:text-foreground/80 transition-colors ${
-                activeSection === "news"
+                activeSection === "updates"
                   ? "text-foreground border-b-2 border-primary"
                   : "text-muted-foreground"
               }`}
-              onClick={() => setActiveSection("news")}
+              onClick={() => setActiveSection("updates")}
             >
-              NEWS
+              UPDATES
             </a>
           </nav>
         </div>
@@ -209,7 +199,7 @@ const SkillShiftLanding = () => {
             <div className="mb-20">
               <p className="text-large text-muted-foreground leading-relaxed">
                 SkillShift-AI is a company building artificial intelligence to
-                revolutionize Mobile Legends: Bang Bang coaching and performance 
+                revolutionize Mobile Legends: Bang Bang coaching and performance
                 analysis. We are guided by our mission to help every MLBB player
                 reach their competitive potential through advanced AI insights.
               </p>
@@ -224,16 +214,19 @@ const SkillShiftLanding = () => {
                 <h1 className="h1 font-display leading-tight mb-8">
                   Master MLBB
                   <br />
-                  <span className="text-muted-foreground">with AI Coaching</span>
+                  <span className="text-muted-foreground">
+                    with AI Coaching
+                  </span>
                 </h1>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div>
                   <p className="text-large text-muted-foreground leading-relaxed mb-6">
-                    Every MLBB player deserves personalized, intelligent coaching.
-                    We build AI specifically to analyze gameplay, identify improvement
-                    opportunities, and accelerate competitive growth through data-driven insights.
+                    Every MLBB player deserves personalized, intelligent
+                    coaching. We build AI specifically to analyze gameplay,
+                    identify improvement opportunities, and accelerate
+                    competitive growth through data-driven insights.
                   </p>
                 </div>
 
@@ -278,22 +271,22 @@ const SkillShiftLanding = () => {
           </>
         )}
 
-        {/* Company Section */}
-        {activeSection === "company" && (
+        {/* Features Section */}
+        {activeSection === "features" && (
           <>
             <div className="mb-20">
               <p className="text-large text-muted-foreground leading-relaxed">
-                SkillShift-AI is a company building artificial intelligence to
-                revolutionize Mobile Legends: Bang Bang coaching and performance 
-                analysis. We are guided by our mission to help every MLBB player
-                reach their competitive potential through advanced AI insights.
+                Discover the powerful AI-driven features that make SkillShift
+                the most advanced MLBB coaching platform. Our cutting-edge
+                technology analyzes every aspect of your gameplay to provide
+                personalized insights and recommendations.
               </p>
             </div>
 
-            {/* Principles Section */}
+            {/* Core Features Section */}
             <section className="mb-20">
               <p className="text-xs text-muted-foreground tracking-wider mb-8 uppercase">
-                [ OUR PRINCIPLES ]
+                [ CORE FEATURES ]
               </p>
 
               <div className="space-y-8">
@@ -322,16 +315,18 @@ const SkillShiftLanding = () => {
                     We are hiring across all our offices in{" "}
                     <span className="text-foreground">San Francisco</span>,
                     <span className="text-foreground"> New York</span>, and{" "}
-                    <span className="text-foreground"> Austin</span>. We prioritize
-                    in-person work to support our fast-paced, collaborative
-                    projects.
+                    <span className="text-foreground"> Austin</span>. We
+                    prioritize in-person work to support our fast-paced,
+                    collaborative projects.
                   </p>
                 </div>
 
                 <div className="space-y-4">
                   <div className="flex items-center space-x-4">
                     <div className="w-2 h-2 bg-foreground rounded-full"></div>
-                    <span className="text-muted-foreground">San Francisco, CA</span>
+                    <span className="text-muted-foreground">
+                      San Francisco, CA
+                    </span>
                   </div>
                   <div className="flex items-center space-x-4">
                     <div className="w-2 h-2 bg-foreground rounded-full"></div>
@@ -347,23 +342,27 @@ const SkillShiftLanding = () => {
           </>
         )}
 
-        {/* API Section */}
-        {activeSection === "api" && (
+        {/* Price Section */}
+        {activeSection === "price" && (
           <section className="mb-20">
-            <p className="text-xs text-muted-foreground tracking-wider mb-8 uppercase">[ API ]</p>
-            <h2 className="h2 font-display mb-8">
-              Build with SkillShift MLBB API
-            </h2>
+            <p className="text-xs text-muted-foreground tracking-wider mb-8 uppercase">
+              [ PRICING ]
+            </p>
+            <h2 className="h2 font-display mb-8">Choose Your Coaching Plan</h2>
             <p className="text-large text-muted-foreground leading-relaxed mb-12">
-              Access our advanced MLBB analysis APIs to build powerful coaching
-              applications with screenshot analysis, video processing, and counter-pick intelligence
+              Select the perfect plan for your MLBB coaching journey. From
+              casual players to competitive teams, we have options for every
+              skill level.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="border border-border rounded-lg p-6 bg-card">
                 <h3 className="h5 font-display mb-4">Starter</h3>
                 <div className="h3 font-display mb-4">
-                  $29<span className="text-base text-muted-foreground">/month</span>
+                  $29
+                  <span className="text-base text-muted-foreground">
+                    /month
+                  </span>
                 </div>
                 <ul className="space-y-2 text-muted-foreground">
                   <li>• 1,000 screenshot analyses/month</li>
@@ -375,7 +374,10 @@ const SkillShiftLanding = () => {
               <div className="border border-primary rounded-lg p-6 bg-primary/5">
                 <h3 className="h5 font-display mb-4">Professional</h3>
                 <div className="h3 font-display mb-4">
-                  $99<span className="text-base text-muted-foreground">/month</span>
+                  $99
+                  <span className="text-base text-muted-foreground">
+                    /month
+                  </span>
                 </div>
                 <ul className="space-y-2 text-muted-foreground">
                   <li>• 10,000 analyses/month</li>
@@ -399,17 +401,18 @@ const SkillShiftLanding = () => {
           </section>
         )}
 
-        {/* Products Section */}
-        {activeSection === "products" && (
+        {/* Coaching Section */}
+        {activeSection === "coaching" && (
           <section className="mb-20">
             <p className="text-xs text-muted-foreground tracking-wider mb-8 uppercase">
-              [ PRODUCTS ]
+              [ COACHING PROGRAMS ]
             </p>
-            <h2 className="h2 font-display mb-8">SkillShift MLBB Coach</h2>
+            <h2 className="h2 font-display mb-8">Personalized MLBB Coaching</h2>
             <p className="text-large text-muted-foreground leading-relaxed mb-12">
-              The most advanced MLBB coaching AI in the world. SkillShift Coach
-              includes screenshot analysis, video processing, counter-pick intelligence,
-              and personalized performance insights for competitive players.
+              Transform your MLBB gameplay with our AI-powered coaching
+              programs. From beginner fundamentals to advanced competitive
+              strategies, our personalized approach adapts to your skill level
+              and goals.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -439,9 +442,7 @@ const SkillShiftLanding = () => {
               </div>
 
               <div className="border border-border rounded-lg p-6 bg-card">
-                <h3 className="h5 font-display mb-4">
-                  SkillShift Enterprise
-                </h3>
+                <h3 className="h5 font-display mb-4">SkillShift Enterprise</h3>
                 <p className="text-muted-foreground mb-4">
                   Professional esports team coaching solutions
                 </p>
@@ -456,17 +457,20 @@ const SkillShiftLanding = () => {
           </section>
         )}
 
-        {/* Careers Section */}
-        {activeSection === "careers" && (
+        {/* About Section */}
+        {activeSection === "about" && (
           <section className="mb-20">
             <p className="text-xs text-muted-foreground tracking-wider mb-8 uppercase">
-              [ CAREERS ]
+              [ ABOUT SKILLSHIFT ]
             </p>
-            <h2 className="h2 font-display mb-8">Join Our Mission</h2>
+            <h2 className="h2 font-display mb-8">
+              Revolutionizing MLBB Coaching
+            </h2>
             <p className="text-large text-muted-foreground leading-relaxed mb-12">
-              We are a team of AI researchers, engineers, and passionate MLBB
-              players on a mission to revolutionize esports coaching and help
-              every player unlock their competitive potential.
+              SkillShift AI is pioneering the future of esports coaching through
+              advanced artificial intelligence. We combine deep MLBB expertise
+              with cutting-edge AI technology to help players reach their full
+              competitive potential.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -474,9 +478,7 @@ const SkillShiftLanding = () => {
                 <h3 className="h3 font-display mb-6">Our Process</h3>
                 <div className="space-y-6">
                   <div className="border-l border-border pl-6">
-                    <h4 className="h5 font-display mb-2">
-                      Application Review
-                    </h4>
+                    <h4 className="h5 font-display mb-2">Application Review</h4>
                     <p className="text-muted-foreground">
                       A thorough review of your background and assessment of
                       role fit.
@@ -522,13 +524,13 @@ const SkillShiftLanding = () => {
           </section>
         )}
 
-        {/* News Section */}
-        {activeSection === "news" && (
+        {/* Updates Section */}
+        {activeSection === "updates" && (
           <section className="mb-20">
             <p className="text-xs text-muted-foreground tracking-wider mb-8 uppercase">
-              [ NEWS ]
+              [ PLATFORM UPDATES ]
             </p>
-            <h2 className="h2 font-display mb-12">Latest Updates</h2>
+            <h2 className="h2 font-display mb-12">Latest Platform Updates</h2>
 
             <div className="space-y-8">
               {news.map((item, index) => (
@@ -536,7 +538,9 @@ const SkillShiftLanding = () => {
                   key={index}
                   className="border border-border rounded-lg p-6 hover:border-border/60 transition-colors bg-card"
                 >
-                  <div className="text-sm text-muted-foreground mb-2">{item.date}</div>
+                  <div className="text-sm text-muted-foreground mb-2">
+                    {item.date}
+                  </div>
                   <h3 className="h5 font-display mb-3">{item.title}</h3>
                   <p className="text-muted-foreground leading-relaxed">
                     {item.description}
@@ -546,20 +550,6 @@ const SkillShiftLanding = () => {
             </div>
           </section>
         )}
-
-        {/* Product Banner */}
-        <section className="border border-border rounded-lg p-8 bg-muted/20">
-          <p className="text-xs text-muted-foreground tracking-wider mb-4 uppercase">
-            [ LATEST ]
-          </p>
-          <h2 className="h3 font-display mb-4">SkillShift MLBB Coach 3.0</h2>
-          <p className="text-muted-foreground leading-relaxed">
-            SkillShift MLBB Coach 3.0 is the most intelligent esports coaching AI
-            in the world. It includes advanced video analysis, temporal event detection,
-            behavioral pattern recognition, and personalized coaching insights that
-            adapt to your unique playstyle and competitive goals.
-          </p>
-        </section>
       </main>
 
       {/* Footer */}

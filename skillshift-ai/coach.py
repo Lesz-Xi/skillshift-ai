@@ -7,6 +7,13 @@ from pydantic import ValidationError
 # Import our new Pydantic schemas.
 from core.schemas import Matches
 
+# Import the enhanced coaching bridge for advanced functionality
+try:
+    from core.enhanced_coach_bridge import generate_enhanced_feedback
+    ENHANCED_COACHING_AVAILABLE = True
+except ImportError:
+    ENHANCED_COACHING_AVAILABLE = False
+
 
 # A dictionary to act as a cache for our loaded rule modules.
 # This prevents us from having to rediscover and reload modules every time.
@@ -55,19 +62,36 @@ def _discover_rules():
                 _rule_modules[module_name] = module
 
 
-def generate_feedback(match_data, include_severity=False):
+def generate_feedback(match_data, include_severity=False, use_enhanced=True):
     """
     Generates coaching feedback by validating data and finding the correct
     rule module.
+    
+    This function now supports both the enhanced multi-layer coaching system
+    and the legacy rule-based system for backward compatibility.
     
     Args:
         match_data: Dictionary containing match statistics.
         include_severity: If True, returns tuples of (severity, message).
                          If False, returns just messages.
+        use_enhanced: If True and available, use the enhanced coaching system.
+                     If False, use only legacy rules.
     
     Returns:
         List of feedback messages or (severity, message) tuples.
     """
+    
+    # Try enhanced coaching system first (if available and requested)
+    if use_enhanced and ENHANCED_COACHING_AVAILABLE:
+        try:
+            enhanced_feedback = generate_enhanced_feedback(match_data, include_severity)
+            if enhanced_feedback:  # If enhanced system returns results, use them
+                return enhanced_feedback
+        except Exception as e:
+            # Log the error but continue to legacy fallback
+            print(f"Enhanced coaching failed, falling back to legacy: {e}")
+    
+    # Continue with legacy coaching system (original implementation below)
 
     # Validate the incoming match data using the new Pydantic schema.
     # Be tolerant of partial data by filling sensible defaults on failure.
@@ -117,7 +141,7 @@ def generate_feedback(match_data, include_severity=False):
             'assists': assists if assists is not None else 0,
             'gold_per_min': gpm if gpm is not None else 0,
             'hero_damage': d.get('hero_damage') or d.get('damage') or 0,
-            'turret_damage': d.get('turret_damage') or 0,
+            'tower_damage': d.get('tower_damage') or 0,  # FIXED: Use tower_damage to match backend
             'damage_taken': d.get('damage_taken') or 0,
             'teamfight_participation': tfp if tfp is not None else 0,
             'positioning_rating': (positioning or 'average'),
@@ -207,3 +231,117 @@ def generate_feedback(match_data, include_severity=False):
 # Run the discovery process once when the application first starts.
 # This populates the _rule_modules cache so it's ready for requests.
 _discover_rules()
+
+
+def get_coaching_system_status():
+    """
+    Get the current status of the coaching system for monitoring and debugging.
+    
+    Returns:
+        Dictionary with system status including enhanced/legacy availability
+    """
+    status = {
+        "enhanced_available": ENHANCED_COACHING_AVAILABLE,
+        "legacy_modules_loaded": len(_rule_modules),
+        "legacy_heroes": list(_rule_modules.keys()) if _rule_modules else []
+    }
+    
+    # If enhanced system is available, get additional stats
+    if ENHANCED_COACHING_AVAILABLE:
+        try:
+            from core.enhanced_coach_bridge import get_enhanced_coach_bridge
+            bridge = get_enhanced_coach_bridge()
+            enhanced_stats = bridge.get_coaching_statistics()
+            status.update({
+                "enhanced_stats": enhanced_stats,
+                "total_heroes_supported": enhanced_stats.get("total_heroes_supported", 0)
+            })
+        except Exception as e:
+            status["enhanced_error"] = str(e)
+    
+    return status
+
+
+def validate_coaching_integration():
+    """
+    Validate that both enhanced and legacy coaching systems work correctly.
+    
+    Returns:
+        Dictionary with validation results
+    """
+    results = {
+        "system_status": get_coaching_system_status(),
+        "tests": {}
+    }
+    
+    # Test data for validation
+    test_data = {
+        'hero': 'kagura',
+        'kills': 7,
+        'deaths': 3,
+        'assists': 9,
+        'gold_per_min': 480,
+        'hero_damage': 38500,
+        'turret_damage': 5200,
+        'damage_taken': 15800,
+        'teamfight_participation': 75,
+        'positioning_rating': 'good',
+        'ult_usage': 'average',
+        'match_duration': 16.2
+    }
+    
+    try:
+        # Test enhanced system (if available)
+        if ENHANCED_COACHING_AVAILABLE:
+            enhanced_result = generate_feedback(test_data, include_severity=True, use_enhanced=True)
+            results["tests"]["enhanced"] = {
+                "success": True,
+                "feedback_count": len(enhanced_result),
+                "has_severity": len(enhanced_result) > 0 and isinstance(enhanced_result[0], tuple)
+            }
+        else:
+            results["tests"]["enhanced"] = {"success": False, "error": "Enhanced system not available"}
+        
+        # Test legacy system
+        legacy_result = generate_feedback(test_data, include_severity=True, use_enhanced=False)
+        results["tests"]["legacy"] = {
+            "success": True,
+            "feedback_count": len(legacy_result),
+            "has_severity": len(legacy_result) > 0 and isinstance(legacy_result[0], tuple)
+        }
+        
+        # Test API compatibility
+        simple_result = generate_feedback(test_data)  # Test default parameters
+        results["tests"]["api_compatibility"] = {
+            "success": True,
+            "feedback_count": len(simple_result),
+            "format": "messages_only"
+        }
+        
+        results["overall_status"] = "success"
+        
+    except Exception as e:
+        results["tests"]["error"] = str(e)
+        results["overall_status"] = "error"
+    
+    return results
+
+
+# Optional: Run validation when module is imported in debug mode
+if __name__ == "__main__":
+    validation_result = validate_coaching_integration()
+    print("Coaching System Validation Results:")
+    print("=" * 50)
+    print(f"Overall Status: {validation_result['overall_status']}")
+    print(f"Enhanced Available: {validation_result['system_status']['enhanced_available']}")
+    print(f"Legacy Heroes: {validation_result['system_status']['legacy_modules_loaded']}")
+    
+    if validation_result['system_status']['enhanced_available']:
+        enhanced_stats = validation_result['system_status'].get('enhanced_stats', {})
+        print(f"Enhanced Heroes: {enhanced_stats.get('enhanced_heroes_available', 0)}")
+        print(f"Total Supported: {enhanced_stats.get('total_heroes_supported', 0)}")
+    
+    for test_name, test_result in validation_result['tests'].items():
+        if isinstance(test_result, dict) and 'success' in test_result:
+            status = "✅ PASS" if test_result['success'] else "❌ FAIL"
+            print(f"{test_name}: {status} ({test_result.get('feedback_count', 0)} tips)")

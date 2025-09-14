@@ -23,9 +23,10 @@ class ScreenshotAnalysisResponse(BaseModel):
     ign: str
     player_located: bool
     player_ign: Optional[str]
-    kda: Dict[str, Any]
     overall_confidence: float
     row_agnostic_mode: bool
+    analysis: Optional[Dict[str, Any]] = None
+    damage_stats: Optional[Dict[str, Any]] = None
     debug: Optional[Dict[str, Any]] = None
 
 

@@ -1,16 +1,24 @@
 # MLBB Coach AI - Unified Setup & Runbook
 
 This consolidates virtualenv usage and clarifies health checks and API schema contracts.
-
+(bun uninstall -g @anthropic-ai/claude-cli)
 ## One-Command Startup (Recommended)
 
-NEW: python -m uvicorn web.app:app --host 0.0.0.0 --port 8000 --reload
+Quick Start (Two Terminal Windows)
 
-BEST: FASTAPI_USE_GUNICORN=1 FASTAPI_WORKERS=2 FASTAPI_TIMEOUT=180 FRONTEND_PORT=3000 bash -c 'cd skillshift-ai && ./start_services.sh'
+cd /Users/lesz/Documents/Project-AI/skillshift-ai && bash start_services.sh
 
-Manual:
-Backend (multi-worker): cd skillshift-ai && source venv/bin/activate && gunicorn web.app:app -w 2 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 --timeout 180 --graceful-timeout 30 --keep-alive 5
-Frontend: cd skillshift-ai/dashboard-ui-new && PORT=3000 npm run dev
+Terminal 1 (Backend):
+cd /Users/lesz/Documents/Project-AI/skillshift-ai && uvicorn web.app:app --host 0.0.0.0 --port 8000 --reload
+
+Terminal 2 (Frontend):
+cd /Users/lesz/Documents/Project-AI/skillshift-ai/dashboard-ui-new
+&& npm run dev
+
+Once both are running, you can test the fixes we implemented by
+uploading screenshots through the web interface at
+http://localhost:3000/screenshot-analysis - the "error loading
+resource" issue should now be resolved! 🎯
 
 ```bash
 cd skillshift-ai && ./start_services.sh

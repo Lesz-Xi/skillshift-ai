@@ -7,31 +7,11 @@ const SKILLSHIFT_AI_BASE_URL =
 
 export async function GET() {
   try {
-    // Prefer isolated health first (non-blocking), then standard, then basic
-    let healthResponse;
-    try {
-      healthResponse = await fetch(
-        `${SKILLSHIFT_AI_BASE_URL}/api/health-isolated`,
-        {
-          method: "GET",
-          signal: AbortSignal.timeout(2000), // 2s for isolated
-        }
-      );
-    } catch (isolatedError) {
-      console.log("Isolated endpoint failed, trying standard health...");
-      try {
-        healthResponse = await fetch(`${SKILLSHIFT_AI_BASE_URL}/api/health`, {
-          method: "GET",
-          signal: AbortSignal.timeout(4000), // 4s for standard
-        });
-      } catch (quickError) {
-        console.log("Standard health failed, trying basic endpoint...");
-        healthResponse = await fetch(`${SKILLSHIFT_AI_BASE_URL}/health`, {
-          method: "GET",
-          signal: AbortSignal.timeout(3000), // 3s for basic
-        });
-      }
-    }
+    // Use the working backend health endpoint directly (fixed: removed non-existent fallback endpoints)
+    const healthResponse = await fetch(`${SKILLSHIFT_AI_BASE_URL}/health`, {
+      method: "GET",
+      signal: AbortSignal.timeout(3000), // 3s timeout
+    });
 
     if (!healthResponse.ok) {
       console.error("Backend health check failed:", healthResponse.status);

@@ -13,11 +13,14 @@ import {
   Video,
   Settings,
   ChevronDown,
+  ChevronLeft,
   Sparkles,
   Shield,
   Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ActiveUsersIndicator from "./active-users-indicator";
+import UserAvatarMenu from "./user-avatar-menu";
 
 const navigationGroups = [
   {
@@ -26,8 +29,8 @@ const navigationGroups = [
       {
         id: "overview",
         icon: BarChart3,
-        label: "Overview",
-        description: "Match analytics and KPIs",
+        label: "Profile",
+        description: "Your stats and performance overview",
       },
       {
         id: "heroes",
@@ -49,8 +52,8 @@ const navigationGroups = [
       {
         id: "coaching",
         icon: Target,
-        label: "Pipeline",
-        description: "Active coaching requests",
+        label: "Coaching Sessions",
+        description: "Active coaching and training",
       },
       {
         id: "mindset",
@@ -68,35 +71,41 @@ const navigationGroups = [
         icon: Camera,
         label: "Screenshot",
         description: "Upload and analyze screenshots",
-        subItems: [
-          { id: "screenshot-upload", label: "Upload New", icon: Camera },
-          { id: "screenshot-batch", label: "Batch Analysis", icon: Users },
-        ],
       },
       {
         id: "video-analysis",
         icon: Video,
         label: "Video",
         description: "Match replay analysis",
-        subItems: [
-          { id: "video-upload", label: "Upload Replay", icon: Video },
-          { id: "video-library", label: "Match Library", icon: History },
-        ],
+      },
+    ],
+  },
+  {
+    label: "SUPPORT",
+    items: [
+      {
+        id: "admin",
+        icon: Settings,
+        label: "Settings",
+        description: "Account settings and preferences",
       },
     ],
   },
 ];
 
-export function CustomSidebar({ activeSection, onSectionChange, className }) {
+export function CustomSidebar({
+  activeSection,
+  onSectionChange,
+  onClose,
+  className,
+}) {
   const [expandedGroups, setExpandedGroups] = useState([
     "ANALYTICS",
     "COACHING",
     "ANALYSIS TOOLS",
+    "SUPPORT",
   ]);
-  const [expandedItems, setExpandedItems] = useState([
-    "screenshot-analysis",
-    "video-analysis",
-  ]);
+  const [expandedItems, setExpandedItems] = useState([]);
 
   const toggleGroup = (groupLabel) => {
     setExpandedGroups((prev) =>
@@ -120,9 +129,13 @@ export function CustomSidebar({ activeSection, onSectionChange, className }) {
         "w-72 bg-card border-r border-border h-full flex flex-col",
         className
       )}
+      style={{
+        scrollbarWidth: "none",
+        scrollbarGutter: "auto",
+      }}
     >
       {/* Header */}
-      <div className="border-b border-border p-4">
+      <div className="p-4">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <Sparkles className="w-5 h-5 text-primary-foreground" />
@@ -135,13 +148,19 @@ export function CustomSidebar({ activeSection, onSectionChange, className }) {
       </div>
 
       {/* Navigation Content */}
-      <div className="flex-1 overflow-y-auto p-3">
+      <div
+        className="flex-1 overflow-y-auto p-3 [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar]:h-0"
+        style={{
+          scrollbarWidth: "none",
+          scrollbarGutter: "auto",
+        }}
+      >
         {navigationGroups.map((group) => (
-          <div key={group.label} className="mb-4">
+          <div key={group.label} className="mb-2">
             {/* Group Header */}
             <button
               onClick={() => toggleGroup(group.label)}
-              className="flex items-center justify-between w-full px-2 py-2 text-left hover:text-foreground transition-colors"
+              className="flex items-center justify-between w-full px-2 py-2 text-left hover:text-foreground transition-colors border-0"
             >
               <span className="table-header text-muted-foreground">
                 {group.label}
@@ -169,19 +188,22 @@ export function CustomSidebar({ activeSection, onSectionChange, className }) {
                       <div key={item.id}>
                         {/* Main Item */}
                         <button
-                          onClick={() => {
-                            if (item.subItems) {
-                              toggleItem(item.id);
-                            } else {
-                              onSectionChange(item.id);
-                            }
-                          }}
+                          onClick={() => onSectionChange(item.id)}
                           className={cn(
-                            "flex items-center justify-between w-full px-3 py-2 rounded-md text-left transition-all duration-200 min-h-[2.5rem]",
+                            "flex items-center justify-between w-full px-3 py-2 rounded-md text-left min-h-[2.5rem] focus:outline-none focus:ring-0 border-r-0 border-t-0 border-b-0 outline-none ring-0 shadow-none",
                             activeSection === item.id
-                              ? "bg-accent/60 text-accent-foreground border-l-2 border-primary"
-                              : "text-muted-foreground hover:text-foreground hover:bg-accent/30"
+                              ? "bg-accent/60 text-accent-foreground border-l border-muted-foreground"
+                              : "text-muted-foreground"
                           )}
+                          style={{
+                            borderRight: "none !important",
+                            outline: "none !important",
+                            boxShadow: "none !important",
+                            borderTop: "none !important",
+                            borderBottom: "none !important",
+                            border: "none !important",
+                            borderWidth: "0 !important",
+                          }}
                         >
                           <div className="flex items-center gap-3 flex-1">
                             <item.icon className="w-4 h-4 flex-shrink-0" />
@@ -195,53 +217,11 @@ export function CustomSidebar({ activeSection, onSectionChange, className }) {
                             </div>
                           </div>
                           <div className="flex items-center gap-1 flex-shrink-0">
-                            {item.subItems && (
-                              <ChevronDown
-                                className={cn(
-                                  "w-4 h-4 transition-transform",
-                                  expandedItems.includes(item.id)
-                                    ? "rotate-180"
-                                    : ""
-                                )}
-                              />
-                            )}
+                            {/* No sub-items, so no chevron needed */}
                           </div>
                         </button>
 
-                        {/* Sub Items */}
-                        {item.subItems && (
-                          <AnimatePresence>
-                            {expandedItems.includes(item.id) && (
-                              <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: "auto" }}
-                                exit={{ opacity: 0, height: 0 }}
-                                transition={{ duration: 0.2 }}
-                                className="overflow-hidden ml-4 mt-0.5"
-                              >
-                                <div className="space-y-1">
-                                  {item.subItems.map((subItem) => (
-                                    <button
-                                      key={subItem.id}
-                                      onClick={() => onSectionChange(item.id)}
-                                      className={cn(
-                                        "flex items-center gap-2 w-full px-2 py-1.5 rounded-sm text-left transition-all duration-200 text-sm",
-                                        activeSection === item.id
-                                          ? "bg-accent/40 text-accent-foreground border-l border-primary"
-                                          : "text-muted-foreground hover:text-foreground hover:bg-accent/20"
-                                      )}
-                                    >
-                                      <subItem.icon className="w-3 h-3 flex-shrink-0" />
-                                      <span className="truncate">
-                                        {subItem.label}
-                                      </span>
-                                    </button>
-                                  ))}
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        )}
+                        {/* No sub-items */}
                       </div>
                     ))}
                   </div>
@@ -252,19 +232,19 @@ export function CustomSidebar({ activeSection, onSectionChange, className }) {
         ))}
       </div>
 
-      {/* Footer */}
+      {/* Footer - User Avatar and Controls */}
       <div className="border-t border-border p-3">
-        <div className="flex items-center gap-2 p-2 bg-muted rounded-md">
-          <div className="w-6 h-6 bg-muted rounded-full flex items-center justify-center">
-            <Shield className="w-3 h-3 text-muted-foreground" />
-          </div>
-          <div className="flex-1">
-            <div className="text-xs font-medium text-foreground">
-              System Status
-            </div>
-            <div className="text-xs text-muted-foreground">All operational</div>
-          </div>
-          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+        <div className="flex items-center justify-between">
+          <UserAvatarMenu />
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onClose}
+            className="h-8 w-8 p-0 text-muted-foreground hover:text-foreground"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-4 h-4 -ml-4" />
+          </Button>
         </div>
       </div>
     </div>

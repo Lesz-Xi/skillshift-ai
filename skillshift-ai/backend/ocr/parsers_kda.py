@@ -214,8 +214,8 @@ class RowAgnosticKDAParser:
             # Convert to OCR results format for compatibility
             ocr_results = [(None, text, 0.8) for text in texts]
             
-            # Parse KDA data from OCR results
-            kda_data = self._extract_kda_from_ocr(ocr_results, target_ign)
+            # Parse KDA data from OCR results using enhanced version with fallbacks
+            kda_data = self._extract_kda_from_ocr_enhanced(ocr_results, target_ign)
             
             if not kda_data:
                 return None
