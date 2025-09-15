@@ -602,8 +602,8 @@ def _convert_session_response_to_frontend_format(session_result: Dict[str, Any],
                 # Damage statistics from fusion - consistent naming
                 'hero_damage': damage_stats.get('hero_damage'),
                 'damage_taken': damage_stats.get('damage_taken'),
-                'tower_damage': damage_stats.get('turret_damage') or damage_stats.get('tower_damage'),
-                'turret_damage': damage_stats.get('turret_damage') or damage_stats.get('tower_damage'),
+                'tower_damage': damage_stats.get('tower_damage'),  # Use consistent tower_damage
+                'turret_damage': damage_stats.get('tower_damage'),  # Legacy compatibility
                 'teamfight_participation': damage_stats.get('teamfight_participation'),
                 
                 # Ensure damage_stats is included for frontend
@@ -620,6 +620,16 @@ def _convert_session_response_to_frontend_format(session_result: Dict[str, Any],
                 # Status indicators
                 'fusion_status': 'Stats fused',
                 'session_status': 'complete'
+            }
+            
+            # Mirror damage_stats to __raw for legacy compatibility
+            frontend_result['__raw'] = {
+                'damage_stats': damage_stats,
+                'coaching_feedback': merged_analysis.get('coaching_feedback', []),
+                'session': {
+                    'fused': True,
+                    'status': 'merged'
+                }
             }
             
             # Add debug trace if DEBUG_TRACES is enabled
