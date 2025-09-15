@@ -2,80 +2,76 @@
 
 import Globe3D from "./Globe3D";
 
-const offices = [
-  {
-    city: "MANILA",
-    country: "Philippines",
-    lat: 14.5995,
-    lng: 120.9842,
-    coordinates: "14.5995°N, 120.9842°E",
-  },
-  {
-    city: "JAKARTA",
-    country: "Indonesia",
-    lat: -6.2088,
-    lng: 106.8456,
-    coordinates: "6.2088°S, 106.8456°E",
-  },
-  {
-    city: "YANGON",
-    country: "Myanmar",
-    lat: 16.8661,
-    lng: 96.1951,
-    coordinates: "16.8661°N, 96.1951°E",
-  },
-  {
-    city: "PHNOM PENH",
-    country: "Cambodia",
-    lat: 11.5564,
-    lng: 104.9282,
-    coordinates: "11.5564°N, 104.9282°E",
-  },
-  {
-    city: "NEW YORK",
-    country: "USA",
-    lat: 40.7128,
-    lng: -74.006,
-    coordinates: "40.7128°N, 74.0060°W",
-  },
-  {
-    city: "SINGAPORE",
-    country: "Singapore",
-    lat: 1.3521,
-    lng: 103.8198,
-    coordinates: "1.3521°N, 103.8198°E",
-  },
-];
-
 const SkillShiftGlobeSection = () => {
+  // Office locations for the globe
+  const offices = [
+    {
+      city: "San Francisco",
+      coordinates: "37.7749° N, 122.4194° W",
+      lat: 37.7749,
+      lng: -122.4194,
+    },
+    {
+      city: "New York",
+      coordinates: "40.7128° N, 74.0060° W",
+      lat: 40.7128,
+      lng: -74.006,
+    },
+    {
+      city: "Austin",
+      coordinates: "30.2672° N, 97.7431° W",
+      lat: 30.2672,
+      lng: -97.7431,
+    },
+  ];
+
   return (
-    <section className="py-20 px-6">
-      <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center">
-        {/* Left Content */}
-        <div className="space-y-8">
-          <div className="space-y-6">
-            <div className="text-muted-foreground text-sm font-medium tracking-wider">
-              [ GLOBAL REACH ]
-            </div>
+    <section className="mb-20">
+      <div className="mb-8">
+        <p className="text-xs text-muted-foreground tracking-wider mb-4 uppercase">
+          [ GLOBAL REACH ]
+        </p>
+        <h2 className="h3 font-display mb-8">
+          Connecting MLBB Players Worldwide
+        </h2>
+        <p className="text-large text-muted-foreground leading-relaxed mb-12 max-w-3xl">
+          Our AI coaching platform serves players across the globe, with offices
+          in major gaming hubs and a community that spans every continent.
+          Experience the future of MLBB coaching, no matter where you are.
+        </p>
+      </div>
 
-            <h2 className="text-5xl lg:text-6xl font-light tracking-tight text-foreground leading-tight">
-              Connecting
-              <br />
-              MLBB Players
-            </h2>
+      {/* Globe Container */}
+      <div className="relative">
+        <div className="h-[600px] w-full rounded-lg overflow-hidden border border-border bg-card">
+          <Globe3D offices={offices} rotationSpeed={0.002} />
+        </div>
 
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-md">
-              Our AI coaching platform serves Mobile Legends players across the
-              globe, providing personalized insights and strategic guidance in
-              Philippines, Indonesia, Myanmar, Cambodia, USA, and Singapore.
+        {/* Overlay Stats */}
+        <div className="absolute top-6 right-6 bg-card/90 backdrop-blur-sm border border-border rounded-lg p-4">
+          <div className="text-sm text-muted-foreground mb-2">
+            Active Players
+          </div>
+          <div className="text-2xl font-display text-foreground">50,000+</div>
+        </div>
+
+        <div className="absolute bottom-6 left-6 bg-card/90 backdrop-blur-sm border border-border rounded-lg p-4">
+          <div className="text-sm text-muted-foreground mb-2">Countries</div>
+          <div className="text-2xl font-display text-foreground">120+</div>
+        </div>
+      </div>
+
+      {/* Office Details */}
+      <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+        {offices.map((office, index) => (
+          <div key={index} className="text-center">
+            <div className="w-3 h-3 bg-primary rounded-full mx-auto mb-3"></div>
+            <h3 className="h5 font-display mb-2">{office.city}</h3>
+            <p className="text-sm text-muted-foreground">
+              {office.coordinates}
             </p>
           </div>
-        </div>
-
-        {/* Right Globe */}
-        <div className="relative h-[600px] lg:h-[700px]">
-          <Globe3D offices={offices} rotationSpeed={0.0008} />
-        </div>
+        ))}
       </div>
     </section>
   );

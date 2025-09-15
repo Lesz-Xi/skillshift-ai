@@ -17,6 +17,7 @@
 **Purpose**: Provides fallback coaching when hero recognition fails
 
 **Key Features**:
+
 - Generic performance thresholds suitable for any hero
 - Role-agnostic coaching tips covering all aspects of gameplay
 - Proper YAML structure matching the expected HeroConfig format
@@ -27,6 +28,7 @@
 **File**: `debug_hero_recognition.py`
 
 **Changes**:
+
 - Corrected method calls from `generate_enhanced_coaching` to `generate_enhanced_feedback`
 - Updated result handling to work with the actual API return format
 - Enhanced output formatting for better debugging
@@ -52,6 +54,7 @@
 ```
 
 **Key Success Indicators**:
+
 - ✅ Coaching system no longer crashes on unknown heroes
 - ✅ Generates meaningful feedback even when hero recognition fails
 - ✅ Maintains all existing functionality for known heroes
@@ -73,16 +76,18 @@ While the system fix resolves the crash, for best results with your specific scr
 ## 🎯 WHAT THIS FIXES
 
 ### Before the Fix:
+
 ```
-Hero Recognition Fails → "unknown" hero → 
-Config file not found: config/heroes/unknown.yml → 
+Hero Recognition Fails → "unknown" hero →
+Config file not found: config/heroes/unknown.yml →
 Coaching System CRASHES → Frontend Error
 ```
 
 ### After the Fix:
+
 ```
-Hero Recognition Fails → "unknown" hero → 
-Loads config/heroes/unknown.yml → 
+Hero Recognition Fails → "unknown" hero →
+Loads config/heroes/unknown.yml →
 Generates Generic Coaching → SUCCESS
 ```
 
@@ -98,11 +103,13 @@ Generates Generic Coaching → SUCCESS
 ## 🚀 NEXT STEPS (Optional Improvements)
 
 ### For Enhanced Hero Recognition:
+
 1. **Improve OCR for Kagura**: Add common OCR variations like "kagur", "kagra", "kaqura"
 2. **Better Image Preprocessing**: Enhance OCR accuracy for hero name detection
 3. **Timeout Handling**: Improve parallel processing timeout handling
 
 ### For System Robustness:
+
 1. **More Hero Configs**: Create specific YAML configs for frequently used heroes
 2. **Enhanced Fallbacks**: Add role-specific unknown hero configs (unknown_mage.yml, unknown_fighter.yml, etc.)
 3. **Better Error Logging**: Add more detailed logging for debugging future issues
@@ -114,10 +121,10 @@ Generates Generic Coaching → SUCCESS
 **Status**: ✅ **RESOLVED**
 
 The coaching feedback error has been successfully fixed. The system now:
+
 - Handles unknown heroes gracefully without crashing
 - Provides meaningful coaching feedback in all scenarios
 - Maintains backward compatibility with existing functionality
 - Offers clear workarounds for optimal user experience
 
 **Recommendation**: Deploy the `unknown.yml` config file to your production environment to resolve the coaching feedback errors immediately.
-

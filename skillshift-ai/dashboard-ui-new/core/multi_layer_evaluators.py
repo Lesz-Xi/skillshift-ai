@@ -315,7 +315,7 @@ class PerformanceEvaluator(BaseEvaluator):
             tips.append(self._create_tip(
                 severity=CoachingSeverity.SUCCESS,
                 message=format_coaching_message(
-                    "Excellent teamfight presence! {participation}% participation shows strong team coordination.",
+                    "Excellent teamfight presence! {participation} participation shows strong team coordination.",
                     participation=participation
                 ),
                 focus_area=FocusArea.TEAMFIGHTING,
@@ -325,7 +325,7 @@ class PerformanceEvaluator(BaseEvaluator):
             tips.append(self._create_tip(
                 severity=CoachingSeverity.WARNING,
                 message=format_coaching_message(
-                    "Low teamfight participation ({participation}%). Join more team engagements to maximize impact.",
+                    "Low teamfight participation ({participation}). Join more team engagements to maximize impact.",
                     participation=participation
                 ),
                 focus_area=FocusArea.TEAMFIGHTING,

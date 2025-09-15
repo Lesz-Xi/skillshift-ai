@@ -12,6 +12,12 @@ import logging
 import uuid
 import numpy as np
 from pathlib import Path
+import sys
+import os
+
+# Import enhanced coach bridge from frontend core
+sys.path.append('/Users/lesz/Documents/Project-AI/skillshift-ai/dashboard-ui-new')
+from core.enhanced_coach_bridge import generate_enhanced_feedback
 
 from backend.ocr.parsers_kda import KDAResult, kda_parser
 from backend.ocr.parsers_damage import DamageResult, damage_parser
@@ -43,6 +49,7 @@ class GameSession:
     created_at: datetime
     screenshots: List[ScreenshotAnalysis] = field(default_factory=list)
     merged_analysis: Optional[Dict[str, Any]] = None
+    debug_trace: Dict[str, Any] = field(default_factory=dict)
     is_complete: bool = False
 
 class SessionAnalysisService:
@@ -63,37 +70,89 @@ class SessionAnalysisService:
             'damage_stats_confidence': 0.7
         }
     
-    def create_session(self, user_id: str, hero_id: str, target_ign: str) -> str:
-        """Create a new game session."""
-        session_id = str(uuid.uuid4())
+    def create_session(self, user_id: str, hero_id: str, target_ign: str, session_id: Optional[str] = None) -> str:
+        """
+        Create a new game session.
+
+        Args:
+            user_id: User identifier
+            hero_id: Hero identifier
+            target_ign: Target in-game name
+            session_id: Optional frontend-generated session ID
+
+        Returns:
+            Session ID (either provided or generated)
+        """
+        # Use provided session_id or generate a new one
+        final_session_id = session_id or str(uuid.uuid4())
+
+        # Check for session ID conflicts
+        if final_session_id in self.sessions:
+            logger.warning(f"Session ID conflict for {final_session_id}, generating new ID")
+            final_session_id = str(uuid.uuid4())
+
         session = GameSession(
-            session_id=session_id,
+            session_id=final_session_id,
             user_id=user_id,
             hero_id=hero_id,
             target_ign=target_ign,
             created_at=datetime.now()
         )
-        self.sessions[session_id] = session
-        logger.info(f"Created new session {session_id} for user {user_id}, hero {hero_id}, IGN {target_ign}")
-        return session_id
+        self.sessions[final_session_id] = session
+        logger.info(f"Created new session {final_session_id} for user {user_id}, hero {hero_id}, IGN {target_ign}")
+        return final_session_id
     
-    def add_screenshot(self, session_id: str, image_path: str) -> Dict[str, Any]:
+    def get_session(self, session_id: str) -> Optional[GameSession]:
+        """Get a session by ID."""
+        return self.sessions.get(session_id)
+    
+    def add_screenshot(self, session_id: str, image_path: str, debug_mode: bool = False) -> Dict[str, Any]:
         """
         Add a screenshot to a session and analyze it.
-        
+
         This method implements the screen-type discrimination logic to determine
         whether this is a scoreboard/KDA screen or damage/stats screen.
+
+        Args:
+            session_id: Session identifier
+            image_path: Path to the screenshot image
+
+        Returns:
+            Dictionary containing analysis results and session status
+
+        Raises:
+            ValueError: If session doesn't exist or validation fails
+            FileNotFoundError: If image file doesn't exist
         """
         try:
-            # Validate session exists
+            # Enhanced validation
+            if not session_id:
+                raise ValueError("Session ID is required")
+
+            if not image_path:
+                raise ValueError("Image path is required")
+
+            # Auto-create session if it doesn't exist (for frontend compatibility)
             if session_id not in self.sessions:
-                raise ValueError(f"Session {session_id} not found")
-            
+                logger.warning(f"Session {session_id} not found, auto-creating with default values")
+                self.create_session(
+                    user_id="web_user",
+                    hero_id="unknown",
+                    target_ign="unknown",
+                    session_id=session_id
+                )
+
+            # Validate image file exists
+            if not Path(image_path).exists():
+                raise FileNotFoundError(f"Image file not found: {image_path}")
+
             session = self.sessions[session_id]
-            
+
+            logger.info(f"Adding screenshot to session {session_id} for IGN {session.target_ign}")
+
             # Detect screen type and parse accordingly
             screen_type, analysis_result = self._analyze_screenshot_type(image_path, session.target_ign)
-            
+
             # Create screenshot analysis
             screenshot = ScreenshotAnalysis(
                 screenshot_id=str(uuid.uuid4()),
@@ -102,27 +161,68 @@ class SessionAnalysisService:
                 timestamp=datetime.now(),
                 **analysis_result
             )
-            
+
             session.screenshots.append(screenshot)
-            
+
             # Try to merge data if we have both screen types
             if self._can_merge_session_data(session):
+                logger.info(f"Session {session_id} has both screen types, attempting fusion")
                 self._merge_session_data(session)
-            
+            else:
+                logger.info(f"Session {session_id} waiting for more screenshots ({len(session.screenshots)} so far)")
+
             logger.info(f"Added {screen_type} screenshot to session {session_id}")
-            
-            return {
+
+            # Build comprehensive response
+            response = {
                 'session_id': session_id,
                 'screenshot_id': screenshot.screenshot_id,
                 'screen_type': screen_type,
                 'analysis_result': analysis_result,
                 'session_complete': session.is_complete,
-                'merged_analysis': session.merged_analysis
+                'merged_analysis': session.merged_analysis,
+                'screenshots_count': len(session.screenshots),
+                'processing_time': screenshot.processing_time
             }
-            
-        except Exception as e:
-            logger.error(f"Error adding screenshot to session {session_id}: {e}")
+
+            # Add diagnostic information
+            if session.is_complete:
+                response['fusion_status'] = 'complete'
+                response['unified_coaching_generated'] = bool(session.merged_analysis and session.merged_analysis.get('coaching_feedback'))
+            else:
+                response['fusion_status'] = 'incomplete'
+                response['needed_screenshots'] = self._get_needed_screenshot_types(session)
+
+            # Add debug trace when debug mode is enabled (H1 from hypotheses)
+            if debug_mode or os.getenv("DEBUG_TRACES") == "1":
+                response['__trace'] = {
+                    "session": {
+                        "id": session.session_id,
+                        "ready_to_merge": session.is_complete,
+                        "files_seen": len(session.screenshots)
+                    },
+                    **session.debug_trace  # Include all debug info from session
+                }
+
+            return response
+
+        except ValueError as ve:
+            logger.error(f"Validation error adding screenshot to session {session_id}: {ve}")
             raise
+        except FileNotFoundError as fnf:
+            logger.error(f"File not found error adding screenshot to session {session_id}: {fnf}")
+            raise
+        except Exception as e:
+            logger.error(f"Unexpected error adding screenshot to session {session_id}: {e}")
+            # Return partial response with error information for graceful degradation
+            return {
+                'session_id': session_id,
+                'screen_type': 'error',
+                'session_complete': False,
+                'error': str(e),
+                'error_type': type(e).__name__,
+                'fallback_mode': True
+            }
     
     def _analyze_screenshot_type(self, image_path: str, target_ign: str) -> tuple[str, Dict[str, Any]]:
         """
@@ -164,7 +264,12 @@ class SessionAnalysisService:
                 # For damage stats screens, only run damage parser
                 logger.info(f"Detected damage stats screen, running damage parser for {target_ign}")
                 damage_result = damage_parser.parse_damage_from_screenshot(image_path, target_ign)
+                # Ensure damage result has confidence score
+                if damage_result and not hasattr(damage_result, 'confidence'):
+                    damage_result.confidence = 0.8
                 analysis_result['damage_result'] = damage_result
+                # Normalize screen type
+                screen_type = 'damage_stats'
                 
             else:
                 # Unknown screen type, try both parsers as fallback
@@ -189,12 +294,154 @@ class SessionAnalysisService:
                 'raw_data': {'error': str(e)}
             }
     
-    def _can_merge_session_data(self, session: GameSession) -> bool:
-        """Check if session has enough data for merging."""
+    def _can_merge_session_data(self, session: GameSession) -> tuple[bool, Dict[str, Any]]:
+        """Check if session has enough data for merging with debug info."""
         has_scoreboard = any(s.screen_type == 'scoreboard' for s in session.screenshots)
         has_damage_stats = any(s.screen_type == 'damage' or s.screen_type == 'damage_stats' for s in session.screenshots)
         
-        return has_scoreboard and has_damage_stats
+        # Collect debug info
+        scoreboard_screenshot = next((s for s in session.screenshots if s.screen_type == 'scoreboard'), None)
+        damage_screenshot = next((s for s in session.screenshots if s.screen_type in ['damage', 'damage_stats']), None)
+        
+        debug_info = {
+            'has_scoreboard': has_scoreboard,
+            'has_damage_stats': has_damage_stats,
+            'screenshot_count': len(session.screenshots),
+            'screen_types': [s.screen_type for s in session.screenshots]
+        }
+        
+        if scoreboard_screenshot:
+            debug_info['scoreboard'] = {
+                'screen_kind': scoreboard_screenshot.screen_type,
+                'ign': getattr(scoreboard_screenshot.kda_result, 'player_ign', 'unknown') if scoreboard_screenshot.kda_result else 'unknown',
+                'hero': getattr(scoreboard_screenshot.kda_result, 'hero', 'unknown') if scoreboard_screenshot.kda_result else 'unknown',
+                'battle_id': getattr(scoreboard_screenshot.kda_result, 'battle_id', None) if scoreboard_screenshot.kda_result else None
+            }
+        
+        if damage_screenshot:
+            debug_info['damage'] = {
+                'screen_kind': damage_screenshot.screen_type,
+                'ign': getattr(damage_screenshot.damage_result, 'player_ign', 'unknown') if damage_screenshot.damage_result else 'unknown',
+                'hero': getattr(damage_screenshot.damage_result, 'hero', 'unknown') if damage_screenshot.damage_result else 'unknown',
+                'battle_id': getattr(damage_screenshot.damage_result, 'battle_id', None) if damage_screenshot.damage_result else None,
+                'row_confidence': getattr(damage_screenshot.damage_result, 'confidence', 0.0) if damage_screenshot.damage_result else 0.0
+            }
+        
+        # Relaxed fusion gate logic (H2 from hypotheses)
+        can_merge = has_scoreboard and has_damage_stats
+        
+        if not can_merge:
+            debug_info['fusion_gate'] = {
+                'reason': 'missing_screenshots',
+                'passed': False
+            }
+        else:
+            # Check for battle_id mismatch but allow hero+IGN match
+            scoreboard_battle_id = debug_info.get('scoreboard', {}).get('battle_id')
+            damage_battle_id = debug_info.get('damage', {}).get('battle_id')
+            
+            if scoreboard_battle_id and damage_battle_id and scoreboard_battle_id != damage_battle_id:
+                debug_info['fusion_gate'] = {
+                    'reason': 'battle_id_mismatch',
+                    'passed': False
+                }
+                can_merge = False
+            elif not scoreboard_battle_id or not damage_battle_id:
+                # Missing battle_id, check hero+IGN match
+                scoreboard_hero = debug_info.get('scoreboard', {}).get('hero', 'unknown')
+                damage_hero = debug_info.get('damage', {}).get('hero', 'unknown')
+                scoreboard_ign = debug_info.get('scoreboard', {}).get('ign', 'unknown')
+                damage_ign = debug_info.get('damage', {}).get('ign', 'unknown')
+                
+                hero_match = scoreboard_hero.lower() == damage_hero.lower() and scoreboard_hero != 'unknown'
+
+                # Improved IGN matching with squad prefix tolerance (e.g., "HVD Diary of dolls" matches "Diary of dolls")
+                def normalize_ign(ign_string):
+                    """Normalize IGN by removing common squad prefixes and extra whitespace."""
+                    if not ign_string or ign_string == 'unknown':
+                        return 'unknown'
+
+                    # Remove common squad prefixes (3-4 letter codes followed by space)
+                    normalized = ign_string.strip()
+                    words = normalized.split()
+
+                    # If first word is 3-4 chars and all caps/alphanumeric, likely a squad prefix
+                    if len(words) > 1 and len(words[0]) <= 4 and words[0].isupper():
+                        normalized = ' '.join(words[1:])
+
+                    return normalized.lower().strip()
+
+                scoreboard_ign_norm = normalize_ign(scoreboard_ign)
+                damage_ign_norm = normalize_ign(damage_ign)
+                target_ign_norm = normalize_ign(session.target_ign)
+
+                # IGN match if any normalized version matches target IGN
+                ign_match = (scoreboard_ign_norm != 'unknown' and
+                           (scoreboard_ign_norm == damage_ign_norm or
+                            scoreboard_ign_norm == target_ign_norm or
+                            damage_ign_norm == target_ign_norm))
+                
+                debug_info['fusion_gate'] = {
+                    'reason': 'battle_id_missing_but_hero_ign_match' if (hero_match and ign_match) else 'battle_id_missing_and_no_hero_ign_match',
+                    'passed': hero_match and ign_match,
+                    'hero_match': hero_match,
+                    'ign_match': ign_match,
+                    'ign_details': {
+                        'scoreboard_raw': scoreboard_ign,
+                        'damage_raw': damage_ign,
+                        'target_raw': session.target_ign,
+                        'scoreboard_normalized': scoreboard_ign_norm,
+                        'damage_normalized': damage_ign_norm,
+                        'target_normalized': target_ign_norm
+                    }
+                }
+                can_merge = hero_match and ign_match
+            else:
+                debug_info['fusion_gate'] = {
+                    'reason': 'battle_id_match',
+                    'passed': True
+                }
+        
+        return can_merge, debug_info
+    
+    def _calculate_confidence_breakdown(self, fused_result, scoreboard_screenshot, damage_screenshot):
+        """Calculate confidence breakdown for each metric (H8 from hypotheses)."""
+        breakdown = {
+            'kda': 0.0,
+            'gpm': 0.0,
+            'damage': 0.0,
+            'taken': 0.0,
+            'tower': 0.0,
+            'teamfight': 0.0
+        }
+        
+        # KDA confidence from scoreboard
+        if scoreboard_screenshot and scoreboard_screenshot.kda_result:
+            kda_conf = getattr(scoreboard_screenshot.kda_result, 'confidence', 0.0)
+            breakdown['kda'] = min(0.35, kda_conf * 0.35)  # Max 35% weight for KDA
+        
+        # GPM confidence (if available)
+        if fused_result and hasattr(fused_result, 'gold_per_minute') and fused_result.gold_per_minute:
+            breakdown['gpm'] = 0.1  # Fixed 10% if GPM is present
+        
+        # Damage stats confidence from damage screenshot
+        if damage_screenshot and damage_screenshot.damage_result:
+            damage_conf = getattr(damage_screenshot.damage_result, 'confidence', 0.0)
+            
+            # Distribute damage confidence across damage metrics
+            if hasattr(fused_result, 'hero_damage') and fused_result.hero_damage:
+                breakdown['damage'] = min(0.3, damage_conf * 0.3)  # Max 30% weight
+            
+            if hasattr(fused_result, 'damage_taken') and fused_result.damage_taken:
+                breakdown['taken'] = min(0.15, damage_conf * 0.15)  # Max 15% weight
+            
+            if hasattr(fused_result, 'tower_damage') and fused_result.tower_damage:
+                breakdown['tower'] = min(0.1, damage_conf * 0.1)  # Max 10% weight
+            
+            if hasattr(fused_result, 'teamfight_participation') and fused_result.teamfight_participation:
+                breakdown['teamfight'] = min(0.1, damage_conf * 0.1)  # Max 10% weight
+        
+        return breakdown
     
     def _merge_session_data(self, session: GameSession):
         """
@@ -206,12 +453,22 @@ class SessionAnalysisService:
         try:
             logger.info(f"Merging session data for session {session.session_id}")
             
+            # Check if we can merge with debug info
+            can_merge, debug_info = self._can_merge_session_data(session)
+            session.debug_trace.update(debug_info)
+            
+            if not can_merge:
+                logger.warning(f"Cannot merge session {session.session_id}: {debug_info.get('fusion_gate', {}).get('reason', 'unknown')}")
+                session.debug_trace['coaching'] = {'called': False, 'reason': 'merge_failed'}
+                return
+            
             # Find the best screenshots for each type
             best_scoreboard = self._find_best_screenshot(session, 'scoreboard')
             best_damage_stats = self._find_best_screenshot(session, 'damage') or self._find_best_screenshot(session, 'damage_stats')
             
             if not best_scoreboard or not best_damage_stats:
                 logger.warning("Cannot merge session data - missing required screen types")
+                session.debug_trace['coaching'] = {'called': False, 'reason': 'missing_screenshots'}
                 return
             
             # Use the fusion engine to combine data from different screenshots
@@ -255,6 +512,9 @@ class SessionAnalysisService:
                     'data_completeness': fused_result.data_completeness,
                     'fusion_method': fused_result.fusion_method,
                     
+                    # Confidence breakdown (H8 from hypotheses)
+                    'confidence_breakdown': self._calculate_confidence_breakdown(fused_result, best_scoreboard, best_damage_stats),
+                    
                     # Source information
                     'sources': {
                         'scoreboard': {
@@ -269,7 +529,19 @@ class SessionAnalysisService:
                         }
                     }
                 }
-                
+
+                # Generate unified coaching feedback after session fusion (H12 from hypotheses)
+                try:
+                    logger.info(f"Generating unified coaching feedback for session {session.session_id}")
+                    unified_coaching_feedback = generate_enhanced_feedback(merged_analysis)
+                    merged_analysis['coaching_feedback'] = unified_coaching_feedback
+                    session.debug_trace['coaching'] = {'called': True, 'tips_count': len(unified_coaching_feedback)}
+                    logger.info(f"Generated unified coaching feedback with {len(unified_coaching_feedback)} insights")
+                except Exception as e:
+                    logger.warning(f"Failed to generate unified coaching feedback: {e}")
+                    merged_analysis['coaching_feedback'] = []
+                    session.debug_trace['coaching'] = {'called': False, 'reason': str(e)}
+
                 logger.info(f"Setting session.is_complete = True for {session.session_id}")
                 session.merged_analysis = merged_analysis
                 session.is_complete = True
@@ -389,6 +661,37 @@ class SessionAnalysisService:
             logger.info(f"Cleaned up old session {session_id}")
         
         return len(sessions_to_remove)
+
+    def _get_needed_screenshot_types(self, session: GameSession) -> List[str]:
+        """
+        Determine which screenshot types are still needed for session completion.
+
+        Args:
+            session: Game session to check
+
+        Returns:
+            List of needed screenshot types ('scoreboard', 'damage_stats', etc.)
+        """
+        needed_types = []
+
+        # Check for scoreboard data
+        has_scoreboard = any(
+            s.screen_type == 'scoreboard' and s.kda_result
+            for s in session.screenshots
+        )
+        if not has_scoreboard:
+            needed_types.append('scoreboard')
+
+        # Check for damage stats data
+        has_damage_stats = any(
+            s.screen_type in ['damage', 'damage_stats'] and s.damage_result
+            for s in session.screenshots
+        )
+        if not has_damage_stats:
+            needed_types.append('damage_stats')
+
+        logger.info(f"Session {session.session_id} needs: {needed_types}")
+        return needed_types
 
 # Global instance for easy access
 session_analysis_service = SessionAnalysisService()

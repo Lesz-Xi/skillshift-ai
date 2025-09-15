@@ -15,6 +15,7 @@ from .schemas import Matches
 from .hero_identifier import HeroIdentifier
 from .row_specific_hero_detector import RowSpecificHeroDetector
 from .ign_validator import IGNValidator
+from backend.ocr.normalizers import is_ign_match
 
 # Import enhanced OCR processor
 try:
@@ -242,7 +243,7 @@ class DataCollector:
             validated_ign = ign
             for bbox, text, conf in results:
                 validation_result = validator.validate_mlbb_ign(text)
-                if validation_result['is_valid'] and ign.lower() in validation_result['cleaned_ign'].lower():
+                if validation_result['is_valid'] and is_ign_match(ign, validation_result['cleaned_ign']):
                     validated_ign = validation_result['cleaned_ign']
                     logging.info(f"IGN validation successful: {validated_ign} (confidence: {validation_result['confidence']:.3f})")
                     if validation_result['confidence'] < 0.8:
@@ -373,7 +374,7 @@ class DataCollector:
                 
                 for bbox, text, conf in results:
                     validation_result = validator.validate_mlbb_ign(text)
-                    if validation_result['is_valid'] and ign.lower() in validation_result['cleaned_ign'].lower():
+                    if validation_result['is_valid'] and is_ign_match(ign, validation_result['cleaned_ign']):
                         if validation_result['confidence'] > best_match_confidence:
                             validated_ign = validation_result['cleaned_ign']
                             best_match_confidence = validation_result['confidence']
@@ -488,7 +489,7 @@ class DataCollector:
 
         # Locate the player's row using the IGN (case-insensitive, tolerant to OCR noise)
         for bbox, text, conf in ocr_results:
-            if ign.lower() in text.lower():
+            if is_ign_match(ign, text):
                 y_coords = [point[1] for point in bbox]
                 player_row_y_center = (min(y_coords) + max(y_coords)) / 2.0
                 ign_found = True
@@ -742,7 +743,7 @@ class DataCollector:
                 cleaned, _ = validator.clean_ocr_result(line)
                 if re.search(r"[A-Za-z]", cleaned) and 3 <= len(cleaned.replace(" ", "")) <= 16:
                     potential_igns.append(cleaned)
-        player_name_found = any(ign.lower() in all_text_blob for ign in potential_igns)
+        player_name_found = any(is_ign_match(ign, all_text_blob) for ign in potential_igns)
         
         if player_name_found:
             logging.info("Primary player found in screenshot.")

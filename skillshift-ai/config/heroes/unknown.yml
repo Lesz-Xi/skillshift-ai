@@ -1,0 +1,48 @@
+name: "Unknown Hero"
+role: "versatile"
+difficulty: 3
+meta_tier: "B"
+
+performance_thresholds:
+  kda:
+    excellent: 4.0
+    good: 2.5
+    poor: 1.5
+  damage_per_minute:
+    excellent: 5000
+    good: 3500
+    poor: 2500
+  gpm:
+    excellent: 450
+    good: 350
+    poor: 250
+  teamfight_participation:
+    excellent: 70
+    good: 50
+    poor: 30
+
+custom_tips:
+  general:
+    - "Focus on improving your KDA ratio based on your performance"
+    - "Work on increasing gold efficiency and farming"
+    - "Enhance damage output relative to your team"
+    - "Improve teamfight participation percentage"
+  positioning:
+    - "Work on positioning to reduce deaths while maintaining impact"
+    - "Focus on objective control and map awareness"
+  itemization:
+    - "Consider optimizing your item build for better performance"
+    - "Improve your damage-to-gold ratio efficiency"
+
+positioning:
+  ideal_range: "medium"
+  teamfight_role: "Adapt based on team composition and enemy threats"
+  early_game_focus: "Focus on farming and avoiding unnecessary deaths"
+  late_game_focus: "Prioritize team objectives and positioning"
+
+items:
+  coaching_tips:
+    general: "Build items that complement your team's strategy and counter enemy threats"
+    defensive: "Consider defensive items when facing high burst damage"
+    offensive: "Prioritize damage items when ahead to maintain pressure"
+

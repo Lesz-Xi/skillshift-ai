@@ -12,6 +12,14 @@ import json
 import cv2
 import numpy as np
 
+# Import IGN matching helper
+try:
+    from backend.ocr.normalizers import is_ign_match
+except ImportError:
+    # Fallback if backend module not available
+    def is_ign_match(target_ign: str, ocr_text: str) -> bool:
+        return target_ign.lower() in ocr_text.lower()
+
 # Define simple types to replace the missing classes
 SCREENSHOT_TYPE_SCOREBOARD = "scoreboard"
 SCREENSHOT_TYPE_STATS = "stats"
@@ -627,27 +635,20 @@ class RobustIGNMatcher:
     
     def _partial_match(self, target_ign: str, ocr_results: List) -> Dict[str, Any]:
         """Partial matching - IGN contains or is contained in text."""
-        target_lower = target_ign.lower()
         best_match = {"found": False, "confidence": 0.0}
         
         for bbox, text, conf in ocr_results:
-            text_lower = text.lower()
-            
-            # Check if target is in text or text is in target
-            if target_lower in text_lower:
-                confidence = len(target_lower) / len(text_lower) * 0.8
-            elif text_lower in target_lower:
-                confidence = len(text_lower) / len(target_lower) * 0.8
-            else:
-                continue
+            # Use flexible IGN matching that handles guild tags
+            if is_ign_match(target_ign, text):
+                confidence = min(0.8, conf * 0.9)  # Slightly lower confidence for partial match
                 
-            if confidence >= self.min_similarity and confidence > best_match["confidence"]:
-                best_match = {
-                    "found": True,
-                    "confidence": confidence,
-                    "bbox": bbox,
-                    "text": text
-                }
+                if confidence > best_match["confidence"]:
+                    best_match = {
+                        "found": True,
+                        "confidence": confidence,
+                        "bbox": bbox,
+                        "text": text
+                    }
         
         return best_match
     
@@ -1178,7 +1179,7 @@ class AnchorBasedLayoutParser:
             # If IGN known, estimate its X position within this row
             if player_ign:
                 for item in row_items:
-                    if player_ign.lower() in item['text'].lower():
+                    if is_ign_match(player_ign, item['text']):
                         ign_found = True
                         ign_x_position = item['x']
                         break
@@ -3300,7 +3301,7 @@ class EnhancedDataCollector(DataCollector):
         # Find IGN position in OCR results
         ign_positions = []
         for i, (bbox, text, conf) in enumerate(ocr_results):
-            if ign.lower() in text.lower() or any(part in text.lower() for part in ign.lower().split()):
+            if is_ign_match(ign, text):
                 ign_positions.append(i)
         
         if not ign_positions:

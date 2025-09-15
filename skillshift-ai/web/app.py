@@ -7,9 +7,12 @@ import sys
 import time
 import uuid
 from tempfile import NamedTemporaryFile
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 from pathlib import Path
 import psutil
+
+# Get logger for this module
+logger = logging.getLogger(__name__)
 
 # Load environment variables from .env file
 try:
@@ -41,13 +44,17 @@ from core.enhanced_counter_pick_system import enhanced_counter_pick_system
 from core.error_handler import error_handler
 from core.enhanced_ultimate_parsing_system import enhanced_ultimate_parsing_system
 from backend.src.memory_efficient_ocr import (
-    get_memory_efficient_processor, 
+    get_memory_efficient_processor,
     MemoryPoolConfig,
     MemoryPriority
 )
+from backend.src.services.session_analysis_service import SessionAnalysisService
 
 # Global analysis lock to prevent concurrent heavy processing
 analysis_lock = asyncio.Lock()
+
+# Initialize session analysis service for proper session fusion
+session_analysis_service = SessionAnalysisService()
 
 # In-memory match fusion cache keyed by battle_id/session/file signature
 MATCH_CACHE: dict = {}
@@ -164,10 +171,19 @@ def _build_match_key(battle_id: Optional[str], session_id: Optional[str], file_p
     if session_id:
         return f"session:{session_id}"
     import hashlib
+    import os
+    # Get filename and file size for better cache separation
+    filename = os.path.basename(file_path)
+    file_size = os.path.getsize(file_path)
+
+    # Create hash based on filename and file size for separation
+    content_hash = hashlib.md5(f"{filename}:{file_size}".encode()).hexdigest()[:12]
+
+    # Use MD5 of file content for actual content matching
     with open(file_path, 'rb') as f:
-        md5 = hashlib.md5(f.read()).hexdigest()[:12]
+        content_md5 = hashlib.md5(f.read()).hexdigest()[:12]
     minute_bucket = int(_now() // 60)
-    return f"auto:{ign}:{md5}:{minute_bucket}"
+    return f"auto:{ign}:{content_hash}:{content_md5}:{minute_bucket}"
 
 
 def convert_numpy_types(obj):
@@ -382,6 +398,27 @@ def health_check():
     return {"status": "ok"}
 
 
+@app.get("/api/session/{session_id}")
+def get_session_status(session_id: str):
+    """
+    Debug endpoint to check session status and fusion state.
+    """
+    session = session_analysis_service.sessions.get(session_id)
+    if not session:
+        return {"error": "Session not found", "session_id": session_id}
+    
+    return {
+        "session_id": session_id,
+        "hero_id": session.hero_id,
+        "target_ign": session.target_ign,
+        "is_complete": session.is_complete,
+        "screenshot_count": len(session.screenshots),
+        "screenshot_types": [s.screen_type for s in session.screenshots],
+        "has_merged_analysis": session.merged_analysis is not None,
+        "fusion_status": session.merged_analysis.get("fusion_method", "not_fused") if session.merged_analysis else "incomplete"
+    }
+
+
 @app.post("/analyze-screenshot/")
 async def analyze_screenshot(
     file: UploadFile = File(...),
@@ -505,6 +542,7 @@ async def analyze(
     ign: str = "Lesz XVII",
     session_id: Optional[str] = None,
     hero_override: Optional[str] = None,
+    debug_mode: bool = False,
 ):
     """
     Frontend-compatible endpoint that analyzes a screenshot and returns coaching feedback.
@@ -515,9 +553,149 @@ async def analyze(
         raise HTTPException(status_code=429, detail="Analysis busy; try again")
     
     async with analysis_lock:
-        return await _perform_analysis_fast(file, ign, session_id=session_id, hero_override=hero_override)
+        return await _perform_analysis_fast(file, ign, session_id=session_id, hero_override=hero_override, debug_mode=debug_mode)
 
-async def _perform_analysis_fast(file: UploadFile, ign: str, session_id: Optional[str] = None, hero_override: Optional[str] = None):
+def _convert_session_response_to_frontend_format(session_result: Dict[str, Any], ign: str, hero_override: Optional[str] = None) -> Dict[str, Any]:
+    """
+    Convert session analysis service response to frontend-compatible format.
+
+    This ensures that session-based responses maintain compatibility with
+    the existing frontend expectations while including unified coaching feedback
+    and damage statistics from session fusion.
+    """
+    try:
+        # Extract merged analysis if session is complete
+        merged_analysis = session_result.get('merged_analysis', {})
+        is_complete = session_result.get('session_complete', False)
+        screen_type = session_result.get('screen_type', 'unknown')
+
+        # Build base response structure
+        frontend_result = {
+            'session_id': session_result.get('session_id'),
+            'session_complete': is_complete,
+            'screen_type': screen_type,
+            'data': {}
+        }
+
+        if is_complete and merged_analysis:
+            # Session is complete - include fused data with unified coaching feedback
+            logger.info("Session fusion complete - extracting merged analysis data")
+
+            # Extract KDA data
+            kda = merged_analysis.get('kda', {})
+            damage_stats = merged_analysis.get('damage_stats', {})
+
+            # Populate data field with fused information
+            frontend_result['data'] = {
+                'kills': kda.get('kills'),
+                'deaths': kda.get('deaths'),
+                'assists': kda.get('assists'),
+                'hero': merged_analysis.get('hero', hero_override or 'Unknown'),
+                'hero_name': merged_analysis.get('hero', hero_override or 'Unknown'),
+                'gold_per_minute': merged_analysis.get('gold_per_minute'),
+                'kda_ratio': merged_analysis.get('kda_ratio'),
+                'player_rank': 'Unknown',  # Not available in session fusion
+                'battle_id': merged_analysis.get('session_id'),
+                'player_located': merged_analysis.get('player_located', False),
+                'player_ign': merged_analysis.get('player_ign', ign),
+
+                # Damage statistics from fusion - consistent naming
+                'hero_damage': damage_stats.get('hero_damage'),
+                'damage_taken': damage_stats.get('damage_taken'),
+                'tower_damage': damage_stats.get('turret_damage') or damage_stats.get('tower_damage'),
+                'turret_damage': damage_stats.get('turret_damage') or damage_stats.get('tower_damage'),
+                'teamfight_participation': damage_stats.get('teamfight_participation'),
+                
+                # Ensure damage_stats is included for frontend
+                'damage_stats': damage_stats,
+
+                # Session fusion metadata
+                'overall_confidence': merged_analysis.get('overall_confidence'),
+                'data_completeness': merged_analysis.get('data_completeness'),
+                'fusion_method': merged_analysis.get('fusion_method'),
+
+                # Unified coaching feedback from session fusion
+                'coaching_feedback': merged_analysis.get('coaching_feedback', []),
+
+                # Status indicators
+                'fusion_status': 'Stats fused',
+                'session_status': 'complete'
+            }
+            
+            # Add debug trace if DEBUG_TRACES is enabled
+            if os.getenv('DEBUG_TRACES', '0') == '1':
+                session = session_analysis_service.sessions.get(session_result.get('session_id'))
+                if session and hasattr(session, 'debug_trace'):
+                    frontend_result['__trace'] = session.debug_trace
+
+        else:
+            # Session is incomplete - extract partial analysis from current screenshot
+            logger.info("Session incomplete - extracting partial analysis data")
+            analysis_result = session_result.get('analysis_result', {})
+
+            # Extract KDA or damage data based on screen type
+            if screen_type == 'scoreboard' and analysis_result.get('kda_result'):
+                kda_result = analysis_result['kda_result']
+                frontend_result['data'] = {
+                    'kills': kda_result.kills,
+                    'deaths': kda_result.deaths,
+                    'assists': kda_result.assists,
+                    'hero': kda_result.hero or hero_override or 'Unknown',
+                    'hero_name': kda_result.hero or hero_override or 'Unknown',
+                    'player_located': kda_result.player_ign == ign,
+                    'player_ign': kda_result.player_ign,
+                    'session_status': 'partial_kda',
+                    'fusion_status': 'Awaiting damage stats'
+                }
+
+            elif screen_type in ['damage', 'damage_stats'] and analysis_result.get('damage_result'):
+                damage_result = analysis_result['damage_result']
+                frontend_result['data'] = {
+                    'hero': damage_result.hero or hero_override or 'Unknown',
+                    'hero_name': damage_result.hero or hero_override or 'Unknown',
+                    'hero_damage': damage_result.hero_damage,
+                    'damage_taken': damage_result.damage_taken,
+                    'tower_damage': damage_result.tower_damage,
+                    'teamfight_participation': damage_result.teamfight_participation,
+                    'player_located': damage_result.player_ign == ign,
+                    'player_ign': damage_result.player_ign,
+                    'session_status': 'partial_damage',
+                    'fusion_status': 'Awaiting KDA stats'
+                }
+            
+            # Add debug trace for incomplete sessions too
+            if os.getenv('DEBUG_TRACES', '0') == '1':
+                session = session_analysis_service.sessions.get(session_result.get('session_id'))
+                if session and hasattr(session, 'debug_trace'):
+                    frontend_result['__trace'] = session.debug_trace
+            else:
+                # Unknown or error state
+                frontend_result['data'] = {
+                    'hero': hero_override or 'Unknown',
+                    'hero_name': hero_override or 'Unknown',
+                    'session_status': 'unknown',
+                    'fusion_status': 'Analysis failed'
+                }
+
+        logger.info(f"Converted session response to frontend format: {frontend_result.get('data', {}).get('session_status', 'unknown')}")
+        return frontend_result
+
+    except Exception as e:
+        logger.error(f"Error converting session response to frontend format: {e}")
+        # Return minimal response to maintain frontend compatibility
+        return {
+            'session_id': session_result.get('session_id'),
+            'session_complete': False,
+            'screen_type': 'error',
+            'data': {
+                'hero': hero_override or 'Unknown',
+                'hero_name': hero_override or 'Unknown',
+                'session_status': 'conversion_error',
+                'fusion_status': 'Format conversion failed'
+            }
+        }
+
+async def _perform_analysis_fast(file: UploadFile, ign: str, session_id: Optional[str] = None, hero_override: Optional[str] = None, debug_mode: bool = False):
     """
     Fast analysis function that prioritizes speed over accuracy.
     """
@@ -530,13 +708,63 @@ async def _perform_analysis_fast(file: UploadFile, ign: str, session_id: Optiona
         file.file.close()
 
     try:
-        # Use Enhanced Data Collector for faster analysis
-        enhanced_result = enhanced_data_collector.analyze_screenshot_with_session(
-            image_path=temp_file_path,
-            ign=ign,
-            session_id=session_id,
-            hero_override=hero_override
-        )
+        # Session-based routing: use session analysis service when session_id is provided
+        if session_id:
+            try:
+                logger.info(f"Using session analysis service for session {session_id}")
+
+                # Ensure session exists, create if it doesn't
+                if session_id not in session_analysis_service.sessions:
+                    logger.info(f"Creating new session {session_id}")
+                    canonical_hero = hero_database.canonicalize_name(hero_override) if hero_override else 'Unknown'
+                    session_analysis_service.create_session(
+                        user_id=ign,
+                        hero_id=canonical_hero,
+                        target_ign=ign,
+                        session_id=session_id  # Pass frontend-generated session ID
+                    )
+
+                # Use session analysis service for proper fusion
+                # First ensure session exists
+                if not session_analysis_service.get_session(session_id):
+                    logger.info(f"Creating new session {session_id} for {ign}")
+                    session_analysis_service.create_session(
+                        user_id="web_user",
+                        hero_id=hero_override or "unknown",
+                        target_ign=ign,
+                        session_id=session_id
+                    )
+                
+                session_result = session_analysis_service.add_screenshot(session_id, temp_file_path, debug_mode=debug_mode)
+
+                # Convert session service response to frontend-compatible format
+                enhanced_result = _convert_session_response_to_frontend_format(session_result, ign, hero_override)
+
+                # Log session fusion status
+                if session_result.get('session_complete'):
+                    logger.info(f"Session {session_id} fusion completed - unified coaching feedback generated")
+                else:
+                    logger.info(f"Session {session_id} fusion in progress - partial analysis returned")
+
+            except Exception as session_error:
+                logger.error(f"Session analysis service failed, falling back to enhanced data collector: {session_error}")
+                # Fallback to enhanced data collector for backward compatibility
+                enhanced_result = enhanced_data_collector.analyze_screenshot_with_session(
+                    image_path=temp_file_path,
+                    ign=ign,
+                    session_id=session_id,
+                    hero_override=hero_override
+                )
+        else:
+            # Single screenshot analysis - use enhanced data collector
+            logger.info("No session_id provided, using enhanced data collector for single screenshot analysis")
+            enhanced_result = enhanced_data_collector.analyze_screenshot_with_session(
+                image_path=temp_file_path,
+                ign=ign,
+                session_id=session_id,
+                hero_override=hero_override
+            )
+
         # Defensive normalization: some paths may accidentally return tuples
         if isinstance(enhanced_result, tuple):
             try:
@@ -825,7 +1053,7 @@ async def _perform_analysis_fast(file: UploadFile, ign: str, session_id: Optiona
     except Exception as e:
         print(f"Fast analysis failed: {str(e)}")
         # Return an error structure that still includes minimal match_data for proxy contract
-        return {
+        error_response = {
             "success": False,
             "error": str(e),
             "confidence_score": 0.0,
@@ -853,6 +1081,31 @@ async def _perform_analysis_fast(file: UploadFile, ign: str, session_id: Optiona
                 "damage": 0,
                 "match_duration": None,
                 "rank": "Unknown"
+            },
+            # CRITICAL FIX: Always include __raw.damage_stats for frontend compatibility
+            "__raw": {
+                "damage_stats": {
+                    "hero_damage": None,
+                    "tower_damage": None,
+                    "damage_taken": None,
+                    "teamfight_participation_pct": None
+                },
+                "match_data": {
+                    "hero": "Unknown",
+                    "kda": "0/0/0",
+                    "gpm": 0,
+                    "damage": 0,
+                    "match_duration": None,
+                    "rank": "Unknown"
+                }
+            },
+            "analysis": {
+                "damage_statistics": {
+                    "hero_damage": None,
+                    "tower_damage": None,
+                    "damage_taken": None,
+                    "teamfight_participation_pct": None
+                }
             }
         }
     finally:
@@ -1425,6 +1678,18 @@ async def analyze_enhanced(
                 "category": "Improvement Tips"
             })
 
+        # CRITICAL FIX: Build damage statistics for __raw object
+        def _build_enhanced_damage_stats(match_data_dict):
+            """Build consistent damage statistics object for enhanced endpoint"""
+            return {
+                "hero_damage": match_data_dict.get("hero_damage"),
+                "tower_damage": match_data_dict.get("tower_damage") or match_data_dict.get("turret_damage"),
+                "damage_taken": match_data_dict.get("damage_taken"),
+                "teamfight_participation_pct": match_data_dict.get("teamfight_participation") or match_data_dict.get("teamfight_participation_pct")
+            }
+
+        damage_stats = _build_enhanced_damage_stats(match_data)
+
         response = {
             "feedback": feedback_items,
             "mental_boost": mental_boost,
@@ -1438,7 +1703,15 @@ async def analyze_enhanced(
             },
             "debug_info": convert_numpy_types(result.get("debug_info", {})),
             "warnings": convert_numpy_types(result.get("warnings", [])),
-            "diagnostics": diagnostics
+            "diagnostics": diagnostics,
+            # CRITICAL FIX: Always include __raw.damage_stats for frontend compatibility
+            "__raw": {
+                "damage_stats": damage_stats,
+                "match_data": match_data
+            },
+            "analysis": {
+                "damage_statistics": damage_stats
+            }
         }
         
         # CRITICAL FIX: Convert all numpy types to Python types before serialization

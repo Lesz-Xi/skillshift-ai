@@ -1,0 +1,178 @@
+# Kagura - The Onmyoji Master
+# Enhanced hero configuration showcasing the new coaching system capabilities
+
+name: "Kagura"
+role: "mage"
+difficulty: 4
+meta_tier: "A"
+
+# Performance thresholds with rank-aware scaling
+performance_thresholds:
+  kda:
+    excellent:
+      epic: 4.5
+      legend: 5.0
+      mythic: 5.5
+      default: 4.5
+    good:
+      epic: 3.0
+      legend: 3.5
+      mythic: 4.0  
+      default: 3.0
+    poor:
+      epic: 2.0
+      legend: 2.3
+      mythic: 2.5
+      default: 2.0
+  
+  damage_per_minute:
+    excellent: 7000
+    good: 5500
+    poor: 4000
+  
+  gpm:
+    excellent: 650
+    good: 550
+    poor: 450
+  
+  teamfight_participation:
+    excellent: 80
+    good: 65
+    poor: 50
+
+# Skill-specific coaching configuration
+skills:
+  s1:
+    name: "Seimei Umbrella Open"
+    key_metrics: ["umbrella_positioning", "zone_control_effectiveness"]
+    coaching_tips:
+      low_positioning: "Focus on umbrella placement for maximum zone control, not just damage"
+      poor_timing: "Use S1 proactively to control enemy movement and secure escapes"
+    cooldown: 10.0
+    mana_cost: 80
+
+  s2:
+    name: "Rasho Umbrella Flee"  
+    key_metrics: ["teleport_timing", "escape_success_rate", "engagement_positioning"]
+    coaching_tips:
+      poor_escape_timing: "Save umbrella teleport for critical escapes, not aggressive engages"
+      overextension: "Position umbrella defensively before engaging to ensure safe escape"
+    cooldown: 14.0
+    mana_cost: 90
+
+  s3:
+    name: "Onmyoji Summoning"
+    key_metrics: ["link_accuracy", "combo_setup_effectiveness"]  
+    coaching_tips:
+      low_accuracy: "Practice umbrella + link combos in training mode for muscle memory"
+      combo_failure: "Ensure umbrella is positioned correctly before attempting link combos"
+    cooldown: 8.0
+    mana_cost: 70
+
+  ultimate:
+    name: "Yin Yang Overturn"
+    key_metrics: ["ultimate_combo_completion", "isolation_picks", "team_fight_impact"]
+    coaching_tips:
+      low_impact: "Use ultimate for isolated picks or when enemies are CC'd by teammates"
+      combo_incomplete: "Master the full S1→S2→S3→Ult combo sequence for maximum damage"
+      poor_timing: "Wait for key moments - don't waste ultimate on tanky frontliners"
+
+# Item build recommendations with situational coaching
+items:
+  core_items:
+    - "Clock of Destiny"
+    - "Lightning Truncheon"  
+    - "Holy Crystal"
+    - "Divine Glaive"
+  
+  boots_options:
+    - "Magic Shoes"  # Default for CDR
+    - "Tough Boots"  # Against heavy CC
+    - "Warrior Boots" # Against physical assassins
+  
+  situational_items:
+    vs_burst:
+      - "Immortality"
+      - "Athena's Shield"
+      - "Winter Truncheon"
+    vs_cc:
+      - "Purify Spell"
+      - "Tough Boots"
+      - "Dominance Ice"
+    late_game:
+      - "Blood Wings"
+      - "Genius Wand"
+      - "Glowing Wand"
+  
+  coaching_tips:
+    vs_burst: "Consider Immortality against burst assassins like Hayabusa or Gusion"
+    vs_cc: "Purify or Tough Boots are essential against heavy CC teams"
+    early_game: "Rush Clock of Destiny for the scaling passive - prioritize over raw damage"
+    late_game: "Divine Glaive becomes crucial against magic defense stacking"
+
+# Positioning and tactical guidance
+positioning:
+  ideal_range: "600-800 units from enemies"
+  priority_targets: ["marksman", "mage", "squishy assassins"]
+  escape_routes: "Always maintain umbrella for teleport escape - position defensively"
+  teamfight_role: "Zone control and backline assassination"
+  early_game_focus: "Safe farming with umbrella zone control, avoid all-ins before level 4"
+  late_game_focus: "Backline positioning, combo execution on isolated targets"
+
+# Matchup-specific advice
+matchups:
+  counters:
+    - "Hayabusa"      # Mobility and stealth
+    - "Helcurt"       # Silence disrupts combos
+    - "Natalia"       # Stealth ganks
+    - "Ling"          # High mobility
+  
+  strong_against:
+    - "Eudora"        # Immobile, combo-dependent
+    - "Aurora"        # Predictable skill shots
+    - "Vale"          # Lower mobility
+    - "Chang'e"       # No escape mechanisms
+  
+  advice:
+    vs_hayabusa: "Play extremely defensively pre-4, position umbrella near tower, buy Immortality early"
+    vs_helcurt: "Stay grouped with team, silence disrupts your combo execution completely"
+    vs_natalia: "Ward river bushes, never extend without umbrella positioned for escape"
+    vs_eudora: "Out-range her combo, use umbrella to dodge her stun skillshot"
+    vs_aurora: "Maintain distance, her freeze combos are shorter range than your poke"
+
+# Custom coaching tips by game phase
+custom_tips:
+  general:
+    - "Master the S1→S2→S3→Ult combo in practice mode until it's muscle memory"
+    - "Watch MSC tournament Kagura gameplay for advanced positioning techniques"
+    - "Remember: umbrella positioning is more important than immediate damage"
+
+  early_game:
+    - "Focus on farming safely - avoid trades until level 4 power spike"
+    - "Use S1 for minion wave control and enemy zone denial"
+    - "Position umbrella defensively near your tower before engaging"
+    - "Don't chase kills without umbrella backup - you're vulnerable"
+
+  mid_game:
+    - "Look for isolated picks with full combo execution"
+    - "Control objectives by zoning enemies with umbrella placement"
+    - "Coordinate with tank for setup - you need CC to land full combo"
+    - "Roam with caution - always have escape route planned"
+
+  late_game:
+    - "Stay behind frontline, never lead team fights"
+    - "Focus marksman/mage in team fights - ignore tanks completely"
+    - "Save combo for key moments, don't waste on frontline tanks"
+    - "One perfect combo can win the team fight - be patient"
+
+  itemization:
+    - "Clock of Destiny first for scaling - resist rushing raw damage"
+    - "Magic Shoes are usually better than Arcane Boots for the CDR"
+    - "Divine Glaive is mandatory against magic defense stackers"
+    - "Consider Winter Truncheon against dive compositions"
+
+  positioning:
+    - "Umbrella placement determines your survival - think defensively first"
+    - "Maintain 700+ unit distance from enemy frontline in team fights"
+    - "Use umbrella to cut off enemy escape routes, not just for damage"
+    - "Never teleport aggressively unless you're 100% confident in the kill"

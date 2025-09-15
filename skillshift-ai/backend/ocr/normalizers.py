@@ -73,6 +73,48 @@ def normalize_text_for_matching(text: str) -> str:
         # Fallback to original text if normalization fails
         return text.lower()
 
+
+def is_ign_match(target_ign: str, ocr_text: str) -> bool:
+    """
+    Check if target IGN matches OCR text, handling guild/clan tags.
+    
+    Examples:
+    - "Diary of dolls" matches "HVD Diary of dolls"
+    - "Diary of dolls" matches "[CLAN] Diary of dolls"
+    - "HVD Diary of dolls" matches "Diary of dolls"
+    """
+    # Normalize both texts
+    target_norm = normalize_text_for_matching(target_ign)
+    ocr_norm = normalize_text_for_matching(ocr_text)
+    
+    # Direct substring match (handles when target is part of OCR text)
+    if target_norm in ocr_norm:
+        return True
+    
+    # Check if OCR text is part of target (handles when OCR missed guild tag)
+    if ocr_norm in target_norm:
+        return True
+    
+    # Handle guild/clan tags by checking if core IGN matches
+    # Common guild tag patterns: [TAG], TAG·, «TAG», etc.
+    guild_pattern = r'^(?:\[\w+\]|\w{2,5}[·\s]|«\w+»|\w+\|)\s*(.+)'
+    
+    # Try to extract core IGN from OCR text
+    ocr_match = re.match(guild_pattern, ocr_norm)
+    if ocr_match:
+        core_ocr_ign = ocr_match.group(1).strip()
+        if target_norm == core_ocr_ign or target_norm in core_ocr_ign:
+            return True
+    
+    # Try to extract core IGN from target
+    target_match = re.match(guild_pattern, target_norm)
+    if target_match:
+        core_target_ign = target_match.group(1).strip()
+        if core_target_ign == ocr_norm or core_target_ign in ocr_norm:
+            return True
+    
+    return False
+
 # Legacy helper functions for backward compatibility
 def normalize_diary_of_dolls_text(text: str) -> str:
     """Legacy function - use normalize_text_for_matching instead."""

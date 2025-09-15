@@ -13,7 +13,7 @@ import re
 from dataclasses import dataclass
 
 from .detectors import row_agnostic_detector, RowCrop, TableRegion
-from .normalizers import normalize_text_for_matching, normalize_kda_text, fix_ocr_slash_noise, clean_digits, norm_percent
+from .normalizers import normalize_text_for_matching, normalize_kda_text, fix_ocr_slash_noise, clean_digits, norm_percent, is_ign_match
 
 logger = logging.getLogger(__name__)
 
@@ -253,11 +253,8 @@ class RowAgnosticDamageParser:
             texts = self._extract_text_roi_optimized(processed_region)
             all_text = " ".join(texts).lower()
             
-            # Normalize target IGN for comparison
-            normalized_target = self._normalize_text_for_matching(target_ign.lower())
-            normalized_text = self._normalize_text_for_matching(all_text)
-            
-            return normalized_target in normalized_text
+            # Use flexible IGN matching that handles guild tags
+            return is_ign_match(target_ign, all_text)
             
         except Exception as e:
             logger.debug(f"Error checking if row contains IGN: {e}")
@@ -521,7 +518,7 @@ class RowAgnosticDamageParser:
             
             # Look for damage values near the target IGN
             for i, (bbox, text, confidence) in enumerate(ocr_results):
-                if target_ign_lower in text.lower():
+                if is_ign_match(target_ign, text):
                     logger.info(f"Found target IGN in text: '{text}' at index {i}")
                     
                     # Analyze surrounding OCR results for complete damage values
@@ -658,8 +655,8 @@ class RowAgnosticDamageParser:
             for bbox, text, confidence in ocr_results:
                 text_lower = text.lower().strip()
                 
-                # Check if this text contains the IGN
-                if target_ign.lower() in text_lower:
+                # Check if this text contains the IGN (with guild tag handling)
+                if is_ign_match(target_ign, text):
                     ign_found = True
                     continue
                 
@@ -691,7 +688,7 @@ class RowAgnosticDamageParser:
             avg_confidence = sum(result[2] for result in ocr_results) / len(ocr_results)
             
             # Bonus for finding the target IGN
-            ign_found = any(target_ign.lower() in result[1].lower() for result in ocr_results)
+            ign_found = any(is_ign_match(target_ign, result[1]) for result in ocr_results)
             if ign_found:
                 avg_confidence += 0.2
             
@@ -1200,7 +1197,7 @@ class RowAgnosticDamageParser:
                 normalized_text = self._normalize_text_for_matching(text)
                 
                 # Skip if this is the IGN text
-                if normalized_ign in normalized_text:
+                if is_ign_match(target_ign, text):
                     continue
                 
                 # Check against hero patterns
@@ -1230,10 +1227,7 @@ class RowAgnosticDamageParser:
             base_confidence = sum(result[2] for result in ocr_results) / len(ocr_results)
             
             # IGN matching bonus
-            normalized_ign = self._normalize_text_for_matching(target_ign)
-            all_text = " ".join([result[1] for result in ocr_results])
-            normalized_text = self._normalize_text_for_matching(all_text)
-            ign_bonus = 0.2 if normalized_ign in normalized_text else 0.0
+            ign_bonus = 0.2 if any(is_ign_match(target_ign, result[1]) for result in ocr_results) else 0.0
             
             # Damage values bonus
             damage_bonus = 0.15 if damage_values else 0.0

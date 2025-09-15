@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import CoachingFeedback from "@/components/coaching/CoachingFeedback";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
@@ -591,63 +592,8 @@ export default function AnalysisHistoryPage() {
                   </div>
                 </div>
 
-                {/* Coaching Feedback */}
-                <div className="space-y-4">
-                  <h4 className="font-medium text-foreground">
-                    Coaching Insights
-                  </h4>
-                  <div className="space-y-2">
-                    {(selectedAnalysis.coachingInsights || []).map(
-                      (insight, index) => (
-                        <div key={index} className="flex items-start gap-2">
-                          <Target className="w-4 h-4 text-muted-foreground mt-0.5" />
-                          <span className="text-sm text-foreground">
-                            {insight}
-                          </span>
-                        </div>
-                      )
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4 mt-4">
-                    <div>
-                      <h5 className="font-medium text-green-600 mb-2">
-                        Strengths
-                      </h5>
-                      <ul className="space-y-1">
-                        {(selectedAnalysis.feedback?.strengths || []).map(
-                          (strength, index) => (
-                            <li
-                              key={index}
-                              className="text-sm text-muted-foreground flex items-center gap-1"
-                            >
-                              <CheckCircle className="w-3 h-3 text-green-500" />
-                              {strength}
-                            </li>
-                          )
-                        )}
-                      </ul>
-                    </div>
-                    <div>
-                      <h5 className="font-medium text-orange-600 mb-2">
-                        Areas to Improve
-                      </h5>
-                      <ul className="space-y-1">
-                        {(selectedAnalysis.feedback?.improvements || []).map(
-                          (improvement, index) => (
-                            <li
-                              key={index}
-                              className="text-sm text-muted-foreground flex items-center gap-1"
-                            >
-                              <AlertCircle className="w-3 h-3 text-orange-500" />
-                              {improvement}
-                            </li>
-                          )
-                        )}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+                {/* Unified Coaching Feedback */}
+                <CoachingFeedback analysisResult={selectedAnalysis} />
               </div>
 
               <div className="flex gap-2 mt-6">

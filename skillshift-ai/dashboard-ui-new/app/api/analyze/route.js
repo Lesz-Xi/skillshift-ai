@@ -328,6 +328,7 @@ export async function POST(request) {
     const dashboardResponse = {
       success: true,
       message: "Analysis completed successfully",
+      coaching_feedback: analysisResult.coaching_feedback || [], // Include backend unified coaching feedback
       __raw: analysisResult, // Include raw backend response for damage_stats access
       analysis: {
         // Core analysis results
@@ -412,33 +413,33 @@ export async function POST(request) {
 // Normalize various backend feedback shapes into unified objects
 function normalizeFeedback(analysisResult) {
   if (!analysisResult) return [];
+
+  // Priority order: backend coaching_feedback > statistical_feedback > feedback
   let items =
+    analysisResult.coaching_feedback ||
     analysisResult.statistical_feedback ||
     analysisResult.feedback ||
     null;
 
-  if (!items && Array.isArray(analysisResult.coaching_feedback)) {
-    items = analysisResult.coaching_feedback.map((msg) => ({
-      message: String(msg),
-      severity: "info",
-      category: "coaching",
-    }));
-  }
-
   if (!items) return [];
 
-  return items.map((it) => {
-    if (typeof it === "string") {
-      return { message: it, severity: "info", category: "general" };
-    }
-    if (typeof it === "object" && it !== null) {
-      const message = it.message ?? it.feedback ?? String(it);
-      const severity = it.severity ?? it.type ?? "info";
-      const category = it.category ?? "General";
-      return { message, severity, category };
-    }
-    return { message: String(it), severity: "info", category: "general" };
-  });
+  // Handle unified coaching feedback from backend session analysis
+  if (Array.isArray(items)) {
+    return items.map((item) => {
+      if (typeof item === "string") {
+        return { message: item, severity: "info", category: "coaching" };
+      }
+      if (typeof item === "object" && item !== null) {
+        const message = item.message ?? item.feedback ?? String(item);
+        const severity = item.severity ?? item.type ?? "info";
+        const category = item.category ?? "coaching";
+        return { message, severity, category };
+      }
+      return { message: String(item), severity: "info", category: "coaching" };
+    });
+  }
+
+  return [];
 }
 
 async function runAsyncFallback({ fileBuffer, file, ign, pollTimeoutMs, extractOptions }) {

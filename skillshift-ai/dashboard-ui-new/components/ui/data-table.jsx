@@ -149,7 +149,7 @@ export function DataTable({
                   data-state={row.getIsSelected() && "selected"}
                   className="hover:bg-muted/50 transition-colors"
                 >
-                  {row.getVisibleCells().map((cell) => (
+                  {(row.getVisibleCells() || []).map((cell) => (
                     <TableCell key={cell.id} className="py-3">
                       {flexRender(
                         cell.column.columnDef.cell,

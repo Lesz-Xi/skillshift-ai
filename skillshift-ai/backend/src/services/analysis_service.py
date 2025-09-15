@@ -3,10 +3,14 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any, Dict, Optional
+import logging
+import os
 
 import cv2
 import numpy as np
 from fastapi import HTTPException
+
+logger = logging.getLogger(__name__)
 
 from backend.ocr.detectors import row_agnostic_detector
 from backend.ocr.parsers_kda import kda_parser
@@ -80,13 +84,24 @@ class ScreenshotAnalysisService:
         try:
             # Add screenshot to session
             result = session_analysis_service.add_screenshot(session_id, image_path)
-            
+
             # Get current session analysis
             session_analysis = session_analysis_service.get_session_analysis(session_id)
-            
+
             if not session_analysis:
                 raise ValueError(f"Failed to get analysis for session {session_id}")
-            
+
+            # Get session object for debug trace
+            session = session_analysis_service.get_session(session_id)
+
+            # Calculate confidence from breakdown (H8 - never 0% when KDA exists)
+            confidence_breakdown = session_analysis.get("confidence_breakdown", {})
+            overall_confidence = sum(confidence_breakdown.values()) if confidence_breakdown else 0.0
+
+            # Ensure minimum confidence when KDA data exists
+            if "kda" in session_analysis and overall_confidence < 0.1:
+                overall_confidence = max(0.1, confidence_breakdown.get('kda', 0.0))
+
             # Format response compatible with legacy API
             resp: Dict[str, Any] = {
                 "ign": ign,
@@ -94,7 +109,7 @@ class ScreenshotAnalysisService:
                 "player_ign": session_analysis.get("player_ign"),
                 "session_id": session_id,
                 "session_complete": session_analysis.get("session_complete", False),
-                "overall_confidence": session_analysis.get("overall_confidence", 0.0),
+                "overall_confidence": overall_confidence,
                 "row_agnostic_mode": row_agnostic_mode,
             }
             
@@ -117,8 +132,14 @@ class ScreenshotAnalysisService:
             
             if "mvp_score" in session_analysis:
                 resp["mvp_score"] = session_analysis["mvp_score"]
-            
-            # Add debug info
+
+            # Add unified coaching feedback if available
+            if "coaching_feedback" in session_analysis:
+                resp["coaching_feedback"] = session_analysis["coaching_feedback"]
+
+            # Add debug info and trace instrumentation (H1 from hypotheses)
+            debug_traces_enabled = debug_mode or os.getenv("DEBUG_TRACES") == "1"
+
             if debug_mode:
                 resp["debug"] = {
                     "session_info": {
@@ -129,6 +150,18 @@ class ScreenshotAnalysisService:
                     },
                     "missing_screens": session_analysis.get("missing_screens", []),
                     "sources": session_analysis.get("sources", {}),
+                }
+
+            # Add comprehensive debug trace (H1 - Expose Trace)
+            if debug_traces_enabled and session:
+                resp["__trace"] = {
+                    "session": {
+                        "id": session.session_id,
+                        "ready_to_merge": session.is_complete,
+                        "files_seen": len(session.screenshots)
+                    },
+                    "confidence_breakdown": confidence_breakdown,
+                    **session.debug_trace  # Include all debug info from session
                 }
             
             return resp
