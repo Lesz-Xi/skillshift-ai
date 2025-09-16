@@ -14,6 +14,7 @@ import numpy as np
 from pathlib import Path
 import sys
 import os
+import re
 
 # Import enhanced coach bridge from frontend core
 sys.path.append('/Users/lesz/Documents/Project-AI/skillshift-ai/dashboard-ui-new')
@@ -168,26 +169,10 @@ class SessionAnalysisService:
             can_merge, debug_info = self._can_merge_session_data(session)
             if can_merge:
                 logger.info(f"Session {session_id} has both screen types, attempting fusion")
+                session.debug_trace.update(debug_info)  # Store debug info
                 self._merge_session_data(session)
             else:
                 logger.info(f"Session {session_id} waiting for more screenshots ({len(session.screenshots)} so far)")
-                # MANUS-AI FIX: Handle single screenshot timeout completion
-                # If we've been waiting and have at least one good screenshot with data, complete the session
-                if len(session.screenshots) >= 1:
-                    has_valid_data = any(
-                        (s.kda_result and hasattr(s.kda_result, 'kills') and s.kda_result.kills is not None) or
-                        (s.damage_result and hasattr(s.damage_result, 'hero_damage') and s.damage_result.hero_damage is not None)
-                        for s in session.screenshots
-                    )
-
-                    if has_valid_data:
-                        # Set a timeout for single screenshot completion (don't wait forever for damage stats)
-                        session_age = (datetime.now() - session.created_at).total_seconds()
-                        if session_age > 5:  # After 5 seconds, complete with partial data
-                            logger.info(f"Session {session_id} timeout reached with valid data, completing single screenshot analysis")
-                            self._complete_single_screenshot_session(session)
-                        else:
-                            logger.info(f"Session {session_id} has valid data, will complete after timeout if no more screenshots")
 
             logger.info(f"Added {screen_type} screenshot to session {session_id}")
 
@@ -263,11 +248,17 @@ class SessionAnalysisService:
             ocr_results = reader.readtext(img)
             screen_type = damage_parser._detect_screen_type(ocr_results)
             
+            # Log screen type detection for debugging
+            logger.info(f"Screen type detection for {image_path}: detected '{screen_type}'")
+            if logger.isEnabledFor(logging.DEBUG):
+                ocr_text_preview = ' '.join([result[1] for result in ocr_results[:10]])  # First 10 OCR results
+                logger.debug(f"OCR text preview: {ocr_text_preview}")
+            
             analysis_result = {
                 'kda_result': None,
                 'damage_result': None,
                 'processing_time': 0.0,
-                'raw_data': {}
+                'raw_data': {'detected_screen_type': screen_type}
             }
             
             start_time = datetime.now()
@@ -500,6 +491,7 @@ class SessionAnalysisService:
                 # Create merged analysis with proper null handling
                 merged_analysis = {
                     'session_id': session.session_id,
+                    'session_status': 'merged',  # Add session status field
                     'ign': session.target_ign,
                     'hero': session.hero_id,
                     'player_located': fused_result.player_ign == session.target_ign,
@@ -516,7 +508,7 @@ class SessionAnalysisService:
                     'damage_stats': {
                         'hero_damage': fused_result.hero_damage if fused_result.hero_damage > 0 else None,
                         'damage_taken': fused_result.damage_taken if fused_result.damage_taken > 0 else None,
-                        'turret_damage': fused_result.tower_damage if fused_result.tower_damage > 0 else None,
+                        'tower_damage': fused_result.tower_damage if fused_result.tower_damage > 0 else None,  # Use tower_damage not turret_damage
                         'teamfight_participation': fused_result.teamfight_participation if fused_result.teamfight_participation > 0 else None
                     },
                     
