@@ -66,6 +66,71 @@ class RowAgnosticScoreboardDetector:
         # Minimum confidence for table detection
         self.min_table_confidence = 0.7
 
+    def _calculate_adaptive_threshold(self, texts: List[str], target_ign: str) -> int:
+        """
+        MANUS-AI METHODOLOGY: Calculate adaptive threshold based on OCR noise conditions.
+        Implements error recovery through context-aware threshold adjustment.
+
+        Args:
+            texts: OCR text results to analyze for noise level
+            target_ign: Target IGN to match against
+
+        Returns:
+            Adaptive threshold (40-85) based on noise analysis
+        """
+        try:
+            # Base threshold
+            base_threshold = 85
+
+            # Analyze OCR noise level
+            noise_indicators = 0
+            total_texts = len(texts)
+
+            if total_texts == 0:
+                return 65  # Fallback threshold
+
+            for text in texts:
+                # Check for OCR noise indicators
+                if any(char.isdigit() for char in text):  # Numbers present
+                    noise_indicators += 1
+                if len(text) < 3:  # Very short text fragments
+                    noise_indicators += 1
+                if any(char in text for char in '@#$%&*[]{}'):  # Special characters
+                    noise_indicators += 1
+                if text.lower() in ['mvp', 'kda', 'gold', 'damage']:  # Game terms
+                    noise_indicators += 0.5
+
+            # Calculate noise ratio
+            noise_ratio = noise_indicators / total_texts
+
+            # Apply Manus AI error recovery: Lower threshold for noisy conditions
+            if noise_ratio > 0.7:  # High noise
+                adaptive_threshold = 50
+            elif noise_ratio > 0.5:  # Medium noise
+                adaptive_threshold = 60
+            elif noise_ratio > 0.3:  # Low noise
+                adaptive_threshold = 70
+            else:  # Clean OCR
+                adaptive_threshold = base_threshold
+
+            # Context preservation: Additional adjustment for partial matches
+            target_words = target_ign.lower().split()
+            for text in texts:
+                text_lower = text.lower()
+                # Check for partial word matches (context preservation)
+                partial_matches = sum(1 for word in target_words if word in text_lower)
+                if partial_matches > 0:
+                    # Lower threshold when partial matches exist (context recovery)
+                    adaptive_threshold = max(40, adaptive_threshold - 10)
+                    break
+
+            logger.info(f"MANUS-AI: Adaptive threshold calculated: {adaptive_threshold} (noise_ratio: {noise_ratio:.2f})")
+            return adaptive_threshold
+
+        except Exception as e:
+            logger.error(f"Error calculating adaptive threshold: {e}")
+            return 60  # Safe fallback threshold
+
     def detect_table_regions(self, image_path: str) -> Optional[TableRegion]:
         """
         Detect the scoreboard table and return normalized geometry with OCR Mission 5 robustness.
@@ -650,17 +715,26 @@ class RowAgnosticScoreboardDetector:
             
             # Use robust fuzzy matching
             from backend.ocr.textmatch import best_match
-            result = best_match(target_ign, texts, threshold=70)
-            
-            # Debug logging
-            logger.debug(f"Best match result: {result}, type: {type(result)}")
-            
-            # Handle the result properly
+            # MANUS-AI METHODOLOGY: Context preservation and error recovery
+            # Apply adaptive threshold based on OCR noise conditions
+            # Lower threshold for noisy OCR output to preserve context
+            adaptive_threshold = self._calculate_adaptive_threshold(texts, target_ign)
+
+            result = best_match(target_ign, texts, threshold=adaptive_threshold)
+
+            # Debug logging for adaptive thresholding
+            logger.debug(f"Best match result: {result}, type: {type(result)}, adaptive_threshold: {adaptive_threshold}")
+
+            # Handle the result properly with context preservation
             if result and len(result) == 2:
                 match, score = result
-                if match and score >= 70:
+                # Use adaptive threshold for acceptance
+                if match and score >= adaptive_threshold:
+                    logger.info(f"✅ IGN match accepted with adaptive threshold: {score} >= {adaptive_threshold}")
                     return True, float(score) / 100.0  # Convert to 0-1 scale
-            
+                else:
+                    logger.info(f"⚠️ IGN match below adaptive threshold: {score} < {adaptive_threshold}")
+
             return False, 0.0
 
         except Exception as e:

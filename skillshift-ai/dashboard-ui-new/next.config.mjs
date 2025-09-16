@@ -11,13 +11,15 @@ const nextConfig = {
   },
   async rewrites() {
     return [
-      {
-        source: '/api/:path*',
-        destination: 'http://localhost:8000/api/:path*',
-      },
+      // MANUS-AI FIX: Remove conflicting /api/* rewrite that bypasses frontend API routes
+      // Only proxy specific endpoints that don't have frontend handlers
       {
         source: '/health',
         destination: 'http://localhost:8000/health',
+      },
+      {
+        source: '/api/backend/:path*',
+        destination: 'http://localhost:8000/api/:path*',
       },
     ];
   },

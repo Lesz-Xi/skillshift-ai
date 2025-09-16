@@ -281,7 +281,7 @@ class ParallelProcessingManager:
         
         # Add resource monitoring 
         self.processing_start_time = None
-        self.timeout_threshold = 60  # Maximum 60 seconds per analysis (relaxed)
+        self.timeout_threshold = 180  # Maximum 180 seconds per analysis (increased for session fusion)
         
         logging.info(f"🚀 Enhanced MLBB parallel processing initialized with {self.max_workers} workers (performance mode)")
         logging.warning(f"⚠️ Resource limits: max {self.timeout_threshold}s timeout, {self.max_workers} workers")

@@ -165,11 +165,29 @@ class SessionAnalysisService:
             session.screenshots.append(screenshot)
 
             # Try to merge data if we have both screen types
-            if self._can_merge_session_data(session):
+            can_merge, debug_info = self._can_merge_session_data(session)
+            if can_merge:
                 logger.info(f"Session {session_id} has both screen types, attempting fusion")
                 self._merge_session_data(session)
             else:
                 logger.info(f"Session {session_id} waiting for more screenshots ({len(session.screenshots)} so far)")
+                # MANUS-AI FIX: Handle single screenshot timeout completion
+                # If we've been waiting and have at least one good screenshot with data, complete the session
+                if len(session.screenshots) >= 1:
+                    has_valid_data = any(
+                        (s.kda_result and hasattr(s.kda_result, 'kills') and s.kda_result.kills is not None) or
+                        (s.damage_result and hasattr(s.damage_result, 'hero_damage') and s.damage_result.hero_damage is not None)
+                        for s in session.screenshots
+                    )
+
+                    if has_valid_data:
+                        # Set a timeout for single screenshot completion (don't wait forever for damage stats)
+                        session_age = (datetime.now() - session.created_at).total_seconds()
+                        if session_age > 5:  # After 5 seconds, complete with partial data
+                            logger.info(f"Session {session_id} timeout reached with valid data, completing single screenshot analysis")
+                            self._complete_single_screenshot_session(session)
+                        else:
+                            logger.info(f"Session {session_id} has valid data, will complete after timeout if no more screenshots")
 
             logger.info(f"Added {screen_type} screenshot to session {session_id}")
 
@@ -692,6 +710,130 @@ class SessionAnalysisService:
 
         logger.info(f"Session {session.session_id} needs: {needed_types}")
         return needed_types
+
+    def _complete_single_screenshot_session(self, session: GameSession):
+        """
+        Complete a session with partial data from a single screenshot.
+
+        This method handles cases where we only have one screenshot type (either scoreboard or damage)
+        and need to provide the best available analysis without waiting for additional screenshots.
+        """
+        try:
+            logger.info(f"Completing single screenshot session {session.session_id}")
+
+            # Find the best available screenshot
+            best_screenshot = None
+            screen_type = None
+
+            # Prioritize scoreboard screenshots for KDA data
+            scoreboard_candidates = [s for s in session.screenshots if s.screen_type == 'scoreboard' and s.kda_result]
+            if scoreboard_candidates:
+                best_screenshot = max(scoreboard_candidates, key=lambda s: s.kda_result.confidence if s.kda_result else 0.0)
+                screen_type = 'scoreboard'
+            else:
+                # Fall back to damage screenshots
+                damage_candidates = [s for s in session.screenshots if s.screen_type in ['damage', 'damage_stats'] and s.damage_result]
+                if damage_candidates:
+                    best_screenshot = max(damage_candidates, key=lambda s: s.damage_result.confidence if s.damage_result else 0.0)
+                    screen_type = 'damage_stats'
+
+            if not best_screenshot:
+                logger.warning(f"No valid screenshot found for single session completion {session.session_id}")
+                return
+
+            # Create merged analysis from single screenshot
+            merged_analysis = {
+                'session_id': session.session_id,
+                'ign': session.target_ign,
+                'hero': session.hero_id,
+                'player_located': False,
+                'player_ign': None,
+                'single_screenshot_mode': True,  # Flag to indicate partial data
+                'analysis_type': screen_type,
+
+                # Initialize all fields
+                'kda': None,
+                'damage_stats': None,
+                'gold_per_minute': None,
+                'kda_ratio': None,
+                'mvp_score': None,
+
+                # Quality metrics - lower for single screenshot
+                'overall_confidence': 0.0,
+                'data_completeness': 0.5,  # 50% completeness for single screenshot
+                'fusion_method': 'single_screenshot',
+
+                # Source information
+                'sources': {
+                    'single_screenshot': {
+                        'image_path': best_screenshot.image_path,
+                        'processing_time': best_screenshot.processing_time,
+                        'screen_type': screen_type
+                    }
+                }
+            }
+
+            # Extract data based on screenshot type
+            if screen_type == 'scoreboard' and best_screenshot.kda_result:
+                kda = best_screenshot.kda_result
+                merged_analysis.update({
+                    'player_located': True,
+                    'player_ign': kda.player_ign,
+                    'kda': {
+                        'kills': kda.kills,
+                        'deaths': kda.deaths,
+                        'assists': kda.assists
+                    },
+                    'kda_ratio': kda.kda_ratio if hasattr(kda, 'kda_ratio') else
+                                ((kda.kills + kda.assists) / max(kda.deaths, 1) if kda.deaths is not None else 0),
+                    'overall_confidence': kda.confidence,
+                    'data_completeness': 0.6  # Higher for scoreboard data
+                })
+
+                # Try to extract gold per minute if available
+                if hasattr(kda, 'raw_data') and 'gold_per_minute' in kda.raw_data:
+                    merged_analysis['gold_per_minute'] = kda.raw_data['gold_per_minute']
+
+            elif screen_type == 'damage_stats' and best_screenshot.damage_result:
+                damage = best_screenshot.damage_result
+                merged_analysis.update({
+                    'player_located': True,
+                    'player_ign': damage.player_ign,
+                    'damage_stats': {
+                        'hero_damage': damage.hero_damage if damage.hero_damage > 0 else None,
+                        'damage_taken': damage.damage_taken if damage.damage_taken > 0 else None,
+                        'turret_damage': damage.tower_damage if hasattr(damage, 'tower_damage') and damage.tower_damage > 0 else None,
+                        'teamfight_participation': damage.teamfight_participation if hasattr(damage, 'teamfight_participation') and damage.teamfight_participation > 0 else None
+                    },
+                    'overall_confidence': damage.confidence if hasattr(damage, 'confidence') else 0.8,
+                    'data_completeness': 0.4  # Lower for damage-only data
+                })
+
+                # Extract gold per minute from damage data if available
+                if hasattr(damage, 'raw_data') and 'gold_per_minute' in damage.raw_data:
+                    merged_analysis['gold_per_minute'] = damage.raw_data['gold_per_minute']
+
+            # Generate coaching feedback for single screenshot
+            try:
+                logger.info(f"Generating coaching feedback for single screenshot session {session.session_id}")
+                unified_coaching_feedback = generate_enhanced_feedback(merged_analysis)
+                merged_analysis['coaching_feedback'] = unified_coaching_feedback
+                session.debug_trace['coaching'] = {'called': True, 'tips_count': len(unified_coaching_feedback), 'mode': 'single_screenshot'}
+                logger.info(f"Generated coaching feedback for single screenshot with {len(unified_coaching_feedback)} insights")
+            except Exception as e:
+                logger.warning(f"Failed to generate coaching feedback for single screenshot: {e}")
+                merged_analysis['coaching_feedback'] = []
+                session.debug_trace['coaching'] = {'called': False, 'reason': str(e), 'mode': 'single_screenshot'}
+
+            # Mark session as complete
+            session.merged_analysis = merged_analysis
+            session.is_complete = True
+            session.debug_trace['completion_mode'] = 'single_screenshot_timeout'
+
+            logger.info(f"Successfully completed single screenshot session {session.session_id} with {screen_type} data")
+
+        except Exception as e:
+            logger.error(f"Error completing single screenshot session {session.session_id}: {e}")
 
 # Global instance for easy access
 session_analysis_service = SessionAnalysisService()

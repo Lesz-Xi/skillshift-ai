@@ -39,10 +39,17 @@ const EXPERIENCE_STAGES = {
 
 export async function POST(request) {
   try {
+    // MANUS-AI FIX: Parse query parameters for IGN and session_id
+    const url = new URL(request.url);
+    const queryIgn = url.searchParams.get("ign") || "";
+    const querySessionId = url.searchParams.get("session_id") || "";
+
     const formData = await request.formData();
     const file = formData.get("file");
     const allowDefaultIGN = process.env.ALLOW_DEFAULT_IGN === "true";
-    const ignInput = (formData.get("ign") || "").toString().trim();
+
+    // MANUS-AI FIX: Check both query parameters and form data for IGN
+    const ignInput = (queryIgn || formData.get("ign") || "").toString().trim();
     const heroInput = (formData.get("hero") || formData.get("hero_override") || "").toString().trim();
     const ign = ignInput || (allowDefaultIGN ? DEFAULT_IGN : "");
     if (!ign) {
@@ -59,7 +66,8 @@ export async function POST(request) {
     }
     const analysisType = formData.get("analysisType") || "general";
     const experienceStage = formData.get("experienceStage") || "first_upload";
-    const sessionId = (formData.get("session_id") || "").toString().trim() || null;
+    // MANUS-AI FIX: Use query parameter for session_id
+    const sessionId = (querySessionId || formData.get("session_id") || "").toString().trim() || null;
 
     if (!file) {
       return NextResponse.json(
@@ -255,34 +263,71 @@ export async function POST(request) {
       stageConfig
     );
 
-    // CRITICAL FIX: Handle confidence score format inconsistency
-    const rawConfidence =
-      analysisResult.confidence_scores?.overall_confidence ||
-      analysisResult.overall_confidence ||
-      analysisResult.diagnostics?.confidence_score ||
-      analysisResult.confidence_score ||
-      0;
+    // MANUS-AI FIX: Detect session-based responses vs direct responses
+    const isSessionResponse = analysisResult.hasOwnProperty('session_id') ||
+                             analysisResult.hasOwnProperty('__raw') ||
+                             (analysisResult.hasOwnProperty('analysis') && analysisResult.hasOwnProperty('confidence_score'));
+
+    // MANUS-AI FIX: Handle confidence score extraction from session-based responses
+    let rawConfidence = 0;
+    let sessionData = {};
+
+    if (isSessionResponse) {
+      // MANUS-AI: Session responses have confidence at the top level, not in .data
+      sessionData = analysisResult; // Use the full response as session data
+      rawConfidence = analysisResult.confidence_score ||
+                     analysisResult.__raw?.confidence_score ||
+                     analysisResult.overall_confidence ||
+                     analysisResult.analysis?.quality?.overall_confidence ||
+                     analysisResult.quality?.overall_confidence ||
+                     0;
+    } else {
+      // Extract confidence from direct response
+      rawConfidence = analysisResult.confidence_scores?.overall_confidence ||
+                     analysisResult.overall_confidence ||
+                     analysisResult.diagnostics?.confidence_score ||
+                     analysisResult.confidence_score ||
+                     0;
+    }
 
     // Normalize confidence to 0-100 range (percentage)
     const normalizedConfidence =
       rawConfidence > 1 ? rawConfidence : rawConfidence * 100;
 
-    // Validate confidence isn't inflated without data
-    const hasValidData =
-      (analysisResult.parsed_data?.hero &&
-        analysisResult.parsed_data?.hero !== "Unknown" &&
-        analysisResult.parsed_data?.kda !== "N/A") ||
-      (analysisResult.match_data?.hero &&
-        analysisResult.match_data?.hero !== "Unknown" &&
-        analysisResult.match_data?.kda !== "N/A");
+    // MANUS-AI FIX: Validate data based on response type
+    let hasValidData;
+    if (isSessionResponse) {
+      // MANUS-AI: Validate session-based response data from actual structure
+      hasValidData = (sessionData.hero && sessionData.hero !== "Unknown") ||
+                    (sessionData.match_data?.hero && sessionData.match_data?.hero !== "Unknown") ||
+                    (sessionData.parsed_data?.hero && sessionData.parsed_data?.hero !== "Unknown") ||
+                    (sessionData.__raw?.hero && sessionData.__raw?.hero !== "Unknown") ||
+                    (sessionData.analysis?.performance?.hero && sessionData.analysis?.performance?.hero !== "Unknown") ||
+                    (sessionData.__raw?.session_status && sessionData.__raw?.session_status !== "failed");
+    } else {
+      // Validate direct response data
+      hasValidData = (analysisResult.parsed_data?.hero &&
+                     analysisResult.parsed_data?.hero !== "Unknown" &&
+                     analysisResult.parsed_data?.kda !== "N/A") ||
+                    (analysisResult.match_data?.hero &&
+                     analysisResult.match_data?.hero !== "Unknown" &&
+                     analysisResult.match_data?.kda !== "N/A");
+    }
 
     const actualConfidence = hasValidData
       ? normalizedConfidence
       : Math.min(normalizedConfidence, 30);
 
-    // Pull performance from either parsed_data, match_data, or top-level fields
-    const perfSrc =
-      analysisResult.parsed_data || analysisResult.match_data || {};
+    // MANUS-AI FIX: Pull performance data based on response type
+    let perfSrc;
+    if (isSessionResponse) {
+      // MANUS-AI: Session responses have data in multiple locations, prioritize actual data
+      perfSrc = sessionData.match_data || sessionData.parsed_data ||
+               sessionData.__raw || sessionData.analysis?.performance || {};
+    } else {
+      // Direct response uses parsed_data or match_data
+      perfSrc = analysisResult.parsed_data || analysisResult.match_data || {};
+    }
     const hero = perfSrc.hero || analysisResult.hero || "Unknown";
     // Build KDA from components if missing
     const kKills = perfSrc.kills ?? analysisResult.kills;
@@ -328,8 +373,12 @@ export async function POST(request) {
     const dashboardResponse = {
       success: true,
       message: "Analysis completed successfully",
-      coaching_feedback: analysisResult.coaching_feedback || [], // Include backend unified coaching feedback
-      __raw: analysisResult, // Include raw backend response for damage_stats access
+      // MANUS-AI FIX: Handle coaching feedback based on response type
+      coaching_feedback: isSessionResponse ?
+        (sessionData.coaching_feedback || sessionData.__raw?.coaching_feedback || []) :
+        (analysisResult.coaching_feedback || []),
+      // MANUS-AI FIX: Include appropriate raw data based on response type
+      __raw: isSessionResponse ? sessionData : analysisResult, // Include raw backend response for damage_stats access
       analysis: {
         // Core analysis results
         statistical_feedback: enhancedInsights.statistical_feedback,
