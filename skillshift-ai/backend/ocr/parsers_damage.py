@@ -187,10 +187,12 @@ class RowAgnosticDamageParser:
         try:
             all_text = " ".join([result[1] for result in ocr_results]).lower()
             
-            # KDA/Scoreboard screen anchors
-            kda_anchors = ["kda", "victory", "defeat", "gold", "mvp", "bronze", "silver", "gold"]
-            # Damage/Stats screen anchors  
-            damage_anchors = ["hero damage", "tower damage", "damage taken", "teamfight", "damage"]
+            # KDA/Scoreboard screen anchors (enhanced for better detection)
+            kda_anchors = ["kda", "victory", "defeat", "mvp", "bronze", "silver", "gold", "k/d/a",
+                          "kill", "death", "assist", "scoreboard", "match result", "win", "lose"]
+            # Damage/Stats screen anchors
+            damage_anchors = ["hero damage", "tower damage", "damage taken", "teamfight", "damage dealt",
+                             "turret damage", "objective damage"]
             
             kda_score = sum(1 for anchor in kda_anchors if anchor in all_text)
             damage_score = sum(1 for anchor in damage_anchors if anchor in all_text)
@@ -202,12 +204,21 @@ class RowAgnosticDamageParser:
             elif damage_score > kda_score:
                 return "damage"
             else:
-                # If unclear, default to damage but with low confidence
-                return "damage"
+                # MANUS-AI FIX: If unclear, try pattern-based detection
+                # Look for KDA pattern (N/N/N) which is strong indicator
+                kda_pattern = re.search(r'\b\d{1,2}/\d{1,2}/\d{1,2}\b', all_text)
+                if kda_pattern:
+                    logger.info(f"Found KDA pattern '{kda_pattern.group()}', classifying as scoreboard")
+                    return "scoreboard"
+
+                # If no pattern found, default to scoreboard for better user experience
+                logger.info("Unclear screen type, defaulting to scoreboard")
+                return "scoreboard"
                 
         except Exception as e:
             logger.error(f"Error detecting screen type: {e}")
-            return "damage"  # Default fallback
+            # MANUS-AI FIX: Better fallback for KDA screenshots
+            return "scoreboard"  # Most screenshots uploaded are likely KDA
     
     def _extract_damage_from_ocr_screen_specific(self, ocr_results: List, target_ign: str, screen_type: str) -> Optional[Dict[str, Any]]:
         """

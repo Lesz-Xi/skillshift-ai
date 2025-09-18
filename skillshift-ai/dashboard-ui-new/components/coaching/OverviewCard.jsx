@@ -7,24 +7,45 @@ export default function OverviewCard({ data }) {
 
   // Parse KDA data
   const kdaDisplay = (() => {
-    if (kda) {
-      if (typeof kda === "object") {
-        return `${kda.kills || 0}/${kda.deaths || 0}/${kda.assists || 0}`;
+    if (!kda) return "N/A";
+    if (typeof kda === "object") {
+      const { kills, deaths, assists } = kda;
+      if ([kills, deaths, assists].some((val) => val === null || val === undefined)) {
+        return "N/A";
       }
-      return kda;
+      return `${kills}/${deaths}/${assists}`;
     }
-    return "N/A";
+    return kda;
   })();
 
   // Calculate KDA ratio for display
   const kdaRatio = (() => {
     if (kda && typeof kda === "object") {
-      const { kills = 0, deaths = 0, assists = 0 } = kda;
+      const { kills, deaths, assists } = kda;
+      if (
+        kills === null ||
+        kills === undefined ||
+        deaths === null ||
+        deaths === undefined ||
+        assists === null ||
+        assists === undefined
+      ) {
+        return "N/A";
+      }
       if (deaths === 0) return kills + assists; // Perfect KDA
       return ((kills + assists) / deaths).toFixed(2);
     }
     return "N/A";
   })();
+
+  const formatDuration = (value) => {
+    if (value === null || value === undefined || value === "") return "N/A";
+    if (typeof value === "string") return value;
+    const totalSeconds = Math.max(0, Math.round(Number(value) * 60));
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
 
   return (
     <Card className="bg-card border-border">

@@ -8,10 +8,10 @@ import https from "node:https";
 const SKILLSHIFT_AI_BASE_URL =
   process.env.SKILLSHIFT_AI_URL || "http://localhost:8000";
 const DEFAULT_IGN = process.env.DEFAULT_IGN || "";
-const USE_FAST_ANALYSIS = process.env.USE_FAST_ANALYSIS === "true";
+// MANUS-AI FIX: Force use of session analysis service (never use fast analysis)
+const USE_FAST_ANALYSIS = false; // MANUS: Always use session analysis for 90% confidence
 const ANALYZE_TIMEOUT_MS = Number(process.env.ANALYZE_TIMEOUT_MS || "240000"); // 4 minutes default
-const ANALYZE_ENDPOINT =
-  process.env.NEXT_PUBLIC_ANALYZE_ENDPOINT || "/api/analyze";
+const ANALYZE_ENDPOINT = "/api/analyze"; // MANUS: Always use session analysis endpoint
 
 // Experience stage configurations for enhanced feedback
 const EXPERIENCE_STAGES = {
@@ -66,8 +66,12 @@ export async function POST(request) {
     }
     const analysisType = formData.get("analysisType") || "general";
     const experienceStage = formData.get("experienceStage") || "first_upload";
-    // MANUS-AI FIX: Use query parameter for session_id
-    const sessionId = (querySessionId || formData.get("session_id") || "").toString().trim() || null;
+    // MANUS-AI FIX: Generate session_id if not provided to ensure session-based fusion
+    let sessionId = (querySessionId || formData.get("session_id") || "").toString().trim();
+    if (!sessionId) {
+      // Generate UUID for session-based analysis (required for 90% confidence)
+      sessionId = 'session_' + Math.random().toString(36).substring(2, 11) + '_' + Date.now();
+    }
 
     if (!file) {
       return NextResponse.json(

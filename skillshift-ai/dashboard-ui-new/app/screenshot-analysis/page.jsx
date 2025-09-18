@@ -179,32 +179,45 @@ export default function ScreenshotAnalysisPage() {
             r?.match_data?.hero ||
             null;
 
-          // Handle KDA object properly - preserve null values when data is missing
-          const kda =
-            r.kda ||
-            r?.analysis?.performance?.kda ||
-            r?.match_data?.kda ||
+          const rawKda =
+            r.kda ??
+            r?.analysis?.performance?.kda ??
+            r?.match_data?.kda ??
+            r?.parsed_data?.kda ??
             null;
+          const kdaBreakdown =
+            (rawKda && typeof rawKda === "object" ? rawKda : null) ||
+            r?.kda_breakdown ||
+            r?.match_data?.kda_breakdown ||
+            r?.parsed_data?.kda_breakdown ||
+            r?.__raw?.kda_breakdown ||
+            r?.__raw?.match_data?.kda_breakdown ||
+            null;
+          const kda = kdaBreakdown || rawKda;
 
-          const gpm =
-            r.gpm ||
-            r?.analysis?.performance?.gpm ||
-            r?.match_data?.gpm ||
+          const gpmRaw =
+            r.gpm ??
+            r?.analysis?.performance?.gpm ??
+            r?.match_data?.gpm ??
+            r?.parsed_data?.gpm ??
             null;
+          const gpm = gpmRaw === 0 ? null : gpmRaw;
 
           const role = r.role || r?.analysis?.performance?.role || null;
 
           let confidence = 0;
-          if (typeof r?.confidence_score === "number") {
-            confidence = r.confidence_score; // already 0-1
+          if (typeof r?.overall_confidence === "number") {
+            confidence = r.overall_confidence;
+          } else if (typeof r?.confidence_score === "number") {
+            confidence = r.confidence_score;
           } else if (
             typeof r?.analysis?.quality?.overall_confidence === "number"
           ) {
-            // convert 0-100 to 0-1
-            confidence = r.analysis.quality.overall_confidence / 100;
+            confidence = r.analysis.quality.overall_confidence;
           } else if (typeof r?.diagnostics?.confidence_score === "number") {
             confidence = r.diagnostics.confidence_score;
           }
+          if (confidence > 1) confidence = confidence / 100;
           if (!Number.isFinite(confidence)) confidence = 0;
           confidence = Math.max(0, Math.min(1, confidence));
 
@@ -216,13 +229,48 @@ export default function ScreenshotAnalysisPage() {
               )
             : [];
 
+          const fusionStatus =
+            r?.fusion_status ||
+            r?.data?.fusion_status ||
+            r?.__raw?.fusion_status ||
+            r?.__raw?.data?.fusion_status ||
+            null;
+          const sessionStatus =
+            r?.session_status ||
+            r?.data?.session_status ||
+            r?.__raw?.session_status ||
+            r?.__raw?.data?.session_status ||
+            null;
+
+          const matchDuration =
+            r.match_duration ??
+            r?.data?.match_duration ??
+            r?.analysis?.performance?.match_duration ??
+            r?.match_data?.match_duration ??
+            r?.parsed_data?.match_duration ??
+            r?.__raw?.match_duration ??
+            r?.__raw?.match_data?.match_duration ??
+            null;
+
+          const confidenceBreakdown =
+            r?.confidence_breakdown ||
+            r?.data?.confidence_breakdown ||
+            r?.__raw?.confidence_breakdown ||
+            r?.__raw?.data?.confidence_breakdown ||
+            {};
+
           return {
             success: r?.success ?? true,
             confidence_score: confidence,
             hero,
             kda,
+            kda_string: r?.kda_string || (typeof rawKda === "string" ? rawKda : null),
             gpm,
             role,
+            match_duration: matchDuration,
+            fusion_status: fusionStatus,
+            session_status: sessionStatus,
+            confidence_breakdown: confidenceBreakdown,
             coaching_feedback: feedbackArray,
             // keep full raw for debugging/advanced UI
             __raw: r,

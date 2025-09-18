@@ -29,6 +29,7 @@ class KDAResult:
     confidence: float
     row_index: int
     raw_data: Dict[str, Any]
+    match_duration: Optional[float] = None
 
 class RowAgnosticKDAParser:
     """
@@ -180,7 +181,8 @@ class RowAgnosticKDAParser:
                 mvp_score=kda_data.get('mvp_score', 0.0),
                 confidence=kda_data.get('confidence', 0.0),
                 row_index=row_crop.row_index,
-                raw_data=kda_data
+                raw_data=kda_data,
+                match_duration=kda_data.get('match_duration')
             )
             
         except Exception as e:
@@ -227,7 +229,8 @@ class RowAgnosticKDAParser:
                 mvp_score=kda_data.get('mvp_score', 0.0),
                 confidence=kda_data.get('confidence', 0.0),
                 row_index=row_crop.row_index,
-                raw_data=kda_data
+                raw_data=kda_data,
+                match_duration=kda_data.get('match_duration')
             )
             
         except Exception as e:
@@ -531,6 +534,17 @@ class RowAgnosticKDAParser:
             hero = self._extract_hero_name_enhanced(ocr_results, target_ign)
             mvp_score = self._extract_mvp_score_enhanced(ocr_results)
             confidence = self._calculate_confidence_enhanced(ocr_results, target_ign, normalized_text)
+
+            # Attempt to extract match duration from captured text
+            match_duration = None
+            duration_match = re.search(r'(\d{1,2})[:\.](\d{2})', all_text)
+            if duration_match:
+                try:
+                    minutes = int(duration_match.group(1))
+                    seconds = int(duration_match.group(2))
+                    match_duration = minutes + seconds / 60
+                except Exception:
+                    match_duration = None
             
             return {
                 'hero': hero,
@@ -539,6 +553,7 @@ class RowAgnosticKDAParser:
                 'assists': assists,
                 'mvp_score': mvp_score,
                 'confidence': confidence,
+                'match_duration': match_duration,
                 'raw_text': all_text,
                 'normalized_text': normalized_text
             }

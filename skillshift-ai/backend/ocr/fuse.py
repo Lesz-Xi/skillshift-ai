@@ -42,6 +42,7 @@ class FusedResult:
     # OCR Mission 4 additions
     hero_confidence: float = 0.0
     hero_resolution_method: str = "unknown"
+    match_duration: Optional[float] = None
     
     def to_enriched_schema(self) -> Dict[str, Any]:
         """Return enriched schema as specified in OCR-Mission-4.md."""
@@ -65,6 +66,7 @@ class FusedResult:
             'hero_resolution_method': self.hero_resolution_method,
             'teamfight_participation': self.teamfight_participation,
             'gold_per_minute': self.gold_per_minute,
+            'match_duration': self.match_duration,
             'data_completeness': self.data_completeness,
             'fusion_method': self.fusion_method
         }
@@ -146,7 +148,16 @@ class CrossViewFusion:
             
             # Determine fusion method
             fusion_method = self._determine_fusion_method(kda_result, damage_result)
-            
+
+            # Try to carry match duration from the more reliable source
+            match_duration = None
+            if kda_result:
+                match_duration = getattr(kda_result, "match_duration", None)
+                if match_duration is None:
+                    match_duration = kda_result.raw_data.get("match_duration") if getattr(kda_result, "raw_data", None) else None
+            if match_duration is None and damage_result and getattr(damage_result, "raw_data", None):
+                match_duration = damage_result.raw_data.get("match_duration")
+
             # Create fused result
             # Calculate KDA ratio safely
             kills = kda_data['kills']
@@ -177,7 +188,8 @@ class CrossViewFusion:
                 raw_data={
                     'kda_result': kda_result.__dict__ if kda_result else None,
                     'damage_result': damage_result.__dict__ if damage_result else None
-                }
+                },
+                match_duration=match_duration
             )
             
         except Exception as e:
@@ -435,11 +447,20 @@ class CrossViewFusion:
             
             # Determine fusion method
             fusion_method = self._determine_fusion_method_enhanced(kda_result, damage_result)
-            
+
             # OCR Mission 5: Update telemetry with final results
             detector_drift_guards.telemetry.ign_score = overall_confidence
             detector_drift_guards.telemetry.stage_ms["fusion"] = 0.0  # Will be updated by caller
-            
+
+            # Carry forward any match duration we managed to extract
+            match_duration = None
+            if kda_result:
+                match_duration = getattr(kda_result, "match_duration", None)
+                if match_duration is None and getattr(kda_result, "raw_data", None):
+                    match_duration = kda_result.raw_data.get('match_duration')
+            if match_duration is None and damage_result and getattr(damage_result, "raw_data", None):
+                match_duration = damage_result.raw_data.get('match_duration')
+
             # Create enriched fused result
             fused_result = FusedResult(
                 player_ign=player_ign,
@@ -463,6 +484,7 @@ class CrossViewFusion:
                 conflicts_resolved=conflicts_resolved,
                 hero_confidence=hero_confidence,
                 hero_resolution_method=hero_resolution_method,
+                match_duration=match_duration,
                 raw_data={
                     'kda_result': kda_result.__dict__ if kda_result else None,
                     'damage_result': damage_result.__dict__ if damage_result else None,

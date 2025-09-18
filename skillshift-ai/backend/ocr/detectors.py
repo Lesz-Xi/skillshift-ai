@@ -104,12 +104,13 @@ class RowAgnosticScoreboardDetector:
             noise_ratio = noise_indicators / total_texts
 
             # Apply Manus AI error recovery: Lower threshold for noisy conditions
+            # MANUS-AI FIX: Lowered thresholds to handle OCR variations better
             if noise_ratio > 0.7:  # High noise
-                adaptive_threshold = 50
+                adaptive_threshold = 35  # Lowered from 50 to handle difficult OCR
             elif noise_ratio > 0.5:  # Medium noise
-                adaptive_threshold = 60
+                adaptive_threshold = 45  # Lowered from 60
             elif noise_ratio > 0.3:  # Low noise
-                adaptive_threshold = 70
+                adaptive_threshold = 55  # Lowered from 70
             else:  # Clean OCR
                 adaptive_threshold = base_threshold
 
@@ -682,6 +683,9 @@ class RowAgnosticScoreboardDetector:
                         image, absolute_bbox, target_ign
                     )
 
+                # MANUS-AI DEBUG: Enhanced row detection logging
+                logger.info(f"Row {i} (visual row {i+1}): contains_ign={contains_ign}, confidence={confidence:.2f}, bbox=({row_y}, {panel_left}, {panel_width}, {row_height})")
+
                 row_crop = RowCrop(
                     row_index=i,
                     bbox_ratio=bbox_ratio,
@@ -755,41 +759,52 @@ class RowAgnosticScoreboardDetector:
             RowCrop containing the target IGN, or None if not found
         """
         from backend.ocr.textmatch import best_match
-        
+
+        # MANUS-AI DEBUG: Enhanced target row selection logging
+        logger.info(f"🎯 Finding target row for IGN: '{target_ign}' among {len(row_crops)} rows")
+
         # First, try to find rows that already have IGN detection
-        for row_crop in row_crops:
+        for i, row_crop in enumerate(row_crops):
+            logger.info(f"🔍 Row {i} (visual row {i+1}): contains_ign={row_crop.contains_target_ign}, confidence={row_crop.confidence:.3f}")
             if row_crop.contains_target_ign and row_crop.confidence > 0.7:
+                logger.info(f"✅ Selected row {i} (visual row {i+1}) with high confidence: {row_crop.confidence:.3f}")
                 return row_crop
 
         # If no pre-detected matches, do OCR on all rows and use fuzzy matching
         best_row = None
         best_score = 0.0
+        best_row_index = -1
 
-        for row_crop in row_crops:
+        for i, row_crop in enumerate(row_crops):
             try:
                 # Extract text from this row
                 row_y, row_x, row_width, row_height = row_crop.absolute_bbox
                 # Note: This would need the original image, but we'll use the confidence
                 # from the row crop as a proxy for now
-                
+
                 # Use the confidence as a score and apply fuzzy matching
                 if row_crop.confidence > 0.3:  # Lower threshold for fuzzy matching
                     # In a real implementation, we'd OCR the row here
                     # For now, we'll use the confidence as a proxy
                     score = row_crop.confidence * 100  # Convert to 0-100 scale
-                    
+
+                    logger.info(f"📊 Row {i} (visual row {i+1}) candidate: score={score:.2f}, confidence={row_crop.confidence:.3f}")
+
                     if score > best_score:
                         best_score = score
                         best_row = row_crop
-                        
+                        best_row_index = i
+
             except Exception as e:
                 logger.error(f"Error processing row for IGN matching: {e}")
                 continue
 
         # Return the best match if it meets our threshold
         if best_row and best_score >= 30:  # 30% threshold for fuzzy matching
+            logger.info(f"🎯 Final selection: Row {best_row_index} (visual row {best_row_index+1}) with score={best_score:.2f}")
             return best_row
 
+        logger.warning(f"❌ No suitable row found for IGN '{target_ign}'")
         return None
 
     def detect(self, image):
