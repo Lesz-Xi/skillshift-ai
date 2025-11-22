@@ -40,12 +40,79 @@ import {
   WifiOff,
 } from "lucide-react";
 
+// Helper function to normalize backend responses - MUST be at module level for fusion callback access
+const normalizeResultHelper = (r) => {
+  const hero = r.hero || r?.analysis?.performance?.hero || r?.match_data?.hero || r?.__raw?.data?.hero || null;
+  const rawKda = r?.data?.kda ?? r?.__raw?.data?.kda ?? r.kda ?? (r?.analysis?.performance?.kda !== "N/A" ? r?.analysis?.performance?.kda : null) ?? r?.match_data?.kda ?? r?.parsed_data?.kda ?? null;
+  const kdaBreakdown = (rawKda && typeof rawKda === "object" ? rawKda : null) || r?.data?.kda_breakdown || r?.__raw?.data?.kda_breakdown || r?.kda_breakdown || r?.match_data?.kda_breakdown || r?.parsed_data?.kda_breakdown || r?.__raw?.kda_breakdown || r?.__raw?.match_data?.kda_breakdown || null;
+  
+  let kda = kdaBreakdown || rawKda;
+  if (kda && typeof kda === 'object' && 'k' in kda) {
+    console.log("🔄 [KDA DEBUG] Converting KDA from short format:", kda);
+    kda = { kills: kda.k, deaths: kda.d, assists: kda.a };
+    console.log("✅ [KDA DEBUG] Converted to long format:", kda);
+  }
+  
+  if (!kda || kda === "N/A") {
+    const kills = r?.data?.kills ?? r?.__raw?.data?.kills ?? r?.kills ?? r?.match_data?.kills ?? r?.parsed_data?.kills ?? null;
+    const deaths = r?.data?.deaths ?? r?.__raw?.data?.deaths ?? r?.deaths ?? r?.match_data?.deaths ?? r?.parsed_data?.deaths ?? null;
+    const assists = r?.data?.assists ?? r?.__raw?.data?.assists ?? r?.assists ?? r?.match_data?.assists ?? r?.parsed_data?.assists ?? null;
+    if (kills !== null && deaths !== null && assists !== null) kda = { kills, deaths, assists };
+  }
+
+  const gpmRaw = r.gpm ?? r?.analysis?.performance?.gpm ?? r?.match_data?.gpm ?? r?.parsed_data?.gpm ?? r?.__raw?.data?.gpm ?? null;
+  const gpm = gpmRaw === 0 ? null : gpmRaw;
+  const role = r.role || r?.analysis?.performance?.role || r?.__raw?.data?.role || null;
+  const heroDamage = r?.data?.hero_damage ?? r?.data?.damage ?? r?.__raw?.data?.hero_damage ?? r?.hero_damage ?? r?.damage ?? (r?.analysis?.performance?.hero_damage !== "N/A" ? r?.analysis?.performance?.hero_damage : null) ?? r?.match_data?.hero_damage ?? r?.parsed_data?.hero_damage ?? null;
+  const damageTaken = r?.data?.damage_taken ?? r?.__raw?.data?.damage_taken ?? r?.damage_taken ?? (r?.analysis?.performance?.damage_taken !== "N/A" ? r?.analysis?.performance?.damage_taken : null) ?? r?.match_data?.damage_taken ?? r?.parsed_data?.damage_taken ?? null;
+  const turretDamage = r?.data?.turret_damage ?? r?.__raw?.data?.turret_damage ?? r?.turret_damage ?? (r?.analysis?.performance?.turret_damage !== "N/A" ? r?.analysis?.performance?.turret_damage : null) ?? r?.match_data?.turret_damage ?? r?.parsed_data?.turret_damage ?? null;
+  const teamfightParticipation = r?.data?.teamfight_participation ?? r?.__raw?.data?.teamfight_participation ?? r?.teamfight_participation ?? (r?.analysis?.performance?.teamfight_participation !== "N/A" ? r?.analysis?.performance?.teamfight_participation : null) ?? r?.match_data?.teamfight_participation ?? r?.parsed_data?.teamfight_participation ?? null;
+
+  let confidence = 0;
+  if (typeof r?.overall_confidence === "number") confidence = r.overall_confidence;
+  else if (typeof r?.confidence_score === "number") confidence = r.confidence_score;
+  else if (typeof r?.analysis?.quality?.overall_confidence === "number") confidence = r.analysis.quality.overall_confidence;
+  else if (typeof r?.diagnostics?.confidence_score === "number") confidence = r.diagnostics.confidence_score;
+  else if (typeof r?.__raw?.data?.overall_confidence === "number") confidence = r.__raw.data.overall_confidence;
+  else if (typeof r?.__raw?.data?.confidence_score === "number") confidence = r.__raw.data.confidence_score;
+  if (confidence > 1) confidence = confidence / 100;
+  if (!Number.isFinite(confidence)) confidence = 0;
+  confidence = Math.max(0, Math.min(1, confidence));
+
+  const feedbackArray = Array.isArray(r?.coaching_feedback) ? r.coaching_feedback : Array.isArray(r?.analysis?.statistical_feedback) ? r.analysis.statistical_feedback.map((f) => typeof f === "string" ? f : f?.message || JSON.stringify(f)) : [];
+  const fusionStatus = r?.fusion_status || r?.data?.fusion_status || r?.__raw?.fusion_status || r?.__raw?.data?.fusion_status || null;
+  const sessionStatus = r?.session_status || r?.data?.session_status || r?.__raw?.session_status || r?.__raw?.data?.session_status || null;
+  const matchDuration = r.match_duration ?? r?.data?.match_duration ?? r?.analysis?.performance?.match_duration ?? r?.match_data?.match_duration ?? r?.parsed_data?.match_duration ?? r?.__raw?.match_duration ?? r?.__raw?.match_data?.match_duration ?? r?.__raw?.data?.match_duration ?? r?.__raw?.data?.match_duration_minutes ?? null;
+  const confidenceBreakdown = r?.confidence_breakdown || r?.data?.confidence_breakdown || r?.__raw?.confidence_breakdown || r?.__raw?.data?.confidence_breakdown || {};
+
+  return {
+    success: r?.success ?? true,
+    confidence_score: confidence,
+    hero,
+    kda,
+    kda_string: r?.kda_string || (typeof rawKda === "string" ? rawKda : null),
+    gpm,
+    role,
+    match_duration: matchDuration,
+    hero_damage: heroDamage,
+    damage_taken: damageTaken,
+    turret_damage: turretDamage,
+    teamfight_participation: teamfightParticipation,
+    fusion_status: fusionStatus,
+    session_status: sessionStatus,
+    confidence_breakdown: confidenceBreakdown,
+    coaching_feedback: feedbackArray,
+    __raw: r,
+  };
+};
+
 export default function ScreenshotAnalysisPage() {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [processingFiles, setProcessingFiles] = useState(new Set());
   const [analysisResults, setAnalysisResults] = useState({});
   const [selectedResultFile, setSelectedResultFile] = useState(null);
+  const [fusedResult, setFusedResult] = useState(null); // Store fused result separately
   const [showResultModal, setShowResultModal] = useState(false);
   const [playerIGN, setPlayerIGN] = useState("");
   const [isConnected, setIsConnected] = useState(false);
@@ -94,7 +161,7 @@ export default function ScreenshotAnalysisPage() {
 
   const handleFileUpload = useCallback((files) => {
     const newFiles = Array.from(files).map((file) => ({
-      id: Math.random().toString(36).substr(2, 9),
+      id: Math.random().toString(36).substring(2, 11),
       file,
       name: file.name,
       size: file.size,
@@ -107,14 +174,18 @@ export default function ScreenshotAnalysisPage() {
   const handleDrop = useCallback(
     (e) => {
       e.preventDefault();
+      e.stopPropagation();
       const files = e.dataTransfer.files;
-      handleFileUpload(files);
+      if (files && files.length > 0) {
+        handleFileUpload(files);
+      }
     },
     [handleFileUpload]
   );
 
   const handleDragOver = useCallback((e) => {
     e.preventDefault();
+    e.stopPropagation();
   }, []);
 
   const removeFile = (fileId) => {
@@ -172,112 +243,8 @@ export default function ScreenshotAnalysisPage() {
 
         // Normalize various backend/proxy result shapes into the UI schema
         // FIXED: Handle null values properly instead of coercing to "N/A"
-        const normalizeResult = (r) => {
-          const hero =
-            r.hero ||
-            r?.analysis?.performance?.hero ||
-            r?.match_data?.hero ||
-            null;
-
-          const rawKda =
-            r.kda ??
-            r?.analysis?.performance?.kda ??
-            r?.match_data?.kda ??
-            r?.parsed_data?.kda ??
-            null;
-          const kdaBreakdown =
-            (rawKda && typeof rawKda === "object" ? rawKda : null) ||
-            r?.kda_breakdown ||
-            r?.match_data?.kda_breakdown ||
-            r?.parsed_data?.kda_breakdown ||
-            r?.__raw?.kda_breakdown ||
-            r?.__raw?.match_data?.kda_breakdown ||
-            null;
-          const kda = kdaBreakdown || rawKda;
-
-          const gpmRaw =
-            r.gpm ??
-            r?.analysis?.performance?.gpm ??
-            r?.match_data?.gpm ??
-            r?.parsed_data?.gpm ??
-            null;
-          const gpm = gpmRaw === 0 ? null : gpmRaw;
-
-          const role = r.role || r?.analysis?.performance?.role || null;
-
-          let confidence = 0;
-          if (typeof r?.overall_confidence === "number") {
-            confidence = r.overall_confidence;
-          } else if (typeof r?.confidence_score === "number") {
-            confidence = r.confidence_score;
-          } else if (
-            typeof r?.analysis?.quality?.overall_confidence === "number"
-          ) {
-            confidence = r.analysis.quality.overall_confidence;
-          } else if (typeof r?.diagnostics?.confidence_score === "number") {
-            confidence = r.diagnostics.confidence_score;
-          }
-          if (confidence > 1) confidence = confidence / 100;
-          if (!Number.isFinite(confidence)) confidence = 0;
-          confidence = Math.max(0, Math.min(1, confidence));
-
-          const feedbackArray = Array.isArray(r?.coaching_feedback)
-            ? r.coaching_feedback
-            : Array.isArray(r?.analysis?.statistical_feedback)
-            ? r.analysis.statistical_feedback.map((f) =>
-                typeof f === "string" ? f : f?.message || JSON.stringify(f)
-              )
-            : [];
-
-          const fusionStatus =
-            r?.fusion_status ||
-            r?.data?.fusion_status ||
-            r?.__raw?.fusion_status ||
-            r?.__raw?.data?.fusion_status ||
-            null;
-          const sessionStatus =
-            r?.session_status ||
-            r?.data?.session_status ||
-            r?.__raw?.session_status ||
-            r?.__raw?.data?.session_status ||
-            null;
-
-          const matchDuration =
-            r.match_duration ??
-            r?.data?.match_duration ??
-            r?.analysis?.performance?.match_duration ??
-            r?.match_data?.match_duration ??
-            r?.parsed_data?.match_duration ??
-            r?.__raw?.match_duration ??
-            r?.__raw?.match_data?.match_duration ??
-            null;
-
-          const confidenceBreakdown =
-            r?.confidence_breakdown ||
-            r?.data?.confidence_breakdown ||
-            r?.__raw?.confidence_breakdown ||
-            r?.__raw?.data?.confidence_breakdown ||
-            {};
-
-          return {
-            success: r?.success ?? true,
-            confidence_score: confidence,
-            hero,
-            kda,
-            kda_string: r?.kda_string || (typeof rawKda === "string" ? rawKda : null),
-            gpm,
-            role,
-            match_duration: matchDuration,
-            fusion_status: fusionStatus,
-            session_status: sessionStatus,
-            confidence_breakdown: confidenceBreakdown,
-            coaching_feedback: feedbackArray,
-            // keep full raw for debugging/advanced UI
-            __raw: r,
-          };
-        };
-
-        const normalized = normalizeResult(result);
+        // Use module-level helper function for scoping (needed for fusion callback)
+        const normalized = normalizeResultHelper(result);
         results.push({
           fileId: fileData.id,
           fileName: fileData.name,
@@ -305,6 +272,190 @@ export default function ScreenshotAnalysisPage() {
       });
 
       setAnalysisResults(resultsMap);
+
+      // 🔥 FUSION INTEGRATION: Check if we have both KDA and damage data across ALL results
+      // This triggers after ALL screenshots in the batch have been analyzed
+      // We check if ANY result has KDA data AND ANY result has damage data
+      // If both exist, we trigger fusion to merge them into a single comprehensive analysis
+      const allResults = Object.values(resultsMap);
+
+      console.log("🔍 [FUSION DEBUG] Analyzing all results for fusion eligibility:", {
+        totalResults: allResults.length,
+        sessionId: sessionId,
+      });
+
+      // Check if we have at least one KDA screenshot (scoreboard view)
+      // CRITICAL FIX: Check ALL possible paths where backend may return KDA data
+      const hasKDA = allResults.some((result, idx) => {
+        // Try multiple extraction paths in priority order:
+        const kills = 
+          result?.data?.kills ??              // Primary: result.data.kills (backend structure)
+          result?.kda?.kills ??               // KDA object
+          result?.__raw?.data?.kills ??       // Raw data nested
+          result?.kills ??                    // Top-level fallback
+          result?.match_data?.kills ??        // Match data path
+          result?.parsed_data?.kills ??       // Parsed data path
+          null;
+        
+        const deaths = 
+          result?.data?.deaths ??             // Primary: result.data.deaths (backend structure)
+          result?.kda?.deaths ??              // KDA object
+          result?.__raw?.data?.deaths ??      // Raw data nested
+          result?.deaths ??                   // Top-level fallback
+          result?.match_data?.deaths ??       // Match data path
+          result?.parsed_data?.deaths ??      // Parsed data path
+          null;
+        
+        console.log(`🔍 [FUSION DEBUG] Result ${idx} KDA check:`, {
+          kills,
+          deaths,
+          hasKDA: kills !== null && deaths !== null,
+          checkedPaths: {
+            'data.kills': result?.data?.kills,
+            'kda.kills': result?.kda?.kills,
+            '__raw.data.kills': result?.__raw?.data?.kills,
+            'kills': result?.kills,
+          },
+          fullResult: result,
+        });
+        return kills !== null && deaths !== null;
+      });
+
+      const hasDamageData = allResults.some((result, idx) => {
+        // CRITICAL FIX: Check ALL possible paths where backend may return damage data
+        const paths = {
+          data_hero_damage: result?.data?.hero_damage,     // PRIMARY: result.data.hero_damage (backend structure)
+          data_damage: result?.data?.damage,               // result.data.damage alternative
+          hero_damage: result?.hero_damage,
+          damage: result?.damage,
+          analysis_perf: result?.analysis?.performance?.hero_damage,
+          match_data: result?.match_data?.hero_damage,
+          raw_data: result?.__raw?.data?.hero_damage,
+          raw_damage_stats: result?.__raw?.damage_stats?.hero_damage,
+          parsed_data: result?.parsed_data?.hero_damage,
+        };
+        const damage =
+          paths.data_hero_damage ??          // Try primary backend path first
+          paths.data_damage ??
+          paths.hero_damage ??
+          paths.damage ??
+          paths.analysis_perf ??
+          paths.match_data ??
+          paths.raw_data ??
+          paths.raw_damage_stats ??
+          paths.parsed_data ??
+          null;
+        console.log(`🔍 [FUSION DEBUG] Result ${idx} Damage check:`, {
+          allPaths: paths,
+          finalDamage: damage,
+          hasDamageData: damage !== null && damage > 0,
+        });
+        return damage !== null && damage > 0;
+      });
+
+      console.log(`📊 [FUSION DEBUG] Upload batch analysis:`, {
+        hasKDA,
+        hasDamageData,
+        sessionId,
+        willTriggerFusion: hasKDA && hasDamageData && sessionId,
+      });
+
+      // Only trigger fusion if we have BOTH data types
+      // This ensures we don't try to fuse with incomplete data
+      if (hasKDA && hasDamageData && sessionId) {
+        console.log(`🔄 Triggering fusion for session ${sessionId} with IGN=${playerIGN || "Lesz XVII"}...`);
+
+        // Update UI to show fusion in progress
+        setUploadedFiles((prev) =>
+          prev.map((file) => ({
+            ...file,
+            status: "fusing",
+          }))
+        );
+
+        try {
+          // Call Next.js API route which proxies to:
+          // Backend POST /api/session/{session_id}/fuse
+          // This triggers the fusion engine to merge KDA + Damage data
+          const fusionResponse = await fetch("/api/fused", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ign: playerIGN || "Lesz XVII",
+              session_id: sessionId,
+            }),
+            signal: AbortSignal.timeout(10000), // 10s timeout for fusion request
+          });
+
+          if (fusionResponse.ok) {
+            const fusionData = await fusionResponse.json();
+
+            console.log("🔍 [FUSION DEBUG] Fusion response received:", {
+              status: fusionData.status,
+              session_id: fusionData.session_id,
+              fusion_status: fusionData.fusion_status || fusionData.data?.fusion_status,
+              has_data: !!fusionData.data,
+              data_keys: fusionData.data ? Object.keys(fusionData.data) : [],
+              raw_response: fusionData,
+            });
+
+            if (fusionData.status === "fused") {
+              console.log("✅ [FUSION DEBUG] Session fused successfully, normalizing result...");
+
+              // Normalize the fused data into our UI schema
+              // This contains merged KDA + Damage data with comprehensive coaching
+              const fusedResult = normalizeResultHelper(fusionData.data);
+
+              console.log("🔍 [FUSION DEBUG] Normalized fused result:", {
+                hero: fusedResult.hero,
+                kda: fusedResult.kda,
+                hero_damage: fusedResult.hero_damage,
+                damage_taken: fusedResult.damage_taken,
+                confidence_score: fusedResult.confidence_score,
+                fusion_status: fusedResult.fusion_status,
+                has_raw: !!fusedResult.__raw,
+                raw_keys: fusedResult.__raw ? Object.keys(fusedResult.__raw) : [],
+              });
+
+              // IMPORTANT: Store the fused result separately
+              // This ensures ALL tabs display the same fused data
+              console.log("🔍 [FUSION DEBUG] Storing fused result:", {
+                fused_kda: fusedResult.kda,
+                fused_hero_damage: fusedResult.hero_damage,
+                fused_confidence: fusedResult.confidence_score,
+              });
+              
+              setFusedResult(fusedResult);
+              console.log("✅ [FUSION DEBUG] Fused result stored - all tabs will now show fused data");
+            } else if (fusionData.status === "partial") {
+              console.log("⏳ [FUSION DEBUG] Session still partial:", fusionData.message);
+              // Keep individual results - fusion will retry when more screenshots added
+            }
+          } else {
+            const errorText = await fusionResponse.text();
+            console.error(`❌ [FUSION DEBUG] Fusion request failed:`, {
+              status: fusionResponse.status,
+              statusText: fusionResponse.statusText,
+              errorBody: errorText,
+            });
+          }
+        } catch (fusionError) {
+          console.warn("⚠️ Fusion polling failed (non-critical):", fusionError instanceof Error ? fusionError.message : String(fusionError));
+          // Keep individual results as fallback
+        } finally {
+          // Reset status to "analyzed" after fusion attempt
+          setUploadedFiles((prev) =>
+            prev.map((file) => ({
+              ...file,
+              status: "analyzed",
+            }))
+          );
+        }
+      } else {
+        console.log(`ℹ️ Skipping fusion: hasKDA=${hasKDA}, hasDamageData=${hasDamageData}, sessionId=${sessionId}`);
+      }
 
       // Show results modal for the first file
       if (results.length > 0) {
@@ -618,7 +769,14 @@ export default function ScreenshotAnalysisPage() {
               className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors cursor-pointer"
               onDrop={handleDrop}
               onDragOver={handleDragOver}
-              onClick={() => fileInputRef.current?.click()}
+              onClick={(e) => {
+                // FIXED: Removed e.preventDefault() which was blocking file input trigger
+                // Keep e.stopPropagation() to prevent event bubbling to parent elements
+                e.stopPropagation();
+                if (fileInputRef.current) {
+                  fileInputRef.current.click();
+                }
+              }}
             >
               <div className="flex flex-col items-center gap-4">
                 <div className="p-4 bg-muted rounded-lg">
@@ -643,7 +801,13 @@ export default function ScreenshotAnalysisPage() {
                 type="file"
                 multiple
                 accept="image/*"
-                onChange={(e) => handleFileUpload(e.target.files)}
+                onChange={(e) => {
+                  if (e.target.files && e.target.files.length > 0) {
+                    handleFileUpload(e.target.files);
+                    // Reset the input value to allow re-uploading the same file
+                    e.target.value = '';
+                  }
+                }}
                 className="hidden"
               />
             </div>
@@ -805,8 +969,11 @@ export default function ScreenshotAnalysisPage() {
                   </div>
 
                   {/* Enhanced Coaching Feedback */}
-                  {analysisResults[selectedResultFile] && (
-                    <CoachingFeedback analysisResult={analysisResults[selectedResultFile]} />
+                  {/* MANUS FIX: Use fusedResult if available, otherwise show individual result */}
+                  {(fusedResult || analysisResults[selectedResultFile]) && (
+                    <CoachingFeedback 
+                      analysisResult={fusedResult || analysisResults[selectedResultFile]} 
+                    />
                   )}
                 </div>
               </DialogContent>

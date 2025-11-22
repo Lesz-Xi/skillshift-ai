@@ -48,9 +48,9 @@ export async function POST(request) {
     const file = formData.get("file");
     const allowDefaultIGN = process.env.ALLOW_DEFAULT_IGN === "true";
 
-    // MANUS-AI FIX: Check both query parameters and form data for IGN
+    // MANUS-AI FIX: Check both query parameters and form data for IGN and hero override
     const ignInput = (queryIgn || formData.get("ign") || "").toString().trim();
-    const heroInput = (formData.get("hero") || formData.get("hero_override") || "").toString().trim();
+    const heroOverride = (formData.get("hero") || formData.get("hero_override") || "").toString().trim();
     const ign = ignInput || (allowDefaultIGN ? DEFAULT_IGN : "");
     if (!ign) {
       return NextResponse.json(
@@ -158,7 +158,8 @@ export async function POST(request) {
       const qp = new URLSearchParams();
       qp.set("ign", ign);
       if (sessionId) qp.set("session_id", sessionId);
-      if (heroInput) qp.set("hero_override", heroInput);
+      // MANUS-AI FIX: Pass hero override to backend for manual hero selection
+      if (heroOverride) qp.set("hero_override", heroOverride);
       // CRITICAL FIX: Add extract_options to enable damage statistics extraction
       qp.set("extract_options", JSON.stringify({ with_damage: true }));
       const url = `${SKILLSHIFT_AI_BASE_URL}${endpoint}?${qp.toString()}`;
@@ -199,7 +200,7 @@ export async function POST(request) {
           const qp2 = new URLSearchParams();
           qp2.set("ign", ign);
           if (sessionId) qp2.set("session_id", sessionId);
-          if (heroInput) qp2.set("hero_override", heroInput);
+          if (heroOverride) qp2.set("hero_override", heroOverride);
           // CRITICAL FIX: Add extract_options to enable damage statistics extraction
           qp2.set("extract_options", JSON.stringify({ with_damage: true }));
           const url2 = `${SKILLSHIFT_AI_BASE_URL}${endpoint}?${qp2.toString()}`;
@@ -243,17 +244,37 @@ export async function POST(request) {
       }
     }
 
-    // CRITICAL FIX: Validate backend response structure
-    if (
-      !analysisResult ||
-      (!analysisResult.match_data && !analysisResult.parsed_data)
-    ) {
+    // CRITICAL FIX: Validate backend response structure - support both session-based and direct responses
+    if (!analysisResult) {
+      console.error("Invalid backend response structure: null/undefined response");
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Invalid analysis response",
+          details: "Backend returned null/undefined response",
+          stage: "response_validation",
+        },
+        { status: 502 }
+      );
+    }
+
+    // Check for valid session-based response (has session_id, screen_type, or data properties)
+    const isSessionResponse = analysisResult.session_id ||
+                             analysisResult.screen_type ||
+                             analysisResult.data ||
+                             analysisResult.session_complete !== undefined;
+
+    // Check for valid direct response (has match_data or parsed_data)
+    const isDirectResponse = analysisResult.match_data || analysisResult.parsed_data;
+
+    // Ensure we have either type of valid response
+    if (!isSessionResponse && !isDirectResponse) {
       console.error("Invalid backend response structure:", analysisResult);
       return NextResponse.json(
         {
           success: false,
           error: "Invalid analysis response",
-          details: "Backend returned malformed data",
+          details: "Backend returned malformed data - missing required properties",
           stage: "response_validation",
         },
         { status: 502 }
@@ -267,10 +288,7 @@ export async function POST(request) {
       stageConfig
     );
 
-    // MANUS-AI FIX: Detect session-based responses vs direct responses
-    const isSessionResponse = analysisResult.hasOwnProperty('session_id') ||
-                             analysisResult.hasOwnProperty('__raw') ||
-                             (analysisResult.hasOwnProperty('analysis') && analysisResult.hasOwnProperty('confidence_score'));
+    // MANUS-AI FIX: Use the isSessionResponse from validation above (no redeclaration needed)
 
     // MANUS-AI FIX: Handle confidence score extraction from session-based responses
     let rawConfidence = 0;
@@ -279,7 +297,10 @@ export async function POST(request) {
     if (isSessionResponse) {
       // MANUS-AI: Session responses have confidence at the top level, not in .data
       sessionData = analysisResult; // Use the full response as session data
-      rawConfidence = analysisResult.confidence_score ||
+      // MANUS FIX: Check data.overall_confidence first (where backend puts fused confidence)
+      rawConfidence = analysisResult.data?.overall_confidence ||
+                     analysisResult.__raw?.data?.overall_confidence ||
+                     analysisResult.confidence_score ||
                      analysisResult.__raw?.confidence_score ||
                      analysisResult.overall_confidence ||
                      analysisResult.analysis?.quality?.overall_confidence ||
@@ -298,36 +319,84 @@ export async function POST(request) {
     const normalizedConfidence =
       rawConfidence > 1 ? rawConfidence : rawConfidence * 100;
 
-    // MANUS-AI FIX: Validate data based on response type
+    // MANUS-AI FIX: Validate data based on response type (hero-independent validation)
     let hasValidData;
     if (isSessionResponse) {
-      // MANUS-AI: Validate session-based response data from actual structure
-      hasValidData = (sessionData.hero && sessionData.hero !== "Unknown") ||
-                    (sessionData.match_data?.hero && sessionData.match_data?.hero !== "Unknown") ||
-                    (sessionData.parsed_data?.hero && sessionData.parsed_data?.hero !== "Unknown") ||
-                    (sessionData.__raw?.hero && sessionData.__raw?.hero !== "Unknown") ||
-                    (sessionData.analysis?.performance?.hero && sessionData.analysis?.performance?.hero !== "Unknown") ||
-                    (sessionData.__raw?.session_status && sessionData.__raw?.session_status !== "failed");
+      // MANUS FIX: Validate based on fusion status and numeric data, NOT hero name
+      // MANUS FIX: Validate based on fusion status and numeric data, NOT hero name
+      const fusionComplete = sessionData.fusion_status === "Stats fused" ||
+                            sessionData.data?.fusion_status === "Stats fused" ||
+                            sessionData.__raw?.data?.fusion_status === "Stats fused";
+
+      const sessionComplete = sessionData.session_status === "complete" ||
+                             sessionData.session_complete === true ||
+                             sessionData.data?.session_status === "complete" ||
+                             sessionData.__raw?.data?.session_status === "complete";
+
+      
+      // Check for KDA data - support both enriched schema and legacy format
+      const hasKDA = (
+        // Enriched schema format (kda.k, kda.d, kda.a)
+        (sessionData.kda?.k !== null && sessionData.kda?.k !== undefined) ||
+        (sessionData.data?.kda?.k !== null && sessionData.data?.kda?.k !== undefined) ||  // MANUS FIX: Added nested check
+        (sessionData.__raw?.kda?.k !== null && sessionData.__raw?.kda?.k !== undefined) ||
+        // Legacy format (data.kills, data.deaths)
+        (sessionData.data?.kills !== null && sessionData.data?.kills !== undefined) ||
+        (sessionData.__raw?.data?.kills !== null && sessionData.__raw?.data?.kills !== undefined)
+      );
+      
+      // Check for damage data - support enriched schema percentages and legacy format
+      const hasDamageData = (
+        // Enriched schema format (damage.hero_pct) - check if defined, even if 0
+        (sessionData.damage?.hero_pct !== null && sessionData.damage?.hero_pct !== undefined) ||
+        (sessionData.data?.damage?.hero_pct !== null && sessionData.data?.damage?.hero_pct !== undefined) || // MANUS FIX: Added nested check
+        (sessionData.__raw?.damage?.hero_pct !== null && sessionData.__raw?.damage?.hero_pct !== undefined) ||
+        // Legacy format (data.hero_damage) - must be finite number
+        Number.isFinite(sessionData.data?.hero_damage) ||
+        Number.isFinite(sessionData.data?.damage_taken) ||
+        Number.isFinite(sessionData.__raw?.data?.hero_damage)
+      );
+
+      // CRITICAL FIX: Valid if we have BOTH KDA and damage (complete fusion), OR complete data from one view
+      // Hero detection is OPTIONAL and does NOT affect validation
+      const hasCompleteFusion = hasKDA && hasDamageData;
+      const hasCompleteKDA = hasKDA && (sessionData.data?.deaths !== null || sessionData.__raw?.data?.deaths !== null);
+      const hasCompleteDamage = hasDamageData && Number.isFinite(sessionData.data?.damage_taken || sessionData.__raw?.data?.damage_taken);
+      
+      hasValidData = hasCompleteFusion || hasCompleteKDA || hasCompleteDamage;
+      
+      console.log("Data validation:", {
+        fusionComplete,
+        sessionComplete,
+        hasKDA,
+        hasDamageData,
+        hasCompleteFusion,
+        hasValidData
+      });
     } else {
-      // Validate direct response data
-      hasValidData = (analysisResult.parsed_data?.hero &&
-                     analysisResult.parsed_data?.hero !== "Unknown" &&
-                     analysisResult.parsed_data?.kda !== "N/A") ||
-                    (analysisResult.match_data?.hero &&
-                     analysisResult.match_data?.hero !== "Unknown" &&
-                     analysisResult.match_data?.kda !== "N/A");
+      // Validate direct response data - focus on KDA/damage, not hero
+      const hasKDA = analysisResult.parsed_data?.kda && analysisResult.parsed_data?.kda !== "N/A";
+      const hasDamage = Number.isFinite(analysisResult.parsed_data?.hero_damage);
+      hasValidData = hasKDA || hasDamage;
     }
 
+    // MANUS-AI FIX: Trust backend confidence when we have valid stats (no capping)
+    // Hero detection does NOT affect confidence - only statistical completeness matters
     const actualConfidence = hasValidData
-      ? normalizedConfidence
-      : Math.min(normalizedConfidence, 30);
+      ? normalizedConfidence  // Trust backend confidence for valid data
+      : Math.min(normalizedConfidence, 50);  // Only cap for truly incomplete data
 
     // MANUS-AI FIX: Pull performance data based on response type
     let perfSrc;
     if (isSessionResponse) {
-      // MANUS-AI: Session responses have data in multiple locations, prioritize actual data
-      perfSrc = sessionData.match_data || sessionData.parsed_data ||
-               sessionData.__raw || sessionData.analysis?.performance || {};
+      // MANUS FIX: Check sessionData.data first (where backend puts fused data)
+      perfSrc = sessionData.data ||
+               sessionData.__raw?.data ||
+               sessionData.match_data ||
+               sessionData.parsed_data ||
+               sessionData.__raw ||
+               sessionData.analysis?.performance ||
+               {};
     } else {
       // Direct response uses parsed_data or match_data
       perfSrc = analysisResult.parsed_data || analysisResult.match_data || {};
@@ -396,7 +465,12 @@ export async function POST(request) {
           gpm,
           match_duration,
           rank,
-          role: analysisResult.role || "Unknown",
+          role: analysisResult.role || perfSrc.role || "Unknown",
+          // MANUS FIX: Include damage statistics from perfSrc
+          hero_damage: perfSrc.hero_damage || "N/A",
+          damage_taken: perfSrc.damage_taken || "N/A",
+          turret_damage: perfSrc.turret_damage || "N/A",
+          teamfight_participation: perfSrc.teamfight_participation || "N/A",
         },
 
         // Confidence and quality metrics with validation

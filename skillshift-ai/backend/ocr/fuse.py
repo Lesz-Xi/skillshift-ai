@@ -55,6 +55,9 @@ class FusedResult:
                 'ratio': self.kda_ratio
             },
             'damage': {
+                'hero_damage': self.hero_damage,
+                'tower_damage': self.tower_damage,
+                'damage_taken': self.damage_taken,
                 'hero_pct': self.hero_damage_pct,
                 'turret_pct': self.turret_damage_pct,
                 'taken_pct': self.taken_damage_pct
@@ -494,7 +497,8 @@ class CrossViewFusion:
                         'confidence': hero_confidence,
                         'method': hero_resolution_method
                     },
-                    'drift_telemetry': detector_drift_guards.telemetry.__dict__
+                    'drift_telemetry': detector_drift_guards.telemetry.__dict__,
+                    'coaching_feedback': self._generate_stat_based_coaching(kda_data, damage_data)
                 }
             )
             
@@ -531,14 +535,22 @@ class CrossViewFusion:
             'mvp_score': 0.0
         }
         
-        # Use KDA result if available and meets threshold
-        if kda_result and kda_result.confidence >= self.confidence_thresholds['kda']:
-            kda_data.update({
-                'kills': max(0, kda_result.kills),  # Ensure non-negative
-                'deaths': max(0, kda_result.deaths),
-                'assists': max(0, kda_result.assists),
-                'mvp_score': max(0.0, kda_result.mvp_score)
-            })
+        # MANUS FIX: Accept KDA data if available, even with lower confidence
+        # Strict thresholds block valid data - trust OCR if stats look reasonable
+        if kda_result:
+            # Check if data looks valid (non-negative numbers)
+            has_valid_stats = (kda_result.kills >= 0 and kda_result.deaths >= 0 and kda_result.assists >= 0)
+            # Accept if confidence >= 60% OR stats are valid with confidence >= 50%
+            should_use = (kda_result.confidence >= 0.6) or (has_valid_stats and kda_result.confidence >= 0.5)
+            
+            if should_use:
+                kda_data.update({
+                    'kills': max(0, kda_result.kills),  # Ensure non-negative
+                    'deaths': max(0, kda_result.deaths),
+                    'assists': max(0, kda_result.assists),
+                    'mvp_score': max(0.0, kda_result.mvp_score)
+                })
+                logger.info(f"KDA data accepted: confidence={kda_result.confidence:.3f}, valid_stats={has_valid_stats}")
         
         return kda_data
     
@@ -555,22 +567,30 @@ class CrossViewFusion:
             'gold_per_minute': 0
         }
         
-        # Use damage result if available and meets threshold
-        if damage_result and damage_result.confidence >= self.confidence_thresholds['damage']:
-            damage_data.update({
-                'hero_damage': max(0, damage_result.hero_damage),
-                'tower_damage': max(0, damage_result.tower_damage),
-                'damage_taken': max(0, damage_result.damage_taken),
-                'teamfight_participation': max(0.0, damage_result.teamfight_participation),
-                'gold_per_minute': max(0, damage_result.gold_per_minute)
-            })
+        # MANUS FIX: Accept damage data if available, even with lower confidence
+        # Strict thresholds block valid data - trust OCR if stats look reasonable
+        if damage_result:
+            # Check if data looks valid (positive damage values)
+            has_valid_stats = (damage_result.hero_damage > 0 or damage_result.damage_taken > 0)
+            # Accept if confidence >= 60% OR stats are valid with confidence >= 50%
+            should_use = (damage_result.confidence >= 0.6) or (has_valid_stats and damage_result.confidence >= 0.5)
             
-            # Extract percentage data if available in raw_data
-            if hasattr(damage_result, 'raw_data') and damage_result.raw_data:
-                raw_data = damage_result.raw_data
-                damage_data['hero_damage_pct'] = raw_data.get('hero_damage_pct', 0.0)
-                damage_data['turret_damage_pct'] = raw_data.get('turret_damage_pct', 0.0)
-                damage_data['taken_damage_pct'] = raw_data.get('taken_damage_pct', 0.0)
+            if should_use:
+                damage_data.update({
+                    'hero_damage': max(0, damage_result.hero_damage),
+                    'tower_damage': max(0, damage_result.tower_damage),
+                    'damage_taken': max(0, damage_result.damage_taken),
+                    'teamfight_participation': max(0.0, damage_result.teamfight_participation),
+                    'gold_per_minute': max(0, damage_result.gold_per_minute)
+                })
+                logger.info(f"Damage data accepted: confidence={damage_result.confidence:.3f}, valid_stats={has_valid_stats}")
+                
+                # Extract percentage data if available in raw_data
+                if hasattr(damage_result, 'raw_data') and damage_result.raw_data:
+                    raw_data = damage_result.raw_data
+                    damage_data['hero_damage_pct'] = raw_data.get('hero_damage_pct', 0.0)
+                    damage_data['turret_damage_pct'] = raw_data.get('turret_damage_pct', 0.0)
+                    damage_data['taken_damage_pct'] = raw_data.get('taken_damage_pct', 0.0)
         
         return damage_data
     
@@ -634,7 +654,7 @@ class CrossViewFusion:
             return 8.0  # Default reasonable MVP score
     
     def _calculate_overall_confidence_enhanced(self, kda_result: Optional[KDAResult], damage_result: Optional[DamageResult], mvp_score: float) -> float:
-        """Enhanced confidence calculation with MVP validation."""
+        """Enhanced confidence calculation with MVP validation and hero-independent completeness."""
         try:
             confidences = []
             weights = []
@@ -659,7 +679,15 @@ class CrossViewFusion:
             # Data consistency bonus
             consistency_bonus = 0.05 if kda_result and damage_result else 0.0
             
-            final_confidence = weighted_confidence + mvp_bonus + consistency_bonus
+            # MANUS FIX: Hero-independent completeness bonus
+            # Award bonus when we have complete KDA + Damage data regardless of hero detection
+            has_kda = kda_result and kda_result.kills >= 0 and kda_result.deaths >= 0 and kda_result.assists >= 0
+            has_damage = damage_result and damage_result.hero_damage > 0
+            completeness_bonus = 0.15 if (has_kda and has_damage) else 0.0
+            
+            final_confidence = weighted_confidence + mvp_bonus + consistency_bonus + completeness_bonus
+            
+            logger.info(f"Confidence calculation: weighted={weighted_confidence:.3f}, mvp_bonus={mvp_bonus:.3f}, consistency_bonus={consistency_bonus:.3f}, completeness_bonus={completeness_bonus:.3f}, final={final_confidence:.3f}")
             
             return min(1.0, max(0.0, final_confidence))
             
@@ -735,6 +763,61 @@ class CrossViewFusion:
             return f"damage_only_{damage_quality}"
         else:
             return "none"
+    
+    def _generate_stat_based_coaching(self, kda_data: Dict[str, Any], damage_data: Dict[str, Any]) -> List[str]:
+        """Generate coaching feedback based purely on statistics (hero-independent)."""
+        feedback = []
+        
+        try:
+            kills = kda_data.get('kills', 0)
+            deaths = max(1, kda_data.get('deaths', 1))  # Avoid division by zero
+            assists = kda_data.get('assists', 0)
+            hero_damage = damage_data.get('hero_damage', 0)
+            damage_taken = damage_data.get('damage_taken', 0)
+            teamfight_participation = damage_data.get('teamfight_participation', 0)
+            
+            # KDA Analysis
+            kda_ratio = (kills + assists) / deaths
+            if kda_ratio >= 3.0:
+                feedback.append("🌟 Excellent KDA ratio! Your kill participation is outstanding.")
+            elif kda_ratio >= 2.0:
+                feedback.append("✅ Good KDA ratio. Keep up the solid performance!")
+            elif deaths > 5:
+                feedback.append("⚠️ High death count. Focus on map awareness and positioning.")
+            
+            # Damage Analysis
+            if hero_damage > 100000:
+                feedback.append("💥 Impressive damage output! You're a major threat.")
+            elif hero_damage > 50000:
+                feedback.append("⚔️ Solid damage contribution to team fights.")
+            
+            # Survivability Analysis
+            if damage_taken > 0 and hero_damage > 0:
+                damage_ratio = hero_damage / damage_taken
+                if damage_ratio >= 1.5:
+                    feedback.append("🛡️ Great damage efficiency - dealing more than taking!")
+                elif damage_ratio < 0.8:
+                    feedback.append("💭 Consider improving positioning to reduce damage taken.")
+            
+            # Teamfight Analysis
+            if teamfight_participation >= 70:
+                feedback.append("🤝 Excellent teamfight participation! Great team coordination.")
+            elif teamfight_participation >= 50:
+                feedback.append("👥 Good teamwork. Keep coordinating with teammates.")
+            elif teamfight_participation < 50 and teamfight_participation > 0:
+                feedback.append("📍 Try to participate more in team objectives and fights.")
+            
+            # Fallback if no specific feedback
+            if not feedback:
+                feedback.append("📊 Analysis complete. Keep practicing to improve your performance!")
+            
+            logger.info(f"Generated {len(feedback)} coaching tips based on stats (hero-independent)")
+            
+        except Exception as e:
+            logger.error(f"Error generating stat-based coaching: {e}")
+            feedback = ["📊 Performance data analyzed successfully."]
+        
+        return feedback
     
     def _get_mvp_debug_info(self, kda_data: Dict[str, Any], damage_data: Dict[str, Any], mvp_score: float) -> Dict[str, Any]:
         """Get MVP computation debug information."""

@@ -17,18 +17,64 @@ export default function CoachingFeedback({ analysisResult }) {
   const {
     success,
     confidence_score,
-    hero,
-    kda,
-    gpm,
-    role,
-    match_duration,
-    fusion_status,
-    confidence_breakdown,
-    coaching_feedback,
     __raw,
   } = analysisResult;
 
-  const confidencePercent = Math.round((confidence_score || 0) * 100);
+  // MANUS FIX: Extract data from nested 'data' object if available (fused results)
+  const fusedData = analysisResult.data || {};
+  
+  // Robust extraction: Check fusedData first, then analysisResult top-level
+  const hero = fusedData.hero || analysisResult.hero;
+  
+  // KDA: Handle object or individual fields
+  const kdaRaw = fusedData.kda || analysisResult.kda;
+  const kda = (kdaRaw && typeof kdaRaw === 'object') ? kdaRaw : analysisResult.kda;
+
+  const gpm = fusedData.gpm || analysisResult.gpm;
+  const role = fusedData.role || analysisResult.role;
+  const match_duration = fusedData.match_duration || analysisResult.match_duration;
+  const fusion_status = fusedData.fusion_status || analysisResult.fusion_status;
+  const confidence_breakdown = fusedData.confidence_breakdown || analysisResult.confidence_breakdown;
+  const coaching_feedback = fusedData.coaching_feedback || analysisResult.coaching_feedback;
+
+  // Enhanced unified coaching feedback binding per triage checklist
+  // Priority: analysis.coaching_feedback -> data.coaching_feedback -> __raw.coaching_feedback
+  const getUnifiedCoachingFeedback = () => {
+    // First check direct analysis.coaching_feedback (session fusion primary)
+    if (analysisResult.data?.coaching_feedback && Array.isArray(analysisResult.data.coaching_feedback)) {
+      return analysisResult.data.coaching_feedback;
+    }
+    // Then check top-level coaching_feedback (current format)
+    if (coaching_feedback && Array.isArray(coaching_feedback)) {
+      return coaching_feedback;
+    }
+    // Fallback to __raw.coaching_feedback (legacy compatibility)
+    if (__raw?.coaching_feedback && Array.isArray(__raw.coaching_feedback)) {
+      return __raw.coaching_feedback;
+    }
+    // Final fallback to empty array
+    return [];
+  };
+
+  const unifiedCoachingFeedback = getUnifiedCoachingFeedback();
+
+  // Enhanced confidence scoring per triage checklist
+  // Use analysis.overall_confidence after merge, show partial status before merge
+  const getBackendConfidence = () => {
+    // First check analysis.overall_confidence (session fusion primary)
+    if (analysisResult.data?.overall_confidence) {
+      return analysisResult.data.overall_confidence;
+    }
+    // Then check top-level overall_confidence (current format)
+    if (analysisResult.overall_confidence) {
+      return analysisResult.overall_confidence;
+    }
+    // Fallback to confidence_score (legacy compatibility)
+    return confidence_score || 0;
+  };
+
+  const backendConfidence = getBackendConfidence();
+  const confidencePercent = Math.round(backendConfidence * 100);
   const confidenceThreshold = 0.4;
   const normalizedFusionStatus = (
     fusion_status ||
@@ -41,8 +87,12 @@ export default function CoachingFeedback({ analysisResult }) {
   const fusionError =
     normalizedFusionStatus.includes("failed") ||
     normalizedFusionStatus.includes("error");
-  const isConfident = success && confidence_score >= confidenceThreshold;
-  const hasInsights = Array.isArray(coaching_feedback) && coaching_feedback.length > 0;
+  const isSessionComplete =
+    analysisResult.session_complete ||
+    analysisResult.data?.session_status === "complete" ||
+    __raw?.session_complete;
+  const isConfident = success && backendConfidence >= confidenceThreshold;
+  const hasInsights = Array.isArray(unifiedCoachingFeedback) && unifiedCoachingFeedback.length > 0;
   const shouldShowInsights = success && isConfident && hasInsights;
 
   const statusTone = !success
@@ -91,10 +141,47 @@ export default function CoachingFeedback({ analysisResult }) {
       ? "bg-yellow-50 text-yellow-700 border-yellow-200"
       : "bg-red-50 text-red-700 border-red-200";
 
-  // Extract damage statistics with backend-first binding
+  // Enhanced damage statistics extraction per triage checklist
+  // Priority: analysis.damage_stats -> data.damage_stats -> __raw.damage_stats -> legacy formats
   const getDamageStatistics = () => {
-    // First check for direct backend damage_stats field
+    console.log("🔍 [DAMAGE DEBUG] Extracting damage statistics from analysis result:", {
+      has_data: !!analysisResult.data,
+      has_damage_stats: !!analysisResult.damage_stats,
+      has_raw: !!__raw,
+      has_raw_damage_stats: !!__raw?.damage_stats,
+      data_keys: analysisResult.data ? Object.keys(analysisResult.data) : [],
+      raw_keys: __raw ? Object.keys(__raw) : [],
+    });
+
+    // MANUS FIX: Use the extracted fusedData for damage stats
+    const damageFromFusedData = fusedData.damage || {};
+    
+    // Check for absolute values first (from fused result)
+    if (damageFromFusedData.hero_damage !== undefined || damageFromFusedData.damage_taken !== undefined) {
+      console.log("✅ [DAMAGE DEBUG] Found damage stats in fusedData.damage:", damageFromFusedData);
+      return {
+        hero_damage: damageFromFusedData.hero_damage ?? damageFromFusedData.hero_pct ?? null,
+        tower_damage: damageFromFusedData.tower_damage ?? damageFromFusedData.turret_pct ?? null,
+        damage_taken: damageFromFusedData.damage_taken ?? damageFromFusedData.taken_pct ?? null,
+        teamfight_participation: analysisResult.teamfight_participation ?? __raw?.teamfight_participation ?? null,
+      };
+    }
+
+    // First check analysis.damage_stats (session fusion primary)
+    if (analysisResult.data?.damage_stats) {
+      const stats = analysisResult.data.damage_stats;
+      console.log("✅ [DAMAGE DEBUG] Found damage stats in analysisResult.data.damage_stats:", stats);
+      return {
+        hero_damage: stats.hero_damage ?? null,
+        tower_damage: stats.turret_damage ?? stats.tower_damage ?? null,
+        damage_taken: stats.damage_taken ?? null,
+        teamfight_participation: stats.teamfight_participation ?? null,
+      };
+    }
+
+    // Second check for direct backend damage_stats field (current format)
     if (analysisResult.damage_stats) {
+      console.log("✅ [DAMAGE DEBUG] Found damage stats in analysisResult.damage_stats:", analysisResult.damage_stats);
       return {
         hero_damage: analysisResult.damage_stats.hero_damage ?? null,
         tower_damage:
@@ -107,9 +194,10 @@ export default function CoachingFeedback({ analysisResult }) {
       };
     }
 
-    // Fallback to __raw.damage_stats
+    // Third fallback to __raw.damage_stats (legacy compatibility)
     const raw = __raw ?? {};
     if (raw.damage_stats) {
+      console.log("✅ [DAMAGE DEBUG] Found damage stats in __raw.damage_stats:", raw.damage_stats);
       return {
         hero_damage: raw.damage_stats.hero_damage ?? null,
         tower_damage: raw.damage_stats.turret_damage ?? null,
@@ -119,29 +207,50 @@ export default function CoachingFeedback({ analysisResult }) {
       };
     }
 
+    // Check for fused response format (damage percentages)
+    const damage = analysisResult.damage ?? raw.damage ?? raw?.data?.damage;
+    if (damage) {
+      console.log("✅ [DAMAGE DEBUG] Found damage object in fused format:", damage);
+      // Fused format has percentage fields - treat any non-null value as "has stats"
+      return {
+        hero_damage: damage.hero_damage ?? damage.hero_pct ?? null,
+        tower_damage: damage.tower_damage ?? damage.turret_pct ?? null,
+        damage_taken: damage.damage_taken ?? damage.taken_pct ?? null,
+        teamfight_participation: analysisResult.teamfight_participation ?? raw.teamfight_participation ?? null,
+      };
+    }
+
     // Final fallback to legacy format and session-based fusion data
     const match = raw.match_data ?? {};
-    const data = raw.data ?? {};
-    return {
+    const legacyStats = {
       hero_damage:
-        raw.hero_damage ?? match.hero_damage ?? data.hero_damage ?? null,
+        raw.hero_damage ?? match.hero_damage ?? analysisResult.data?.hero_damage ?? null,
       tower_damage:
         raw.tower_damage ??
         raw.turret_damage ??
         match.tower_damage ??
         match.turret_damage ??
-        data.tower_damage ??
-        data.turret_damage ??
+        analysisResult.data?.tower_damage ??
+        analysisResult.data?.turret_damage ??
         null,
       damage_taken:
-        raw.damage_taken ?? match.damage_taken ?? data.damage_taken ?? null,
+        raw.damage_taken ?? match.damage_taken ?? analysisResult.data?.damage_taken ?? null,
       teamfight_participation:
         raw.teamfight_participation ??
         raw.teamfight_participation_pct ??
         match.teamfight_participation ??
-        data.teamfight_participation ??
+        analysisResult.data?.teamfight_participation ??
         null,
     };
+    console.log("⚠️ [DAMAGE DEBUG] Using legacy format extraction:", {
+      legacyStats,
+      checked_paths: {
+        raw_hero_damage: raw.hero_damage,
+        match_hero_damage: match.hero_damage,
+        data_hero_damage: analysisResult.data?.hero_damage,
+      },
+    });
+    return legacyStats;
   };
 
   // Extract MVP score and duration from raw data
@@ -259,7 +368,9 @@ export default function CoachingFeedback({ analysisResult }) {
               </div>
             </div>
             <Badge variant="outline" className={badgeToneClass}>
-              Confidence: {confidencePercent}%
+              {isSessionComplete
+                ? `Confidence: ${confidencePercent}%`
+                : "Partial (waiting for second screenshot)"}
             </Badge>
           </div>
         </CardContent>
@@ -314,7 +425,7 @@ export default function CoachingFeedback({ analysisResult }) {
                   <CardContent className="p-4 text-center">
                     <AlertCircle className="w-8 h-8 text-gray-600 mx-auto mb-2" />
                     <p className="text-gray-800 font-medium">
-                      Damage statistics not available
+                      ⚠️ Stats not fused — upload both KDA and Damage screenshots.
                     </p>
                     <p className="text-gray-700 text-sm mt-1">
                       This screenshot doesn't contain damage statistics.
@@ -328,7 +439,7 @@ export default function CoachingFeedback({ analysisResult }) {
           {/* Full-width AI Coaching Insights */}
           {shouldShowInsights ? (
             <InsightsList
-              insights={coaching_feedback}
+              insights={unifiedCoachingFeedback}
               confidence={confidence_score}
             />
           ) : (
